@@ -1,11 +1,17 @@
 import type { AppProps } from "next/app";
-import Layout from "../components/layout";
+import PageTransitionWrapper from "../components/page-transition-wrapper";
+import GlobalStyles from "../styles/global";
+import Header from "../components/header";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <>
+      <GlobalStyles />
+      <Header />
+      <PageTransitionWrapper>
+        <Component {...pageProps} />
+      </PageTransitionWrapper>
+    </>
   );
 }
 

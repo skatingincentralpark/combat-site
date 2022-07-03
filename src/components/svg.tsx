@@ -4,12 +4,13 @@ import styled from "@emotion/styled";
 type Props = {
   src: string;
   width: string;
+  priority: boolean;
 };
 
-const Svg = ({ src, width }: Props) => {
+const Svg = ({ src, width, priority }: Props) => {
   return (
     <SvgWrapper width={width}>
-      <Image src={src} layout="fill" objectFit="contain" />
+      <Image src={src} layout="fill" objectFit="contain" priority={priority} />
     </SvgWrapper>
   );
 };

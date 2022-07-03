@@ -1,0 +1,49 @@
+import { default as NextImage } from "next/image";
+import styled from "@emotion/styled";
+
+type Props = {
+  src: string;
+  padding?: string;
+  width?: string;
+  widthMobile?: string;
+  margin?: string;
+};
+
+const Image = ({ src, ...rest }: Props) => {
+  return (
+    <ImageWrapper {...rest}>
+      <NextImage
+        src={src}
+        alt="Picture of the author"
+        layout="responsive"
+        objectFit="contain"
+        width="100%"
+        height="100%"
+      />
+    </ImageWrapper>
+  );
+};
+
+export default Image;
+
+type ImageWrapperProps = {
+  padding?: string;
+  width?: string;
+  widthMobile?: string;
+  margin?: string;
+};
+
+const ImageWrapper = styled.div<ImageWrapperProps>`
+  padding: ${({ padding }) => (padding ? padding : `0.5rem`)};
+  margin: ${({ margin }) => (margin ? margin : `0`)};
+  width: ${({ width }) => (width ? width : `100%`)};
+  height: 100%;
+
+  position: relative;
+
+  cursor: pointer;
+
+  @media screen and (min-width: 700px) {
+    width: ${({ widthMobile }) => (widthMobile ? widthMobile : `100%`)};
+  }
+`;

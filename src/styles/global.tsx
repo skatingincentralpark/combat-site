@@ -7,10 +7,12 @@ const GlobalStyles = () => {
     :root {
       --gray-1: #f4f4f4;
       --gray-2: #cccccb;
-      --gray-3: #6b6b6b;
+      --gray-3: #b8b8b8;
+      --gray-4: #6b6b6b;
       --green-1: #35b14a;
       --green-2: #359446;
       --green-3: #166821;
+      --green-light-1: #35b14a80;
       --yellow-1: #fce200;
       --yellow-2: #eecb15;
       --olive-1: #564f0a;
@@ -28,6 +30,8 @@ const GlobalStyles = () => {
       --gap-l: 1rem;
       --gap-xl: 1.25rem;
       --gap-xxl: 1.5rem;
+      --gap-page-top: calc(var(--header-height) + 1rem);
+      --header-height: 6rem;
     }
 
     @font-face {
@@ -52,39 +56,26 @@ const GlobalStyles = () => {
       font-display: swap;
     }
 
-    html {
+    html,
+    body,
+    body > div:first-of-type {
       height: 100%;
+    }
+    html {
       background: white;
       font-family: var(--font-family-primary);
-      font-size: 13px;
+      font-size: clamp(12px, 0.9vw, 18px);
+      line-height: clamp(1.3em, 1.1vw, 2em);
       font-weight: 200;
-      line-height: 1.2em;
       color: var(--font-family-primary);
       overflow-y: scroll;
-
-      @media screen and (min-width: 700px) {
-        font-size: 13px;
-      }
-
-      @media screen and (min-width: 1600px) {
-        font-size: 15px;
-      }
     }
     * {
       box-sizing: border-box;
     }
     body {
-      height: 100%;
       padding: 0;
       margin: 0;
-
-      & > div {
-        height: 100%;
-      }
-    }
-    ::selection {
-      color: #010101;
-      background-color: black;
     }
     img,
     picture,

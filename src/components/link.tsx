@@ -20,7 +20,6 @@ export default Link;
 const StyledLink = styled.a`
   position: relative;
   display: block;
-  height: 100%;
   width: 100%;
   cursor: pointer;
 `;
