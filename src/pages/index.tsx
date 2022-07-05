@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-const Home = () => {
+const HomePage = () => {
   const [isShown, setIsShown] = useState(false);
   const toggle = () => setIsShown((x) => !x);
 
@@ -82,7 +82,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
 
 const PageWrapper = styled.div`
   width: 100%;

@@ -1,14 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
 import Svg from "./svg";
 import Link from "./link";
+import { useRouter } from "next/router";
 
 //TO:DO: Create a HeaderLinkComponent
 const Header = () => {
+  const router = useRouter();
+  const checkIfShopPath = () => router.pathname.match(/\/shop\//);
+
   const [navOpen, setNavOpen] = useState(false);
+  const [isShopPath, setIsShopPath] = useState(checkIfShopPath || null);
+
+  useEffect(() => {
+    setIsShopPath(checkIfShopPath());
+  }, [router.pathname]);
 
   const toggleNav = () => setNavOpen((x) => !x);
+  const closeNav = () => {
+    setNavOpen(false);
+    setIsShopPath(null);
+  };
+  const navigateToShop = () => router.push("/shop");
 
   const variants = {
     initial: {
@@ -22,16 +36,44 @@ const Header = () => {
     },
   };
 
+  const variantsWidth = {
+    initial: {
+      width: 0,
+      backgroundColor: "#d9ff00",
+    },
+    animate: {
+      width: "var(--back-button-width)",
+      backgroundColor: "var(--yellow-1)",
+    },
+    exit: {
+      width: 0,
+      backgroundColor: "#fff",
+    },
+  };
+
   return (
     <>
-      <StyledHeader>
-        <button onClick={toggleNav}>
+      <HeaderWrapper>
+        <AnimatePresence>
+          {isShopPath && !navOpen && (
+            <HeaderBackButton
+              onClick={navigateToShop}
+              variants={variantsWidth}
+              initial="initial"
+              exit="exit"
+              animate="animate"
+            >
+              back
+            </HeaderBackButton>
+          )}
+        </AnimatePresence>
+        <HeaderToggle onClick={toggleNav}>
           <Svg src="/svg/combat-title.svg" width="18rem" priority />
-        </button>
-      </StyledHeader>
+        </HeaderToggle>
+      </HeaderWrapper>
       <AnimatePresence>
         {navOpen && (
-          <HeaderMenu
+          <HeaderMenuWrapper
             variants={variants}
             initial="initial"
             exit="exit"
@@ -40,25 +82,25 @@ const Header = () => {
             <HeaderMenuInner>
               <HeaderMenuNav>
                 <StyledNavLink>
-                  <Link href="/" onClick={toggleNav}>
+                  <Link href="/" onClick={closeNav}>
                     <StyledDot />
                     Home
                   </Link>
                 </StyledNavLink>
                 <StyledNavLink>
-                  <Link href="/shop" onClick={toggleNav}>
+                  <Link href="/shop" onClick={closeNav}>
                     <StyledDot />
                     Shop
                   </Link>
                 </StyledNavLink>
                 <StyledNavLink>
-                  <Link href="/" onClick={toggleNav}>
+                  <Link href="/news" onClick={closeNav}>
                     <StyledDot />
                     News
                   </Link>
                 </StyledNavLink>
                 <StyledNavLink>
-                  <Link href="/" onClick={toggleNav}>
+                  <Link href="/" onClick={closeNav}>
                     <StyledDot />
                     Lookbook
                   </Link>
@@ -85,7 +127,7 @@ const Header = () => {
                 </p>
               </HeaderMenuText>
             </HeaderMenuInner>
-          </HeaderMenu>
+          </HeaderMenuWrapper>
         )}
       </AnimatePresence>
     </>
@@ -94,7 +136,7 @@ const Header = () => {
 
 export default Header;
 
-const StyledHeader = styled.header`
+const HeaderWrapper = styled.header`
   position: fixed;
   top: 0;
   left: 0;
@@ -111,25 +153,36 @@ const StyledHeader = styled.header`
   justify-content: flex-start;
 
   background-color: white;
+`;
+const HeaderToggle = styled.button`
+  padding: var(--gap-l);
 
-  & > button {
-    padding: var(--gap-l);
+  flex-grow: 1;
 
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
+  height: 100%;
+  cursor: pointer;
 
   &:hover {
-    background-color: var(--yellow-1);
+    @media screen and (min-width: 700px) {
+      background-color: var(--yellow-1);
+    }
   }
 
   &:active {
     background-color: var(--yellow-2);
   }
 `;
+const HeaderBackButton = styled(motion.button)`
+  --back-button-width: 10rem;
+  width: var(--back-button-width);
+  height: 100%;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
 
-const HeaderMenu = styled(motion.div)`
+  background-color: var(--yellow-1);
+`;
+const HeaderMenuWrapper = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
@@ -140,7 +193,7 @@ const HeaderMenu = styled(motion.div)`
   width: 100%;
   height: 100vh;
 
-  background-color: white;
+  background-color: var(--gray-1);
 
   font-weight: 300;
 `;
@@ -166,12 +219,11 @@ const HeaderMenuNav = styled.nav`
   }
 `;
 const StyledNavLink = styled.div`
-  padding: var(--gap-xs) 0;
   border-bottom: 1px solid var(--gray-3);
   background-color: var(--nav-link-bg-color);
   color: var(--nav-link-color);
   --nav-link-color: black;
-  --nav-link-bg-color: white;
+  --nav-link-bg-color: var(--gray-1);
   --dot-color: var(--yellow-2); // scoped to link so the dot can use it
   --dot-scale: scale(1);
 
@@ -182,10 +234,13 @@ const StyledNavLink = styled.div`
     border-top: 1px solid var(--gray-3);
   }
   &:hover {
-    --nav-link-color: var(--yellow-1);
-    --nav-link-bg-color: var(--yellow-1);
-    --dot-color: var(--yellow-1); // scoped to link so the dot can use it
-    --dot-scale: scale(1.2);
+    @media screen and (min-width: 700px) {
+      background-color: var(--yellow-1);
+      --nav-link-color: var(--yellow-1);
+      --nav-link-bg-color: var(--yellow-1);
+      --dot-color: var(--yellow-1); // scoped to link so the dot can use it
+      --dot-scale: scale(1.2);
+    }
   }
   &:active {
     --nav-link-color: white;

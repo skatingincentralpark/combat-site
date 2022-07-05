@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
-import ShopItem from "../components/shop-item";
+import { motion, AnimatePresence } from "framer-motion";
+import ShopItem from "../../components/shop-item";
 
-const Home = () => {
+const ShopPage = () => {
   const products = [
     {
       title: "Aftermath",
@@ -50,18 +51,18 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default ShopPage;
 
-const PageWrapper = styled.div`
+const PageWrapper = styled(motion.div)`
   width: 100%;
-  height: 100%;
+  height: fit-content;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 
-  padding: var(--gap-page-top) 4rem;
+  padding: var(--gap-page-top) 3.5rem;
 
   @media screen and (min-width: 700px) {
     padding: var(--gap-page-top) var(--gap-l);

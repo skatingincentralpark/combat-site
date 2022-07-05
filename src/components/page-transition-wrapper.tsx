@@ -30,7 +30,7 @@ const PageTransitionWrapper = ({ children }: Props) => {
         initial="initial"
         exit="exit"
         animate="animate"
-        transition={{ duration: 0.1 }}
+        // transition={{ duration: 0.1 }}
       >
         {children}
       </StyledMotionDiv>

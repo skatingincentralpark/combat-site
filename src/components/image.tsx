@@ -34,14 +34,12 @@ type ImageWrapperProps = {
 };
 
 const ImageWrapper = styled.div<ImageWrapperProps>`
-  padding: ${({ padding }) => (padding ? padding : `0.5rem`)};
+  padding: ${({ padding }) => (padding ? padding : `0`)};
   margin: ${({ margin }) => (margin ? margin : `0`)};
   width: ${({ width }) => (width ? width : `100%`)};
   height: 100%;
 
   position: relative;
-
-  cursor: pointer;
 
   @media screen and (min-width: 700px) {
     width: ${({ widthMobile }) => (widthMobile ? widthMobile : `100%`)};

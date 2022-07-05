@@ -28,10 +28,15 @@ const GlobalStyles = () => {
       --gap-s: 0.5rem;
       --gap-m: 0.75rem;
       --gap-l: 1rem;
-      --gap-xl: 1.25rem;
-      --gap-xxl: 1.5rem;
+      --gap-xl: 1.5rem;
+      --gap-xxl: 2rem;
       --gap-page-top: calc(var(--header-height) + 1rem);
+      --button-height-s: 3.25rem;
       --header-height: 6rem;
+
+      @media screen and (min-width: 650px) {
+        --button-height-s: 2.5rem;
+      }
     }
 
     @font-face {
@@ -105,6 +110,7 @@ const GlobalStyles = () => {
       color: inherit;
       border: none;
       padding: 0;
+      margin: 0;
       font-size: inherit;
       font-family: inherit;
       font-weight: inherit;

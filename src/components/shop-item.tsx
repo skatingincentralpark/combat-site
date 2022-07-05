@@ -20,7 +20,7 @@ const ShopItem = ({ product }: Props) => {
   const details = Object.entries(product);
 
   const navigate = () => {
-    router.push("/shop-item");
+    router.push("/shop/1");
   };
 
   return (
