@@ -70,7 +70,7 @@ const GlobalStyles = () => {
       background: white;
       font-family: var(--font-family-primary);
       font-size: clamp(12px, 0.9vw, 18px);
-      line-height: clamp(1.3em, 1.1vw, 2em);
+      line-height: clamp(1.3em, 1.4em, 2em);
       font-weight: 200;
       color: var(--font-family-primary);
       overflow-y: scroll;

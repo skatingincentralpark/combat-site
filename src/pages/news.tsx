@@ -38,12 +38,15 @@ const NewsPage = () => {
         <NewsItemWrapper key={i}>
           <NewsItemImageWrapper
             animate={{
-              scale: [1, 0.8, 0.8, 1, 1],
-              rotate: [0, 0, 180, 180, 0],
-              borderRadius: ["20%", "50%", "50%", "50%", "0"],
+              scale: [1, 0.96, 1, 1, 1],
+              borderColor: ["#bfffea", "#b3ff6b", "#fffa67", "#C3C48D"],
+              borderWidth: ["10px", "20px", "5px", "0px"],
+              opacity: ["0%", "100%", "100%", "100%"],
+              y: [100, 0, 0, 0, 0],
+              borderRadius: ["0rem", "2.5rem", "2.5rem", "2rem", "2rem"],
             }}
             transition={{
-              duration: 1,
+              duration: 2,
               ease: "easeInOut",
               times: [0, 0.2, 0.5, 0.8, 1],
               repeatDelay: 5,
@@ -93,13 +96,14 @@ const NewsItemWrapper = styled(motion.div)`
 const NewsItemImageWrapper = styled(motion.div)`
   margin-bottom: var(--gap-xl);
 
-  outline: 2px solid black;
+  /* outline: 2px solid black; */
+  border: 1px solid #c3c48d;
   aspect-ratio: 2 / 3;
   position: relative;
   overflow: hidden;
   width: 100%;
   max-width: 20rem;
-  min-width: 12rem;
+  flex-shrink: 0;
 
   @media screen and (min-width: 650px) {
     margin-right: var(--gap-xl);
