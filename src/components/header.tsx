@@ -27,12 +27,15 @@ const Header = () => {
   const variants = {
     initial: {
       y: "-100%",
+      opacity: 0,
     },
     animate: {
       y: "0",
+      opacity: 1,
     },
     exit: {
       y: "-100%",
+      opacity: 0,
     },
   };
 
@@ -78,6 +81,7 @@ const Header = () => {
             initial="initial"
             exit="exit"
             animate="animate"
+            transition={{ type: "spring", duration: 0.3, bounce: 0.3 }}
           >
             <HeaderMenuInner>
               <HeaderMenuNav>
@@ -193,7 +197,7 @@ const HeaderMenuWrapper = styled(motion.div)`
   width: 100%;
   height: 100vh;
 
-  background-color: var(--gray-1);
+  background-color: white;
 
   font-weight: 300;
 `;
@@ -223,7 +227,7 @@ const StyledNavLink = styled.div`
   background-color: var(--nav-link-bg-color);
   color: var(--nav-link-color);
   --nav-link-color: black;
-  --nav-link-bg-color: var(--gray-1);
+  --nav-link-bg-color: white;
   --dot-color: var(--yellow-2); // scoped to link so the dot can use it
   --dot-scale: scale(1);
 

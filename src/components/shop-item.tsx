@@ -59,7 +59,7 @@ const ShopItemWrapper = styled(motion.div)`
   border-radius: 1rem;
 
   transform: rotate(0deg);
-  transition: width 0.25s ease, transform 0.15s ease, border 0.25s ease,
+  transition: width 0.25s ease, transform 0.15s ease, border 0.1s,
     box-shadow 0.25s ease;
 
   @media screen and (min-width: 700px) {
@@ -75,7 +75,7 @@ const ShopItemWrapper = styled(motion.div)`
     box-shadow: 4px 6px 15px var(--green-light-1);
   }
   &:active {
-    border-color: var(--green-3);
+    border-width: 2px;
   }
 `;
 const StyledImage = styled.div`

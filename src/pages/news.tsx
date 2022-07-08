@@ -1,8 +1,6 @@
 import { default as NextImage } from "next/image";
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import Image from "../components/image";
 
 const news = [
   {
@@ -40,15 +38,15 @@ const NewsPage = () => {
             animate={{
               scale: [1, 0.96, 1, 1, 1],
               borderColor: ["#bfffea", "#b3ff6b", "#fffa67", "#C3C48D"],
-              borderWidth: ["10px", "20px", "5px", "0px"],
+              borderWidth: ["10px", "30px", "5px", "0px"],
               opacity: ["0%", "100%", "100%", "100%"],
               y: [100, 0, 0, 0, 0],
-              borderRadius: ["0rem", "2.5rem", "2.5rem", "2rem", "2rem"],
+              borderRadius: ["0rem", "25rem", "2.5rem", "2rem", "2rem"],
             }}
             transition={{
-              duration: 2,
+              duration: 1.5,
               ease: "easeInOut",
-              times: [0, 0.2, 0.5, 0.8, 1],
+              times: [0, 0.2, 0.5, 0.9, 1],
               repeatDelay: 5,
             }}
           >
@@ -95,8 +93,6 @@ const NewsItemWrapper = styled(motion.div)`
 `;
 const NewsItemImageWrapper = styled(motion.div)`
   margin-bottom: var(--gap-xl);
-
-  /* outline: 2px solid black; */
   border: 1px solid #c3c48d;
   aspect-ratio: 2 / 3;
   position: relative;
@@ -104,6 +100,7 @@ const NewsItemImageWrapper = styled(motion.div)`
   width: 100%;
   max-width: 20rem;
   flex-shrink: 0;
+  transition: aspect-ratio 1s, width 1s, aspect-ratio 1s;
 
   @media screen and (min-width: 650px) {
     margin-right: var(--gap-xl);
@@ -126,7 +123,7 @@ const NewsItemDate = styled.div`
   flex-shrink: 0;
 
   @media screen and (min-width: 650px) {
-    margin-right: var(--gap-xl);
+    margin-right: var(--gap-xxl);
   }
 `;
 const NewsItemTitle = styled.div`

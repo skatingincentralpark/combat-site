@@ -1,11 +1,7 @@
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
 
 const HomePage = () => {
-  const [isShown, setIsShown] = useState(false);
-  const toggle = () => setIsShown((x) => !x);
-
   const container = {
     hidden: {
       opacity: 0,
@@ -18,7 +14,7 @@ const HomePage = () => {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.02,
+        staggerChildren: 0.07,
       },
     },
   };
@@ -31,7 +27,6 @@ const HomePage = () => {
   return (
     <PageWrapper>
       <PaddingWrapper>
-        <button onClick={toggle}>GO</button>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit
           voluptate eius eum maxime ipsa unde, aut blanditiis earum culpa
@@ -50,33 +45,36 @@ const HomePage = () => {
         </p>
       </PaddingWrapper>
       <AnimatePresence>
-        {isShown && (
-          <ColorBlockWrapper
-            variants={container}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-          >
-            <ColorBlock variants={item} />
-            <ColorBlock1 variants={item} />
-            <ColorBlock2 variants={item} />
-            <ColorBlock3 variants={item} />
-            <ColorBlock4 variants={item} />
-            <ColorBlock5 variants={item} />
-            <ColorBlock variants={item} />
-            <ColorBlock1 variants={item} />
-            <ColorBlock2 variants={item} />
-            <ColorBlock3 variants={item} />
-            <ColorBlock4 variants={item} />
-            <ColorBlock5 variants={item} />
-            <ColorBlock variants={item} />
-            <ColorBlock1 variants={item} />
-            <ColorBlock2 variants={item} />
-            <ColorBlock3 variants={item} />
-            <ColorBlock4 variants={item} />
-            <ColorBlock5 variants={item} />
-          </ColorBlockWrapper>
-        )}
+        <ColorBlockWrapper
+          variants={container}
+          initial="hidden"
+          animate="show"
+          exit="hidden"
+        >
+          <ColorBlock variants={item} />
+          <ColorBlock1 variants={item} />
+          <ColorBlock2 variants={item} />
+          <ColorBlock3 variants={item} />
+          <ColorBlock4 variants={item} />
+          <ColorBlock5 variants={item} />
+          <ColorBlock variants={item} />
+          <ColorBlock1 variants={item} />
+          <ColorBlock2 variants={item} />
+          <ColorBlock3 variants={item} />
+          <ColorBlock4 variants={item} />
+          <ColorBlock5 variants={item} />
+          <ColorBlock variants={item} />
+          <ColorBlock1 variants={item} />
+          <ColorBlock2 variants={item} />
+          <ColorBlock3 variants={item} />
+          <ColorBlock4 variants={item} />
+          <ColorBlock5 variants={item} />
+          <ColorBlock1 variants={item} />
+          <ColorBlock2 variants={item} />
+          <ColorBlock3 variants={item} />
+          <ColorBlock4 variants={item} />
+          <ColorBlock5 variants={item} />
+        </ColorBlockWrapper>
       </AnimatePresence>
     </PageWrapper>
   );

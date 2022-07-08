@@ -55,7 +55,7 @@ export default ShopPage;
 
 const PageWrapper = styled(motion.div)`
   width: 100%;
-  height: fit-content;
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
