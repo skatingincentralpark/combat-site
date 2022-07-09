@@ -59,14 +59,14 @@ const ShopItemWrapper = styled(motion.div)`
   border-radius: 1rem;
 
   transform: rotate(0deg);
-  transition: width 0.25s ease, transform 0.15s ease, border 0.1s,
+  transition: width 0.5s ease, transform 0.15s ease, border 0.1s,
     box-shadow 0.25s ease;
 
   @media screen and (min-width: 700px) {
-    width: calc(50% - 2rem);
+    width: calc(50% - 3rem);
   }
   @media screen and (min-width: 1050px) {
-    width: calc(25% - 2rem);
+    width: calc(25% - 3rem);
   }
 
   &:hover {

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import ShopItem from "../../components/shop-item";
 
 const ShopPage = () => {
@@ -63,8 +63,9 @@ const PageWrapper = styled(motion.div)`
   align-items: center;
 
   padding: var(--gap-page-top) 3.5rem;
+  padding-bottom: 10rem;
 
   @media screen and (min-width: 700px) {
-    padding: var(--gap-page-top) var(--gap-l);
+    padding: var(--gap-page-top) 3.5rem;
   }
 `;

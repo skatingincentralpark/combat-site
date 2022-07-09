@@ -39,7 +39,7 @@ const Header = () => {
     },
   };
 
-  const variantsWidth = {
+  const variantsBackButton = {
     initial: {
       width: 0,
       backgroundColor: "#d9ff00",
@@ -61,7 +61,7 @@ const Header = () => {
           {isShopPath && !navOpen && (
             <HeaderBackButton
               onClick={navigateToShop}
-              variants={variantsWidth}
+              variants={variantsBackButton}
               initial="initial"
               exit="exit"
               animate="animate"

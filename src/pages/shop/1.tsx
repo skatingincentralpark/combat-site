@@ -8,15 +8,6 @@ const ShopItemPage = () => {
   const sizes = ["s", "m", "l", "xl"];
   const [selectedSize, setSelectedSize] = useState(sizes[0]);
 
-  const variants = {
-    initial: {
-      y: "100%",
-    },
-    animate: {
-      y: "0",
-    },
-  };
-
   return (
     <PageWrapper>
       <StyledImage>

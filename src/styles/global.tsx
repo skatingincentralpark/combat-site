@@ -1,8 +1,6 @@
-import { Global, css, useTheme } from "@emotion/react";
+import { Global, css } from "@emotion/react";
 
 const GlobalStyles = () => {
-  const theme = useTheme();
-
   const styles = css`
     :root {
       --gray-1: #f4f4f4;
@@ -69,11 +67,12 @@ const GlobalStyles = () => {
     html {
       background: white;
       font-family: var(--font-family-primary);
-      font-size: clamp(12px, 0.9vw, 18px);
+      font-size: clamp(12px, 0.85vw, 18px);
       line-height: clamp(1.3em, 1.4em, 2em);
       font-weight: 200;
       color: var(--font-family-primary);
       overflow-y: scroll;
+      min-height: fit-content;
     }
     * {
       box-sizing: border-box;
