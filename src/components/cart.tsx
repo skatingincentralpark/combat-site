@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "./shared-styles/button";
 
 const Cart = () => {
   return (
     <>
       <CartButton>
-        <button></button>
+        <Button>Hello</Button>
       </CartButton>
       <CartModal></CartModal>
     </>
@@ -14,5 +15,8 @@ const Cart = () => {
 
 export default Cart;
 
-const CartButton = styled(motion.div)``;
+const CartButton = styled(motion.div)`
+  position: fixed;
+  z-index: 9;
+`;
 const CartModal = styled(motion.div)``;

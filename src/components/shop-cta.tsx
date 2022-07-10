@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import RadioButton from "./radio-button";
+import { Button } from "../components/shared-styles/button";
 
 type Props = {
   sizes: string[];
@@ -38,7 +39,7 @@ const ShopCta = ({ sizes, selectedSize, setSelectedSize }: Props) => {
           </RadioButton>
         ))}
       </RadioGroup>
-      <StyledButton onClick={() => {}}>Add To Cart</StyledButton>
+      <Button onClick={() => {}}>Add To Cart</Button>
     </ShopCtaWrapper>
   );
 };
@@ -61,21 +62,4 @@ const ShopCtaWrapper = styled(motion.div)`
 const RadioGroup = styled.div`
   display: flex;
   justify-content: flex-start;
-`;
-const StyledButton = styled.button`
-  color: white;
-  font-weight: 600;
-  border-radius: 0 0 var(--gap-xs) var(--gap-xs);
-  padding: var(--gap-s) var(--gap-l);
-  background-color: var(--green-1);
-  width: 100%;
-  height: var(--button-height);
-  cursor: pointer;
-
-  &:hover {
-    background-color: var(--green-2);
-  }
-  &:active {
-    background-color: var(--green-3);
-  }
 `;
