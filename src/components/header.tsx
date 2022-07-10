@@ -145,7 +145,7 @@ const HeaderWrapper = styled.header`
   top: 0;
   left: 0;
 
-  z-index: 9;
+  z-index: 7;
 
   display: flex;
   flex-direction: row;

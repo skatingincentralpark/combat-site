@@ -39,7 +39,7 @@ const ShopCta = ({ sizes, selectedSize, setSelectedSize }: Props) => {
           </RadioButton>
         ))}
       </RadioGroup>
-      <StyledButton onClick={() => {}}>Add To Cart</StyledButton>
+      <Button onClick={() => {}}>Add To Cart</Button>
     </ShopCtaWrapper>
   );
 };
@@ -62,4 +62,7 @@ const ShopCtaWrapper = styled(motion.div)`
 const RadioGroup = styled.div`
   display: flex;
   justify-content: flex-start;
+`;
+const Button = styled(StyledButton)`
+  border-radius: 0 0 var(--gap-xs) var(--gap-xs);
 `;

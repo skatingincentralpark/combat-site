@@ -21,4 +21,6 @@ const CartButtonWrapper = styled(motion.div)`
   top: var(--gap-l);
   right: var(--gap-l);
 `;
-const CartModal = styled(motion.div)``;
+const CartModal = styled(motion.div)`
+  z-index: 8;
+`;

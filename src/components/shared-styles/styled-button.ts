@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 const StyledButton = styled.button`
   color: white;
   font-weight: 600;
-  border-radius: 0 0 var(--gap-xs) var(--gap-xs);
-  padding: var(--gap-s) var(--gap-l);
+  border-radius: var(--gap-xs);
+  padding: var(--gap-s) var(--gap-xxl);
   background-color: var(--green-1);
   width: 100%;
   height: var(--button-height);
