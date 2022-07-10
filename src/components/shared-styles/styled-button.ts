@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const Button = styled.button`
+const StyledButton = styled.button`
   color: white;
   font-weight: 600;
   border-radius: 0 0 var(--gap-xs) var(--gap-xs);
@@ -18,4 +18,4 @@ const Button = styled.button`
   }
 `;
 
-export { Button };
+export { StyledButton };

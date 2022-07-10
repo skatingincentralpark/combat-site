@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import RadioButton from "./radio-button";
-import { Button } from "../components/shared-styles/button";
+import { StyledButton } from "./shared-styles/styled-button";
 
 type Props = {
   sizes: string[];
@@ -39,7 +39,7 @@ const ShopCta = ({ sizes, selectedSize, setSelectedSize }: Props) => {
           </RadioButton>
         ))}
       </RadioGroup>
-      <Button onClick={() => {}}>Add To Cart</Button>
+      <StyledButton onClick={() => {}}>Add To Cart</StyledButton>
     </ShopCtaWrapper>
   );
 };

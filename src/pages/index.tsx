@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import ColorStrips from "../components/color-strips";
-import { PageWrapper } from "../components/shared-styles/page-wrapper";
+import { StyledPageWrapper } from "../components/shared-styles/styled-page-wrapper";
 
 const HomePage = () => {
   const chosenColors = [
@@ -16,7 +16,7 @@ const HomePage = () => {
   const colors = [...chosenColors];
 
   return (
-    <PageWrapper>
+    <StyledPageWrapper>
       <TextWrapper>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit
         voluptate eius eum maxime ipsa unde, aut blanditiis earum culpa dolorum
@@ -34,7 +34,7 @@ const HomePage = () => {
         cumque?
       </TextWrapper>
       <ColorStrips colors={colors} />
-    </PageWrapper>
+    </StyledPageWrapper>
   );
 };
 

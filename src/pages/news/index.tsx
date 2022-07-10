@@ -1,5 +1,5 @@
 import NewsItem from "../../components/news-item";
-import { PageWrapper } from "../../components/shared-styles/page-wrapper";
+import { StyledPageWrapper } from "../../components/shared-styles/styled-page-wrapper";
 
 const news = [
   {
@@ -30,11 +30,11 @@ const news = [
 
 const NewsPage = () => {
   return (
-    <PageWrapper px="l">
+    <StyledPageWrapper px="l">
       {news.map((item, i) => (
         <NewsItem newsItem={item} key={i} />
       ))}
-    </PageWrapper>
+    </StyledPageWrapper>
   );
 };
 

@@ -5,15 +5,15 @@ type PageWrapperProps = {
 };
 
 const gap = {
-  xs: "--gap-xs",
-  s: "--gap-s",
-  m: "--gap-m",
-  l: "--gap-l",
-  xl: "--gap-xl",
-  xxl: "--gap-xxl",
+  xs: "var(--gap-xs)",
+  s: "var(--gap-s)",
+  m: "var(--gap-m)",
+  l: "var(--gap-l)",
+  xl: "var(--gap-xl)",
+  xxl: "var(--gap-xxl)",
 };
 
-const PageWrapper = styled.div<PageWrapperProps>`
+const StyledPageWrapper = styled.div<PageWrapperProps>`
   width: 100%;
   height: 100%;
   padding-top: var(--gap-page-top);
@@ -21,4 +21,4 @@ const PageWrapper = styled.div<PageWrapperProps>`
   padding-right: ${({ px }) => (px ? gap[px] : 0)};
 `;
 
-export { PageWrapper };
+export { StyledPageWrapper };
