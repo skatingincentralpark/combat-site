@@ -145,7 +145,7 @@ const HeaderWrapper = styled.header`
   top: 0;
   left: 0;
 
-  z-index: 7;
+  z-index: 8;
 
   display: flex;
   flex-direction: row;
@@ -192,7 +192,7 @@ const HeaderMenuWrapper = styled(motion.div)`
   left: 0;
 
   overflow-y: auto;
-  z-index: 8;
+  z-index: 7;
 
   width: 100%;
   height: 100vh;
