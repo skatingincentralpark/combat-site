@@ -29,11 +29,11 @@ const GlobalStyles = () => {
       --gap-xl: 1.5rem;
       --gap-xxl: 2rem;
       --gap-page-top: calc(var(--header-height) + 1rem);
-      --button-height-s: 3.25rem;
+      --button-height: 3.25rem;
       --header-height: 6rem;
 
       @media screen and (min-width: 650px) {
-        --button-height-s: 2.5rem;
+        --button-height: 2.5rem;
       }
     }
 

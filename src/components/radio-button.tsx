@@ -33,7 +33,7 @@ const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
 
   transition: background-color 0.25s cubic-bezier(0.25, 1, 0.5, 1);
 
-  height: var(--button-height-s);
+  height: var(--button-height);
   flex-grow: 1;
 
   font-weight: 600;

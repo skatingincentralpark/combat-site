@@ -69,7 +69,7 @@ const StyledButton = styled.button`
   padding: var(--gap-s) var(--gap-l);
   background-color: var(--green-1);
   width: 100%;
-  height: var(--button-height-s);
+  height: var(--button-height);
   cursor: pointer;
 
   &:hover {
