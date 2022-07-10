@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
 import NewsItem from "../../components/news-item";
+import { PageWrapper } from "../../components/shared-styles/page-wrapper";
 
 const news = [
   {
@@ -30,18 +30,12 @@ const news = [
 
 const NewsPage = () => {
   return (
-    <PageWrapper>
+    <PageWrapper px="l">
       {news.map((item, i) => (
         <NewsItem newsItem={item} key={i} />
       ))}
     </PageWrapper>
   );
 };
-
-const PageWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: var(--gap-page-top) var(--gap-l);
-`;
 
 export default NewsPage;
