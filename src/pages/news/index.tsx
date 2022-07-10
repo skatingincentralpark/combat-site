@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import NewsItem from "../components/news-item";
+import NewsItem from "../../components/news-item";
 
 const news = [
   {
