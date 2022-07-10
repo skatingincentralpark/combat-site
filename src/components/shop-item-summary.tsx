@@ -15,7 +15,7 @@ type Props = {
   };
 };
 
-const ShopItem = ({ product }: Props) => {
+const ShopItemSummary = ({ product }: Props) => {
   const router = useRouter();
   const details = Object.entries(product);
 
@@ -29,10 +29,10 @@ const ShopItem = ({ product }: Props) => {
         <Image src="/images/Bill2.png" />
       </StyledImage>
       <StyledDescription>
-        {details.map((x, i) => (
+        {details.map((detail, i) => (
           <StyledDescriptionItem key={i}>
-            <span>{x[0]}: </span>
-            <span>{x[1]}</span>
+            <span>{detail[0]}: </span>
+            <span>{detail[1]}</span>
           </StyledDescriptionItem>
         ))}
       </StyledDescription>
@@ -43,7 +43,7 @@ const ShopItem = ({ product }: Props) => {
   );
 };
 
-export default ShopItem;
+export default ShopItemSummary;
 
 const ShopItemWrapper = styled(motion.div)`
   width: 100%;

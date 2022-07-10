@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
-import ShopItem from "../../components/shop-item";
+import ShopItemSummary from "../../components/shop-item-summary";
 
 const ShopPage = () => {
   const products = [
@@ -45,7 +45,7 @@ const ShopPage = () => {
   return (
     <PageWrapper>
       {products.map((product, i) => (
-        <ShopItem product={product} key={i} />
+        <ShopItemSummary product={product} key={i} />
       ))}
     </PageWrapper>
   );
