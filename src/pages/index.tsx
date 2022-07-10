@@ -1,28 +1,18 @@
 import styled from "@emotion/styled";
-import { motion, AnimatePresence } from "framer-motion";
+import ColorStrips from "../components/color-strips";
 
 const HomePage = () => {
-  const container = {
-    hidden: {
-      opacity: 0,
-      transition: {
-        staggerDirection: -1,
-        staggerChildren: 0.02,
-        when: "afterChildren",
-      },
-    },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.07,
-      },
-    },
-  };
+  const colors = [
+    "var(--green-2)",
+    "var(--green-3)",
+    "var(--yellow-1)",
+    "var(--yellow-2)",
+    "var(--olive-1)",
+    "red",
+    "orange",
+  ];
 
-  const item = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1 },
-  };
+  const colorsRepeated = [...colors];
 
   return (
     <PageWrapper>
@@ -44,38 +34,7 @@ const HomePage = () => {
           mollitia dolores blanditiis? Quis fugit omnis laudantium cumque?
         </p>
       </PaddingWrapper>
-      <AnimatePresence>
-        <ColorBlockWrapper
-          variants={container}
-          initial="hidden"
-          animate="show"
-          exit="hidden"
-        >
-          <ColorBlock variants={item} />
-          <ColorBlock1 variants={item} />
-          <ColorBlock2 variants={item} />
-          <ColorBlock3 variants={item} />
-          <ColorBlock4 variants={item} />
-          <ColorBlock5 variants={item} />
-          <ColorBlock variants={item} />
-          <ColorBlock1 variants={item} />
-          <ColorBlock2 variants={item} />
-          <ColorBlock3 variants={item} />
-          <ColorBlock4 variants={item} />
-          <ColorBlock5 variants={item} />
-          <ColorBlock variants={item} />
-          <ColorBlock1 variants={item} />
-          <ColorBlock2 variants={item} />
-          <ColorBlock3 variants={item} />
-          <ColorBlock4 variants={item} />
-          <ColorBlock5 variants={item} />
-          <ColorBlock1 variants={item} />
-          <ColorBlock2 variants={item} />
-          <ColorBlock3 variants={item} />
-          <ColorBlock4 variants={item} />
-          <ColorBlock5 variants={item} />
-        </ColorBlockWrapper>
-      </AnimatePresence>
+      <ColorStrips colors={colorsRepeated} />
     </PageWrapper>
   );
 };
@@ -90,31 +49,4 @@ const PageWrapper = styled.div`
 `;
 const PaddingWrapper = styled.div`
   padding: var(--gap-l);
-`;
-const ColorBlockWrapper = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-  display: flex;
-`;
-const ColorBlock = styled(motion.div)`
-  width: 50px;
-  height: 100%;
-  display: inline-block;
-  background-color: var(--green-1);
-  flex-grow: 1;
-`;
-const ColorBlock1 = styled(ColorBlock)`
-  background-color: var(--green-2);
-`;
-const ColorBlock2 = styled(ColorBlock)`
-  background-color: var(--green-3);
-`;
-const ColorBlock3 = styled(ColorBlock)`
-  background-color: var(--yellow-1);
-`;
-const ColorBlock4 = styled(ColorBlock)`
-  background-color: var(--yellow-2);
-`;
-const ColorBlock5 = styled(ColorBlock)`
-  background-color: var(--olive-1);
 `;
