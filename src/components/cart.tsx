@@ -8,15 +8,15 @@ const Cart = () => {
 
   const variants = {
     initial: {
-      // y: "-100%",
+      // y: 50,
       opacity: 0,
     },
     animate: {
-      // y: "0",
+      // y: 0,
       opacity: 1,
     },
     exit: {
-      // y: "-100%",
+      // y: -50,
       opacity: 0,
     },
   };
@@ -36,9 +36,25 @@ const Cart = () => {
             initial="initial"
             exit="exit"
             animate="animate"
-            // transition={{ type: "spring", duration: 0.3, bounce: 0.3 }}
           >
-            <p>hello</p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic,
+              blanditiis fugiat tempore, assumenda quae error earum non id eos
+              deserunt perferendis distinctio autem! Tenetur eaque in, dolores
+              architecto vitae autem.
+            </p>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa
+              vitae in eligendi sit! Cupiditate expedita ipsam hic amet aperiam
+              voluptatibus eligendi doloribus alias perferendis, reiciendis
+              reprehenderit eaque autem laudantium obcaecati sint error qui quae
+              asperiores voluptas numquam atque. Ratione reiciendis molestias
+              doloribus atque quae rerum aperiam eos sint! Possimus, natus?
+              Similique expedita, deserunt fuga laudantium repellat nam itaque
+              magnam reprehenderit excepturi culpa neque porro quos libero nihil
+              est minus facere ab molestias, maxime iusto dignissimos
+              architecto! Dicta eius, cum ad voluptates sit error.
+            </p>
           </CartModal>
         )}
       </AnimatePresence>

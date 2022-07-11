@@ -52,7 +52,7 @@ type ColorProps = {
 
 const ColorBlockWrapper = styled(motion.div)`
   width: 100%;
-  height: 100%;
+  height: 70vh;
   display: flex;
 `;
 const ColorBlock = styled(motion.div)<ColorProps>`
