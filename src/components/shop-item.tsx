@@ -88,7 +88,6 @@ const StyledDescription = styled.div`
   & > p {
     display: block;
     margin-bottom: 2rem;
-    max-width: 35rem;
   }
 
   @media screen and (min-width: 650px) {
@@ -102,6 +101,7 @@ const StyledDescription = styled.div`
 
     & > p {
       margin-right: 2rem;
+      max-width: 35rem;
     }
   }
 `;
