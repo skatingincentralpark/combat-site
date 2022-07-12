@@ -67,7 +67,7 @@ const GlobalStyles = () => {
     html {
       background: white;
       font-family: var(--font-family-primary);
-      font-size: clamp(12px, 0.85vw, 18px);
+      font-size: clamp(12px, 0.8vw, 18px);
       line-height: clamp(1.3em, 1.4em, 2em);
       font-weight: 200;
       color: var(--font-family-primary);
