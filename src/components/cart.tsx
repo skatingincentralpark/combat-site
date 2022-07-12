@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { StyledButton } from "./shared-styles/styled-button";
+import Image from "./image";
 
 const Cart = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -37,24 +38,25 @@ const Cart = () => {
             exit="exit"
             animate="animate"
           >
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic,
-              blanditiis fugiat tempore, assumenda quae error earum non id eos
-              deserunt perferendis distinctio autem! Tenetur eaque in, dolores
-              architecto vitae autem.
-            </p>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa
-              vitae in eligendi sit! Cupiditate expedita ipsam hic amet aperiam
-              voluptatibus eligendi doloribus alias perferendis, reiciendis
-              reprehenderit eaque autem laudantium obcaecati sint error qui quae
-              asperiores voluptas numquam atque. Ratione reiciendis molestias
-              doloribus atque quae rerum aperiam eos sint! Possimus, natus?
-              Similique expedita, deserunt fuga laudantium repellat nam itaque
-              magnam reprehenderit excepturi culpa neque porro quos libero nihil
-              est minus facere ab molestias, maxime iusto dignissimos
-              architecto! Dicta eius, cum ad voluptates sit error.
-            </p>
+            <CartItem>
+              <Image src="/images/Bill2.png" />
+              <CartItemBody>
+                <strong>Viktor Tee</strong>
+                <strong>$70 AUD</strong>
+                <CartItemBodySummary>
+                  <div>
+                    <strong>Color:</strong> <span>White</span>
+                  </div>
+                  <div>
+                    <strong>Size:</strong> <span>S</span>
+                  </div>
+                  <div>
+                    <strong>Quantity:</strong> <span>1</span>
+                  </div>
+                </CartItemBodySummary>
+                <span>Remove</span>
+              </CartItemBody>
+            </CartItem>
           </CartModal>
         )}
       </AnimatePresence>
@@ -76,7 +78,30 @@ const CartModal = styled(motion.div)`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
-  background-color: #f6ff00a7;
+  height: 100%;
+
+  background-color: #f6ff00e5;
   backdrop-filter: blur(3px) invert(1);
+  padding: var(--gap-page-top) var(--gap-xxl);
+`;
+const CartItem = styled.div`
+  width: 50%;
+  height: min-content;
+
+  @media screen and (min-width: 650px) {
+    width: 25%;
+  }
+
+  & > div:first-of-type {
+    border-radius: 1.5rem;
+    overflow: hidden;
+  }
+`;
+const CartItemBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--gap-l);
+`;
+const CartItemBodySummary = styled.div`
+  margin: var(--gap-l) 0;
 `;
