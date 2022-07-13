@@ -60,8 +60,14 @@ const AccordionWrapper = styled.div`
 
   margin: var(--gap-xl) 0;
   padding: var(--gap-l) 0;
+
+  @media screen and (min-width: 700px) {
+    display: flex;
+  }
 `;
-const AccordionList = styled.div``;
+const AccordionList = styled.div`
+  flex-shrink: 0;
+`;
 const AccordionListItem = styled.div`
   font-weight: 400;
   cursor: pointer;
@@ -78,6 +84,7 @@ const AccordionListItem = styled.div`
       --nav-link-bg-color: var(--yellow-1);
     }
   }
+
   &:active {
     --nav-link-color: white;
     --nav-link-bg-color: var(--yellow-2);
@@ -98,6 +105,4 @@ const AccordionListItemIndicator = styled.span<ActiveProp>`
   transition: background-color 0.25s, transform 0.25s;
 `;
 
-const AccordionBody = styled.div`
-  position: relative;
-`;
+const AccordionBody = styled.div``;

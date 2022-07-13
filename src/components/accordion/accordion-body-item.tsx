@@ -43,4 +43,10 @@ const AccordionBodyItemWrapper = styled(motion.div)`
 `;
 const AccordionBodyItemWrapperInner = styled.div`
   margin-top: var(--gap-l);
+
+  @media screen and (min-width: 700px) {
+    margin-top: 0;
+    margin-left: 7rem;
+    max-width: 30rem;
+  }
 `;
