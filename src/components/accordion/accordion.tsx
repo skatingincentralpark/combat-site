@@ -16,17 +16,20 @@ const Accordion = ({ options }: Props) => {
   return (
     <AccordionWrapper>
       <AccordionList>
-        {options.map((option, i) => (
-          <AccordionListItem
-            key={i}
-            onClick={() => {
-              setActiveItem(i);
-            }}
-          >
-            <AccordionListItemIndicator />
-            {option.label}
-          </AccordionListItem>
-        ))}
+        {options.map((option, i) => {
+          const active = activeItem === i;
+          return (
+            <AccordionListItem
+              key={i}
+              onClick={() => {
+                setActiveItem(i);
+              }}
+            >
+              <AccordionListItemIndicator active={active} />
+              {option.label}
+            </AccordionListItem>
+          );
+        })}
       </AccordionList>
       <AccordionBody>
         <AnimatePresence exitBeforeEnter>
@@ -47,18 +50,53 @@ const Accordion = ({ options }: Props) => {
 
 export default Accordion;
 
+type ActiveProp = {
+  active: boolean;
+};
+
 const AccordionWrapper = styled.div`
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
+  border-top: 0.5px solid var(--olive-1);
+  border-bottom: 0.5px solid var(--olive-1);
 
   margin: var(--gap-xl) 0;
-  padding: var(--gap-m) 0;
+  padding: var(--gap-l) 0;
 `;
 const AccordionList = styled.div``;
 const AccordionListItem = styled.div`
   font-weight: 400;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  --dot-color: #ffffff0; // scoped to link so the dot can use it
+  --dot-scale: scale(1);
+
+  &:hover {
+    @media screen and (min-width: 700px) {
+      --nav-link-color: var(--yellow-1);
+      --nav-link-bg-color: var(--yellow-1);
+    }
+  }
+  &:active {
+    --nav-link-color: white;
+    --nav-link-bg-color: var(--yellow-2);
+    --dot-color: white; // scoped to link so the dot can use it
+    --dot-scale: scale(1.2);
+  }
 `;
-const AccordionListItemIndicator = styled.div``;
+const AccordionListItemIndicator = styled.span<ActiveProp>`
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  margin-right: var(--gap-l);
+
+  border: 0.5px solid black;
+  background-color: ${({ active }) => (active ? "black" : "var(--dot-color)")};
+  transform: var(--dot-scale);
+  transition: background-color 0.25s, transform 0.25s;
+`;
 
 const AccordionBody = styled.div`
   position: relative;

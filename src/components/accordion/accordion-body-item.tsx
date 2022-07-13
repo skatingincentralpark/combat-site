@@ -14,7 +14,7 @@ const AccordionBodyItem = ({ children, active }: Props) => {
       opacity: 0,
     },
     animate: {
-      maxHeight: 100,
+      maxHeight: 200,
       opacity: 1,
       transition: { duration: 0.2 },
     },
@@ -31,7 +31,7 @@ const AccordionBodyItem = ({ children, active }: Props) => {
       exit="exit"
       animate="animate"
     >
-      {children}
+      <AccordionBodyItemWrapperInner>{children}</AccordionBodyItemWrapperInner>
     </AccordionBodyItemWrapper>
   );
 };
@@ -40,4 +40,7 @@ export default AccordionBodyItem;
 
 const AccordionBodyItemWrapper = styled(motion.div)`
   overflow: hidden;
+`;
+const AccordionBodyItemWrapperInner = styled.div`
+  margin-top: var(--gap-l);
 `;
