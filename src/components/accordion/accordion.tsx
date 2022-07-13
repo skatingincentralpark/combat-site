@@ -54,7 +54,7 @@ type ActiveProp = {
   active: boolean;
 };
 
-const AccordionWrapper = styled.div`
+const AccordionWrapper = styled(motion.div)`
   border-top: 0.5px solid var(--olive-1);
   border-bottom: 0.5px solid var(--olive-1);
 

@@ -45,6 +45,12 @@ const CartItemBody = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: var(--gap-l);
+
+  @media screen and (min-width: 650px) {
+    border-top: 0.5px solid var(--olive-1);
+    padding: var(--gap-l) 0;
+    margin-top: var(--gap-xxl);
+  }
 `;
 const CartItemBodySummary = styled.div`
   margin: var(--gap-l) 0;
