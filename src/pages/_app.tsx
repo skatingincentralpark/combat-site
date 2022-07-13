@@ -3,7 +3,7 @@ import PageTransitionWrapper from "../components/page-transition-wrapper";
 import GlobalStyles from "../styles/global";
 import Header from "../components/header";
 import Announcement from "../components/announcement";
-import Cart from "../components/cart";
+import Cart from "../components/cart/cart";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

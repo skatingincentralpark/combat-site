@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { StyledButton } from "./shared-styles/styled-button";
-import Image from "./image";
-import Accordion from "./accordion/accordion";
+import { StyledButton } from "../shared-styles/styled-button";
+import Image from "../image";
+import Accordion from "../accordion/accordion";
 
 const Cart = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -99,6 +99,7 @@ const CartModal = styled(motion.div)`
   left: 0;
   width: 100%;
   height: 100%;
+  overflow-y: auto;
 
   background-color: #f6ff00e5;
   backdrop-filter: blur(3px) invert(1);
