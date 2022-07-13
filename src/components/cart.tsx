@@ -3,24 +3,37 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { StyledButton } from "./shared-styles/styled-button";
 import Image from "./image";
+import Accordion from "./accordion/accordion";
 
 const Cart = () => {
   const [cartOpen, setCartOpen] = useState(false);
 
   const variants = {
     initial: {
-      // y: 50,
       opacity: 0,
     },
     animate: {
-      // y: 0,
       opacity: 1,
     },
     exit: {
-      // y: -50,
       opacity: 0,
     },
   };
+
+  const accordionOptions = [
+    {
+      label: "Shipping Policy",
+      text: "Italy: approximately 1-2 working days (excluding the Italian Islands which may take 2-3 working days).  European Union: approximately 2-3 working days.  Rest of the world: approximately 4-5 working days.",
+    },
+    {
+      label: "Returns",
+      text: "Compiled client and server successfully in 122 ms (522 modules).  European Union: approximately 2-3 working days.  Rest of the world: approximately 4-5 working days.",
+    },
+    {
+      label: "Secure Payment",
+      text: "Microfoam is shiny, slightly thickened, and should have microscopic, uniform bubbles.  European Union: approximately 2-3 working days.  Rest of the world: approximately 4-5 working days.",
+    },
+  ];
 
   return (
     <>
@@ -57,6 +70,13 @@ const Cart = () => {
                 <span>Remove</span>
               </CartItemBody>
             </CartItem>
+            <Accordion options={accordionOptions} />
+            {/* <TempFillerText>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
+              blanditiis consectetur similique porro architecto cupiditate cum
+              eligendi est dolorem, facere itaque consequuntur molestiae
+              obcaecati repellat neque, libero quae culpa recusandae!
+            </TempFillerText> */}
           </CartModal>
         )}
       </AnimatePresence>
@@ -104,4 +124,9 @@ const CartItemBody = styled.div`
 `;
 const CartItemBodySummary = styled.div`
   margin: var(--gap-l) 0;
+`;
+const TempFillerText = styled.div`
+  /* border-top: 1px solid gray; */
+  margin-top: 1rem;
+  padding-top: 1rem;
 `;
