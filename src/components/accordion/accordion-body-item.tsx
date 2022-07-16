@@ -7,7 +7,7 @@ type Props = {
   active: boolean;
 };
 
-const AccordionBodyItem = ({ children, active }: Props) => {
+const AccordionBodyItem = ({ children }: Props) => {
   const variants = {
     initial: {
       maxHeight: 0,
@@ -16,7 +16,10 @@ const AccordionBodyItem = ({ children, active }: Props) => {
     animate: {
       maxHeight: 200,
       opacity: 1,
-      transition: { duration: 0.2 },
+      transition: {
+        type: "spring",
+        duration: 0.7,
+      },
     },
     exit: {
       maxHeight: 0,

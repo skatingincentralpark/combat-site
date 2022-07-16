@@ -13,6 +13,8 @@ const GlobalStyles = () => {
       --green-light-1: #35b14a80;
       --yellow-1: #fce200;
       --yellow-2: #eecb15;
+      --yellow-3: #faff5ae4;
+      --yellow-4: #f6ff00e5;
       --olive-1: #564f0a;
       --text-primary: #000000;
       --text-secondary: #a4a6a9;

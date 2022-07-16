@@ -79,7 +79,7 @@ const CartModal = styled(motion.div)`
   height: 100%;
   overflow-y: auto;
 
-  background-color: #f6ff00e5;
+  background-color: var(--yellow-4);
   backdrop-filter: blur(3px) invert(1);
   padding: var(--gap-page-top) var(--gap-xxl);
 `;

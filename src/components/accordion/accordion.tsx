@@ -21,9 +21,8 @@ const Accordion = ({ options }: Props) => {
           return (
             <AccordionListItem
               key={i}
-              onClick={() => {
-                setActiveItem(i);
-              }}
+              onClick={() => setActiveItem(i)}
+              onTouchStart={() => setActiveItem(i)}
             >
               <AccordionListItemIndicator active={active} />
               {option.label}
@@ -75,21 +74,25 @@ const AccordionListItem = styled.div`
   display: flex;
   align-items: center;
 
+  background-color: var(--nav-link-bg-color);
+  color: var(--nav-link-color);
+
+  padding-right: var(--gap-l);
+
   --dot-color: #ffffff0; // scoped to link so the dot can use it
-  --dot-scale: scale(1);
 
   &:hover {
     @media screen and (min-width: 700px) {
-      --nav-link-color: var(--yellow-1);
-      --nav-link-bg-color: var(--yellow-1);
+      --nav-link-bg-color: var(--yellow-4);
+      --dot-color: var(--yellow-4); // scoped to link so the dot can use it
+      outline: 0.5px solid black;
     }
   }
 
   &:active {
-    --nav-link-color: white;
-    --nav-link-bg-color: var(--yellow-2);
-    --dot-color: white; // scoped to link so the dot can use it
-    --dot-scale: scale(1.2);
+    --nav-link-bg-color: var(--yellow-3);
+    --dot-color: var(--yellow-3); // scoped to link so the dot can use it
+    outline: 0.5px solid black;
   }
 `;
 const AccordionListItemIndicator = styled.span<ActiveProp>`
@@ -101,7 +104,6 @@ const AccordionListItemIndicator = styled.span<ActiveProp>`
 
   border: 0.5px solid black;
   background-color: ${({ active }) => (active ? "black" : "var(--dot-color)")};
-  transform: var(--dot-scale);
   transition: background-color 0.25s, transform 0.25s;
 `;
 
