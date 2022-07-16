@@ -26,7 +26,7 @@ const CartItem = ({ tee }: Props) => {
             <strong>Quantity:</strong> <span>1</span>
           </div>
         </CartItemBodySummary>
-        <span>Remove</span>
+        <CartRemove>Remove</CartRemove>
       </CartItemBody>
     </CartItemWrapper>
   );
@@ -62,4 +62,10 @@ const CartItemBody = styled.div`
 `;
 const CartItemBodySummary = styled.div`
   margin: var(--gap-l) 0 var(--gap-xl) 0;
+`;
+const CartRemove = styled.button`
+  font-weight: 400;
+  width: fit-content;
+  cursor: pointer;
+  text-decoration: underline;
 `;
