@@ -4,6 +4,7 @@ import { useState } from "react";
 import { StyledButton } from "../shared-styles/styled-button";
 import Accordion from "../accordion/accordion";
 import CartItem from "./cart-item";
+import CartMobileCta from "./cart-mobile-cta";
 
 const Cart = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -55,6 +56,7 @@ const Cart = () => {
               <CartItem tee={1} />
             </CartItemWrapper>
             <Accordion options={accordionOptions} />
+            <CartMobileCta />
           </CartModal>
         )}
       </AnimatePresence>

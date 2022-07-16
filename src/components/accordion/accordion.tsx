@@ -76,7 +76,7 @@ const AccordionListItem = styled.div`
   background-color: var(--nav-link-bg-color);
   color: var(--nav-link-color);
 
-  padding-right: var(--gap-l);
+  padding: 0 var(--gap-l) 0 var(--gap-s);
 
   --dot-color: #ffffff0; // scoped to link so the dot can use it
 
@@ -96,8 +96,8 @@ const AccordionListItem = styled.div`
 `;
 const AccordionListItemIndicator = styled.span<ActiveProp>`
   display: inline-block;
-  width: 1rem;
-  height: 1rem;
+  width: 0.75rem;
+  height: 0.75rem;
   border-radius: 50%;
   margin-right: var(--gap-l);
 

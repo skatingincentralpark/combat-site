@@ -5,9 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 type Props = {
   isClosed: boolean;
   children: React.ReactNode;
+  delay?: number;
 };
 
-const SlideUpModal = ({ isClosed, children }: Props) => {
+const SlideUpModal = ({ isClosed, children, delay }: Props) => {
   const variants = {
     initial: {
       opacity: 0,
@@ -16,7 +17,11 @@ const SlideUpModal = ({ isClosed, children }: Props) => {
     animate: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeInOut", delay: 1.5 },
+      transition: {
+        duration: 0.5,
+        ease: "easeInOut",
+        delay: delay ? delay : 0,
+      },
     },
     exit: {
       opacity: 0,

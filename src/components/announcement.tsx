@@ -11,7 +11,7 @@ const Announcement = () => {
   const [isClosed, setIsClosed] = useState(false);
 
   return (
-    <SlideUpModal isClosed={isClosed}>
+    <SlideUpModal isClosed={isClosed} delay={0.5}>
       <AnnouncementInner onClick={() => setIsClosed(true)}>
         <div>{announcement.title}</div>
         <div>{announcement.text}</div>
