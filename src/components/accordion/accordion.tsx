@@ -57,7 +57,6 @@ const AccordionWrapper = styled(motion.div)`
   border-top: 0.5px solid var(--olive-1);
   border-bottom: 0.5px solid var(--olive-1);
 
-  margin: var(--gap-xl) 0;
   padding: var(--gap-l) 0;
 
   @media screen and (min-width: 700px) {

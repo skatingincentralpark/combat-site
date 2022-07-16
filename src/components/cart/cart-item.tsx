@@ -44,7 +44,7 @@ const CartItemWrapper = styled.div`
 const CartItemBody = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: var(--gap-l);
+  margin-top: var(--gap-xxl);
 
   @media screen and (min-width: 650px) {
     border-top: 0.5px solid var(--olive-1);

@@ -86,4 +86,5 @@ const CartModal = styled(motion.div)`
 const CartItemWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: var(--gap-xxl);
 `;
