@@ -52,7 +52,7 @@ const Cart = () => {
             animate="animate"
           >
             <CartItemWrapper>
-              <CartItem />
+              <CartItem tee={1} />
             </CartItemWrapper>
             <Accordion options={accordionOptions} />
           </CartModal>

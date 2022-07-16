@@ -1,11 +1,17 @@
 import styled from "@emotion/styled";
 import Image from "../image";
-import { StyledButton } from "../shared-styles/styled-button";
+// import { StyledButton } from "../shared-styles/styled-button";
 
-const CartItem = () => {
+type Props = {
+  tee: number;
+};
+
+const CartItem = ({ tee }: Props) => {
   return (
     <CartItemWrapper>
-      <Image src="/images/Bill2.png" />
+      {tee === 1 && <Image src="/images/Bill2.png" />}
+      {tee === 2 && <Image src="/images/Viktor.png" />}
+      {tee === 3 && <Image src="/images/Laughing.png" />}
       <CartItemBody>
         <strong>Viktor Tee</strong>
         <strong>$70 AUD</strong>
@@ -20,7 +26,7 @@ const CartItem = () => {
             <strong>Quantity:</strong> <span>1</span>
           </div>
         </CartItemBodySummary>
-        <StyledButton>Remove</StyledButton>
+        <span>Remove</span>
       </CartItemBody>
     </CartItemWrapper>
   );
@@ -29,13 +35,13 @@ const CartItem = () => {
 export default CartItem;
 
 const CartItemWrapper = styled.div`
-  width: calc(50% - 1rem);
+  width: calc(50% - 2rem);
   height: min-content;
-  margin: 1rem 1rem 0 0;
+  margin: 2rem 2rem 0 0;
   transition: width 0.5s ease;
 
   @media screen and (min-width: 850px) {
-    width: calc(20% - 1rem);
+    width: calc(20% - 2rem);
   }
 
   & > div:first-of-type {
