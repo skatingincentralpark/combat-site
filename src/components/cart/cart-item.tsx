@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import Image from "../image";
+import { StyledButton } from "../shared-styles/styled-button";
 
 const CartItem = () => {
   return (
@@ -19,7 +20,7 @@ const CartItem = () => {
             <strong>Quantity:</strong> <span>1</span>
           </div>
         </CartItemBodySummary>
-        <span>Remove</span>
+        <StyledButton>Remove</StyledButton>
       </CartItemBody>
     </CartItemWrapper>
   );
@@ -31,8 +32,9 @@ const CartItemWrapper = styled.div`
   width: calc(50% - 1rem);
   height: min-content;
   margin: 1rem 1rem 0 0;
+  transition: width 0.5s ease;
 
-  @media screen and (min-width: 650px) {
+  @media screen and (min-width: 850px) {
     width: calc(20% - 1rem);
   }
 
@@ -44,7 +46,7 @@ const CartItemWrapper = styled.div`
 const CartItemBody = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: var(--gap-xxl);
+  margin-top: var(--gap-xl);
 
   @media screen and (min-width: 650px) {
     border-top: 0.5px solid var(--olive-1);
@@ -53,5 +55,5 @@ const CartItemBody = styled.div`
   }
 `;
 const CartItemBodySummary = styled.div`
-  margin: var(--gap-l) 0;
+  margin: var(--gap-l) 0 var(--gap-xl) 0;
 `;
