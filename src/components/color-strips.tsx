@@ -39,6 +39,12 @@ const ColorStrips = ({ colors }: Props) => {
         {colors.map((color, i) => (
           <ColorBlock variants={childVariants} color={color} key={i} />
         ))}
+        {colors.map((color, i) => (
+          <ColorBlock variants={childVariants} color={color} key={i} />
+        ))}
+        {colors.map((color, i) => (
+          <ColorBlock variants={childVariants} color={color} key={i} />
+        ))}
       </ColorBlockWrapper>
     </AnimatePresence>
   );

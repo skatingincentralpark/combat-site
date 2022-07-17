@@ -61,10 +61,10 @@ const Header = () => {
           {isShopPath && !navOpen && (
             <HeaderBackButton
               onClick={navigateToShop}
-              // variants={variantsBackButton}
-              // initial="initial"
-              // exit="exit"
-              // animate="animate"
+              variants={variantsBackButton}
+              initial="initial"
+              exit="exit"
+              animate="animate"
             >
               back
             </HeaderBackButton>
