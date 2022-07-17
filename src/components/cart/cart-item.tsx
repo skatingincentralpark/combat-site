@@ -37,7 +37,7 @@ export default CartItem;
 const CartItemWrapper = styled.div`
   width: calc(50% - 2rem);
   height: min-content;
-  margin: 2rem 2rem 0 0;
+  margin: 2rem 2rem 2rem 0;
   transition: width 0.5s ease;
 
   @media screen and (min-width: 850px) {
@@ -53,6 +53,7 @@ const CartItemBody = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: var(--gap-xl);
+  margin-left: var(--gap-m);
 
   @media screen and (min-width: 650px) {
     border-top: 0.5px solid var(--olive-1);

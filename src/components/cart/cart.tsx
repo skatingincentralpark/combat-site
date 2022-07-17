@@ -52,10 +52,14 @@ const Cart = () => {
             exit="exit"
             animate="animate"
           >
-            <CartItemWrapper>
-              <CartItem tee={1} />
-            </CartItemWrapper>
-            <Accordion options={accordionOptions} />
+            <CartModalInner>
+              <CartItemWrapper>
+                <CartItem tee={1} />
+                <CartItem tee={2} />
+                <CartItem tee={3} />
+              </CartItemWrapper>
+              <Accordion options={accordionOptions} />
+            </CartModalInner>
             <CartMobileCta />
           </CartModal>
         )}
@@ -83,6 +87,8 @@ const CartModal = styled(motion.div)`
 
   background-color: var(--yellow-4);
   backdrop-filter: blur(3px) invert(1);
+`;
+const CartModalInner = styled.div`
   padding: var(--gap-page-top) var(--gap-xxl);
 `;
 const CartItemWrapper = styled.div`

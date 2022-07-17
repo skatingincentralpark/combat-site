@@ -7,6 +7,7 @@ type Props = {
   children: React.ReactNode;
   delay?: number;
   backgroundColor?: string;
+  position?: string;
 };
 
 const SlideUpModal = ({
@@ -14,6 +15,7 @@ const SlideUpModal = ({
   children,
   delay,
   backgroundColor,
+  position,
 }: Props) => {
   const variants = {
     initial: {
@@ -45,6 +47,7 @@ const SlideUpModal = ({
           exit="exit"
           animate="animate"
           backgroundColor={backgroundColor}
+          position={position}
         >
           {children}
         </SlideUpModalWrapper>
@@ -55,11 +58,12 @@ const SlideUpModal = ({
 
 type StyledProps = {
   backgroundColor?: string;
+  position?: string;
 };
 
 const SlideUpModalWrapper = styled(motion.div)<StyledProps>`
   width: 100%;
-  position: fixed;
+  position: ${({ position }) => (position ? position : "fixed")};
   bottom: 0;
   left: 0;
   background-color: ${({ backgroundColor }) =>
