@@ -19,6 +19,8 @@ const Image = ({ src, ...rest }: Props) => {
         objectFit="contain"
         width="100%"
         height="100%"
+        placeholder="blur"
+        blurDataURL={src}
       />
     </ImageWrapper>
   );

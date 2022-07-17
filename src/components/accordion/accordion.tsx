@@ -19,11 +19,7 @@ const Accordion = ({ options }: Props) => {
         {options.map((option, i) => {
           const active = activeItem === i;
           return (
-            <AccordionListItem
-              key={i}
-              onClick={() => setActiveItem(i)}
-              onTouchStart={() => setActiveItem(i)}
-            >
+            <AccordionListItem key={i} onClick={() => setActiveItem(i)}>
               <AccordionListItemIndicator active={active} />
               {option.label}
             </AccordionListItem>

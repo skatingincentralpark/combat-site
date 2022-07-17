@@ -5,6 +5,7 @@ import { StyledButton } from "../shared-styles/styled-button";
 import Accordion from "../accordion/accordion";
 import CartItem from "./cart-item";
 import CartMobileCta from "./cart-mobile-cta";
+import { default as NextImage } from "next/image";
 
 const Cart = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -53,6 +54,14 @@ const Cart = () => {
             animate="animate"
           >
             <CartModalInner>
+              <CartFunWrapper>
+                <NextImage
+                  src="/images/pig.GIF"
+                  alt="Something"
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </CartFunWrapper>
               <CartItemWrapper>
                 <CartItem tee={1} />
                 <CartItem tee={2} />
@@ -89,10 +98,26 @@ const CartModal = styled(motion.div)`
   backdrop-filter: blur(3px) invert(1);
 `;
 const CartModalInner = styled.div`
-  padding: var(--gap-page-top) var(--gap-xxl);
+  padding: var(--gap-l) var(--gap-xxl) 6rem var(--gap-xxl);
 `;
 const CartItemWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: var(--gap-xxl);
+`;
+const CartFunWrapper = styled.div`
+  margin-bottom: var(--gap-xl);
+  border: 1px solid #c3c48d;
+  aspect-ratio: 2 / 3;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 10rem;
+  flex-shrink: 0;
+  transition: aspect-ratio 1s, width 1s, aspect-ratio 1s;
+
+  @media screen and (min-width: 650px) {
+    margin-right: var(--gap-xl);
+    aspect-ratio: 1 / 1;
+  }
 `;

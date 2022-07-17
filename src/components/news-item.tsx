@@ -36,6 +36,8 @@ const NewsItem = ({ newsItem }: Props) => {
           alt="Something"
           layout="fill"
           objectFit="cover"
+          placeholder="blur"
+          blurDataURL={newsItem.image}
         />
       </NewsItemImageWrapper>
       <NewsItemTextWrapper>

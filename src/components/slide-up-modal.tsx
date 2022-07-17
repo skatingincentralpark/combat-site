@@ -46,7 +46,7 @@ const SlideUpModal = ({
           initial="initial"
           exit="exit"
           animate="animate"
-          backgroundColor={backgroundColor}
+          backgroundcolor={backgroundColor}
           position={position}
         >
           {children}
@@ -57,7 +57,7 @@ const SlideUpModal = ({
 };
 
 type StyledProps = {
-  backgroundColor?: string;
+  backgroundcolor?: string;
   position?: string;
 };
 
@@ -66,8 +66,8 @@ const SlideUpModalWrapper = styled(motion.div)<StyledProps>`
   position: ${({ position }) => (position ? position : "fixed")};
   bottom: 0;
   left: 0;
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor ? backgroundColor : ""};
+  background-color: ${({ backgroundcolor }) =>
+    backgroundcolor ? backgroundcolor : ""};
   z-index: 2;
   cursor: pointer;
 `;
