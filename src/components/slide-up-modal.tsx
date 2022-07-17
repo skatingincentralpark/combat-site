@@ -6,9 +6,15 @@ type Props = {
   isClosed: boolean;
   children: React.ReactNode;
   delay?: number;
+  backgroundColor?: string;
 };
 
-const SlideUpModal = ({ isClosed, children, delay }: Props) => {
+const SlideUpModal = ({
+  isClosed,
+  children,
+  delay,
+  backgroundColor,
+}: Props) => {
   const variants = {
     initial: {
       opacity: 0,
@@ -38,6 +44,7 @@ const SlideUpModal = ({ isClosed, children, delay }: Props) => {
           initial="initial"
           exit="exit"
           animate="animate"
+          backgroundColor={backgroundColor}
         >
           {children}
         </SlideUpModalWrapper>
@@ -46,12 +53,17 @@ const SlideUpModal = ({ isClosed, children, delay }: Props) => {
   );
 };
 
-const SlideUpModalWrapper = styled(motion.div)`
+type StyledProps = {
+  backgroundColor?: string;
+};
+
+const SlideUpModalWrapper = styled(motion.div)<StyledProps>`
   width: 100%;
   position: fixed;
   bottom: 0;
   left: 0;
-  background-color: white;
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor ? backgroundColor : ""};
   z-index: 2;
   cursor: pointer;
 `;
