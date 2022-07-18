@@ -1,6 +1,6 @@
+import { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
 import { StyledButton } from "../shared-styles/styled-button";
 import Accordion from "../accordion/accordion";
 import CartItem from "./cart-item";
@@ -37,6 +37,21 @@ const Cart = () => {
     },
   ];
 
+  const myRef = useRef<HTMLDivElement>(null);
+  const [eleVisible, setEleVisible] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (!cartOpen) return;
+    if (!myRef.current) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      setEleVisible(entry.isIntersecting);
+    });
+
+    observer.observe(myRef.current);
+  }, [cartOpen]);
+
   return (
     <>
       <CartButtonWrapper>
@@ -54,7 +69,7 @@ const Cart = () => {
             animate="animate"
           >
             <CartModalInner>
-              <CartFunWrapper>
+              <CartFunWrapper ref={myRef}>
                 <NextImage
                   src="/images/pig.GIF"
                   alt="Something"
