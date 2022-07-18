@@ -4,8 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { StyledButton } from "../shared-styles/styled-button";
 import Accordion from "../accordion/accordion";
 import CartItem from "./cart-item";
-import CartMobileCta from "./cart-mobile-cta";
+import SlideUpModal from "../slide-up-modal";
 import { default as NextImage } from "next/image";
+import CartCta from "./cart-cta";
 
 const Cart = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -83,8 +84,14 @@ const Cart = () => {
                 <CartItem tee={3} />
               </CartItemWrapper>
               <Accordion options={accordionOptions} />
+              <CartCta />
             </CartModalInner>
-            <CartMobileCta />
+            <SlideUpModal
+              isClosed={!eleVisible}
+              backgroundColor="var(--yellow-4)"
+            >
+              <CartCta />
+            </SlideUpModal>
           </CartModal>
         )}
       </AnimatePresence>
@@ -107,13 +114,14 @@ const CartModal = styled(motion.div)`
   left: 0;
   width: 100%;
   height: 100%;
-  overflow-y: auto;
 
   background-color: var(--yellow-4);
   backdrop-filter: blur(3px) invert(1);
 `;
 const CartModalInner = styled.div`
   padding: var(--gap-l) var(--gap-xxl) 6rem var(--gap-xxl);
+  overflow-y: auto;
+  height: 100%;
 `;
 const CartItemWrapper = styled.div`
   display: flex;
@@ -122,7 +130,6 @@ const CartItemWrapper = styled.div`
 `;
 const CartFunWrapper = styled.div`
   margin-bottom: var(--gap-xl);
-  border: 1px solid #c3c48d;
   aspect-ratio: 2 / 3;
   position: relative;
   overflow: hidden;
