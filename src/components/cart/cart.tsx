@@ -89,6 +89,7 @@ const Cart = () => {
             <SlideUpModal
               isClosed={!eleVisible}
               backgroundColor="var(--yellow-4)"
+              mobileOnly
             >
               <CartCta />
             </SlideUpModal>

@@ -8,6 +8,7 @@ type Props = {
   delay?: number;
   backgroundColor?: string;
   position?: string;
+  mobileOnly?: boolean;
 };
 
 const SlideUpModal = ({
@@ -16,6 +17,7 @@ const SlideUpModal = ({
   delay,
   backgroundColor,
   position,
+  mobileOnly,
 }: Props) => {
   const variants = {
     initial: {
@@ -48,6 +50,7 @@ const SlideUpModal = ({
           animate="animate"
           backgroundcolor={backgroundColor}
           position={position}
+          mobileOnly={mobileOnly}
         >
           {children}
         </SlideUpModalWrapper>
@@ -59,6 +62,7 @@ const SlideUpModal = ({
 type StyledProps = {
   backgroundcolor?: string;
   position?: string;
+  mobileOnly?: boolean;
 };
 
 const SlideUpModalWrapper = styled(motion.div)<StyledProps>`
@@ -70,6 +74,10 @@ const SlideUpModalWrapper = styled(motion.div)<StyledProps>`
     backgroundcolor ? backgroundcolor : ""};
   z-index: 2;
   cursor: pointer;
+
+  @media screen and (min-width: 650px) {
+    display: ${({ mobileOnly }) => mobileOnly && "none"};
+  }
 `;
 
 export default SlideUpModal;
