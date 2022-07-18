@@ -83,8 +83,8 @@ const Cart = () => {
                 <CartItem tee={2} />
                 <CartItem tee={3} />
               </CartItemWrapper>
-              <Accordion options={accordionOptions} />
               <CartCta />
+              <Accordion options={accordionOptions} />
             </CartModalInner>
             <SlideUpModal
               isClosed={!eleVisible}
