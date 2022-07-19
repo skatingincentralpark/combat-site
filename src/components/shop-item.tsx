@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { motion } from "framer-motion";
 import Image from "../components/image";
 import ShopCta from "../components/shop-cta";

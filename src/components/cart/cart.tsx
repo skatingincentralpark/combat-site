@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { StyledButton } from "../shared-styles/styled-button";
 import Accordion from "../accordion/accordion";
@@ -88,8 +88,8 @@ const Cart = () => {
             </CartModalInner>
             <SlideUpModal
               isClosed={!eleVisible}
-              backgroundColor="var(--yellow-4)"
-              mobileOnly
+              backgroundcolor="var(--yellow-4)"
+              mobileonly
             >
               <CartCta />
             </SlideUpModal>

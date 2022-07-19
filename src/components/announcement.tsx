@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { useState } from "react";
 import SlideUpModal from "./slide-up-modal";
 
@@ -11,7 +11,7 @@ const Announcement = () => {
   const [isClosed, setIsClosed] = useState(false);
 
   return (
-    <SlideUpModal isClosed={isClosed} delay={0.5} backgroundColor="white">
+    <SlideUpModal isClosed={isClosed} delay={0.5} $backgroundColor="white">
       <AnnouncementInner onClick={() => setIsClosed(true)}>
         <div>{announcement.title}</div>
         <div>{announcement.text}</div>

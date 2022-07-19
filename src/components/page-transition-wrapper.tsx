@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {

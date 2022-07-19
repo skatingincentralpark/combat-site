@@ -1,23 +1,23 @@
 import React from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {
   isClosed: boolean;
   children: React.ReactNode;
   delay?: number;
-  backgroundColor?: string;
+  backgroundcolor?: string;
   position?: string;
-  mobileOnly?: boolean;
+  mobileonly?: boolean;
 };
 
 const SlideUpModal = ({
   isClosed,
   children,
   delay,
-  backgroundColor,
+  backgroundcolor,
   position,
-  mobileOnly,
+  mobileonly,
 }: Props) => {
   const variants = {
     initial: {
@@ -48,9 +48,9 @@ const SlideUpModal = ({
           initial="initial"
           exit="exit"
           animate="animate"
-          backgroundcolor={backgroundColor}
+          backgroundcolor={backgroundcolor}
           position={position}
-          mobileOnly={mobileOnly}
+          mobileonly={mobileonly}
         >
           {children}
         </SlideUpModalWrapper>
@@ -62,7 +62,7 @@ const SlideUpModal = ({
 type StyledProps = {
   backgroundcolor?: string;
   position?: string;
-  mobileOnly?: boolean;
+  mobileonly?: boolean;
 };
 
 const SlideUpModalWrapper = styled(motion.div)<StyledProps>`
@@ -76,7 +76,7 @@ const SlideUpModalWrapper = styled(motion.div)<StyledProps>`
   cursor: pointer;
 
   @media screen and (min-width: 650px) {
-    display: ${({ mobileOnly }) => mobileOnly && "none"};
+    display: ${({ mobileonly }) => mobileonly && "none"};
   }
 `;
 

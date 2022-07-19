@@ -1,7 +1,7 @@
-import { Global, css } from "@emotion/react";
+// import { Global, css } from "@emotion/react";
+import { createGlobalStyle } from "styled-components";
 
-const GlobalStyles = () => {
-  const styles = css`
+const GlobalStyle = createGlobalStyle`
     :root {
       --gray-1: #f4f4f4;
       --gray-2: #cccccb;
@@ -120,7 +120,4 @@ const GlobalStyles = () => {
     }
   `;
 
-  return <Global styles={styles} />;
-};
-
-export default GlobalStyles;
+export default GlobalStyle;

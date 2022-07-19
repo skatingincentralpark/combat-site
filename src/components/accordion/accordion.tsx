@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import AccordionBodyItem from "./accordion-body-item";
 

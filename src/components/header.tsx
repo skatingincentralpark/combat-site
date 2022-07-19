@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import Svg from "./svg";
 import Link from "./link";

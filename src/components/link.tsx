@@ -1,5 +1,5 @@
 import { default as NextLink } from "next/link";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 type Props = {
   children: React.ReactNode;
