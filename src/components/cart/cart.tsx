@@ -72,7 +72,7 @@ const Cart = () => {
             <CartModalInner>
               <CartFunWrapper ref={myRef}>
                 <NextImage
-                  src="/images/otter.jpeg"
+                  src="/images/otter-cheeks.jpeg"
                   alt="Something"
                   layout="fill"
                   objectFit="cover"
