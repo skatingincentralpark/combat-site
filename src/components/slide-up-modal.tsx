@@ -4,20 +4,20 @@ import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {
   isClosed: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   delay?: number;
-  backgroundcolor?: string;
+  $backgroundColor?: string;
   position?: string;
-  mobileonly?: boolean;
+  $mobileOnly?: boolean;
 };
 
 const SlideUpModal = ({
   isClosed,
   children,
   delay,
-  backgroundcolor,
+  $backgroundColor,
   position,
-  mobileonly,
+  $mobileOnly,
 }: Props) => {
   const variants = {
     initial: {
@@ -48,9 +48,9 @@ const SlideUpModal = ({
           initial="initial"
           exit="exit"
           animate="animate"
-          backgroundcolor={backgroundcolor}
+          $backgroundColor={$backgroundColor}
           position={position}
-          mobileonly={mobileonly}
+          $mobileOnly={$mobileOnly}
         >
           {children}
         </SlideUpModalWrapper>
@@ -60,9 +60,9 @@ const SlideUpModal = ({
 };
 
 type StyledProps = {
-  backgroundcolor?: string;
+  $backgroundColor?: string;
   position?: string;
-  mobileonly?: boolean;
+  $mobileOnly?: boolean;
 };
 
 const SlideUpModalWrapper = styled(motion.div)<StyledProps>`
@@ -70,13 +70,13 @@ const SlideUpModalWrapper = styled(motion.div)<StyledProps>`
   position: ${({ position }) => (position ? position : "fixed")};
   bottom: 0;
   left: 0;
-  background-color: ${({ backgroundcolor }) =>
-    backgroundcolor ? backgroundcolor : ""};
+  background-color: ${({ $backgroundColor }) =>
+    $backgroundColor ? $backgroundColor : ""};
   z-index: 2;
   cursor: pointer;
 
   @media screen and (min-width: 650px) {
-    display: ${({ mobileonly }) => mobileonly && "none"};
+    display: ${({ $mobileOnly }) => $mobileOnly && "none"};
   }
 `;
 

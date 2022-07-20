@@ -88,8 +88,8 @@ const Cart = () => {
             </CartModalInner>
             <SlideUpModal
               isClosed={!eleVisible}
-              backgroundcolor="var(--yellow-4)"
-              mobileonly
+              $backgroundColor="var(--yellow-4)"
+              $mobileOnly
             >
               <CartCta />
             </SlideUpModal>
