@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import Image from "./image";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";

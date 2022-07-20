@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import { useState } from "react";
 import SlideUpModal from "./slide-up-modal";
 

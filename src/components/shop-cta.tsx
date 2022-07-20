@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import RadioButton from "./radio-button";
 import { StyledButton } from "./shared-styles/styled-button";

@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import PageTransitionWrapper from "../components/page-transition-wrapper";
-import GlobalStyle from "../styles/global";
+import GlobalStyles from "../styles/global";
 import Header from "../components/header";
 import Announcement from "../components/announcement";
 import Cart from "../components/cart/cart";
@@ -8,7 +8,7 @@ import Cart from "../components/cart/cart";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyles />
       <Header />
       <Cart />
       {/* <Announcement /> */}

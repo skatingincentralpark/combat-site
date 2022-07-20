@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
 import { StyledButton } from "../shared-styles/styled-button";
 import Accordion from "../accordion/accordion";

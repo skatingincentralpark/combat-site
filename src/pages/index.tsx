@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import ColorStrips from "../components/color-strips";
 import { StyledPageWrapper } from "../components/shared-styles/styled-page-wrapper";
 

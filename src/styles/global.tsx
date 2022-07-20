@@ -1,7 +1,7 @@
-// import { Global, css } from "@emotion/react";
-import { createGlobalStyle } from "styled-components";
+import { Global, css } from "@emotion/react";
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyles = () => {
+  const styles = css`
     :root {
       --gray-1: #f4f4f4;
       --gray-2: #cccccb;
@@ -39,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
       --gap-page-top: calc(var(--header-height) + 1rem);
       --button-height: 3rem;
       --header-height: 6rem;
-      
+
       @media screen and (min-width: 650px) {
         --button-height: 2.5rem;
       }
@@ -126,4 +126,7 @@ const GlobalStyle = createGlobalStyle`
     }
   `;
 
-export default GlobalStyle;
+  return <Global styles={styles} />;
+};
+
+export default GlobalStyles;

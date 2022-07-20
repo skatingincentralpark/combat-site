@@ -1,5 +1,5 @@
 import { default as NextImage } from "next/image";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 
 type Props = {
