@@ -121,7 +121,7 @@ const CartModal = styled(motion.div)`
   backdrop-filter: blur(3px) invert(1);
 `;
 const CartModalInner = styled.div`
-  padding: var(--gap-l) var(--gap-xxl) 6rem var(--gap-xxl);
+  padding: var(--gap-l) var(--gap-xxl) var(--gap-l) var(--gap-xxl);
   overflow-y: auto;
   height: 100%;
 `;
