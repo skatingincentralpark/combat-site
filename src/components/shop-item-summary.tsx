@@ -69,13 +69,19 @@ const ShopItemWrapper = styled(motion.div)`
     width: calc(25% - 3rem);
   }
 
+  --active-hover-color: var(--green-1);
+
   &:hover {
-    transform: scale(1.02);
-    border-color: var(--green-1);
-    box-shadow: 4px 6px 15px var(--green-light-1);
+    @media screen and (min-width: 700px) {
+      transform: scale(1.02);
+      border-color: var(--active-hover-color);
+      box-shadow: 4px 6px 15px var(--active-hover-color);
+    }
   }
+
   &:active {
-    border-width: 2px;
+    --active-hover-color: var(--green-2);
+    border-color: var(--active-color);
   }
 `;
 const StyledImage = styled.div`
@@ -108,14 +114,7 @@ const StyledButton = styled.button`
   font-weight: 600;
   border-radius: 0.5rem;
   padding: var(--gap-s) var(--gap-l);
-  background-color: var(--green-1);
+  background-color: var(--active-hover-color);
   width: 100%;
   cursor: pointer;
-
-  &:hover {
-    background-color: var(--green-2);
-  }
-  &:active {
-    background-color: var(--green-3);
-  }
 `;
