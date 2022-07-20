@@ -50,20 +50,20 @@ const PageWrapper = styled(motion.div)`
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: var(--gap-page-top) var(--gap-l);
+  padding: var(--gap-page-top) var(--gap-s);
 
   @media screen and (min-width: 650px) {
     justify-content: flex-end;
-    padding-bottom: var(--gap-xl);
+    padding-bottom: var(--gap-m);
   }
 `;
 const InfoWrapper = styled(motion.div)`
   text-align: center;
-  margin: 0 var(--gap-xl);
+  margin: 0 var(--gap-m);
 
   @media screen and (min-width: 650px) {
     border-top: 1px solid var(--gray-2);
-    padding-top: var(--gap-l);
+    padding-top: var(--gap-s);
     text-align: left;
     display: flex;
   }
@@ -72,7 +72,7 @@ const StyledTitle = styled.div`
   display: flex;
   flex-direction: column;
   font-weight: 300;
-  margin-bottom: var(--gap-l);
+  margin-bottom: var(--gap-s);
 
   & > span:nth-of-type(2) {
     color: var(--gray-3);
@@ -107,7 +107,7 @@ const StyledDescription = styled.div`
 `;
 const StyledImage = styled.div`
   aspect-ratio: 1 / 1;
-  padding: 0 var(--gap-l);
+  padding: 0 var(--gap-s);
 
   @media screen and (min-width: 650px) {
     max-width: 30rem;

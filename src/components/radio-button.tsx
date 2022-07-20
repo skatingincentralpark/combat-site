@@ -47,11 +47,11 @@ const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
   align-items: center;
 
   &:nth-of-type(1) {
-    border-radius: var(--gap-xs) 0 0 0;
+    border-radius: var(--gap-3xs) 0 0 0;
   }
 
   &:last-of-type {
-    border-radius: 0 var(--gap-xs) 0 0;
+    border-radius: 0 var(--gap-3xs) 0 0;
   }
 
   & > input {

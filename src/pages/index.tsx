@@ -41,5 +41,5 @@ const HomePage = () => {
 export default HomePage;
 
 const TextWrapper = styled.div`
-  padding: var(--gap-l);
+  padding: var(--gap-s);
 `;

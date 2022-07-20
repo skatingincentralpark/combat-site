@@ -159,7 +159,7 @@ const HeaderWrapper = styled.header`
   background-color: white;
 `;
 const HeaderToggle = styled.button`
-  padding: var(--gap-l);
+  padding: var(--gap-s);
 
   flex-grow: 1;
 
@@ -232,7 +232,7 @@ const StyledNavLink = styled.div`
   --dot-scale: scale(1);
 
   & a {
-    padding: var(--gap-m);
+    padding: var(--gap-xs);
   }
   &:first-of-type {
     border-top: 1px solid var(--gray-3);
@@ -258,14 +258,14 @@ const StyledDot = styled.span`
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  margin-right: var(--gap-l);
+  margin-right: var(--gap-s);
   background-color: var(--dot-color);
   transform: var(--dot-scale);
   transition: background-color 0.25s, transform 0.25s;
 `;
 const HeaderMenuText = styled.div`
   font-size: var(--font-size-m);
-  padding: var(--gap-l);
+  padding: var(--gap-s);
 
   max-width: 50rem;
 `;

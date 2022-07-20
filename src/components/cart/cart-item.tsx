@@ -52,17 +52,17 @@ const CartItemWrapper = styled.div`
 const CartItemBody = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: var(--gap-xl);
-  margin-left: var(--gap-m);
+  margin-top: var(--gap-m);
+  margin-left: var(--gap-xs);
 
   @media screen and (min-width: 650px) {
     border-top: 0.5px solid var(--olive-1);
-    padding: var(--gap-l) 0;
-    margin-top: var(--gap-xxl);
+    padding: var(--gap-s) 0;
+    margin-top: var(--gap-l);
   }
 `;
 const CartItemBodySummary = styled.div`
-  margin: var(--gap-l) 0 var(--gap-xl) 0;
+  margin: var(--gap-s) 0 var(--gap-m) 0;
 `;
 const CartRemove = styled.button`
   font-weight: 400;

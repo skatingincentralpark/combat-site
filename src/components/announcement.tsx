@@ -21,15 +21,15 @@ const Announcement = () => {
 };
 
 const AnnouncementInner = styled.div`
-  margin: 0 var(--gap-xl);
-  padding: var(--gap-m) 0;
+  margin: 0 var(--gap-m);
+  padding: var(--gap-xs) 0;
   border-top: 1px solid var(--gray-2);
   text-align: left;
   display: flex;
 
   & > div:nth-of-type(2) {
     max-width: 40rem;
-    margin-left: var(--gap-l);
+    margin-left: var(--gap-s);
   }
 `;
 

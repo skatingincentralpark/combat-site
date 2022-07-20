@@ -24,16 +24,22 @@ const GlobalStyle = createGlobalStyle`
       --font-size-l: 1.2rem;
       --font-size-xl: 1.4rem;
       --font-family-primary: IBM Plex Mono;
-      --gap-xs: 0.25rem;
-      --gap-s: 0.5rem;
-      --gap-m: 0.75rem;
-      --gap-l: 1rem;
-      --gap-xl: 1.5rem;
-      --gap-xxl: 2rem;
+      --gap-3xs: 0.25rem;
+      --gap-xxs: 0.5rem;
+      --gap-xs: 0.75rem;
+      --gap-s: 1rem;
+      --gap-m: 1.5rem;
+      --gap-l: 2rem;
+      --gap-xl: 2.5rem;
+      --gap-xxl: 3rem;
+      --gap-3xl: 4rem;
+      --gap-4xl: 5rem;
+      --gap-5xl: 6rem;
+      --gap-6xl: 7rem;
       --gap-page-top: calc(var(--header-height) + 1rem);
-      --button-height: 3.25rem;
+      --button-height: 3rem;
       --header-height: 6rem;
-
+      
       @media screen and (min-width: 650px) {
         --button-height: 2.5rem;
       }

@@ -24,14 +24,14 @@ const CartCta = () => {
 export default CartCta;
 
 const CartCtaInner = styled.div`
-  padding: var(--gap-xl) 0;
+  padding: var(--gap-m) 0;
   text-align: left;
   display: flex;
   flex-direction: column;
 
   & > button {
     max-width: fit-content;
-    margin-top: var(--gap-xl);
+    margin-top: var(--gap-m);
   }
 `;
 const CartDescriptionItem = styled.div`
@@ -42,6 +42,6 @@ const CartDescriptionItem = styled.div`
   & > span:first-of-type {
     font-weight: 600;
     min-width: clamp(7rem, 6vw, 10rem);
-    margin-right: var(--gap-l);
+    margin-right: var(--gap-s);
   }
 `;

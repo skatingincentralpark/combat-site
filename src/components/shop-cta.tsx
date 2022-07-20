@@ -64,5 +64,5 @@ const RadioGroup = styled.div`
   justify-content: flex-start;
 `;
 const Button = styled(StyledButton)`
-  border-radius: 0 0 var(--gap-xs) var(--gap-xs);
+  border-radius: 0 0 var(--gap-3xs) var(--gap-3xs);
 `;

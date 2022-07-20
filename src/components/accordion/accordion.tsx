@@ -53,7 +53,7 @@ const AccordionWrapper = styled(motion.div)`
   border-top: 0.5px solid var(--olive-1);
   border-bottom: 0.5px solid var(--olive-1);
 
-  padding: var(--gap-xl) 0;
+  padding: var(--gap-m) 0;
 
   @media screen and (min-width: 700px) {
     display: flex;
@@ -72,7 +72,7 @@ const AccordionListItem = styled.div`
   background-color: var(--nav-link-bg-color);
   color: var(--nav-link-color);
 
-  padding: 0 var(--gap-l) 0 var(--gap-s);
+  padding: 0 var(--gap-s) 0 var(--gap-xxs);
 
   --dot-color: #ffffff0; // scoped to link so the dot can use it
 
@@ -95,7 +95,7 @@ const AccordionListItemIndicator = styled.span<ActiveProp>`
   width: 0.75rem;
   height: 0.75rem;
   border-radius: 50%;
-  margin-right: var(--gap-l);
+  margin-right: var(--gap-s);
 
   border: 0.5px solid black;
   background-color: ${({ active }) => (active ? "black" : "var(--dot-color)")};

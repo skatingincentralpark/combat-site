@@ -89,7 +89,7 @@ const Cart = () => {
             <SlideUpModal
               isClosed={!eleVisible}
               $backgroundColor="var(--yellow-4)"
-              $padding="0 var(--gap-xl)"
+              $padding="0 var(--gap-m)"
               $mobileOnly
             >
               <CartCta />
@@ -106,8 +106,8 @@ export default Cart;
 const CartButtonWrapper = styled(motion.div)`
   position: fixed;
   z-index: 9;
-  top: var(--gap-l);
-  right: var(--gap-l);
+  top: var(--gap-s);
+  right: var(--gap-s);
 `;
 const CartModal = styled(motion.div)`
   position: fixed;
@@ -121,17 +121,17 @@ const CartModal = styled(motion.div)`
   backdrop-filter: blur(3px) invert(1);
 `;
 const CartModalInner = styled.div`
-  padding: var(--gap-l) var(--gap-xxl) var(--gap-l) var(--gap-xxl);
+  padding: var(--gap-s) var(--gap-l) var(--gap-s) var(--gap-l);
   overflow-y: auto;
   height: 100%;
 `;
 const CartItemWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: var(--gap-xxl);
+  margin-bottom: var(--gap-l);
 `;
 const CartFunWrapper = styled.div`
-  margin-bottom: var(--gap-xl);
+  margin-bottom: var(--gap-m);
   aspect-ratio: 2 / 3;
   position: relative;
   overflow: hidden;
@@ -141,7 +141,7 @@ const CartFunWrapper = styled.div`
   transition: aspect-ratio 1s, width 1s, aspect-ratio 1s;
 
   @media screen and (min-width: 650px) {
-    margin-right: var(--gap-xl);
+    margin-right: var(--gap-m);
     aspect-ratio: 1 / 1;
   }
 `;

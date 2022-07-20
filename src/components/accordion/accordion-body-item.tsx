@@ -45,7 +45,7 @@ const AccordionBodyItemWrapper = styled(motion.div)`
   overflow: hidden;
 `;
 const AccordionBodyItemWrapperInner = styled.div`
-  margin-top: var(--gap-l);
+  margin-top: var(--gap-s);
 
   @media screen and (min-width: 700px) {
     margin-top: 0;

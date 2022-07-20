@@ -49,7 +49,7 @@ const ShopItemWrapper = styled(motion.div)`
   width: 100%;
   height: fit-content;
 
-  margin: var(--gap-l);
+  margin: var(--gap-s);
 
   cursor: pointer;
 
@@ -93,7 +93,7 @@ const StyledDescription = styled.div`
   background-color: var(--gray-1);
   border-top: 1px dashed var(--gray-2);
   border-bottom: 1px dashed var(--gray-2);
-  padding: var(--gap-m) var(--gap-l);
+  padding: var(--gap-xs) var(--gap-s);
 `;
 const StyledDescriptionItem = styled.div`
   display: flex;
@@ -101,19 +101,19 @@ const StyledDescriptionItem = styled.div`
   & > span:first-of-type {
     font-weight: 600;
     min-width: clamp(7rem, 6vw, 10rem);
-    margin-right: var(--gap-l);
+    margin-right: var(--gap-s);
   }
   & > span:nth-of-type(2) {
   }
 `;
 const StyledCtaWrapper = styled.div`
-  padding: var(--gap-l);
+  padding: var(--gap-s);
 `;
 const StyledButton = styled.button`
   color: white;
   font-weight: 600;
   border-radius: 0.5rem;
-  padding: var(--gap-s) var(--gap-l);
+  padding: var(--gap-xxs) var(--gap-s);
   background-color: var(--active-hover-color);
   width: 100%;
   cursor: pointer;

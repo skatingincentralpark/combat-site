@@ -5,12 +5,12 @@ type PageWrapperProps = {
 };
 
 const gap = {
-  xs: "var(--gap-xs)",
-  s: "var(--gap-s)",
-  m: "var(--gap-m)",
-  l: "var(--gap-l)",
-  xl: "var(--gap-xl)",
-  xxl: "var(--gap-xxl)",
+  xs: "var(--gap-3xs)",
+  s: "var(--gap-xxs)",
+  m: "var(--gap-xs)",
+  l: "var(--gap-s)",
+  xl: "var(--gap-m)",
+  xxl: "var(--gap-l)",
 };
 
 const StyledPageWrapper = styled.div<PageWrapperProps>`
