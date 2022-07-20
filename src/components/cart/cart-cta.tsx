@@ -24,19 +24,20 @@ const CartCta = () => {
 export default CartCta;
 
 const CartCtaInner = styled.div`
-  padding: var(--gap-xxl);
-  border-top: 0.5px solid var(--olive-1);
+  padding: var(--gap-xl) 0;
   text-align: left;
   display: flex;
   flex-direction: column;
 
   & > button {
+    max-width: fit-content;
     margin-top: var(--gap-xl);
   }
 `;
 const CartDescriptionItem = styled.div`
   display: flex;
   justify-content: space-between;
+  max-width: 35rem;
 
   & > span:first-of-type {
     font-weight: 600;

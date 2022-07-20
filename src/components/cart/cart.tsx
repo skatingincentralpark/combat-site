@@ -72,7 +72,7 @@ const Cart = () => {
             <CartModalInner>
               <CartFunWrapper ref={myRef}>
                 <NextImage
-                  src="/images/pig.GIF"
+                  src="/images/otter.jpeg"
                   alt="Something"
                   layout="fill"
                   objectFit="cover"
@@ -83,12 +83,13 @@ const Cart = () => {
                 <CartItem tee={2} />
                 <CartItem tee={3} />
               </CartItemWrapper>
-              <CartCta />
               <Accordion options={accordionOptions} />
+              <CartCta />
             </CartModalInner>
             <SlideUpModal
               isClosed={!eleVisible}
               $backgroundColor="var(--yellow-4)"
+              $padding="0 var(--gap-xl)"
               $mobileOnly
             >
               <CartCta />

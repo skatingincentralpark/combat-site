@@ -7,7 +7,7 @@ type Props = {
   children?: React.ReactNode;
   delay?: number;
   $backgroundColor?: string;
-  position?: string;
+  $padding?: string;
   $mobileOnly?: boolean;
 };
 
@@ -16,7 +16,7 @@ const SlideUpModal = ({
   children,
   delay,
   $backgroundColor,
-  position,
+  $padding,
   $mobileOnly,
 }: Props) => {
   const variants = {
@@ -49,7 +49,7 @@ const SlideUpModal = ({
           exit="exit"
           animate="animate"
           $backgroundColor={$backgroundColor}
-          position={position}
+          $padding={$padding}
           $mobileOnly={$mobileOnly}
         >
           {children}
@@ -61,19 +61,20 @@ const SlideUpModal = ({
 
 type StyledProps = {
   $backgroundColor?: string;
-  position?: string;
+  $padding?: string;
   $mobileOnly?: boolean;
 };
 
 const SlideUpModalWrapper = styled(motion.div)<StyledProps>`
   width: 100%;
-  position: ${({ position }) => (position ? position : "fixed")};
+  position: fixed;
   bottom: 0;
   left: 0;
   background-color: ${({ $backgroundColor }) =>
     $backgroundColor ? $backgroundColor : ""};
   z-index: 2;
   cursor: pointer;
+  padding: ${({ $padding }) => $padding && $padding};
 
   @media screen and (min-width: 650px) {
     display: ${({ $mobileOnly }) => $mobileOnly && "none"};
