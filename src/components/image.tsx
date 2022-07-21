@@ -2,7 +2,7 @@ import { default as NextImage } from "next/image";
 import styled from "@emotion/styled";
 
 type Props = {
-  src: string;
+  src: StaticImageData;
   padding?: string;
   width?: string;
   widthMobile?: string;
@@ -10,17 +10,18 @@ type Props = {
 };
 
 const Image = ({ src, ...rest }: Props) => {
+  console.log(src);
   return (
     <ImageWrapper {...rest}>
       <NextImage
-        src={src}
+        src={src.src}
         alt="Picture of the author"
         layout="responsive"
         objectFit="contain"
         width="100%"
         height="100%"
         placeholder="blur"
-        blurDataURL={src}
+        blurDataURL={src.blurDataURL}
       />
     </ImageWrapper>
   );

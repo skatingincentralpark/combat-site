@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import Image from "./image";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
+import productImage from "../../public/images/Bill2.png";
 
 type Props = {
   product: {
@@ -26,7 +27,7 @@ const ShopItemSummary = ({ product }: Props) => {
   return (
     <ShopItemWrapper onClick={navigate}>
       <StyledImage>
-        <Image src="/images/Bill2.png" />
+        <Image src={productImage} />
       </StyledImage>
       <StyledDescription>
         {details.map((detail, i) => (

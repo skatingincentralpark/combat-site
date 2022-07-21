@@ -7,6 +7,7 @@ import CartItem from "./cart-item";
 import SlideUpModal from "../slide-up-modal";
 import { default as NextImage } from "next/image";
 import CartCta from "./cart-cta";
+import funImage from "../../../public/images/otter-cheeks.jpeg";
 
 const Cart = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -72,7 +73,7 @@ const Cart = () => {
             <CartModalInner>
               <CartFunWrapper ref={myRef}>
                 <NextImage
-                  src="/images/otter-cheeks.jpeg"
+                  src={funImage}
                   alt="Something"
                   layout="fill"
                   objectFit="cover"
