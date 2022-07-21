@@ -11,7 +11,7 @@ const Announcement = () => {
   const [isClosed, setIsClosed] = useState(false);
 
   return (
-    <SlideUpModal isClosed={isClosed} delay={0.5} $backgroundColor="white">
+    <SlideUpModal isClosed={isClosed} delay={0.5} backgroundcolor="white">
       <AnnouncementInner onClick={() => setIsClosed(true)}>
         <div>{announcement.title}</div>
         <div>{announcement.text}</div>

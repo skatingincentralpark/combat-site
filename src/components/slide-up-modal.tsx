@@ -6,18 +6,18 @@ type Props = {
   isClosed: boolean;
   children?: React.ReactNode;
   delay?: number;
-  $backgroundColor?: string;
-  $padding?: string;
-  $mobileOnly?: boolean;
+  backgroundcolor?: string;
+  padding?: string;
+  displaydesktop?: string;
 };
 
 const SlideUpModal = ({
   isClosed,
   children,
   delay,
-  $backgroundColor,
-  $padding,
-  $mobileOnly,
+  backgroundcolor,
+  padding,
+  displaydesktop,
 }: Props) => {
   const variants = {
     initial: {
@@ -48,9 +48,9 @@ const SlideUpModal = ({
           initial="initial"
           exit="exit"
           animate="animate"
-          $backgroundColor={$backgroundColor}
-          $padding={$padding}
-          $mobileOnly={$mobileOnly}
+          backgroundcolor={backgroundcolor}
+          padding={padding}
+          displaydesktop={displaydesktop}
         >
           {children}
         </SlideUpModalWrapper>
@@ -60,9 +60,9 @@ const SlideUpModal = ({
 };
 
 type StyledProps = {
-  $backgroundColor?: string;
-  $padding?: string;
-  $mobileOnly?: boolean;
+  backgroundcolor?: string;
+  padding?: string;
+  displaydesktop?: string;
 };
 
 const SlideUpModalWrapper = styled(motion.div)<StyledProps>`
@@ -70,14 +70,14 @@ const SlideUpModalWrapper = styled(motion.div)<StyledProps>`
   position: fixed;
   bottom: 0;
   left: 0;
-  background-color: ${({ $backgroundColor }) =>
-    $backgroundColor ? $backgroundColor : ""};
+  background-color: ${({ backgroundcolor }) =>
+    backgroundcolor ? backgroundcolor : ""};
   z-index: 2;
   cursor: pointer;
-  padding: ${({ $padding }) => $padding && $padding};
+  padding: ${({ padding }) => padding && padding};
 
   @media screen and (min-width: 650px) {
-    display: ${({ $mobileOnly }) => $mobileOnly && "none"};
+    display: ${({ displaydesktop }) => displaydesktop};
   }
 `;
 
