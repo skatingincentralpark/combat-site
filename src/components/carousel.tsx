@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import styled from "@emotion/styled";
 import useEmblaCarousel from "embla-carousel-react";
 import { mediaByIndex } from "../../public/images/carousel-images";
-import { StyledPageWrapper } from "./shared-styles/styled-page-wrapper";
+import { StyledPageWrapperCentered } from "./shared-styles/styled-page-wrapper";
 import Image from "./image";
 import { default as NextImage } from "next/image";
 
@@ -13,7 +13,7 @@ type Props = {
 
 const Carousel = ({ slides }: Props) => {
   const [viewportRef, embla] = useEmblaCarousel({
-    // dragFree: true,
+    dragFree: true,
     containScroll: "trimSnaps",
   });
 
@@ -35,7 +35,7 @@ const Carousel = ({ slides }: Props) => {
   }, [embla, onSelect]);
 
   return (
-    <StyledPageWrapper>
+    <StyledPageWrapperCentered>
       <Embla>
         {/* what's viewport ref? */}
         <EmblaViewPort ref={viewportRef}>
@@ -59,7 +59,7 @@ const Carousel = ({ slides }: Props) => {
           </EmblaContainer>
         </EmblaViewPort>
       </Embla>
-    </StyledPageWrapper>
+    </StyledPageWrapperCentered>
   );
 };
 

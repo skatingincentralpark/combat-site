@@ -22,4 +22,10 @@ const StyledPageWrapper = styled.div<PageWrapperProps>`
   padding-right: ${({ px }) => (px ? gap[px] : 0)};
 `;
 
-export { StyledPageWrapper };
+const StyledPageWrapperCentered = styled(StyledPageWrapper)<PageWrapperProps>`
+  position: relative;
+  top: 45%;
+  transform: translateY(-50%);
+`;
+
+export { StyledPageWrapper, StyledPageWrapperCentered };
