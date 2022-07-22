@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <GlobalStyles />
       <Header />
-      <Cart />
+      {/* <Cart /> */}
       {/* <Announcement /> */}
       <PageTransitionWrapper>
         <Component {...pageProps} />

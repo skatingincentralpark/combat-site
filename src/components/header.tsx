@@ -104,7 +104,7 @@ const Header = () => {
                   </Link>
                 </StyledNavLink>
                 <StyledNavLink>
-                  <Link href="/" onClick={closeNav}>
+                  <Link href="/lookbook" onClick={closeNav}>
                     <StyledDot />
                     Lookbook
                   </Link>

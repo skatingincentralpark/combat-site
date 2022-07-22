@@ -10,7 +10,6 @@ type Props = {
 };
 
 const Image = ({ src, ...rest }: Props) => {
-  console.log(src);
   return (
     <ImageWrapper {...rest}>
       <NextImage

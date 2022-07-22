@@ -1,3 +1,5 @@
+// TO-DO: Remove when Next provides this type by default, research why it's not working
+
 type StaticImageData = {
   src: string;
   height: number;
