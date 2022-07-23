@@ -13,7 +13,7 @@ type Props = {
 
 const Carousel = ({ slides }: Props) => {
   const [viewportRef, embla] = useEmblaCarousel({
-    dragFree: true,
+    // dragFree: true,
     containScroll: "trimSnaps",
   });
 
@@ -40,53 +40,68 @@ const Carousel = ({ slides }: Props) => {
         {/* what's viewport ref? */}
         <EmblaViewPort ref={viewportRef}>
           <EmblaContainer>
-            {slides.map((index) => (
-              <EmblaSlide key={index}>
-                <img src={mediaByIndex(index).src} alt="" />
-              </EmblaSlide>
-            ))}
+            {slides.map((index) => {
+              const { width, height } = mediaByIndex(index);
+              console.log(`w: ${width}, h: ${height}`);
+
+              return (
+                <EmblaSlide
+                  key={index}
+                  style={{ aspectRatio: `${width} / ${height}` }}
+                >
+                  {index === 0 && (
+                    <SlideText>Oslo 52.3676° N, 4.9041° E</SlideText>
+                  )}
+                  <img src={mediaByIndex(index).src} alt="" />
+                </EmblaSlide>
+              );
+            })}
           </EmblaContainer>
         </EmblaViewPort>
       </Embla>
-      {/* <Tester>
-        {slides.map((index) => (
-          <img src={mediaByIndex(index).src} alt="" />
-        ))}
-      </Tester> */}
+      <FlexRow>
+        <div>
+          Spring Song Days
+          <br />
+          Spring / Summer 2022
+        </div>
+        <div>
+          first weplant
+          <br />
+          theseed
+          <br />
+          inourminds then
+          <br />
+          weleavetherestto[...]
+          <br />
+        </div>
+      </FlexRow>
     </StyledPageWrapperCentered>
   );
 };
 
 export default Carousel;
 
+// TO-DO: currently styled up to here,
+//        please understand what each style is doing after finished
 const Embla = styled.div`
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  padding: var(--gap-xs);
+  padding: var(--gap-xs); // creates the white border effect
 `;
 const EmblaViewPort = styled.div`
   overflow: hidden;
+  padding-top: var(--gap-l); // creates space for the slide text
 `;
 const EmblaContainer = styled.div`
   display: flex;
   user-select: none;
+  height: 50vh;
 `;
 const EmblaSlide = styled.div`
   transition: min-width 1s ease;
   cursor: grab;
-  margin-right: var(--gap-xs);
-  min-width: 90%;
-
-  @media screen and (min-width: 400px) {
-    min-width: 70%;
-  }
-  @media screen and (min-width: 700px) {
-    min-width: 40%;
-  }
-  @media screen and (min-width: 1000px) {
-    min-width: 20%;
-  }
+  margin-right: var(--gap-xs); // gap between slides
+  height: 100%;
+  position: relative;
 
   &:active {
     cursor: grabbing;
@@ -96,19 +111,20 @@ const EmblaSlide = styled.div`
     margin-right: 0;
   }
 `;
-// TO-DO: currently styled up to here,
-//        please understand what each style is doing after finished
-const EmblaSlideInner = styled.div``;
-
-const Tester = styled.div`
+const SlideText = styled.div`
+  position: absolute;
+  color: var(--text-secondary);
+  padding: 0 var(--gap-xxs);
+  transform: translate3d(0, calc(-100% - (var(--gap-l) / 4)), 0);
+  top: 0;
+`;
+const FlexRow = styled.div`
   display: flex;
   flex-direction: row;
-  height: 200px;
-  gap: 1rem;
-  padding: 0 1rem;
-  overflow-x: auto;
+  justify-content: space-between;
+  padding: 0 var(--gap-s);
 
-  & > * {
-    height: 100%;
+  & > div:nth-of-type(2) {
+    text-align: right;
   }
 `;
