@@ -42,22 +42,17 @@ const Carousel = ({ slides }: Props) => {
           <EmblaContainer>
             {slides.map((index) => (
               <EmblaSlide key={index}>
-                {/* <NextImage
-                  src={mediaByIndex(index).src}
-                  alt="Picture of the author"
-                  layout="responsive"
-                  objectFit="contain"
-                  width="100%"
-                  height="150px"
-                  placeholder="blur"
-                  blurDataURL={mediaByIndex(index).blurDataURL}
-                /> */}
                 <img src={mediaByIndex(index).src} alt="" />
               </EmblaSlide>
             ))}
           </EmblaContainer>
         </EmblaViewPort>
       </Embla>
+      {/* <Tester>
+        {slides.map((index) => (
+          <img src={mediaByIndex(index).src} alt="" />
+        ))}
+      </Tester> */}
     </StyledPageWrapperCentered>
   );
 };
@@ -68,10 +63,10 @@ const Embla = styled.div`
   position: relative;
   margin-left: auto;
   margin-right: auto;
+  padding: var(--gap-xs);
 `;
 const EmblaViewPort = styled.div`
   overflow: hidden;
-  width: 100%;
 `;
 const EmblaContainer = styled.div`
   display: flex;
@@ -79,9 +74,9 @@ const EmblaContainer = styled.div`
 `;
 const EmblaSlide = styled.div`
   transition: min-width 1s ease;
-  min-width: 90%;
   cursor: grab;
-  margin: 0.5rem;
+  margin-right: var(--gap-xs);
+  min-width: 90%;
 
   @media screen and (min-width: 400px) {
     min-width: 70%;
@@ -96,7 +91,24 @@ const EmblaSlide = styled.div`
   &:active {
     cursor: grabbing;
   }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
 `;
 // TO-DO: currently styled up to here,
 //        please understand what each style is doing after finished
 const EmblaSlideInner = styled.div``;
+
+const Tester = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 200px;
+  gap: 1rem;
+  padding: 0 1rem;
+  overflow-x: auto;
+
+  & > * {
+    height: 100%;
+  }
+`;
