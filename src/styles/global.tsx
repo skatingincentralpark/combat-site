@@ -34,10 +34,11 @@ const GlobalStyles = () => {
       }
       html {
         background: white;
-        font-family: var(--font-family-primary);
+        font-family: var(--font-family-primary), "Courier New", Courier,
+          monospace;
         font-size: clamp(12px, 0.8vw, 18px);
         line-height: clamp(1.3em, 1.4em, 2em);
-        font-weight: 200;
+        font-weight: 300;
         color: var(--font-family-primary);
         overflow-y: scroll;
         min-height: fit-content;
