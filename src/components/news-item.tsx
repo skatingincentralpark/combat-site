@@ -1,4 +1,4 @@
-import { default as NextImage } from "next/image";
+import Image from "next/future/image";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 
@@ -8,11 +8,13 @@ type Props = {
     location: string;
     description: string;
     date: string;
-    image: string;
+    image: StaticImageData;
   };
 };
 
 const NewsItem = ({ newsItem }: Props) => {
+  const newsItemImage = newsItem.image;
+
   return (
     <NewsItemWrapper>
       <NewsItemImageWrapper
@@ -31,13 +33,13 @@ const NewsItem = ({ newsItem }: Props) => {
           repeatDelay: 5,
         }}
       >
-        <NextImage
-          src={newsItem.image}
+        <Image
+          src={newsItemImage.src}
+          width={newsItemImage.width}
+          height={newsItemImage.height}
           alt="Something"
-          layout="fill"
-          objectFit="cover"
-          placeholder="blur"
-          blurDataURL={newsItem.image}
+          quality={100}
+          sizes="(max-height: 500px) 1000px (max-height: 300px) 700px"
         />
       </NewsItemImageWrapper>
       <NewsItemTextWrapper>
@@ -69,16 +71,21 @@ const NewsItemImageWrapper = styled(motion.div)`
   margin-bottom: var(--gap-m);
   border: 1px solid #c3c48d;
   aspect-ratio: 2 / 3;
-  position: relative;
   overflow: hidden;
-  width: 100%;
   max-width: 20rem;
   flex-shrink: 0;
+  height: fit-content;
   transition: aspect-ratio 1s, width 1s, aspect-ratio 1s;
 
   @media screen and (min-width: 650px) {
     margin-right: var(--gap-m);
     aspect-ratio: 1 / 1;
+  }
+
+  & > img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
 `;
 const NewsItemTextWrapper = styled.div`
