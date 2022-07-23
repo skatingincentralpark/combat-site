@@ -42,18 +42,17 @@ const Carousel = ({ slides }: Props) => {
           <EmblaContainer>
             {slides.map((index) => (
               <EmblaSlide key={index}>
-                <EmblaSlideInner>
-                  <NextImage
-                    src={mediaByIndex(index).src}
-                    alt="Picture of the author"
-                    layout="responsive"
-                    objectFit="contain"
-                    width="100%"
-                    height="150px"
-                    placeholder="blur"
-                    blurDataURL={mediaByIndex(index).blurDataURL}
-                  />
-                </EmblaSlideInner>
+                {/* <NextImage
+                  src={mediaByIndex(index).src}
+                  alt="Picture of the author"
+                  layout="responsive"
+                  objectFit="contain"
+                  width="100%"
+                  height="150px"
+                  placeholder="blur"
+                  blurDataURL={mediaByIndex(index).blurDataURL}
+                /> */}
+                <img src={mediaByIndex(index).src} alt="" />
               </EmblaSlide>
             ))}
           </EmblaContainer>
@@ -73,28 +72,16 @@ const Embla = styled.div`
 const EmblaViewPort = styled.div`
   overflow: hidden;
   width: 100%;
-
-  /* .embla__viewport.is-draggable {
-    cursor: move;
-    cursor: grab;
-  }
-
-  .embla__viewport.is-dragging {
-    cursor: grabbing;
-  } */
 `;
 const EmblaContainer = styled.div`
   display: flex;
   user-select: none;
-  -webkit-touch-callout: none;
-  -khtml-user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  /* margin-left: -10px; */
 `;
 const EmblaSlide = styled.div`
-  /* position: relative; */
   transition: min-width 1s ease;
   min-width: 90%;
+  cursor: grab;
+  margin: 0.5rem;
 
   @media screen and (min-width: 400px) {
     min-width: 70%;
@@ -104,24 +91,11 @@ const EmblaSlide = styled.div`
   }
   @media screen and (min-width: 1000px) {
     min-width: 20%;
-    /* 
-    &:nth-child(5) {
-      min-width: 90%;
-    }
-
-    &:nth-child(6) {
-      min-width: 25%;
-    }
-
-    &:nth-child(7) {
-      min-width: 50%;
-    }
-
-    &:nth-child(8) {
-      min-width: 80%;
-    } */
   }
-  /* padding-left: 10px; */
+
+  &:active {
+    cursor: grabbing;
+  }
 `;
 // TO-DO: currently styled up to here,
 //        please understand what each style is doing after finished

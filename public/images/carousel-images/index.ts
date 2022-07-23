@@ -24,6 +24,5 @@ export const media = [
   media10,
 ];
 export const mediaByIndex = (index: number) => {
-  console.log(media[index % media.length]);
   return media[index % media.length];
 };

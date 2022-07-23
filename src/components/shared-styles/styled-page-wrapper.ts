@@ -17,15 +17,15 @@ const StyledPageWrapper = styled.div<PageWrapperProps>`
   width: 100%;
   height: fit-content;
   padding-top: var(--gap-page-top);
-  padding-bottom: var(--gap-page-top);
+  padding-bottom: var(--gap-xl);
   padding-left: ${({ px }) => (px ? gap[px] : 0)};
   padding-right: ${({ px }) => (px ? gap[px] : 0)};
 `;
 
 const StyledPageWrapperCentered = styled(StyledPageWrapper)<PageWrapperProps>`
   position: relative;
-  top: 45%;
   transform: translateY(-50%);
+  top: 45%;
 `;
 
 export { StyledPageWrapper, StyledPageWrapperCentered };
