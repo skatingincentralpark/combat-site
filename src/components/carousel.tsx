@@ -43,8 +43,9 @@ const Carousel = ({ slides }: Props) => {
     show: {
       translateX: 0,
       transition: {
-        duration: 1,
-        type: "spring",
+        duration: 0.8,
+        ease: "anticipate",
+        type: "tween",
       },
     },
   };
@@ -122,7 +123,7 @@ const EmblaContainer = styled(motion.div)`
   --translate-distance: -900px;
 
   @media screen and (min-width: 650px) {
-    --translate-distance: -1200px;
+    --translate-distance: -1000px;
   }
 `;
 const EmblaSlide = styled(motion.div)`
