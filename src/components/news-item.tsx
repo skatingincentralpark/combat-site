@@ -1,4 +1,4 @@
-import Image from "next/future/image";
+import Image from "next/image";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 
@@ -13,7 +13,7 @@ type Props = {
 };
 
 const NewsItem = ({ newsItem }: Props) => {
-  const newsItemImage = newsItem.image;
+  const { src, width, height, blurDataURL } = newsItem.image;
 
   return (
     <NewsItemWrapper>
@@ -34,11 +34,16 @@ const NewsItem = ({ newsItem }: Props) => {
         }}
       >
         <Image
-          src={newsItemImage.src}
-          width={newsItemImage.width}
-          height={newsItemImage.height}
+          src={src}
+          width={width}
+          height={height}
           alt="Something"
           quality={100}
+          placeholder="blur"
+          blurDataURL={blurDataURL}
+          layout="fill"
+          objectFit="cover"
+          objectPosition="top"
         />
       </NewsItemImageWrapper>
       <NewsItemTextWrapper>
@@ -72,20 +77,21 @@ const NewsItemImageWrapper = styled(motion.div)`
   aspect-ratio: 2 / 3;
   overflow: hidden;
   max-width: 20rem;
+  width: 100%;
   flex-shrink: 0;
   height: fit-content;
   transition: aspect-ratio 1s, width 1s, aspect-ratio 1s;
+  position: relative;
 
   @media screen and (min-width: 650px) {
     margin-right: var(--gap-m);
     aspect-ratio: 1 / 1;
   }
 
-  & > img {
-    object-fit: cover;
+  /* & > span {
     width: 100%;
     height: 100%;
-  }
+  } */
 `;
 const NewsItemTextWrapper = styled.div`
   & > * {

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Image from "./image";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import productImage from "../../public/images/Bill2.png";
@@ -27,7 +27,12 @@ const ShopItemSummary = ({ product }: Props) => {
   return (
     <ShopItemWrapper onClick={navigate}>
       <StyledImage>
-        <Image src={productImage} />
+        <Image
+          src={productImage}
+          alt="Something"
+          quality={100}
+          placeholder="blur"
+        />
       </StyledImage>
       <StyledDescription>
         {details.map((detail, i) => (

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
-import Image from "../components/image";
+import Image from "next/image";
 import ShopCta from "../components/shop-cta";
+import productImage from "../../public/images/Bill2.png";
 
 type Props = {
   sizes: string[];
@@ -13,9 +14,14 @@ const ShopItem = ({ sizes }: Props) => {
 
   return (
     <PageWrapper>
-      {/* <StyledImage> */}
-      {/* <Image src="/images/Bill2.png" /> */}
-      {/* </StyledImage> */}
+      <StyledImage>
+        <Image
+          src={productImage}
+          alt="Something"
+          quality={100}
+          placeholder="blur"
+        />
+      </StyledImage>
       <InfoWrapper>
         <StyledTitle>
           <span>Viktor Tee</span>
