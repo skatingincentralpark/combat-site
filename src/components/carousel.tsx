@@ -67,7 +67,7 @@ const Carousel = ({ slides }: Props) => {
               exit="hidden"
             >
               {slides.map((index) => {
-                const { width, height, src } = mediaByIndex(index);
+                const { width, height, src, blurDataURL } = mediaByIndex(index);
 
                 return (
                   <EmblaSlide
@@ -83,6 +83,8 @@ const Carousel = ({ slides }: Props) => {
                       height={height}
                       alt="Something"
                       quality={100}
+                      placeholder="blur"
+                      blurDataURL={blurDataURL}
                     />
                   </EmblaSlide>
                 );
