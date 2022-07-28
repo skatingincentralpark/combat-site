@@ -39,7 +39,6 @@ const NewsItem = ({ newsItem }: Props) => {
           height={newsItemImage.height}
           alt="Something"
           quality={100}
-          sizes="(max-height: 500px) 1000px (max-height: 300px) 700px"
         />
       </NewsItemImageWrapper>
       <NewsItemTextWrapper>
