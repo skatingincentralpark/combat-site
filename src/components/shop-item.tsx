@@ -13,9 +13,9 @@ const ShopItem = ({ sizes }: Props) => {
 
   return (
     <PageWrapper>
-      <StyledImage>
-        <Image src="/images/Bill2.png" />
-      </StyledImage>
+      {/* <StyledImage> */}
+      {/* <Image src="/images/Bill2.png" /> */}
+      {/* </StyledImage> */}
       <InfoWrapper>
         <StyledTitle>
           <span>Viktor Tee</span>
