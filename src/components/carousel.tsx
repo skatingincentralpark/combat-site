@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 import useEmblaCarousel from "embla-carousel-react";
 import { mediaByIndex } from "../../public/images/carousel-images";
 import { StyledPageWrapperCentered } from "./shared-styles/styled-page-wrapper";
-import Image from "./image";
-import { default as NextImage } from "next/image";
+// import Image from "next/future/image";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 // TODO: https://www.embla-carousel.com/plugins/wheel-gestures/
@@ -67,7 +67,8 @@ const Carousel = ({ slides }: Props) => {
               exit="hidden"
             >
               {slides.map((index) => {
-                const { width, height } = mediaByIndex(index);
+                const { width, height, src } = mediaByIndex(index);
+
                 return (
                   <EmblaSlide
                     key={index}
@@ -76,7 +77,13 @@ const Carousel = ({ slides }: Props) => {
                     {index === 0 && (
                       <SlideText>Oslo 52.3676° N, 4.9041° E</SlideText>
                     )}
-                    <img src={mediaByIndex(index).src} alt="" />
+                    <Image
+                      src={src}
+                      width={width}
+                      height={height}
+                      alt="Something"
+                      quality={100}
+                    />
                   </EmblaSlide>
                 );
               })}
