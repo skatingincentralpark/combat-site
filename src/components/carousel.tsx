@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 import useEmblaCarousel from "embla-carousel-react";
 import { mediaByIndex } from "../../public/images/carousel-images";
 import { StyledPageWrapperCentered } from "./shared-styles/styled-page-wrapper";
-// import Image from "next/future/image";
-import Image from "next/image";
+import Image from "next/future/image";
+// import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 // TODO: https://www.embla-carousel.com/plugins/wheel-gestures/
@@ -81,8 +81,8 @@ const Carousel = ({ slides }: Props) => {
                       src={src}
                       width={width}
                       height={height}
-                      alt="Something"
-                      quality={100}
+                      // alt="Something"
+                      // quality={100}
                       placeholder="blur"
                       blurDataURL={blurDataURL}
                     />
@@ -148,6 +148,10 @@ const EmblaSlide = styled(motion.div)`
 
   &:last-of-type {
     margin-right: 0;
+  }
+
+  & > img {
+    height: 100%;
   }
 `;
 const SlideText = styled.div`
