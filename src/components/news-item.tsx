@@ -8,13 +8,11 @@ type Props = {
     location: string;
     description: string;
     date: string;
-    image: StaticImageData;
+    image: string;
   };
 };
 
 const NewsItem = ({ newsItem }: Props) => {
-  const { src, blurDataURL } = newsItem.image;
-
   return (
     <NewsItemWrapper>
       <NewsItemImageWrapper
@@ -34,11 +32,9 @@ const NewsItem = ({ newsItem }: Props) => {
         }}
       >
         <Image
-          src={src}
+          src={newsItem.image}
           alt="Something"
           quality={100}
-          placeholder="blur"
-          blurDataURL={blurDataURL}
           layout="fill"
           objectFit="cover"
           objectPosition="top"

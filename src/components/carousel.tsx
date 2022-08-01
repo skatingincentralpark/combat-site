@@ -26,7 +26,6 @@ type Props = {
 };
 
 const Carousel = ({ lookbook }: Props) => {
-  const { album } = lookbook;
   const [viewportRef, embla] = useEmblaCarousel({
     containScroll: "trimSnaps",
   });
@@ -64,6 +63,9 @@ const Carousel = ({ lookbook }: Props) => {
     },
   };
 
+  if (!lookbook)
+    return <StyledPageWrapperCentered>Loading...</StyledPageWrapperCentered>;
+
   return (
     <StyledPageWrapperCentered>
       <ButtonContainer>
@@ -87,7 +89,7 @@ const Carousel = ({ lookbook }: Props) => {
               animate="show"
               exit="hidden"
             >
-              {album.map(({ asset, caption }, i) => {
+              {lookbook?.album?.map(({ asset, caption }, i) => {
                 const { metadata, url } = asset;
                 const { aspectRatio, width, height } = metadata;
 
