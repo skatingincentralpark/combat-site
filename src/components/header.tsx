@@ -104,9 +104,9 @@ const Header = () => {
                   </Link>
                 </StyledNavLink>
                 <StyledNavLink>
-                  <Link href="/lookbook" onClick={closeNav}>
+                  <Link href="/lookbooks" onClick={closeNav}>
                     <StyledDot />
-                    Lookbook
+                    Lookbooks
                   </Link>
                 </StyledNavLink>
               </HeaderMenuNav>

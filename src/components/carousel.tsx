@@ -4,6 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { StyledPageWrapperCentered } from "./shared-styles/styled-page-wrapper";
 import Image from "next/future/image";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 type Props = {
   lookbook: {
@@ -65,6 +66,9 @@ const Carousel = ({ lookbook }: Props) => {
 
   return (
     <StyledPageWrapperCentered>
+      <ButtonContainer>
+        <Link href="/lookbooks">Back</Link>
+      </ButtonContainer>
       <ButtonContainer>
         <NavButton onClick={scrollPrev} disabled={!prevBtnEnabled}>
           Prev
