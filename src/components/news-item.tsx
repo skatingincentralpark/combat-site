@@ -13,7 +13,7 @@ type Props = {
 };
 
 const NewsItem = ({ newsItem }: Props) => {
-  const { src, width, height, blurDataURL } = newsItem.image;
+  const { src, blurDataURL } = newsItem.image;
 
   return (
     <NewsItemWrapper>
@@ -35,8 +35,6 @@ const NewsItem = ({ newsItem }: Props) => {
       >
         <Image
           src={src}
-          width={width}
-          height={height}
           alt="Something"
           quality={100}
           placeholder="blur"
