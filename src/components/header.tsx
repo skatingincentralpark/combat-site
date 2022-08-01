@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
 import Svg from "./svg";
@@ -8,14 +8,17 @@ import { useRouter } from "next/router";
 //TO:DO: Create a HeaderLinkComponent
 const Header = () => {
   const router = useRouter();
-  const checkIfShopPath = () => router.pathname.match(/\/shop\//);
+  const checkIfShopPath = useCallback(
+    () => router.pathname.match(/\/shop\//),
+    [router.pathname]
+  );
 
   const [navOpen, setNavOpen] = useState(false);
   const [isShopPath, setIsShopPath] = useState(checkIfShopPath || null);
 
   useEffect(() => {
     setIsShopPath(checkIfShopPath());
-  }, [router.pathname]);
+  }, [router.pathname, checkIfShopPath]);
 
   const toggleNav = () => setNavOpen((x) => !x);
   const closeNav = () => {
@@ -26,16 +29,16 @@ const Header = () => {
 
   const variants = {
     initial: {
-      // y: "-100%",
-      opacity: 0,
+      y: "-100%",
+      // opacity: 0,
     },
     animate: {
-      // y: "0",
-      opacity: 1,
+      y: "0",
+      // opacity: 1,
     },
     exit: {
-      // y: "-100%",
-      opacity: 0,
+      y: "-100%",
+      // opacity: 0,
     },
   };
 
@@ -81,7 +84,7 @@ const Header = () => {
             initial="initial"
             exit="exit"
             animate="animate"
-            transition={{ type: "spring", duration: 0.3, bounce: 0.3 }}
+            transition={{ type: "spring", duration: 0.6 }}
           >
             <HeaderMenuInner>
               <HeaderMenuNav>
