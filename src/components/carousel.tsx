@@ -1,18 +1,31 @@
 import { useState, useEffect, useCallback } from "react";
 import styled from "@emotion/styled";
 import useEmblaCarousel from "embla-carousel-react";
-import { mediaByIndex } from "../../public/images/carousel-images";
 import { StyledPageWrapperCentered } from "./shared-styles/styled-page-wrapper";
 import Image from "next/future/image";
-// import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
-// TODO: https://www.embla-carousel.com/plugins/wheel-gestures/
 type Props = {
-  slides: number[];
+  lookbook: {
+    album: {
+      asset: {
+        metadata: {
+          aspectRatio: number;
+          height: number;
+          lqip: string;
+          palette: {};
+          width: number;
+        };
+        url: string;
+      };
+      caption: string;
+    }[];
+    _id: string;
+  };
 };
 
-const Carousel = ({ slides }: Props) => {
+const Carousel = ({ lookbook }: Props) => {
+  const { album } = lookbook;
   const [viewportRef, embla] = useEmblaCarousel({
     containScroll: "trimSnaps",
   });
@@ -53,8 +66,12 @@ const Carousel = ({ slides }: Props) => {
   return (
     <StyledPageWrapperCentered>
       <ButtonContainer>
-        <button onClick={scrollPrev}>Prev</button>
-        <button onClick={scrollNext}>Next</button>
+        <NavButton onClick={scrollPrev} disabled={!prevBtnEnabled}>
+          Prev
+        </NavButton>
+        <NavButton onClick={scrollNext} disabled={!nextBtnEnabled}>
+          Next
+        </NavButton>
       </ButtonContainer>
       <Embla>
         {/* what's viewport ref? */}
@@ -66,25 +83,23 @@ const Carousel = ({ slides }: Props) => {
               animate="show"
               exit="hidden"
             >
-              {slides.map((index) => {
-                const { width, height, src, blurDataURL } = mediaByIndex(index);
+              {album.map(({ asset, caption }, i) => {
+                const { metadata, url } = asset;
+                const { aspectRatio, width, height } = metadata;
 
                 return (
                   <EmblaSlide
-                    key={index}
-                    style={{ aspectRatio: `${width} / ${height}` }}
+                    key={i}
+                    style={{ aspectRatio: `${aspectRatio} / 1` }}
                   >
-                    {index === 0 && (
-                      <SlideText>Oslo 52.3676° N, 4.9041° E</SlideText>
-                    )}
+                    {caption && <SlideText>{caption}</SlideText>}
                     <Image
-                      src={src}
+                      src={url}
                       width={width}
                       height={height}
-                      // alt="Something"
-                      // quality={100}
+                      alt={caption}
                       placeholder="blur"
-                      blurDataURL={blurDataURL}
+                      blurDataURL={url}
                     />
                   </EmblaSlide>
                 );
@@ -165,7 +180,7 @@ const FlexRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0 var(--gap-s);
+  padding: 0 var(--gap-xs);
 
   & > div:nth-of-type(2) {
     text-align: right;
@@ -173,4 +188,10 @@ const FlexRow = styled.div`
 `;
 const ButtonContainer = styled(FlexRow)`
   max-width: 9rem;
+`;
+const NavButton = styled.button<{ disabled: boolean }>`
+  padding: 10px;
+  margin-right: 10px;
+  color: ${({ disabled }) => disabled && "lightgray"};
+  outline: ${({ disabled }) => !disabled && "1px solid black"};
 `;
