@@ -41,12 +41,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { slug = "" } = context.params!;
   const lookbook = await client.fetch(
     `
-      *[_type == "lookbook" && slug.current == $slug]{
+      *[_type == "lookbook" && slug.current == $slug] {
         _id,
         "slug": slug.current,
-          album[]{ caption, slug, asset -> {
+        album[]{ 
+          caption, 
+          slug, 
+          asset -> {
             url,
-            metadata{
+            metadata {
               "height": dimensions.height,
               "width": dimensions.width,
               "aspectRatio": dimensions.aspectRatio,
