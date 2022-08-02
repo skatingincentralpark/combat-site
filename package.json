@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@portabletext/react": "^1.0.6",
     "@sanity/client": "^3.3.2",
     "embla-carousel-react": "^7.0.0-rc05",
     "framer-motion": "^6.3.16",

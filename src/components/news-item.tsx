@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
+import { PortableText } from "@portabletext/react";
 
 type Props = {
   newsItem: {
@@ -71,7 +72,9 @@ const NewsItem = ({ newsItem }: Props) => {
               {newsItem.location.lat} {newsItem.location.lng}
             </div>
           </NewsItemTitle>
-          <NewsItemDescription>{newsItem.description}</NewsItemDescription>
+          <NewsItemDescription>
+            <PortableText value={newsItem.body} />
+          </NewsItemDescription>
         </div>
       </NewsItemTextWrapper>
     </NewsItemWrapper>
