@@ -87,6 +87,10 @@ const GlobalStyles = () => {
         text-decoration: inherit;
         overflow-wrap: break-word;
       }
+
+      p {
+        margin-bottom: var(--gap-s);
+      }
     `,
   ];
 

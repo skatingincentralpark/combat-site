@@ -69,11 +69,12 @@ const NewsItem = ({ newsItem }: Props) => {
           <NewsItemTitle>
             <div>{newsItem.title}</div>
             <div>
-              {newsItem.location.lat} {newsItem.location.lng}
+              {newsItem.location.lat.toFixed(2)} °S{" : "}
+              {newsItem.location.lng.toFixed(2)} °E
             </div>
           </NewsItemTitle>
           <NewsItemDescription>
-            <PortableText value={newsItem.body} />
+            <PortableText value={newsItem.description} />
           </NewsItemDescription>
         </div>
       </NewsItemTextWrapper>
@@ -108,11 +109,6 @@ const NewsItemImageWrapper = styled(motion.div)`
     margin-right: var(--gap-m);
     aspect-ratio: 1 / 1;
   }
-
-  /* & > span {
-    width: 100%;
-    height: 100%;
-  } */
 `;
 const NewsItemTextWrapper = styled.div`
   & > * {
