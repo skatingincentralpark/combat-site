@@ -4,15 +4,35 @@ import { motion } from "framer-motion";
 
 type Props = {
   newsItem: {
-    title: string;
-    location: string;
-    description: string;
+    author: {};
+    body: [];
+    description: [];
+    category: {};
     date: string;
-    image: string;
+    image: {
+      asset: {
+        metadata: {
+          aspectRatio: number;
+          height: number;
+          lqip: string;
+          palette: {};
+          width: number;
+        };
+        url: string;
+      };
+      caption: string;
+    };
+    location: {
+      lat: number;
+      lng: number;
+    };
+    slug: {};
+    title: string;
   };
 };
 
 const NewsItem = ({ newsItem }: Props) => {
+  console.log(newsItem);
   return (
     <NewsItemWrapper>
       <NewsItemImageWrapper
@@ -32,12 +52,14 @@ const NewsItem = ({ newsItem }: Props) => {
         }}
       >
         <Image
-          src={newsItem.image}
-          alt="Something"
+          src={newsItem.image.asset.url}
+          alt={newsItem.image.caption}
           quality={100}
           layout="fill"
           objectFit="cover"
           objectPosition="top"
+          placeholder="blur"
+          blurDataURL={newsItem.image.asset.url}
         />
       </NewsItemImageWrapper>
       <NewsItemTextWrapper>
@@ -45,7 +67,9 @@ const NewsItem = ({ newsItem }: Props) => {
         <div>
           <NewsItemTitle>
             <div>{newsItem.title}</div>
-            <div>{newsItem.location}</div>
+            <div>
+              {newsItem.location.lat} {newsItem.location.lng}
+            </div>
           </NewsItemTitle>
           <NewsItemDescription>{newsItem.description}</NewsItemDescription>
         </div>
