@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
+import Image from "next/future/image";
 import styled from "@emotion/styled";
 import useEmblaCarousel from "embla-carousel-react";
-import { StyledPageWrapperCentered } from "./shared-styles/styled-page-wrapper";
-import Image from "next/future/image";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
 import { PortableText } from "@portabletext/react";
+import { StyledPageWrapperCentered } from "./shared-styles/styled-page-wrapper";
 
 type Props = {
   lookbook: {
@@ -35,7 +35,6 @@ const Carousel = ({ lookbook }: Props) => {
     containScroll: "trimSnaps",
   });
 
-  // TODO: Can be used to gray out next/prev buttons when reach the start/end
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
 
@@ -73,19 +72,7 @@ const Carousel = ({ lookbook }: Props) => {
 
   return (
     <StyledPageWrapperCentered>
-      <ButtonContainer>
-        <Link href="/lookbooks">Back</Link>
-      </ButtonContainer>
-      <ButtonContainer>
-        <NavButton onClick={scrollPrev} disabled={!prevBtnEnabled}>
-          Prev
-        </NavButton>
-        <NavButton onClick={scrollNext} disabled={!nextBtnEnabled}>
-          Next
-        </NavButton>
-      </ButtonContainer>
       <Embla>
-        {/* what's viewport ref? */}
         <EmblaViewPort ref={viewportRef}>
           <AnimatePresence>
             <EmblaContainer
@@ -94,46 +81,87 @@ const Carousel = ({ lookbook }: Props) => {
               animate="show"
               exit="hidden"
             >
-              {lookbook?.album?.map(({ asset, caption }, i) => {
-                const { metadata, url } = asset;
-                const { aspectRatio, width, height } = metadata;
-
-                return (
-                  <EmblaSlide
-                    key={i}
-                    style={{ aspectRatio: `${aspectRatio} / 1` }}
-                  >
-                    {caption && <SlideText>{caption}</SlideText>}
-                    <Image
-                      src={url}
-                      width={width}
-                      height={height}
-                      alt={caption}
-                      placeholder="blur"
-                      blurDataURL={url}
-                    />
-                  </EmblaSlide>
-                );
+              {lookbook?.album?.map((image, i) => {
+                return <CarouselSlide image={image} key={i} />;
               })}
             </EmblaContainer>
           </AnimatePresence>
         </EmblaViewPort>
       </Embla>
-      <FlexRow>
-        <div>
-          {lookbook.title}
-          <br />
-          {lookbook.season} {lookbook.date}
-        </div>
-        <div>
-          <PortableText value={lookbook.description} />
-        </div>
-      </FlexRow>
+      <LookbookDescription
+        title={lookbook.title}
+        season={lookbook.season}
+        date={lookbook.date}
+        description={lookbook.description}
+      />
     </StyledPageWrapperCentered>
   );
 };
 
 export default Carousel;
+
+type CarouselSlideProps = {
+  image: {
+    asset: {
+      metadata: {
+        aspectRatio: number;
+        height: number;
+        lqip: string;
+        palette: {};
+        width: number;
+      };
+      url: string;
+    };
+    caption: string;
+  };
+};
+
+export const CarouselSlide = ({ image }: CarouselSlideProps) => {
+  const { asset, caption } = image;
+  const { metadata, url } = asset;
+  const { aspectRatio, width, height } = metadata;
+
+  return (
+    <EmblaSlide style={{ aspectRatio: `${aspectRatio} / 1` }}>
+      {caption && <SlideText>{caption}</SlideText>}
+      <Image
+        src={url}
+        width={width}
+        height={height}
+        alt={caption}
+        placeholder="blur"
+        blurDataURL={url}
+      />
+    </EmblaSlide>
+  );
+};
+
+type LookbookDescriptionProps = {
+  title: string;
+  season: string;
+  date: string;
+  description: [];
+};
+
+export const LookbookDescription = ({
+  title,
+  season,
+  date,
+  description,
+}: LookbookDescriptionProps) => {
+  return (
+    <FlexRow>
+      <div>
+        {title}
+        <br />
+        {season} {date}
+      </div>
+      <div>
+        <PortableText value={description} />
+      </div>
+    </FlexRow>
+  );
+};
 
 // TODO: Please understand what each style is doing after finished
 const Embla = styled.div`
@@ -189,13 +217,4 @@ const FlexRow = styled.div`
   & > div:nth-of-type(2) {
     text-align: right;
   }
-`;
-const ButtonContainer = styled(FlexRow)`
-  max-width: 9rem;
-`;
-const NavButton = styled.button<{ disabled: boolean }>`
-  padding: 10px;
-  margin-right: 10px;
-  color: ${({ disabled }) => disabled && "lightgray"};
-  outline: ${({ disabled }) => !disabled && "1px solid black"};
 `;
