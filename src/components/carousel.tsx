@@ -5,9 +5,15 @@ import { StyledPageWrapperCentered } from "./shared-styles/styled-page-wrapper";
 import Image from "next/future/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { PortableText } from "@portabletext/react";
 
 type Props = {
   lookbook: {
+    _id: string;
+    season: string;
+    date: string;
+    description: [];
+    title: string;
     album: {
       asset: {
         metadata: {
@@ -21,7 +27,6 @@ type Props = {
       };
       caption: string;
     }[];
-    _id: string;
   };
 };
 
@@ -116,19 +121,12 @@ const Carousel = ({ lookbook }: Props) => {
       </Embla>
       <FlexRow>
         <div>
-          Spring Song Days
+          {lookbook.title}
           <br />
-          Spring / Summer 2022
+          {lookbook.season} {lookbook.date}
         </div>
         <div>
-          first weplant
-          <br />
-          theseed
-          <br />
-          inourminds then
-          <br />
-          weleavetherestto[...]
-          <br />
+          <PortableText value={lookbook.description} />
         </div>
       </FlexRow>
     </StyledPageWrapperCentered>

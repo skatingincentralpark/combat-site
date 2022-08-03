@@ -33,7 +33,6 @@ type Props = {
 };
 
 const NewsItem = ({ newsItem }: Props) => {
-  console.log(newsItem);
   return (
     <NewsItemWrapper>
       <NewsItemImageWrapper

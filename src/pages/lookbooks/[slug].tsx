@@ -2,8 +2,13 @@ import client from "../../../client";
 import { GetStaticProps, GetStaticPaths } from "next";
 import Carousel from "../../components/carousel";
 
-type Props = {
+type LookbookProps = {
   lookbook: {
+    _id: string;
+    season: string;
+    date: string;
+    description: [];
+    title: string;
     album: {
       asset: {
         metadata: {
@@ -17,11 +22,10 @@ type Props = {
       };
       caption: string;
     }[];
-    _id: string;
   };
 };
 
-const LookbookPage = ({ lookbook }: Props) => {
+const LookbookPage = ({ lookbook }: LookbookProps) => {
   return <Carousel lookbook={lookbook} />;
 };
 
@@ -44,9 +48,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
       *[_type == "lookbook" && slug.current == $slug] {
         _id,
         "slug": slug.current,
+        season,
+        date,
+        description,
+        title,
         album[]{ 
           caption, 
-          slug, 
+          slug,
           asset -> {
             url,
             metadata {
