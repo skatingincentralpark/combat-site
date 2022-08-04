@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PortableText } from "@portabletext/react";
 import { StyledPageWrapperCentered } from "./shared-styles/styled-page-wrapper";
 
-type Props = {
+type LookbookProps = {
   lookbook: {
     _id: string;
     season: string;
@@ -15,22 +15,18 @@ type Props = {
     description: [];
     title: string;
     album: {
-      asset: {
-        metadata: {
-          aspectRatio: number;
-          height: number;
-          lqip: string;
-          palette: {};
-          width: number;
-        };
-        url: string;
-      };
+      aspectRatio: number;
+      height: number;
+      lqip: string;
+      palette: {};
+      width: number;
+      url: string;
       caption: string;
     }[];
   };
 };
 
-const Carousel = ({ lookbook }: Props) => {
+const Carousel = ({ lookbook }: LookbookProps) => {
   const [viewportRef, embla] = useEmblaCarousel({
     containScroll: "trimSnaps",
   });
@@ -100,26 +96,20 @@ const Carousel = ({ lookbook }: Props) => {
 
 export default Carousel;
 
-type CarouselSlideProps = {
+type Image = {
   image: {
-    asset: {
-      metadata: {
-        aspectRatio: number;
-        height: number;
-        lqip: string;
-        palette: {};
-        width: number;
-      };
-      url: string;
-    };
+    aspectRatio: number;
+    height: number;
+    lqip: string;
+    palette: {};
+    width: number;
+    url: string;
     caption: string;
   };
 };
 
-export const CarouselSlide = ({ image }: CarouselSlideProps) => {
-  const { asset, caption } = image;
-  const { metadata, url } = asset;
-  const { aspectRatio, width, height } = metadata;
+export const CarouselSlide = ({ image }: Image) => {
+  const { aspectRatio, height, lqip, palette, width, url, caption } = image;
 
   return (
     <EmblaSlide style={{ aspectRatio: `${aspectRatio} / 1` }}>

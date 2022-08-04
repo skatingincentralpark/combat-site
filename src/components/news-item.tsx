@@ -3,36 +3,35 @@ import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import { PortableText } from "@portabletext/react";
 
-type Props = {
+type NewsItemType = {
   newsItem: {
-    author: {};
+    title: string;
+    author: string;
     body: [];
     description: [];
-    category: {};
+    category: string;
     date: string;
-    image: {
-      asset: {
-        metadata: {
-          aspectRatio: number;
-          height: number;
-          lqip: string;
-          palette: {};
-          width: number;
-        };
-        url: string;
-      };
-      caption: string;
-    };
+    slug: string;
     location: {
       lat: number;
       lng: number;
     };
-    slug: {};
-    title: string;
+    image: {
+      aspectRatio: number;
+      height: number;
+      lqip: string;
+      palette: {};
+      width: number;
+      url: string;
+      caption: string;
+    };
   };
 };
 
-const NewsItem = ({ newsItem }: Props) => {
+const NewsItem = ({ newsItem }: NewsItemType) => {
+  const { aspectRatio, height, lqip, palette, width, url, caption } =
+    newsItem.image;
+
   return (
     <NewsItemWrapper>
       <NewsItemImageWrapper
@@ -52,14 +51,14 @@ const NewsItem = ({ newsItem }: Props) => {
         }}
       >
         <Image
-          src={newsItem.image.asset.url}
-          alt={newsItem.image.caption}
+          src={url}
+          alt={caption}
           quality={100}
           layout="fill"
           objectFit="cover"
           objectPosition="top"
           placeholder="blur"
-          blurDataURL={newsItem.image.asset.url}
+          blurDataURL={url}
         />
       </NewsItemImageWrapper>
       <NewsItemTextWrapper>

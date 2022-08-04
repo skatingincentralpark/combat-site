@@ -10,16 +10,12 @@ type LookbookProps = {
     description: [];
     title: string;
     album: {
-      asset: {
-        metadata: {
-          aspectRatio: number;
-          height: number;
-          lqip: string;
-          palette: {};
-          width: number;
-        };
-        url: string;
-      };
+      aspectRatio: number;
+      height: number;
+      lqip: string;
+      palette: {};
+      width: number;
+      url: string;
       caption: string;
     }[];
   };
@@ -53,18 +49,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
         description,
         title,
         album[]{ 
-          caption, 
-          slug,
-          asset -> {
-            url,
-            metadata {
-              "height": dimensions.height,
-              "width": dimensions.width,
-              "aspectRatio": dimensions.aspectRatio,
-              lqip,
-              palette
-            }
-          }   
+          caption,
+          "url": asset -> url,
+          "height": asset -> metadata.dimensions.height,
+          "width": asset -> metadata.dimensions.width,
+          "aspectRatio": asset -> metadata.dimensions.aspectRatio,
+          "lqip": asset -> metadata.lqip,
+          "palette": asset -> metadata.palette
         }
       }[0]
     `,

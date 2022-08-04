@@ -2,42 +2,38 @@ import NewsItem from "../../components/news-item";
 import client from "../../../client";
 import { StyledPageWrapper } from "../../components/shared-styles/styled-page-wrapper";
 
-type NewsItem = {
-  author: {};
+type NewsItemType = {
+  title: string;
+  author: string;
   body: [];
   description: [];
-  category: {};
+  category: string;
   date: string;
-  image: {
-    asset: {
-      metadata: {
-        aspectRatio: number;
-        height: number;
-        lqip: string;
-        palette: {};
-        width: number;
-      };
-      url: string;
-    };
-    caption: string;
-  };
+  slug: string;
   location: {
     lat: number;
     lng: number;
   };
-  slug: {};
-  title: string;
+  image: {
+    aspectRatio: number;
+    height: number;
+    lqip: string;
+    palette: {};
+    width: number;
+    url: string;
+    caption: string;
+  };
 };
 
 type Props = {
-  newsItems: [NewsItem];
+  newsItems: [NewsItemType];
 };
 
 const NewsPage = ({ newsItems }: Props) => {
   return (
     <StyledPageWrapper px="l">
-      {newsItems.map((item, i) => (
-        <NewsItem newsItem={item} key={i} />
+      {newsItems.map((newsItem, i) => (
+        <NewsItem newsItem={newsItem} key={i} />
       ))}
     </StyledPageWrapper>
   );
@@ -46,28 +42,24 @@ const NewsPage = ({ newsItems }: Props) => {
 export async function getStaticProps() {
   const newsItems = await client.fetch(`
     *[_type == "newsItem"] {
-      author -> { name },
+      "author": author -> name,
       body,
       date,
       description,
       body,
-      category -> { title },
+      "category": category -> title,
+      location { lat, lng },
+      "slug": slug.current,
+      title,
       image {
         caption,
-        asset -> {
-          url,
-          metadata {
-            "height": dimensions.height,
-            "width": dimensions.width,
-            "aspectRatio": dimensions.aspectRatio,
-            lqip,
-            palette
-          },
-        },
-      },
-      location { lat, lng },
-      slug { current },
-      title
+        "url": asset -> url,
+        "height": asset -> metadata.dimensions.height,
+        "width": asset -> metadata.dimensions.width,
+        "aspectRatio": asset -> metadata.dimensions.aspectRatio,
+        "lqip": asset -> metadata.lqip,
+        "palette": asset -> metadata.palette
+      }
     }
   `);
 
