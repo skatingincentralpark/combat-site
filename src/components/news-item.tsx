@@ -2,54 +2,34 @@ import Image from "next/image";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import { PortableText } from "@portabletext/react";
+import { NewsItemType } from "../types/newsTypes";
 
-type NewsItemType = {
-  newsItem: {
-    title: string;
-    author: string;
-    body: [];
-    description: [];
-    category: string;
-    date: string;
-    slug: string;
-    location: {
-      lat: number;
-      lng: number;
-    };
-    image: {
-      aspectRatio: number;
-      height: number;
-      lqip: string;
-      palette: {};
-      width: number;
-      url: string;
-      caption: string;
-    };
-  };
-};
+type Props = { newsItem: NewsItemType };
 
-const NewsItem = ({ newsItem }: NewsItemType) => {
+const NewsItem = ({ newsItem }: Props) => {
   const { aspectRatio, height, lqip, palette, width, url, caption } =
     newsItem.image;
 
+  const animateObject = {
+    animate: {
+      scale: [1, 0.96, 1, 1, 1],
+      borderColor: ["#bfffea", "#b3ff6b", "#fffa67", "#C3C48D"],
+      borderWidth: ["10px", "30px", "5px", "0px"],
+      opacity: ["0%", "100%", "100%", "100%"],
+      y: [100, 0, 0, 0, 0],
+      borderRadius: ["0rem", "25rem", "2.5rem", "2rem", "2rem"],
+    },
+    transition: {
+      duration: 1.5,
+      ease: "easeInOut",
+      times: [0, 0.2, 0.5, 0.9, 1],
+      repeatDelay: 5,
+    },
+  };
+
   return (
     <NewsItemWrapper>
-      <NewsItemImageWrapper
-        animate={{
-          scale: [1, 0.96, 1, 1, 1],
-          borderColor: ["#bfffea", "#b3ff6b", "#fffa67", "#C3C48D"],
-          borderWidth: ["10px", "30px", "5px", "0px"],
-          opacity: ["0%", "100%", "100%", "100%"],
-          y: [100, 0, 0, 0, 0],
-          borderRadius: ["0rem", "25rem", "2.5rem", "2rem", "2rem"],
-        }}
-        transition={{
-          duration: 1.5,
-          ease: "easeInOut",
-          times: [0, 0.2, 0.5, 0.9, 1],
-          repeatDelay: 5,
-        }}
-      >
+      <NewsItemImageWrapper {...animateObject}>
         <Image
           src={url}
           alt={caption}

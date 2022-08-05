@@ -1,35 +1,9 @@
 import NewsItem from "../../components/news-item";
 import client from "../../../client";
 import { StyledPageWrapper } from "../../components/shared-styles/styled-page-wrapper";
+import { NewsItemType } from "../../types/newsTypes";
 
-type NewsItemType = {
-  title: string;
-  author: string;
-  body: [];
-  description: [];
-  category: string;
-  date: string;
-  slug: string;
-  location: {
-    lat: number;
-    lng: number;
-  };
-  image: {
-    aspectRatio: number;
-    height: number;
-    lqip: string;
-    palette: {};
-    width: number;
-    url: string;
-    caption: string;
-  };
-};
-
-type Props = {
-  newsItems: [NewsItemType];
-};
-
-const NewsPage = ({ newsItems }: Props) => {
+const NewsPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
   return (
     <StyledPageWrapper px="l">
       {newsItems.map((newsItem, i) => (
