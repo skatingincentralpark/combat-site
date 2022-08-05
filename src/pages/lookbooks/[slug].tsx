@@ -1,28 +1,22 @@
 import client from "../../../client";
 import { GetStaticProps, GetStaticPaths } from "next";
-import Carousel from "../../components/carousel";
+import Carousel from "../../components/carousel/carousel";
+import { LookbookType } from "../../types/lookbookTypes";
+import { StyledPageWrapperCentered } from "../../components/shared-styles/styled-page-wrapper";
+import { LookbookDescription } from "../../components/lookbook-description";
 
-type LookbookProps = {
-  lookbook: {
-    _id: string;
-    season: string;
-    date: string;
-    description: [];
-    title: string;
-    album: {
-      aspectRatio: number;
-      height: number;
-      lqip: string;
-      palette: {};
-      width: number;
-      url: string;
-      caption: string;
-    }[];
-  };
-};
-
-const LookbookPage = ({ lookbook }: LookbookProps) => {
-  return <Carousel lookbook={lookbook} />;
+const LookbookPage = ({ lookbook }: LookbookType) => {
+  return (
+    <StyledPageWrapperCentered>
+      <Carousel lookbook={lookbook} />
+      <LookbookDescription
+        title={lookbook.title}
+        season={lookbook.season}
+        date={lookbook.date}
+        description={lookbook.description}
+      />
+    </StyledPageWrapperCentered>
+  );
 };
 
 export default LookbookPage;
