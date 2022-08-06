@@ -55,12 +55,11 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
 
   // Fix for mobile Safari scrolling to top - https://github.com/willmcpo/body-scroll-lock/issues/237
   useLayoutEffect(() => {
-    if (!scrollPersistRef.current) return;
-
     // Disabling scroll works with temporary overwrite
     const storedRequestAnimationFrame = window.requestAnimationFrame;
 
     window.requestAnimationFrame = () => 42;
+    if (!scrollPersistRef.current) return;
     disableBodyScroll(scrollPersistRef.current);
     window.requestAnimationFrame = storedRequestAnimationFrame;
 
