@@ -64,8 +64,6 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
     disableBodyScroll(scrollPersistRef.current);
     window.requestAnimationFrame = storedRequestAnimationFrame;
 
-    console.log(window.requestAnimationFrame);
-
     return () => {
       clearAllBodyScrollLocks();
     };
