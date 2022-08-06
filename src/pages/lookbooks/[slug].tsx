@@ -6,6 +6,8 @@ import { StyledPageWrapperCentered } from "../../components/shared-styles/styled
 import { LookbookDescription } from "../../components/lookbook-description";
 
 const LookbookPage = ({ lookbook }: LookbookType) => {
+  if (!lookbook) return <p>Loading...</p>;
+
   return (
     <StyledPageWrapperCentered>
       <Carousel lookbook={lookbook} />
