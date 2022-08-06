@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 export const CarouselSlide = ({ image }: ImageType) => {
   const { aspectRatio, height, lqip, palette, width, url, caption } = image;
 
+  console.log(palette);
+
   return (
     <EmblaSlide style={{ aspectRatio: `${aspectRatio} / 1` }}>
       {caption && <SlideText>{caption}</SlideText>}
@@ -13,8 +15,7 @@ export const CarouselSlide = ({ image }: ImageType) => {
         width={width}
         height={height}
         alt={caption}
-        placeholder="blur"
-        blurDataURL={url}
+        style={{ backgroundColor: palette.dominant.background }}
       />
     </EmblaSlide>
   );

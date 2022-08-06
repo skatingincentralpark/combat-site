@@ -17,7 +17,11 @@ type ImageType = {
     aspectRatio: number;
     height: number;
     lqip: string;
-    palette: {};
+    palette: {
+      dominant: {
+        background: string;
+      };
+    };
     width: number;
     url: string;
     caption: string;
