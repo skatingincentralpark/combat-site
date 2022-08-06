@@ -75,9 +75,8 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
       initial="initial"
       exit="exit"
       animate="animate"
-      ref={scrollPersistRef}
     >
-      <CartModalInner>
+      <CartModalInner ref={scrollPersistRef}>
         <CartFunWrapper ref={myRef}>
           <NextImage
             src="/images/otter-cheeks.jpeg"
