@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Svg from "./svg";
 import Link from "./link";
 import { useRouter } from "next/router";
+import CombatLogo from "./combat-logo";
 
 //TO:DO: Create a HeaderLinkComponent
 const Header = () => {
@@ -74,7 +75,8 @@ const Header = () => {
           )}
         </AnimatePresence>
         <HeaderToggle onClick={toggleNav}>
-          <Svg src="/svg/combat-title.svg" width="18rem" priority />
+          {/* <Svg src="/svg/combat-title-bold.svg" width="18rem" priority /> */}
+          <CombatLogo />
         </HeaderToggle>
       </HeaderWrapper>
       <AnimatePresence>
