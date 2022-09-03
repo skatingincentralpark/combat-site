@@ -23,7 +23,7 @@ const variants = {
 const accordionOptions = [
   {
     label: "Shipping Policy",
-    text: "Italy: approximately 1-2 working days (excluding the Italian Islands which may take 2-3 working days).  European Union: approximately 2-3 working days.  Rest of the world: approximately 4-5 working days.",
+    text: "Shipping within Australia is a flat rate of $10AUD. We strive to process each order within 1-2 business days of purchase, unless otherwise stated in checkout. Once your item is shipped, you will receive an email with tracking information.  International shipments are free for orders over $200AUD. Otherwise, prices differ depending on zones, from Australia ($20 - $25 Standard, $30 - $40 Express) - will be confirmed during checkout. Customs charges are different for every country. Goriot does not take any responsibility for any taxes, custom charges, duties and fees.  We do not currently offer returns or exchanges. If you have received a faulty, or the wrong sized item, please contact us at contact@goriot.com.",
   },
   {
     label: "Returns",
@@ -31,7 +31,7 @@ const accordionOptions = [
   },
   {
     label: "Secure Payment",
-    text: "Microfoam is shiny, slightly thickened, and should have microscopic, uniform bubbles.  European Union: approximately 2-3 working days.  Rest of the world: approximately 4-5 working days.",
+    text: "Cotton garments stretch with wear and shrink with warm-hot washes. We recommend washing at 40ºC or less, on medium setting and to hang dry. Please allow for some variance in sizing, due to the stretch/shrink nature of the fabric and handmade construction. Typically, you can expect the tee to stretch 3-5cm in the shoulders and chest. Please take this into account when selecting a size.  You can enjoy beautiful ageing of the t-shirts through time as it adopts a papery-vintage texture with improved drape.  The collar is initially snug, however with wear/stretching, a perfect fit can be achieved.",
   },
 ];
 
@@ -70,10 +70,33 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
 
   return (
     <CartModalWrapper
-      variants={variants}
-      initial="initial"
-      exit="exit"
-      animate="animate"
+      // variants={{
+      //   open: {
+      //     opacity: 1,
+      //     height: "auto",
+      //     transition: { duration: 1.4, ease: [0.04, 0.62, 0.23, 0.98] },
+      //   },
+      //   closed: {
+      //     opacity: 1,
+      //     height: 0,
+      //     transition: { duration: 1.4, ease: [0.04, 0.62, 0.23, 0.98] },
+      //   },
+      // }}
+      variants={{
+        open: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 1.4, ease: [0.14, 0.62, 0.23, 0.98] },
+        },
+        closed: {
+          opacity: 1,
+          y: "100%",
+          transition: { duration: 1.4, ease: [0.04, 0.62, 0.23, 0.98] },
+        },
+      }}
+      initial="closed"
+      exit="closed"
+      animate="open"
     >
       <CartModalInner ref={scrollPersistRef}>
         <CartFunWrapper ref={myRef}>
@@ -116,6 +139,8 @@ const CartModalWrapper = styled(motion.div)`
 
   background-color: var(--yellow-4);
   backdrop-filter: blur(3px) invert(1);
+
+  overflow: scroll;
 `;
 const CartModalInner = styled.div`
   padding: var(--gap-s) var(--gap-l) var(--gap-s) var(--gap-l);

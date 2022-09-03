@@ -8,31 +8,24 @@ type Props = {
 };
 
 const AccordionBodyItem = ({ children }: Props) => {
-  const variants = {
-    initial: {
-      maxHeight: 0,
-      opacity: 0,
-    },
-    animate: {
-      maxHeight: 200,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        duration: 0.7,
-      },
-    },
-    exit: {
-      maxHeight: 0,
-      opacity: 0,
-    },
-  };
-
   return (
     <AccordionBodyItemWrapper
-      variants={variants}
-      initial="initial"
-      exit="exit"
-      animate="animate"
+      key="content"
+      initial="collapsed"
+      animate="open"
+      exit="collapsed"
+      variants={{
+        open: {
+          opacity: 1,
+          height: "auto",
+          transition: { duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] },
+        },
+        collapsed: {
+          opacity: 0,
+          height: 0,
+          transition: { duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] },
+        },
+      }}
     >
       <AccordionBodyItemWrapperInner>{children}</AccordionBodyItemWrapperInner>
     </AccordionBodyItemWrapper>

@@ -27,7 +27,7 @@ const Accordion = ({ options }: Props) => {
         })}
       </AccordionList>
       <AccordionBody>
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence initial={false}>
           {options.map((option, i) => {
             const active = activeItem === i;
             if (active)
