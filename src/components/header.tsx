@@ -28,18 +28,20 @@ const Header = () => {
   };
   const navigateToShop = () => router.push("/shop");
 
-  const variants = {
-    initial: {
-      y: "-100%",
-      // opacity: 0,
+  const parentVariants = {
+    hidden: {
+      opacity: 0,
+      transition: {
+        staggerDirection: -1,
+        staggerChildren: 0.1,
+        when: "afterChildren",
+      },
     },
-    animate: {
-      y: "0",
-      // opacity: 1,
-    },
-    exit: {
-      y: "-100%",
-      // opacity: 0,
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
     },
   };
 
@@ -82,38 +84,37 @@ const Header = () => {
       <AnimatePresence>
         {navOpen && (
           <HeaderMenuWrapper
-            variants={variants}
-            initial="initial"
-            exit="exit"
-            animate="animate"
-            transition={{ type: "spring", duration: 0.6 }}
+            variants={parentVariants}
+            initial="hidden"
+            animate="show"
+            exit="hidden"
           >
             <HeaderMenuInner>
               <HeaderMenuNav>
-                <StyledNavLink>
+                <NavLink key={1}>
                   <Link href="/" onClick={closeNav}>
                     <StyledDot />
                     Home
                   </Link>
-                </StyledNavLink>
-                <StyledNavLink>
+                </NavLink>
+                <NavLink key={2}>
                   <Link href="/shop" onClick={closeNav}>
                     <StyledDot />
                     Shop
                   </Link>
-                </StyledNavLink>
-                <StyledNavLink>
+                </NavLink>
+                <NavLink key={3}>
                   <Link href="/news" onClick={closeNav}>
                     <StyledDot />
                     News
                   </Link>
-                </StyledNavLink>
-                <StyledNavLink>
+                </NavLink>
+                <NavLink key={4}>
                   <Link href="/lookbooks" onClick={closeNav}>
                     <StyledDot />
                     Lookbooks
                   </Link>
-                </StyledNavLink>
+                </NavLink>
               </HeaderMenuNav>
               <HeaderMenuText>
                 <p>
@@ -227,12 +228,38 @@ const HeaderMenuNav = styled.nav`
     padding-top: calc(var(--header-height) + 4rem);
   }
 `;
-const StyledNavLink = styled.div`
+const StyledDot = styled.span`
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  margin-right: var(--gap-s);
+  background-color: var(--dot-color);
+  transform: var(--dot-scale);
+  transition: background-color 0.25s, transform 0.25s;
+`;
+const HeaderMenuText = styled.div`
+  font-size: var(--font-size-m);
+  padding: var(--gap-s);
+
+  max-width: 50rem;
+`;
+
+const NavLink = ({ children }: { children: React.ReactNode }) => {
+  const childVariants = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 },
+  };
+
+  return <StyledNavLink variants={childVariants}>{children}</StyledNavLink>;
+};
+
+const StyledNavLink = styled(motion.div)`
   border-bottom: 1px solid var(--gray-3);
   background-color: var(--nav-link-bg-color);
   color: var(--nav-link-color);
   --nav-link-color: black;
-  --nav-link-bg-color: white;
+  --nav-link-bg-color: var(--yellow-1);
   --dot-color: var(--yellow-2); // scoped to link so the dot can use it
   --dot-scale: scale(1);
 
@@ -257,20 +284,4 @@ const StyledNavLink = styled.div`
     --dot-color: white; // scoped to link so the dot can use it
     --dot-scale: scale(1.4);
   }
-`;
-const StyledDot = styled.span`
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  margin-right: var(--gap-s);
-  background-color: var(--dot-color);
-  transform: var(--dot-scale);
-  transition: background-color 0.25s, transform 0.25s;
-`;
-const HeaderMenuText = styled.div`
-  font-size: var(--font-size-m);
-  padding: var(--gap-s);
-
-  max-width: 50rem;
 `;
