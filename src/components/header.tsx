@@ -30,16 +30,15 @@ const Header = () => {
 
   const parentVariants = {
     hidden: {
-      opacity: 0,
+      y: "-100%",
       transition: {
-        staggerDirection: -1,
-        staggerChildren: 0.1,
-        when: "afterChildren",
+        ease: "easeIn",
       },
     },
     show: {
-      opacity: 1,
+      y: 0,
       transition: {
+        ease: "easeOut",
         staggerChildren: 0.1,
       },
     },
@@ -247,8 +246,16 @@ const HeaderMenuText = styled.div`
 
 const NavLink = ({ children }: { children: React.ReactNode }) => {
   const childVariants = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1 },
+    hidden: {
+      opacity: 0,
+      x: "10%",
+      transition: { duration: 0.5, ease: [0.14, 0.62, 0.23, 0.98] },
+    },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.5, ease: [0.14, 0.62, 0.23, 0.98] },
+    },
   };
 
   return <StyledNavLink variants={childVariants}>{children}</StyledNavLink>;
@@ -259,7 +266,6 @@ const StyledNavLink = styled(motion.div)`
   background-color: var(--nav-link-bg-color);
   color: var(--nav-link-color);
   --nav-link-color: black;
-  --nav-link-bg-color: var(--yellow-1);
   --dot-color: var(--yellow-2); // scoped to link so the dot can use it
   --dot-scale: scale(1);
 

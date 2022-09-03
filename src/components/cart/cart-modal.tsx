@@ -117,7 +117,7 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
       </CartModalInner>
       <SlideUpModal
         isClosed={!eleVisible}
-        backgroundcolor="var(--yellow-4)"
+        backgroundcolor="var(--piss-1)"
         padding="0 var(--gap-m)"
         displaydesktop="none"
       >
@@ -137,8 +137,22 @@ const CartModalWrapper = styled(motion.div)`
   width: 100%;
   height: 100%;
 
-  background-color: var(--yellow-4);
-  backdrop-filter: blur(3px) invert(1);
+  background: linear-gradient(180deg, #e6ff40, #b7ff01, #ffffff);
+  background-size: 400% 400%;
+  animation: Combative 4s ease infinite;
+  background-attachment: fixed;
+
+  @keyframes Combative {
+    0% {
+      background-position: 51% 0%;
+    }
+    50% {
+      background-position: 50% 100%;
+    }
+    100% {
+      background-position: 51% 0%;
+    }
+  }
 
   overflow: scroll;
 `;
