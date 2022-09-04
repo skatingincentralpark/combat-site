@@ -31,12 +31,14 @@ const Header = () => {
   const parentVariants = {
     hidden: {
       y: "-100%",
+      opacity: 0,
       transition: {
         ease: "easeIn",
       },
     },
     show: {
       y: 0,
+      opacity: 1,
       transition: {
         ease: "easeOut",
         staggerChildren: 0.1,
@@ -248,13 +250,11 @@ const NavLink = ({ children }: { children: React.ReactNode }) => {
   const childVariants = {
     hidden: {
       opacity: 0,
-      x: "10%",
-      transition: { duration: 0.5, ease: [0.14, 0.62, 0.23, 0.98] },
+      transition: { duration: 0.5 },
     },
     show: {
       opacity: 1,
-      x: 0,
-      transition: { duration: 0.5, ease: [0.14, 0.62, 0.23, 0.98] },
+      transition: { duration: 0.5 },
     },
   };
 
