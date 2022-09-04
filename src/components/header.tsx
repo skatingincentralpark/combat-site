@@ -31,14 +31,14 @@ const Header = () => {
   const parentVariants = {
     hidden: {
       y: "-100%",
-      opacity: 0,
+
       transition: {
         ease: "easeIn",
       },
     },
     show: {
       y: 0,
-      opacity: 1,
+
       transition: {
         ease: "easeOut",
         staggerChildren: 0.1,
