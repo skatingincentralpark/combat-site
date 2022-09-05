@@ -31,7 +31,7 @@ const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
   background-color: ${({ checked }) =>
     checked ? "var(--green-2)" : "var(--gray-2)"};
 
-  transition: background-color 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: background-color 0.1s;
 
   height: var(--button-height);
   flex-grow: 1;
@@ -45,6 +45,10 @@ const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:active {
+    background-color: var(--green-3);
+  }
 
   &:nth-of-type(1) {
     border-radius: var(--gap-3xs) 0 0 0;
