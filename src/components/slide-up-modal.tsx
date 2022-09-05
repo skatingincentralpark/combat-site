@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -6,7 +5,6 @@ type Props = {
   isClosed: boolean;
   children?: React.ReactNode;
   delay?: number;
-  backgroundcolor?: string;
   padding?: string;
   displaydesktop?: string;
 };
@@ -15,7 +13,6 @@ const SlideUpModal = ({
   isClosed,
   children,
   delay,
-  backgroundcolor,
   padding,
   displaydesktop,
 }: Props) => {
@@ -28,15 +25,15 @@ const SlideUpModal = ({
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
-        ease: "easeInOut",
+        duration: 1,
+        ease: "easeOut",
         delay: delay ? delay : 0,
       },
     },
     exit: {
       opacity: 0,
       y: 100,
-      transition: { duration: 0.5, ease: "easeInOut" },
+      transition: { duration: 0.2, ease: "easeIn" },
     },
   };
 
@@ -48,7 +45,6 @@ const SlideUpModal = ({
           initial="initial"
           exit="exit"
           animate="animate"
-          backgroundcolor={backgroundcolor}
           padding={padding}
           displaydesktop={displaydesktop}
         >
@@ -60,7 +56,6 @@ const SlideUpModal = ({
 };
 
 type StyledProps = {
-  backgroundcolor?: string;
   padding?: string;
   displaydesktop?: string;
 };
@@ -70,8 +65,6 @@ const SlideUpModalWrapper = styled(motion.div)<StyledProps>`
   position: fixed;
   bottom: 0;
   left: 0;
-  background-color: ${({ backgroundcolor }) =>
-    backgroundcolor ? backgroundcolor : ""};
   z-index: 2;
   cursor: pointer;
   padding: ${({ padding }) => padding && padding};
