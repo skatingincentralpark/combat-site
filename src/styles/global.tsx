@@ -34,14 +34,11 @@ const GlobalStyles = () => {
       }
       html {
         background: white;
-        /* font-family: var(--font-family-primary), "Courier New", Courier,
-          monospace; */
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-        font-size: clamp(12px, 0.8vw, 18px);
+        font-family: var(--font-family-primary);
+        font-size: 12px;
         line-height: clamp(1.3em, 1.4em, 2em);
         font-weight: 300;
-        color: var(--font-family-primary);
+        color: var(--black);
         overflow-y: scroll;
         min-height: fit-content;
       }
@@ -86,10 +83,6 @@ const GlobalStyles = () => {
         font-weight: inherit;
         text-decoration: inherit;
         overflow-wrap: break-word;
-      }
-
-      p {
-        margin-bottom: var(--gap-s);
       }
     `,
   ];

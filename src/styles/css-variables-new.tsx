@@ -12,12 +12,9 @@ const cssVariables = css`
     --green-3: #216f2e;
     --yellow-1: #fce200;
     --yellow-2: #eecb15;
-    --yellow-3: #faff5ae4;
-    --yellow-4: #f6ff00;
     --piss-1: #deff00;
     --olive-1: #564f0a;
-    --text-primary: #000000;
-    --text-secondary: #a4a6a9;
+    --black: #000000;
     // Font Size
     --font-size-xs: 0.7rem;
     --font-size-s: 0.8rem;

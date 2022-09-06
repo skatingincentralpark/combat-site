@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 const StyledButton = styled.button`
   color: white;
-  font-weight: 600;
+  font-weight: 400;
   border-radius: var(--gap-3xs);
   padding: var(--gap-xxs) var(--gap-l);
   background-color: var(--green-1);
