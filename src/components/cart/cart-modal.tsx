@@ -117,7 +117,6 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
       </CartModalInner>
       <SlideUpModal
         isClosed={!eleVisible}
-        backgroundcolor="var(--piss-1)"
         padding="0 var(--gap-m)"
         displaydesktop="none"
       >
