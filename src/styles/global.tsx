@@ -41,6 +41,10 @@ const GlobalStyles = () => {
         color: var(--black);
         overflow-y: scroll;
         min-height: fit-content;
+
+        @media screen and (min-width: 1550px) {
+          font-size: 13px;
+        }
       }
       * {
         box-sizing: border-box;
