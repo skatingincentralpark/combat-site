@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 const Announcement = () => {
   const announcement = {
     title: "Note:",
-    text: "All orders come with complimentary stickers, let us know which ones you love most, and we’ll look to create more in that style, in the future.",
+    text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi cumque quas repellat perspiciatis, facilis totam optio odio veritatis debitis placeat dolorem ullam pariatur explicabo nobis suscipit, dicta ex.",
   };
 
   const [isClosed, setIsClosed] = useState(false);

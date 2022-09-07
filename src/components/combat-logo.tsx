@@ -101,15 +101,17 @@ const CombatLogo = () => {
 export default CombatLogo;
 
 const Svg = styled.svg`
-  width: 18rem;
+  height: 100%;
 `;
 
 const Path = styled.path<{ delay: number }>`
-  transition: fill 0.25s;
-  animation: color-change 1.5s infinite;
+  fill: #000;
+  --logo-animation-duration: 0.25s;
+  transition: fill var(--logo-animation-duration);
+  animation: FairyBreadBiatch 1.5s infinite;
   animation-delay: ${({ delay }) => `${delay * 0.1}s`};
 
-  @keyframes color-change {
+  /* @keyframes FairyBreadBiatch {
     0% {
       fill: var(--green-2);
     }
@@ -127,6 +129,26 @@ const Path = styled.path<{ delay: number }>`
     }
     100% {
       fill: var(--green-2);
+    }
+  } */
+  @keyframes FairyBreadBiatch {
+    0% {
+      fill: var(--yellow-1);
+    }
+    15% {
+      fill: var(--yellow-1);
+    }
+    25% {
+      fill: var(--yellow-1);
+    }
+    50% {
+      fill: var(--white);
+    }
+    75% {
+      fill: var(--piss-1);
+    }
+    100% {
+      fill: var(--green-1);
     }
   }
 `;

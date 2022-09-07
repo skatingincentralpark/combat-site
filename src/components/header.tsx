@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { motion, AnimatePresence } from "framer-motion";
-import Svg from "./svg";
 import Link from "./link";
 import { useRouter } from "next/router";
 import CombatLogo from "./combat-logo";
 
-//TO:DO: Create a HeaderLinkComponent
+// Header Functionality:
+//    - Change background-color depending on page (take prop through a layout component / regex)
+//    - Change background-color and logo height if nav is open
+//    - Increase animation speed when loading (css-variable)
+
 const Header = () => {
   const router = useRouter();
   const checkIfShopPath = useCallback(
@@ -78,7 +81,6 @@ const Header = () => {
           )}
         </AnimatePresence>
         <HeaderToggle onClick={toggleNav}>
-          {/* <Svg src="/svg/combat-title-bold.svg" width="18rem" priority /> */}
           <CombatLogo />
         </HeaderToggle>
       </HeaderWrapper>
@@ -167,6 +169,7 @@ const HeaderWrapper = styled.header`
 `;
 const HeaderToggle = styled.button`
   padding: var(--gap-s);
+  background-color: #000;
 
   flex-grow: 1;
 

@@ -28,10 +28,11 @@ const cssVariables = css`
     --font-family-primary: Helvetica, -apple-system, Arial, "Helvetica Neue",
       sans-serif;
     // Gap
-    --gap-3xs: 0.25rem;
-    --gap-xxs: 0.5rem;
-    --gap-xs: 0.75rem;
-    --gap-s: 1rem;
+    --gap-4xs: 0.25rem;
+    --gap-3xs: 0.5rem;
+    --gap-xxs: 0.75rem;
+    --gap-xs: 1rem;
+    --gap-s: 1.25rem;
     --gap-m: 1.5rem;
     --gap-l: 2rem;
     --gap-xl: 2.5rem;
@@ -42,7 +43,7 @@ const cssVariables = css`
     --gap-6xl: 7rem;
     // Stuff
     --button-height: 3rem;
-    --header-height: 6rem;
+    --header-height: 5rem;
     --gap-page-top: calc(var(--header-height) + var(--gap-m));
 
     @media screen and (min-width: 650px) {
