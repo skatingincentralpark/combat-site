@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Router from "next/router";
+import styled from "@emotion/styled";
+import { motion, AnimatePresence, transform } from "framer-motion";
 import type { AppProps } from "next/app";
-import PageTransitionWrapper from "../components/page-transition-wrapper";
 import GlobalStyles from "../styles/global";
 import Header from "../components/header";
 import Announcement from "../components/announcement";
 import CartButton from "../components/cart/cart-button";
 import { deviceIsBrowser } from "../lib/helpers";
+import { default as NextImage } from "next/image";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, SetLoading] = useState(false);
@@ -23,7 +26,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       // Bail if we're just changing URL parameters
       if (shallow) return;
 
-      // Otherwise, start loading
       SetLoading(true);
     });
 
@@ -42,7 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Header />
       <CartButton />
       <Announcement />
-      <PageTransitionWrapper>
+      <PageTransitionWrapper loading={loading}>
         <Component {...pageProps} />
       </PageTransitionWrapper>
     </>
@@ -50,3 +52,94 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;
+
+type Props = {
+  children: React.ReactNode;
+  loading: boolean;
+};
+
+const PageTransitionWrapper = ({ children, loading }: Props) => {
+  const router = useRouter();
+
+  const variants = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+      },
+    },
+    exit: {
+      opacity: 0,
+    },
+  };
+
+  return (
+    <AnimatePresence exitBeforeEnter>
+      {loading && (
+        <ImageWrapper
+          initial={{
+            opacity: 0,
+            x: "-100%",
+            y: "-50%",
+          }}
+          animate={{
+            opacity: 1,
+            x: "-50%",
+            y: "-50%",
+            transition: {
+              opacity: { duration: 0.1 },
+            },
+          }}
+        >
+          <NextImage
+            src="/images/otter-cheeks.jpeg"
+            alt="Something"
+            layout="fill"
+            objectFit="cover"
+          />
+        </ImageWrapper>
+      )}
+      {!loading && (
+        <StyledMotionDiv
+          key={router.pathname}
+          variants={variants}
+          initial="initial"
+          exit="exit"
+          animate="animate"
+        >
+          {children}
+        </StyledMotionDiv>
+      )}
+    </AnimatePresence>
+  );
+};
+
+const StyledMotionDiv = styled(motion.div)`
+  height: 100%;
+  width: 100%;
+`;
+const ImageWrapper = styled(motion.div)`
+  height: 300px;
+  width: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  animation: IAmDeeCaptunNow 1s infinite;
+
+  @keyframes IAmDeeCaptunNow {
+    0% {
+      filter: invert(1);
+    }
+    50% {
+      filter: invert(0);
+    }
+    100% {
+      filter: invert(1);
+    }
+  }
+`;
