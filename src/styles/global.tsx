@@ -32,6 +32,7 @@ const GlobalStyles = () => {
       body > div:first-of-type {
         height: 100%;
       }
+
       html {
         background: white;
         font-family: var(--font-family-primary);
@@ -45,7 +46,13 @@ const GlobalStyles = () => {
         @media screen and (min-width: 1550px) {
           font-size: 13px;
         }
+
+        &.is-loading,
+        &.is-loading * {
+          cursor: wait !important;
+        }
       }
+
       * {
         box-sizing: border-box;
       }
