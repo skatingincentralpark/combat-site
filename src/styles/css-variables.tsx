@@ -12,7 +12,7 @@ const cssVariables = css`
     --green-3: #216f2e;
     --yellow-1: #fce200;
     --yellow-2: #eecb15;
-    --yellow-3: #faff5ae4;
+    --yellow-3: #faff5a;
     --yellow-4: #f6ff00;
     --piss-1: #deff00;
     --olive-1: #564f0a;
@@ -25,8 +25,8 @@ const cssVariables = css`
     --font-size-l: 1.2rem;
     --font-size-xl: 1.4rem;
     // Font Family
-    --font-family-primary: Helvetica, -apple-system, Arial, "Helvetica Neue",
-      sans-serif;
+    --font-family-primary: Helvetica, -apple-system, Arial, sans-serif,
+      Courier New;
     // Gap
     --gap-4xs: 0.25rem;
     --gap-3xs: 0.5rem;
