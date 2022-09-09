@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import Link from "./link";
 import { useRouter } from "next/router";
 import CombatLogo from "./combat-logo";
@@ -186,7 +186,7 @@ const HeaderToggle = styled.button`
     background-color: var(--yellow-2);
   }
 `;
-const HeaderBackButton = styled(motion.button)`
+const HeaderBackButton = styled(m.button)`
   --back-button-width: 10rem;
   width: var(--back-button-width);
   height: 100%;
@@ -196,7 +196,7 @@ const HeaderBackButton = styled(motion.button)`
 
   background-color: var(--yellow-1);
 `;
-const HeaderMenuWrapper = styled(motion.div)`
+const HeaderMenuWrapper = styled(m.div)`
   position: fixed;
   top: 0;
   left: 0;
@@ -264,7 +264,7 @@ const NavLink = ({ children }: { children: React.ReactNode }) => {
   return <StyledNavLink variants={childVariants}>{children}</StyledNavLink>;
 };
 
-const StyledNavLink = styled(motion.div)`
+const StyledNavLink = styled(m.div)`
   border-bottom: 1px solid var(--gray-3);
   background-color: var(--nav-link-bg-color);
   color: var(--nav-link-color);

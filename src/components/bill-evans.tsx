@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { motion, AnimatePresence } from "framer-motion";
 
 const BillEvans = () => {
   return (
@@ -68,7 +67,6 @@ const BillEvans = () => {
           d="M605.54,167.28c-2.18,16.5-10.71,34.1-2.21,50.9,5.48,14.88-22.58,18.96-32.35,14.64-37.33-28.86-158.36,30.94-157.07-36.48,8-21.85-10.35-41.92-9.09-64.51,21.73-32.74,77.41-36.23,114.66-31.91,70.92,3.48,61.2-33.2,86.07,67.35Zm-124.14-67.22c-34.4,.78-86.22,31.77-55.77,69.39,3.37,3.13,11.79,10.88,6.38,14.92-6.35,9.45-19.32,24.41-5.74,33.59,10.01,10.54,22.95-2.44,34.64,1.75,23.57,12.73,51.03,2.07,76.39,2.92,21.65-4.04,39.77,20.54,61.42,5.67,9.61-4.73-1.4-16.72-1.22-24.47,4.08-37.88,6.32-56.66-12.45-93.79-12.38-18.88-76.17,.79-103.64-9.99Z"
         />
       </svg>
-      <ColorStrips />
       <svg
         id="Content"
         xmlns="http://www.w3.org/2000/svg"
@@ -108,38 +106,5 @@ const StyledWrapper = styled.div`
     top: 0;
     right: 0;
     height: 100%;
-  }
-`;
-
-const ColorStrips = () => {
-  return (
-    <AnimatePresence>
-      <StyledColorStrips>
-        <motion.div />
-        <motion.div />
-        <motion.div />
-      </StyledColorStrips>
-    </AnimatePresence>
-  );
-};
-
-const StyledColorStrips = styled(motion.div)`
-  position: absolute;
-  top: 50%;
-  right: 0;
-  width: 100%;
-
-  & > * {
-    min-height: 1rem;
-    width: 100%;
-  }
-  & > *:nth-of-type(1) {
-    background-color: #2570b2;
-  }
-  & > *:nth-of-type(2) {
-    background-color: #e72024;
-  }
-  & > *:nth-of-type(3) {
-    background-color: #ebc815;
   }
 `;

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Router from "next/router";
 import styled from "@emotion/styled";
-import { motion, AnimatePresence, isBrowser } from "framer-motion";
+import { LazyMotion, domAnimation, AnimatePresence, m } from "framer-motion";
 import type { AppProps } from "next/app";
 import GlobalStyles from "../styles/global";
 import Header from "../components/header";
@@ -15,7 +15,7 @@ import { pageTransitionSpeed } from "../lib/animate";
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, SetLoading] = useState(false);
 
-  if (isBrowser) {
+  if (deviceIsBrowser) {
     console.log(`Greetings, Traveller 🦧🌠`);
     console.log(`🐡 https://www.nakedlunch.studio/about 🐡`);
   }
@@ -47,12 +47,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalStyles />
-      <Header />
-      <CartButton />
-      <Announcement />
-      <PageTransitionWrapper loading={loading}>
-        <Component {...pageProps} />
-      </PageTransitionWrapper>
+      <LazyMotion features={domAnimation}>
+        <Header />
+        <CartButton />
+        <Announcement />
+        <PageTransitionWrapper loading={loading}>
+          <Component {...pageProps} />
+        </PageTransitionWrapper>
+      </LazyMotion>
     </>
   );
 }
@@ -79,6 +81,9 @@ const PageTransitionWrapper = ({ children, loading }: Props) => {
     },
     exit: {
       opacity: 0,
+      transition: {
+        duration: 0.4,
+      },
     },
   };
 
@@ -131,11 +136,11 @@ const PageTransitionWrapper = ({ children, loading }: Props) => {
   );
 };
 
-const StyledMotionDiv = styled(motion.div)`
+const StyledMotionDiv = styled(m.div)`
   height: 100%;
   width: 100%;
 `;
-const ImageWrapper = styled(motion.div)`
+const ImageWrapper = styled(m.div)`
   height: 300px;
   width: 300px;
   position: fixed;
