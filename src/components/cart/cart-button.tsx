@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { StyledButton } from "../shared-styles/styled-button";
 import CartModal from "./cart-modal";
 
@@ -23,7 +23,7 @@ const CartButton = () => {
 
 export default CartButton;
 
-const CartButtonWrapper = styled(motion.div)`
+const CartButtonWrapper = styled.div`
   position: fixed;
   z-index: 9;
   top: var(--gap-s);

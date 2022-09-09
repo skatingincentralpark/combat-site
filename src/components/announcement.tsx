@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import SlideUpModal from "./slide-up-modal";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const Announcement = () => {
   const announcement = {
@@ -28,7 +28,7 @@ const Announcement = () => {
   );
 };
 
-const AnnouncementInner = styled(motion.div)`
+const AnnouncementInner = styled(m.div)`
   padding: var(--gap-xs) var(--gap-m);
   text-align: left;
   display: flex;

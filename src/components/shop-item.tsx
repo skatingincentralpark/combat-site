@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import ShopCta from "../components/shop-cta";
 import productImage from "../../public/images/Bill2.png";
@@ -51,7 +50,7 @@ const ShopItem = ({ sizes }: Props) => {
 
 export default ShopItem;
 
-const PageWrapper = styled(motion.div)`
+const PageWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -63,7 +62,7 @@ const PageWrapper = styled(motion.div)`
     padding-bottom: var(--gap-m);
   }
 `;
-const InfoWrapper = styled(motion.div)`
+const InfoWrapper = styled.div`
   text-align: center;
   margin: 0 var(--gap-m);
 

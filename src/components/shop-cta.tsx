@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import RadioButton from "./radio-button";
 import { StyledButton } from "./shared-styles/styled-button";
 
@@ -46,7 +46,7 @@ const ShopCta = ({ sizes, selectedSize, setSelectedSize }: Props) => {
 
 export default ShopCta;
 
-const ShopCtaWrapper = styled(motion.div)`
+const ShopCtaWrapper = styled(m.div)`
   position: fixed;
   bottom: 0;
   left: 0;

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 type Props = {
   colors: string[];
@@ -56,12 +56,12 @@ type ColorProps = {
   color: string;
 };
 
-const ColorBlockWrapper = styled(motion.div)`
+const ColorBlockWrapper = styled(m.div)`
   width: 100%;
   height: 70vh;
   display: flex;
 `;
-const ColorBlock = styled(motion.div)<ColorProps>`
+const ColorBlock = styled(m.div)<ColorProps>`
   background-color: ${({ color }) => color && color};
   width: 50px;
   height: 100%;

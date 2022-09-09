@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import styled from "@emotion/styled";
 import useEmblaCarousel from "embla-carousel-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { LookbookType } from "../../types/lookbookTypes";
 import { CarouselSlide } from "./carousel-slide";
 
@@ -70,11 +70,11 @@ export default Carousel;
 const Embla = styled.div`
   padding: var(--gap-xs); // creates the white border effect
 `;
-const EmblaViewPort = styled(motion.div)`
+const EmblaViewPort = styled.div`
   overflow: hidden;
   padding-top: var(--gap-l); // creates space for the slide text
 `;
-const EmblaContainer = styled(motion.div)`
+const EmblaContainer = styled(m.div)`
   display: flex;
   user-select: none;
   height: 50vh;

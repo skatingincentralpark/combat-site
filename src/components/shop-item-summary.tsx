@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { motion } from "framer-motion";
 import productImage from "../../public/images/Bill2.png";
 
 type Props = {
@@ -51,7 +50,7 @@ const ShopItemSummary = ({ product }: Props) => {
 
 export default ShopItemSummary;
 
-const ShopItemWrapper = styled(motion.div)`
+const ShopItemWrapper = styled.div`
   width: 100%;
   height: fit-content;
 

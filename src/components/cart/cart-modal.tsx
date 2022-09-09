@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import styled from "@emotion/styled";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Accordion from "../accordion/accordion";
 import CartItem from "./cart-item";
 import SlideUpModal from "../slide-up-modal";
@@ -70,18 +70,6 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
 
   return (
     <CartModalWrapper
-      // variants={{
-      //   open: {
-      //     opacity: 1,
-      //     height: "auto",
-      //     transition: { duration: 1.4, ease: [0.04, 0.62, 0.23, 0.98] },
-      //   },
-      //   closed: {
-      //     opacity: 1,
-      //     height: 0,
-      //     transition: { duration: 1.4, ease: [0.04, 0.62, 0.23, 0.98] },
-      //   },
-      // }}
       variants={{
         open: {
           opacity: 1,
@@ -128,7 +116,7 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
 
 export default CartModal;
 
-const CartModalWrapper = styled(motion.div)`
+const CartModalWrapper = styled(m.div)`
   position: fixed;
   z-index: 8;
   top: 0;

@@ -1,6 +1,5 @@
 import Image from "next/future/image";
 import styled from "@emotion/styled";
-import { motion } from "framer-motion";
 
 export const CarouselSlide = ({ image }: ImageType) => {
   const { aspectRatio, height, lqip, palette, width, url, caption } = image;
@@ -19,7 +18,7 @@ export const CarouselSlide = ({ image }: ImageType) => {
   );
 };
 
-const EmblaSlide = styled(motion.div)`
+const EmblaSlide = styled.div`
   transition: min-width 1s ease;
   cursor: grab;
   margin-right: var(--gap-xs); // gap between slides

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styled from "@emotion/styled";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { PortableText } from "@portabletext/react";
 import { NewsItemType } from "../types/newsTypes";
 
@@ -62,7 +62,7 @@ const NewsItem = ({ newsItem }: Props) => {
 
 export default NewsItem;
 
-const NewsItemWrapper = styled(motion.div)`
+const NewsItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: var(--gap-l);
@@ -71,7 +71,7 @@ const NewsItemWrapper = styled(motion.div)`
     flex-direction: row;
   }
 `;
-const NewsItemImageWrapper = styled(motion.div)`
+const NewsItemImageWrapper = styled(m.div)`
   margin-bottom: var(--gap-m);
   border: 1px solid #c3c48d;
   aspect-ratio: 2 / 3;

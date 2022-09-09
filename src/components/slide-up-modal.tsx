@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 type Props = {
   isClosed: boolean;
@@ -60,7 +60,7 @@ type StyledProps = {
   displaydesktop?: string;
 };
 
-const SlideUpModalWrapper = styled(motion.div)<StyledProps>`
+const SlideUpModalWrapper = styled(m.div)<StyledProps>`
   width: 100%;
   position: fixed;
   bottom: 0;

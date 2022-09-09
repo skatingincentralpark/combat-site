@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 type Props = {
   children: React.ReactNode;
@@ -42,7 +42,7 @@ const PageTransitionWrapper = ({ children }: Props) => {
 
 export default PageTransitionWrapper;
 
-const StyledMotionDiv = styled(motion.div)`
+const StyledMotionDiv = styled(m.div)`
   height: 100%;
   width: 100%;
 `;

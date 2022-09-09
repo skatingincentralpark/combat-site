@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { motion, AnimatePresence } from "framer-motion";
+import { m } from "framer-motion";
 
 type Props = {
   children: React.ReactNode;
@@ -34,7 +34,7 @@ const AccordionBodyItem = ({ children }: Props) => {
 
 export default AccordionBodyItem;
 
-const AccordionBodyItemWrapper = styled(motion.div)`
+const AccordionBodyItemWrapper = styled(m.div)`
   overflow: hidden;
 `;
 const AccordionBodyItemWrapperInner = styled.div`

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import AccordionBodyItem from "./accordion-body-item";
 
 type Props = {
@@ -49,7 +49,7 @@ type ActiveProp = {
   active: boolean;
 };
 
-const AccordionWrapper = styled(motion.div)`
+const AccordionWrapper = styled.div`
   border-top: 0.5px solid var(--olive-1);
   border-bottom: 0.5px solid var(--olive-1);
 
