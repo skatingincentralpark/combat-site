@@ -8,18 +8,6 @@ import { default as NextImage } from "next/image";
 import CartCta from "./cart-cta";
 import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 
-const variants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-  },
-  exit: {
-    opacity: 0,
-  },
-};
-
 const accordionOptions = [
   {
     label: "Shipping Policy",
@@ -74,11 +62,13 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
         open: {
           opacity: 1,
           y: 0,
+          overflow: "scroll",
           transition: { duration: 1.4, ease: [0.14, 0.62, 0.23, 0.98] },
         },
         closed: {
           opacity: 1,
           y: "100%",
+          overflow: "hidden",
           transition: { duration: 1.4, ease: [0.04, 0.62, 0.23, 0.98] },
         },
       }}
