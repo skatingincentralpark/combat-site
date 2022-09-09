@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Router from "next/router";
 import styled from "@emotion/styled";
-import { motion, AnimatePresence, transform } from "framer-motion";
+import { motion, AnimatePresence, isBrowser } from "framer-motion";
 import type { AppProps } from "next/app";
 import GlobalStyles from "../styles/global";
 import Header from "../components/header";
@@ -14,6 +14,11 @@ import { pageTransitionSpeed } from "../lib/animate";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, SetLoading] = useState(false);
+
+  if (isBrowser) {
+    console.log(`Greetings, Traveller 🦧🌠`);
+    console.log(`🐡 https://www.nakedlunch.studio/about 🐡`);
+  }
 
   // Trigger our loading class
   useEffect(() => {
