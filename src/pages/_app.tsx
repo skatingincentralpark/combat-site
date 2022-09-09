@@ -10,6 +10,7 @@ import Announcement from "../components/announcement";
 import CartButton from "../components/cart/cart-button";
 import { deviceIsBrowser } from "../lib/helpers";
 import { default as NextImage } from "next/image";
+import { pageTransitionSpeed } from "../lib/animate";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, SetLoading] = useState(false);
@@ -30,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     });
 
     Router.events.on("routeChangeComplete", () => {
-      setTimeout(() => SetLoading(false), 300);
+      setTimeout(() => SetLoading(false), pageTransitionSpeed);
     });
 
     Router.events.on("routeChangeError", () => {
@@ -82,7 +83,7 @@ const PageTransitionWrapper = ({ children, loading }: Props) => {
         <ImageWrapper
           initial={{
             opacity: 0,
-            x: "-100%",
+            x: "-200%",
             y: "-50%",
           }}
           animate={{
@@ -90,7 +91,15 @@ const PageTransitionWrapper = ({ children, loading }: Props) => {
             x: "-50%",
             y: "-50%",
             transition: {
-              opacity: { duration: 0.1 },
+              opacity: { duration: pageTransitionSpeed / 1000 },
+            },
+          }}
+          exit={{
+            opacity: 0,
+            x: "200%",
+            y: "-50%",
+            transition: {
+              opacity: { duration: 0.2 },
             },
           }}
         >
@@ -133,13 +142,13 @@ const ImageWrapper = styled(motion.div)`
 
   @keyframes IAmDeeCaptunNow {
     0% {
-      filter: invert(1);
-    }
-    50% {
       filter: invert(0);
     }
-    100% {
+    50% {
       filter: invert(1);
+    }
+    100% {
+      filter: invert(0);
     }
   }
 `;
