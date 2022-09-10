@@ -63,9 +63,7 @@ const ShopItemWrapper = styled.div`
   border: 1px solid var(--gray-2);
   border-radius: 1rem;
 
-  transform: rotate(0deg);
-  transition: width 0.5s ease, transform 0.15s ease, border 0.1s,
-    box-shadow 0.25s ease;
+  transition: transform 0.15s ease, border 0.1s, box-shadow 0.25s ease;
 
   @media screen and (min-width: 700px) {
     width: calc(50% - 3rem);

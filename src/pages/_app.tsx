@@ -11,13 +11,13 @@ import { deviceIsBrowser } from "../lib/helpers";
 import { default as NextImage } from "next/image";
 import { pageTransitionSpeed } from "../lib/animate";
 
+if (deviceIsBrowser) {
+  console.log(`Greetings, Traveller 🦧`);
+  console.log(`https://www.nakedlunch.studio/about`);
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, SetLoading] = useState(false);
-
-  if (deviceIsBrowser) {
-    console.log(`Greetings, Traveller 🦧🌠`);
-    console.log(`🐡 https://www.nakedlunch.studio/about 🐡`);
-  }
 
   // Trigger our loading class
   useEffect(() => {
