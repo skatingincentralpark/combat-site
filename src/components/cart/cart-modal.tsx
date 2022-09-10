@@ -60,19 +60,17 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
     <CartModalWrapper
       variants={{
         open: {
-          // opacity: 1,
+          opacity: 1,
           // y: 0,
           height: "100%",
-          // overflow: "scroll",
-          transition: { duration: 1, ease: [0.14, 0.62, 0.23, 0.98] },
+          transition: { duration: 0.7, ease: [0.14, 0.62, 0.23, 0.98] },
         },
         closed: {
-          // opacity: 0,
+          opacity: 0,
           // y: "100%",
           height: 0,
-          // overflow: "hidden",
           transition: {
-            duration: 1,
+            duration: 0.7,
             ease: [0.04, 0.62, 0.23, 0.98],
             when: "afterChildren",
             staggerDirection: -1,
