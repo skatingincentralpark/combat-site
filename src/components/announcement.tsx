@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import SlideUpModal from "./slide-up-modal";
-import { m } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 const Announcement = () => {
   const announcement = {

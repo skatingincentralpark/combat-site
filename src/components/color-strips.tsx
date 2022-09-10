@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { m, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 type Props = {
   colors: string[];
@@ -28,25 +29,32 @@ const ColorStrips = ({ colors }: Props) => {
     show: { opacity: 1 },
   };
 
+  const [open, setOpen] = useState(false);
+
   return (
-    <AnimatePresence>
-      <ColorBlockWrapper
-        variants={parentVariants}
-        initial="hidden"
-        animate="show"
-        exit="hidden"
-      >
-        {colors.map((color, i) => (
-          <ColorBlock variants={childVariants} color={color} key={i} />
-        ))}
-        {colors.map((color, i) => (
-          <ColorBlock variants={childVariants} color={color} key={i} />
-        ))}
-        {colors.map((color, i) => (
-          <ColorBlock variants={childVariants} color={color} key={i} />
-        ))}
-      </ColorBlockWrapper>
-    </AnimatePresence>
+    <>
+      <button onClick={() => setOpen((x) => !x)}>click</button>
+      <AnimatePresence>
+        {open && (
+          <ColorBlockWrapper
+            variants={parentVariants}
+            initial="hidden"
+            animate="show"
+            exit="hidden"
+          >
+            {colors.map((color, i) => (
+              <ColorBlock variants={childVariants} color={color} key={i} />
+            ))}
+            {colors.map((color, i) => (
+              <ColorBlock variants={childVariants} color={color} key={i} />
+            ))}
+            {colors.map((color, i) => (
+              <ColorBlock variants={childVariants} color={color} key={i} />
+            ))}
+          </ColorBlockWrapper>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

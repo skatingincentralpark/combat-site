@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState, useLayoutEffect } from "react";
+import { useRef } from "react";
 import styled from "@emotion/styled";
-import { m } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import Accordion from "../accordion/accordion";
 import CartItem from "./cart-item";
-import SlideUpModal from "../slide-up-modal";
 import { default as NextImage } from "next/image";
 import CartCta from "./cart-cta";
-import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import useLockBodyScroll from "../../hooks/useLockBodyScroll";
 
 const accordionOptions = [
   {
@@ -23,65 +23,55 @@ const accordionOptions = [
   },
 ];
 
-const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
-  const myRef = useRef<HTMLDivElement>(null);
-  const [eleVisible, setEleVisible] = useState<boolean>(true);
+const CartModal = () => {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const entry = useIntersectionObserver(ref, {});
+  const isVisible = !!entry?.isIntersecting;
 
-  useEffect(() => {
-    if (!cartOpen) return;
-    if (!myRef.current) return;
+  const refScrollPersist = useRef<HTMLDivElement>(null);
+  useLockBodyScroll(refScrollPersist);
 
-    const observer = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      setEleVisible(!entry.isIntersecting);
-    });
+  const slideUpVariant = {
+    initial: {
+      opacity: 0,
+      y: 100,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: "easeOut",
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: 100,
+      transition: { duration: 0.7, ease: "easeIn" },
+    },
+  };
 
-    observer.observe(myRef.current);
-  }, [cartOpen]);
-
-  const scrollPersistRef = useRef<HTMLDivElement>(null);
-
-  // Fix for mobile Safari scrolling to top - https://github.com/willmcpo/body-scroll-lock/issues/237
-  useLayoutEffect(() => {
-    // Disabling scroll works with temporary overwrite
-    const storedRequestAnimationFrame = window.requestAnimationFrame;
-
-    window.requestAnimationFrame = () => 42;
-    if (!scrollPersistRef.current) return;
-    disableBodyScroll(scrollPersistRef.current);
-    window.requestAnimationFrame = storedRequestAnimationFrame;
-
-    return () => {
-      clearAllBodyScrollLocks();
-    };
-  }, []);
+  const parentVariants = {
+    open: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: [0.14, 0.62, 0.23, 0.98] },
+    },
+    closed: {
+      opacity: 0,
+      y: "100%",
+      transition: { duration: 0.7, ease: [0.04, 0.62, 0.23, 0.98] },
+    },
+  };
 
   return (
     <CartModalWrapper
-      variants={{
-        open: {
-          opacity: 1,
-          // y: 0,
-          height: "100%",
-          transition: { duration: 0.7, ease: [0.14, 0.62, 0.23, 0.98] },
-        },
-        closed: {
-          opacity: 0,
-          // y: "100%",
-          height: 0,
-          transition: {
-            duration: 0.7,
-            ease: [0.04, 0.62, 0.23, 0.98],
-            when: "afterChildren",
-            staggerDirection: -1,
-          },
-        },
-      }}
+      variants={parentVariants}
       initial="closed"
-      exit="closed"
       animate="open"
+      exit="closed"
     >
-      <CartModalInner ref={scrollPersistRef}>
+      <CartModalInner ref={refScrollPersist}>
         <CartFunWrapper>
           <NextImage
             src="/images/otter-cheeks.jpeg"
@@ -96,15 +86,15 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
           <CartItem tee={3} />
         </CartItemWrapper>
         <Accordion options={accordionOptions} />
-        <CartCta ref={myRef} />
+        <CartCta ref={ref} />
       </CartModalInner>
-      <SlideUpModal
-        isClosed={!eleVisible}
-        padding="0 var(--gap-m)"
-        displaydesktop="none"
-      >
-        <CartCta />
-      </SlideUpModal>
+      <AnimatePresence>
+        {!isVisible && (
+          <TempSlideUpModal {...slideUpVariant}>
+            <CartCta />
+          </TempSlideUpModal>
+        )}
+      </AnimatePresence>
     </CartModalWrapper>
   );
 };
@@ -161,5 +151,17 @@ const CartFunWrapper = styled.div`
   @media screen and (min-width: 650px) {
     margin-right: var(--gap-m);
     aspect-ratio: 1 / 1;
+  }
+`;
+const TempSlideUpModal = styled(m.div)`
+  width: 100%;
+
+  background-color: var(--piss-1);
+  position: fixed;
+  bottom: 0;
+  padding: 0 var(--gap-m);
+
+  @media screen and (min-width: 650px) {
+    display: none;
   }
 `;

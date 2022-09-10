@@ -20,9 +20,7 @@ const Cart = () => {
           </CartButtonWrapper>
         )}
       </AnimatePresence>
-      <AnimatePresence>
-        {cartOpen && <CartModal cartOpen={cartOpen} />}
-      </AnimatePresence>
+      <AnimatePresence>{cartOpen && <CartModal />}</AnimatePresence>
     </>
   );
 };

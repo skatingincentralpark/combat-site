@@ -41,8 +41,9 @@ const Header = () => {
             <HeaderBackButton
               onClick={navigateToShop}
               {...headerButtonVariants()}
-              children="back"
-            />
+            >
+              back
+            </HeaderBackButton>
           )}
         </AnimatePresence>
 

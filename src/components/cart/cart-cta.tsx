@@ -4,7 +4,7 @@ import { StyledButton } from "../shared-styles/styled-button";
 
 const CartCta = React.forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <CartCtaInner ref={ref}>
+    <CartCtaInner ref={ref || null}>
       <CartDescriptionItem>
         <span>Subtotal</span>
         <span>$60</span>
@@ -46,3 +46,5 @@ const CartDescriptionItem = styled.div`
     margin-right: var(--gap-s);
   }
 `;
+
+CartCta.displayName = "Input";
