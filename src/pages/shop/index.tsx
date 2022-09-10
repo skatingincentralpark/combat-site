@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { motion } from "framer-motion";
 import ShopItemSummary from "../../components/shop-item-summary";
 
 const ShopPage = () => {
@@ -53,7 +52,7 @@ const ShopPage = () => {
 
 export default ShopPage;
 
-const PageWrapper = styled(motion.div)`
+const PageWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;

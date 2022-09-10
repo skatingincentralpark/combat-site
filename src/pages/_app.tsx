@@ -7,7 +7,6 @@ import type { AppProps } from "next/app";
 import GlobalStyles from "../styles/global";
 import Header from "../components/header";
 import Announcement from "../components/announcement";
-import CartButton from "../components/cart/cart-button";
 import { deviceIsBrowser } from "../lib/helpers";
 import { default as NextImage } from "next/image";
 import { pageTransitionSpeed } from "../lib/animate";
@@ -49,7 +48,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyles />
       <LazyMotion features={domAnimation}>
         <Header />
-        <CartButton />
         <Announcement />
         <PageTransitionWrapper loading={loading}>
           <Component {...pageProps} />

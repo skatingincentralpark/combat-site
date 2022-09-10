@@ -1,9 +1,10 @@
+import React from "react";
 import styled from "@emotion/styled";
 import { StyledButton } from "../shared-styles/styled-button";
 
-const CartCta = () => {
+const CartCta = React.forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <CartCtaInner>
+    <CartCtaInner ref={ref}>
       <CartDescriptionItem>
         <span>Subtotal</span>
         <span>$60</span>
@@ -19,7 +20,7 @@ const CartCta = () => {
       <StyledButton>Checkout</StyledButton>
     </CartCtaInner>
   );
-};
+});
 
 export default CartCta;
 

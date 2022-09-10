@@ -4,6 +4,8 @@ import { m, AnimatePresence } from "framer-motion";
 import Link from "./link";
 import { useRouter } from "next/router";
 import CombatLogo from "./combat-logo";
+import Cart from "./cart/cart";
+import { headerButtonVariants, headerVariants } from "../lib/animate";
 
 // Header Functionality:
 //    - Change background-color depending on page (take prop through a layout component / regex)
@@ -31,39 +33,6 @@ const Header = () => {
   };
   const navigateToShop = () => router.push("/shop");
 
-  const parentVariants = {
-    hidden: {
-      y: "-100%",
-
-      transition: {
-        ease: "easeIn",
-      },
-    },
-    show: {
-      y: 0,
-
-      transition: {
-        ease: "easeOut",
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const variantsBackButton = {
-    initial: {
-      width: 0,
-      backgroundColor: "#d9ff00",
-    },
-    animate: {
-      width: "var(--back-button-width)",
-      backgroundColor: "var(--yellow-1)",
-    },
-    exit: {
-      width: 0,
-      backgroundColor: "#fff",
-    },
-  };
-
   return (
     <>
       <HeaderWrapper>
@@ -71,83 +40,82 @@ const Header = () => {
           {isShopPath && !navOpen && (
             <HeaderBackButton
               onClick={navigateToShop}
-              variants={variantsBackButton}
-              initial="initial"
-              exit="exit"
-              animate="animate"
-            >
-              back
-            </HeaderBackButton>
+              {...headerButtonVariants()}
+              children="back"
+            />
           )}
         </AnimatePresence>
+
         <HeaderToggle onClick={toggleNav}>
           <CombatLogo />
         </HeaderToggle>
+
+        <Cart />
       </HeaderWrapper>
+
       <AnimatePresence>
-        {navOpen && (
-          <HeaderMenuWrapper
-            variants={parentVariants}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-          >
-            <HeaderMenuInner>
-              <HeaderMenuNav>
-                <NavLink key={1}>
-                  <Link href="/" onClick={closeNav}>
-                    <StyledDot />
-                    Home
-                  </Link>
-                </NavLink>
-                <NavLink key={2}>
-                  <Link href="/shop" onClick={closeNav}>
-                    <StyledDot />
-                    Shop
-                  </Link>
-                </NavLink>
-                <NavLink key={3}>
-                  <Link href="/news" onClick={closeNav}>
-                    <StyledDot />
-                    News
-                  </Link>
-                </NavLink>
-                <NavLink key={4}>
-                  <Link href="/lookbooks" onClick={closeNav}>
-                    <StyledDot />
-                    Lookbooks
-                  </Link>
-                </NavLink>
-              </HeaderMenuNav>
-              <HeaderMenuText>
-                <p>
-                  From the essays of Emerson, to the stories of the Beat, these
-                  vanguards of individualism, freedom and improvisation give us
-                  comfort and confidence to work towards these values - the
-                  values which we believe are key to living a fulfilling life.
-                </p>
-                <p>
-                  We are moved firstly by the lessons written, and finally, from
-                  the atmosphere created by their words.
-                </p>
-                <p>
-                  Recondo is a repository of ideas expressed through strong
-                  technical foundations in design and well made goods.
-                </p>
-                <p>
-                  At its core, Recondo constructs end-to-end experiences through
-                  garments, site design, and visual - auditory media.
-                </p>
-              </HeaderMenuText>
-            </HeaderMenuInner>
-          </HeaderMenuWrapper>
-        )}
+        {navOpen && <HeaderNav closeNav={closeNav} />}
       </AnimatePresence>
     </>
   );
 };
 
 export default Header;
+
+const HeaderNav = ({ closeNav }: { closeNav: () => void }) => {
+  return (
+    <HeaderMenuWrapper {...headerVariants()}>
+      <HeaderMenuInner>
+        <HeaderMenuNav>
+          <NavLink key={1}>
+            <Link href="/" onClick={closeNav}>
+              <StyledDot />
+              Home
+            </Link>
+          </NavLink>
+          <NavLink key={2}>
+            <Link href="/shop" onClick={closeNav}>
+              <StyledDot />
+              Shop
+            </Link>
+          </NavLink>
+          <NavLink key={3}>
+            <Link href="/news" onClick={closeNav}>
+              <StyledDot />
+              News
+            </Link>
+          </NavLink>
+          <NavLink key={4}>
+            <Link href="/lookbooks" onClick={closeNav}>
+              <StyledDot />
+              Lookbooks
+            </Link>
+          </NavLink>
+        </HeaderMenuNav>
+        <HeaderMenuText>
+          <p>
+            From the essays of Emerson, to the stories of the Beat, these
+            vanguards of individualism, freedom and improvisation give us
+            comfort and confidence to work towards these values - the values
+            which we believe are key to living a fulfilling life.
+          </p>
+          <p>
+            We are moved firstly by the lessons written, and finally, from the
+            atmosphere created by their words.
+          </p>
+          <p>
+            Recondo is a repository of ideas expressed through strong technical
+            foundations in design and well made goods.
+          </p>
+          <p>
+            At its core, Recondo constructs end-to-end experiences through
+            garments, site design, and visual - auditory media.
+          </p>
+        </HeaderMenuText>
+      </HeaderMenuInner>
+    </HeaderMenuWrapper>
+  );
+};
 
 const HeaderWrapper = styled.header`
   position: fixed;
@@ -193,8 +161,6 @@ const HeaderBackButton = styled(m.button)`
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
-
-  background-color: var(--yellow-1);
 `;
 const HeaderMenuWrapper = styled(m.div)`
   position: fixed;

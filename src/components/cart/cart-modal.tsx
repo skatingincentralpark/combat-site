@@ -33,7 +33,7 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
 
     const observer = new IntersectionObserver((entries) => {
       const entry = entries[0];
-      setEleVisible(entry.isIntersecting);
+      setEleVisible(!entry.isIntersecting);
     });
 
     observer.observe(myRef.current);
@@ -76,7 +76,6 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
             ease: [0.04, 0.62, 0.23, 0.98],
             when: "afterChildren",
             staggerDirection: -1,
-            staggerChildren: 0.02,
           },
         },
       }}
@@ -85,7 +84,7 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
       animate="open"
     >
       <CartModalInner ref={scrollPersistRef}>
-        <CartFunWrapper ref={myRef}>
+        <CartFunWrapper>
           <NextImage
             src="/images/otter-cheeks.jpeg"
             alt="Something"
@@ -99,7 +98,7 @@ const CartModal = ({ cartOpen }: { cartOpen: boolean }) => {
           <CartItem tee={3} />
         </CartItemWrapper>
         <Accordion options={accordionOptions} />
-        <CartCta />
+        <CartCta ref={myRef} />
       </CartModalInner>
       <SlideUpModal
         isClosed={!eleVisible}
