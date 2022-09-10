@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { m } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 type Props = {
   isClosed: boolean;
@@ -38,7 +38,7 @@ const SlideUpModal = ({
   };
 
   return (
-    <>
+    <AnimatePresence>
       {!isClosed && (
         <SlideUpModalWrapper
           variants={variants}
@@ -51,7 +51,7 @@ const SlideUpModal = ({
           {children}
         </SlideUpModalWrapper>
       )}
-    </>
+    </AnimatePresence>
   );
 };
 
