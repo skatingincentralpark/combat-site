@@ -20,7 +20,7 @@ const Accordion = ({ options }: Props) => {
           const active = activeItem === i;
           return (
             <AccordionListItem key={i} onClick={() => setActiveItem(i)}>
-              <AccordionListItemIndicator active={active} />
+              {/* <AccordionListItemIndicator active={active} /> */}
               {option.label}
             </AccordionListItem>
           );
@@ -61,18 +61,25 @@ const AccordionWrapper = styled.div`
 `;
 const AccordionList = styled.div`
   flex-shrink: 0;
+
+  @media screen and (min-width: 700px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
-const AccordionListItem = styled.div`
-  font-weight: 400;
+const AccordionListItem = styled.button`
+  font-weight: 600;
   cursor: pointer;
 
-  display: flex;
-  align-items: center;
+  margin-right: var(--gap-s);
+  text-align: left;
 
   background-color: var(--nav-link-bg-color);
   color: var(--nav-link-color);
 
-  padding: 0 var(--gap-s) 0 var(--gap-xxs);
+  @media screen and (min-width: 700px) {
+    padding: 0 var(--gap-s) 0 var(--gap-xxs);
+  }
 
   --dot-color: #ffffff0; // scoped to link so the dot can use it
 
