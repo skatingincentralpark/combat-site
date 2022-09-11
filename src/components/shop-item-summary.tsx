@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import productImage from "../../public/images/Bill2.png";
+import productImage from "../../public/images/tee-bill.png";
 
 type Props = {
   product: {

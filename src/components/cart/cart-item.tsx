@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import Image from "../image";
-import image1 from "../../../public/images/Bill2.png";
-import image2 from "../../../public/images/Viktor.png";
-import image3 from "../../../public/images/Laughing.png";
+import image1 from "../../../public/images/tee-bill.png";
+import image2 from "../../../public/images/tee-viktor.png";
+import image3 from "../../../public/images/tee-laughing.png";
 
 type Props = {
   tee: number;

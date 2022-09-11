@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import ShopCta from "../components/shop-cta";
-import productImage from "../../public/images/Bill2.png";
+import productImage from "../../public/images/tee-bill.png";
 
 type Props = {
   sizes: string[];
