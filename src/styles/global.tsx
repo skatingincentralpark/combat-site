@@ -37,7 +37,7 @@ const GlobalStyles = () => {
         background: white;
         font-family: var(--font-family-primary);
         font-size: 12px;
-        line-height: clamp(1.3em, 1.4em, 2em);
+        line-height: 1.4em;
         font-weight: 300;
         color: var(--black);
         overflow-y: scroll;

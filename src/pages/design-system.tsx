@@ -6,6 +6,7 @@ import {
   HeadingSm,
   Text,
   TextSm,
+  TextLg,
 } from "../components/shared-styles/typography";
 
 const DesignSystemPage = () => {
@@ -22,8 +23,35 @@ const DesignSystemPage = () => {
         </HeadingSm>
       </HeaderSection>
       <TextSection>
+        <TextLg paragraph>
+          <strong>TextLg:</strong> Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Commodi cumque quas repellat perspiciatis, facilis
+          totam optio odio veritatis debitis placeat dolorem ullam pariatur
+          explicabo nobis suscipit, dicta ex. Sunt, labore. Vel laudantium
+          voluptatum recusandae. Perferendis reiciendis id facere labore!
+          Repellendus, cum rerum ipsa debitis placeat, iste possimus aut aliquam
+          fugit quidem a consectetur dolore fuga commodi repudiandae doloribus
+          corporis animi. Nisi, itaque. Assumenda dolorum eveniet asperiores
+          fuga illum magnam! Pariatur aliquam, dicta ullam enim autem doloribus
+          minus? Excepturi, laborum est explicabo deleniti ullam aut aperiam
+          repellendus, vero quo illo tempore?
+        </TextLg>
+        <TextLg>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia
+          itaque ab in tempora iure fuga nam nesciunt quas aliquid aliquam amet
+          quam quod totam eveniet hic excepturi, incidunt laboriosam asperiores!
+          Officia accusantium facere omnis quis dignissimos consequuntur
+          corrupti veniam rem fuga. Corporis nisi magni in ut, provident natus
+          odit labore laborum quis esse molestiae repellat impedit nulla? Sunt,
+          id accusamus. Animi quos, repudiandae dolorum tenetur labore eaque
+          voluptas consequuntur vitae blanditiis laborum inventore temporibus
+          ratione laboriosam voluptatum modi ut saepe eveniet commodi enim
+          repellendus dignissimos quasi. Temporibus autem dolore dolorem!
+        </TextLg>
+      </TextSection>
+      <TextSection>
         <Text paragraph>
-          <strong>Body 1:</strong> Lorem ipsum dolor, sit amet consectetur
+          <strong>Text:</strong> Lorem ipsum dolor, sit amet consectetur
           adipisicing elit. Commodi cumque quas repellat perspiciatis, facilis
           totam optio odio veritatis debitis placeat dolorem ullam pariatur
           explicabo nobis suscipit, dicta ex. Sunt, labore. Vel laudantium
@@ -50,7 +78,7 @@ const DesignSystemPage = () => {
       </TextSection>
       <TextSection>
         <TextSm paragraph>
-          <strong>Body 2:</strong> Lorem ipsum dolor, sit amet consectetur
+          <strong>TextSm:</strong> Lorem ipsum dolor, sit amet consectetur
           adipisicing elit. Commodi cumque quas repellat perspiciatis, facilis
           totam optio odio veritatis debitis placeat dolorem ullam pariatur
           explicabo nobis suscipit, dicta ex. Sunt, labore. Vel laudantium
