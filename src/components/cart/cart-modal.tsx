@@ -25,11 +25,15 @@ const accordionOptions = [
 
 const CartModal = () => {
   const ref = useRef<HTMLDivElement | null>(null);
-  const entry = useIntersectionObserver(ref, {});
+  const refScrollable = useRef<HTMLDivElement>(null);
+
+  const entry = useIntersectionObserver(ref, {
+    root: refScrollable?.current,
+    rootMargin: "100px",
+  });
   const isVisible = !!entry?.isIntersecting;
 
-  const refScrollPersist = useRef<HTMLDivElement>(null);
-  useLockBodyScroll(refScrollPersist);
+  useLockBodyScroll(refScrollable);
 
   const slideUpVariant = {
     initial: {
@@ -40,14 +44,14 @@ const CartModal = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.7,
+        duration: 0.3,
         ease: "easeOut",
       },
     },
     exit: {
       opacity: 0,
       y: 100,
-      transition: { duration: 0.7, ease: "easeIn" },
+      transition: { duration: 0.3, ease: "easeIn" },
     },
   };
 
@@ -71,7 +75,7 @@ const CartModal = () => {
       animate="open"
       exit="closed"
     >
-      <CartModalInner ref={refScrollPersist}>
+      <CartModalInner ref={refScrollable}>
         <CartFunWrapper>
           <NextImage
             src="/images/otter-cheeks.jpeg"
