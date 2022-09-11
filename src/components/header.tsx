@@ -5,7 +5,7 @@ import Link from "./link";
 import { useRouter } from "next/router";
 import CombatLogo from "./combat-logo";
 import Cart from "./cart/cart";
-import { headerButtonVariants, headerVariants } from "../lib/animate";
+import { headerButtonVariants, headerVariants } from "@lib/animate";
 
 // Header Functionality:
 //    - Change background-color depending on page (take prop through a layout component / regex)

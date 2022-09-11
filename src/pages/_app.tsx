@@ -7,9 +7,9 @@ import type { AppProps } from "next/app";
 import GlobalStyles from "../styles/global";
 import Header from "../components/header";
 import Announcement from "../components/announcement";
-import { deviceIsBrowser } from "../lib/helpers";
+import { deviceIsBrowser } from "@lib/helpers";
+import { pageTransitionSpeed } from "@lib/animate";
 import { default as NextImage } from "next/image";
-import { pageTransitionSpeed } from "../lib/animate";
 
 if (deviceIsBrowser) {
   console.log(`Greetings, Traveller 🦧`);
