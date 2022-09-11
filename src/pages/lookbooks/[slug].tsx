@@ -2,7 +2,7 @@ import client from "../../../client";
 import { GetStaticProps, GetStaticPaths } from "next";
 import Carousel from "../../components/carousel/carousel";
 import { LookbookType } from "../../types/lookbookTypes";
-import { StyledPageWrapperCentered } from "../../components/shared-styles/styled-page-wrapper";
+import { StyledPageWrapperCentered } from "../../components/shared-styles/page-wrappers";
 import { LookbookDescription } from "../../components/lookbook-description";
 
 const LookbookPage = ({ lookbook }: LookbookType) => {

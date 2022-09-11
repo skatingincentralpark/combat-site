@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { StyledPageWrapper } from "../components/shared-styles/styled-page-wrapper";
-import { StyledButton } from "../components/shared-styles/styled-button";
+import { StyledPageWrapper } from "../components/shared-styles/page-wrappers";
+import { StyledButton } from "../components/shared-styles/buttons";
 import {
   Heading,
   HeadingSm,

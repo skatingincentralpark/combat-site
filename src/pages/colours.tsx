@@ -1,5 +1,5 @@
 import ColorStrips from "../components/color-strips";
-import { StyledPageWrapper } from "../components/shared-styles/styled-page-wrapper";
+import { StyledPageWrapper } from "../components/shared-styles/page-wrappers";
 
 const ColoursPage = () => {
   const chosenColors = [

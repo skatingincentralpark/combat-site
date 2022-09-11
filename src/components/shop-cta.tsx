@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { m } from "framer-motion";
 import RadioButton from "./radio-button";
-import { StyledButton } from "./shared-styles/styled-button";
+import { StyledButton } from "./shared-styles/buttons";
 
 type Props = {
   sizes: string[];

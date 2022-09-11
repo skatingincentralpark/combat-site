@@ -1,6 +1,6 @@
 import Link from "next/link";
 import client from "../../../client";
-import { StyledPageWrapperCentered } from "../../components/shared-styles/styled-page-wrapper";
+import { StyledPageWrapperCentered } from "../../components/shared-styles/page-wrappers";
 
 type Props = {
   slugs: string[];

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { StyledButton } from "../shared-styles/styled-button";
+import { StyledButton } from "../shared-styles/buttons";
 
 const CartCta = React.forwardRef<HTMLDivElement>((_, ref) => {
   return (
