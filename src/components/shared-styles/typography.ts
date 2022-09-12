@@ -75,7 +75,7 @@ const Text = styled.p<TextProps>`
 const TextSm = styled.p<TextProps>`
   font-size: 12px;
   line-height: 1.5em;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 
   margin-bottom: ${({ paragraph }) => paragraph && "1em"};
 

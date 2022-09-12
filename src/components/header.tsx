@@ -63,35 +63,28 @@ const Header = () => {
 
 export default Header;
 
+const navLinks = [
+  { href: "/", name: "Home" },
+  { href: "/shop", name: "Shop" },
+  { href: "/shop-2", name: "Shop POC" },
+  { href: "/design-system", name: "Design System" },
+  { href: "/news", name: "News" },
+  { href: "/lookbooks", name: "Lookbooks" },
+];
+
 const HeaderNav = ({ closeNav }: { closeNav: () => void }) => {
   return (
     <HeaderMenuWrapper {...headerVariants()}>
       <HeaderMenuInner>
         <HeaderMenuNav>
-          <NavLink key={1}>
-            <Link href="/" onClick={closeNav}>
-              <StyledDot />
-              Home
-            </Link>
-          </NavLink>
-          <NavLink key={2}>
-            <Link href="/shop" onClick={closeNav}>
-              <StyledDot />
-              Shop
-            </Link>
-          </NavLink>
-          <NavLink key={3}>
-            <Link href="/news" onClick={closeNav}>
-              <StyledDot />
-              News
-            </Link>
-          </NavLink>
-          <NavLink key={4}>
-            <Link href="/lookbooks" onClick={closeNav}>
-              <StyledDot />
-              Lookbooks
-            </Link>
-          </NavLink>
+          {navLinks.map((x, i) => (
+            <NavLink key={i}>
+              <Link href={x.href} onClick={closeNav}>
+                <StyledDot />
+                {x.name}
+              </Link>
+            </NavLink>
+          ))}
         </HeaderMenuNav>
         <HeaderMenuText>
           <p>

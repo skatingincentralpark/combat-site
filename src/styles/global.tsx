@@ -33,6 +33,10 @@ const GlobalStyles = () => {
         height: 100%;
       }
 
+      body {
+        min-height: 100%;
+      }
+
       html {
         background: white;
         font-family: var(--font-family-primary);
@@ -41,7 +45,7 @@ const GlobalStyles = () => {
         font-weight: 300;
         color: var(--black);
         overflow-y: scroll;
-        min-height: fit-content;
+        -webkit-font-smoothing: antialiased;
 
         @media screen and (min-width: 1550px) {
           font-size: 13px;
