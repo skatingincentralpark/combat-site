@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import ShopItemSummary from "../components/shop-item-summary";
 import { default as NextImage } from "next/image";
 import { HeadingSm, TextSm } from "components/shared-styles/typography";
 import { StyledPageWrapper } from "components/shared-styles/page-wrappers";
+import Link from "components/link";
 
 const products = [
   {
@@ -67,7 +67,13 @@ const ShopPage = () => {
       <ProductGroup>
         {products.map((product, i) => (
           <Product key={i}>
-            <NextImage src={product.image} layout="fill" objectFit="contain" />
+            <Link href="#">
+              <NextImage
+                src={product.image}
+                layout="fill"
+                objectFit="contain"
+              />
+            </Link>
           </Product>
         ))}
       </ProductGroup>
@@ -97,9 +103,8 @@ const ProductGroup = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 
-  padding: var(--gap-xxl) var(--gap-xl) 0 var(--gap-xl);
+  padding: var(--gap-m) var(--gap-xl) 0 var(--gap-xl);
   margin: auto;
-  max-width: clamp(50rem, 40rem + 40vw, 140rem);
 `;
 
 const Product = styled.div`
@@ -107,15 +112,29 @@ const Product = styled.div`
   margin: var(--gap-xs);
   width: calc(50% - var(--gap-xs) * 2);
   aspect-ratio: 1;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid transparent;
+  transition: border-color 100ms;
 
   @media screen and (min-width: 900px) {
     width: calc(25% - var(--gap-m) * 2);
     margin: var(--gap-m);
   }
+
+  &:hover {
+    @media screen and (min-width: 700px) {
+      border-color: magenta;
+    }
+  }
+
+  &:active {
+    border-color: red;
+  }
 `;
 
 const InfoCardGroup = styled.div`
-  padding: var(--gap-l) var(--gap-xl) var(--gap-xl) var(--gap-xl);
+  padding: var(--gap-m) var(--gap-xl) var(--gap-xl) var(--gap-xl);
   margin: auto;
 
   display: flex;
