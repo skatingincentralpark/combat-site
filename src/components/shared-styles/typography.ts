@@ -96,28 +96,4 @@ const TextSm = styled.p<TextProps>`
   }
 `;
 
-const TextLg = styled.p<TextProps>`
-  font-size: 16px;
-  line-height: 1.5em;
-  letter-spacing: 0.01em;
-
-  margin-bottom: ${({ paragraph }) => paragraph && "1em"};
-
-  @media screen and (min-width: 650px) {
-    &:hover {
-      background-color: lightcyan;
-    }
-
-    font-size: 18px;
-    font-size: clamp(1.34rem, 1.0619rem + 0.5134vw, 1.5rem);
-    line-height: 1.4em;
-  }
-
-  @media (min-width: 1024px) {
-    &:hover {
-      background-color: #eaacf1;
-    }
-  }
-`;
-
-export { Heading, HeadingSm, Text, TextSm, TextLg };
+export { Heading, HeadingSm, Text, TextSm };

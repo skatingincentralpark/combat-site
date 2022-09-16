@@ -94,7 +94,8 @@ const IntroText = styled.div`
   max-width: 70rem;
   margin: auto;
   text-align: center;
-  font-family: "Bitcount Mono Single Lt Circle";
+  font-family: "Bitcount Mono Single Lt Circle", "Courier New", Courier,
+    monospace;
   -webkit-font-smoothing: initial;
 `;
 const ProductGroup = styled.div`
