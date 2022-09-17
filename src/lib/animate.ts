@@ -21,22 +21,18 @@ const headerVariants = () => {
   return {
     initial: {
       y: "-100%",
-
       transition: {
         ease: "easeIn",
       },
     },
     animate: {
       y: 0,
-
       transition: {
         ease: "easeOut",
-        staggerChildren: 0.1,
       },
     },
     exit: {
       y: "-100%",
-
       transition: {
         ease: "easeIn",
       },
