@@ -43,7 +43,9 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
         </MenuImageMobile>
         <HeaderMenuText>
           {navText.map((x) => (
-            <TextSm paragraph>{x}</TextSm>
+            <TextSm paragraph key={x.slice(0, 8)}>
+              {x}
+            </TextSm>
           ))}
         </HeaderMenuText>
       </HeaderMenuInner>
