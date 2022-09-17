@@ -3,7 +3,7 @@ import { m } from "framer-motion";
 import styled from "@emotion/styled";
 import Link from "../link";
 import { headerVariants } from "@lib/animate";
-import { TextSm } from "components/shared-styles/typography";
+import { TextSm } from "@components/shared-styles/typography";
 
 const navLinks = [
   { href: "/", name: "Home" },

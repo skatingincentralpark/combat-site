@@ -15,7 +15,7 @@ function useLockBodyScroll(elementRef: RefObject<Element>) {
     return () => {
       clearAllBodyScrollLocks();
     };
-  }, []);
+  }, [elementRef]);
 }
 
 export default useLockBodyScroll;

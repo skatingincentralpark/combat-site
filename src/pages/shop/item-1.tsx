@@ -1,4 +1,4 @@
-import ShopItem from "../../components/shop-item";
+import ShopItem from "@components/shop-item";
 
 const ShopItemPage = () => {
   const sizes = ["s", "m", "l", "xl"];

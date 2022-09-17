@@ -1,6 +1,6 @@
-import NewsItem from "../../components/news-item";
+import NewsItem from "@components/news-item";
 import client from "../../../client";
-import { StyledPageWrapper } from "../../components/shared-styles/page-wrappers";
+import { StyledPageWrapper } from "@components/shared-styles/page-wrappers";
 import { NewsItemType } from "../../types/newsTypes";
 
 const NewsPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {

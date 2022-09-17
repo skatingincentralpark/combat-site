@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import ShopItemSummary from "../../components/shop-item-summary";
+import ShopItemSummary from "@components/shop-item-summary";
 
 const ShopPage = () => {
   const products = [

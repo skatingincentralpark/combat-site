@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { default as NextImage } from "next/image";
-import { HeadingSm, TextSm } from "components/shared-styles/typography";
-import { StyledPageWrapper } from "components/shared-styles/page-wrappers";
-import Link from "components/link";
+import { HeadingSm, TextSm } from "@components/shared-styles/typography";
+import { StyledPageWrapper } from "@components/shared-styles/page-wrappers";
+import Link from "@components/link";
 
 const products = [
   {

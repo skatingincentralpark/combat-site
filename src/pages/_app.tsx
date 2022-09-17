@@ -3,11 +3,13 @@ import Router from "next/router";
 import { LazyMotion, domAnimation } from "framer-motion";
 import type { AppProps } from "next/app";
 import GlobalStyles from "../styles/global";
-import Header from "components/header/header";
-import Announcement from "components/announcement";
+
+import Header from "@components/header/header";
+import Announcement from "@components/announcement";
+import PageTransitionWrapper from "@components/page-transition-wrapper";
+
 import { deviceIsBrowser } from "@lib/helpers";
 import { pageTransitionSpeed } from "@lib/animate";
-import PageTransitionWrapper from "components/page-transition-wrapper";
 
 if (deviceIsBrowser) {
   console.log(`Greetings, Traveller 🦧`);

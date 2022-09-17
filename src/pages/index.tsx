@@ -1,6 +1,6 @@
 import { default as NextImage } from "next/image";
 import styled from "@emotion/styled";
-import { StyledPageWrapperCentered } from "../components/shared-styles/page-wrappers";
+import { StyledPageWrapperCentered } from "@components/shared-styles/page-wrappers";
 
 const HomePage = () => {
   return (
