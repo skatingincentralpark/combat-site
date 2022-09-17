@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import Router from "next/router";
 import { LazyMotion, domAnimation } from "framer-motion";
 import type { AppProps } from "next/app";
 import GlobalStyles from "../styles/global";
@@ -9,7 +7,7 @@ import Announcement from "@components/announcement";
 import PageTransitionWrapper from "@components/page-transition-wrapper";
 
 import { deviceIsBrowser } from "@lib/helpers";
-import { pageTransitionSpeed } from "@lib/animate";
+import useIsLoading from "hooks/useIsLoading";
 
 if (deviceIsBrowser) {
   console.log(`Greetings, Traveller 🦧`);
@@ -17,31 +15,7 @@ if (deviceIsBrowser) {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [loading, SetLoading] = useState(false);
-
-  // Trigger our loading class
-  useEffect(() => {
-    if (deviceIsBrowser) {
-      document.documentElement.classList.toggle("is-loading", loading);
-    }
-  }, [loading]);
-
-  useEffect(() => {
-    Router.events.on("routeChangeStart", (_, { shallow }) => {
-      // Bail if we're just changing URL parameters
-      if (shallow) return;
-
-      SetLoading(true);
-    });
-
-    Router.events.on("routeChangeComplete", () => {
-      setTimeout(() => SetLoading(false), pageTransitionSpeed);
-    });
-
-    Router.events.on("routeChangeError", () => {
-      SetLoading(false);
-    });
-  }, []);
+  const isLoading = useIsLoading();
 
   return (
     <>
@@ -49,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <LazyMotion features={domAnimation}>
         <Header />
         <Announcement />
-        <PageTransitionWrapper loading={loading}>
+        <PageTransitionWrapper loading={isLoading}>
           <Component {...pageProps} />
         </PageTransitionWrapper>
       </LazyMotion>
