@@ -46,6 +46,10 @@ const Carousel = ({ lookbook }: LookbookType) => {
 
   return (
     <Embla>
+      <ButtonContainerFull>
+        <button onClick={scrollPrev} />
+        <button onClick={scrollNext} />
+      </ButtonContainerFull>
       <EmblaViewPort ref={viewportRef}>
         <AnimatePresence>
           <EmblaContainer
@@ -69,6 +73,7 @@ export default Carousel;
 // TODO: Please understand what each style is doing after finished
 const Embla = styled.div`
   padding: var(--gap-xs); // creates the white border effect
+  position: relative;
 `;
 const EmblaViewPort = styled.div`
   overflow: hidden;
@@ -83,5 +88,35 @@ const EmblaContainer = styled(m.div)`
 
   @media screen and (min-width: 650px) {
     --translate-distance: -1000px;
+  }
+`;
+const ButtonContainerFull = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  display: none;
+  flex-direction: row;
+
+  & > button {
+    flex-grow: 1;
+    outline: 1px dashed transparent;
+    transition: outline 300ms;
+
+    &:active {
+      outline: 1px dashed magenta;
+    }
+  }
+  & > button:first-of-type {
+    cursor: w-resize;
+  }
+  & > button:last-of-type {
+    cursor: e-resize;
+  }
+
+  @media screen and (min-width: 650px) {
+    display: flex;
   }
 `;

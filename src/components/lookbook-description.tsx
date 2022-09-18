@@ -33,6 +33,7 @@ const FlexRow = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding: 0 var(--gap-xs);
+  min-height: 7rem;
 
   & > div:nth-of-type(2) {
     text-align: right;

@@ -1,27 +1,67 @@
+import { useState } from "react";
+import styled from "@emotion/styled";
 import client from "../../../client";
 import { GetStaticProps, GetStaticPaths } from "next";
 import Carousel from "@components/carousel/carousel";
 import { LookbookType } from "../../types/lookbookTypes";
 import { StyledPageWrapperCentered } from "@components/shared-styles/page-wrappers";
 import { LookbookDescription } from "@components/lookbook-description";
+import Dropdown from "@components/dropdown";
 
 const LookbookPage = ({ lookbook }: LookbookType) => {
+  const [seasons, setSeasons] = useState([
+    {
+      id: 0,
+      title: "2020SS",
+      selected: true,
+      key: "season",
+    },
+    {
+      id: 1,
+      title: "2020FW",
+      selected: false,
+      key: "season",
+    },
+    {
+      id: 2,
+      title: "2021SS",
+      selected: false,
+      key: "season",
+    },
+  ]);
+
   if (!lookbook) return <p>Loading...</p>;
 
   return (
     <StyledPageWrapperCentered>
-      <Carousel lookbook={lookbook} />
-      <LookbookDescription
-        title={lookbook.title}
-        season={lookbook.season}
-        date={lookbook.date}
-        description={lookbook.description}
-      />
+      <div>
+        <Carousel lookbook={lookbook} />
+        <LookbookDescription
+          title={lookbook.title}
+          season={lookbook.season}
+          date={lookbook.date}
+          description={lookbook.description}
+        />
+      </div>
+      <DropdownWrapper>
+        <span>Choose a Location:</span>
+        <Dropdown list={seasons} setList={setSeasons} />
+      </DropdownWrapper>
     </StyledPageWrapperCentered>
   );
 };
 
 export default LookbookPage;
+
+const DropdownWrapper = styled.div`
+  padding: 0 var(--gap-xs);
+  display: flex;
+  align-items: center;
+
+  & > span {
+    margin-right: var(--gap-xxs);
+  }
+`;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await client.fetch(`*[_type == "lookbook"][].slug.current`);
