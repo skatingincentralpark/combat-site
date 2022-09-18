@@ -7,12 +7,7 @@ import Cart from "../cart/cart";
 import { headerButtonVariants } from "@lib/animate";
 import HeaderMenu from "./header-menu";
 
-// Header Functionality:
-//    - Change background-color depending on page (take prop through a layout component / regex)
-//    - Change background-color and logo height if nav is open
-//    - Increase animation speed when loading (css-variable)
-
-const Header = () => {
+const Header = ({ isLoading }: { isLoading: boolean }) => {
   const router = useRouter();
   const checkIfShopPath = useCallback(
     () => router.pathname.match(/\/shop\//),
@@ -48,7 +43,7 @@ const Header = () => {
         </AnimatePresence>
 
         <HeaderToggle onClick={toggleNav} navOpen={navOpen}>
-          <CombatLogo />
+          <CombatLogo isLoading={isLoading} />
         </HeaderToggle>
 
         <Cart />
@@ -80,7 +75,8 @@ const HeaderWrapper = styled.header`
   justify-content: flex-start;
 `;
 const HeaderToggle = styled.button<{ navOpen: boolean }>`
-  padding: var(--gap-s) var(--gap-l);
+  position: relative;
+  padding: var(--gap-s) var(--gap-xl);
   background-color: ${({ navOpen }) => !navOpen && "#000"};
 
   flex-grow: 1;

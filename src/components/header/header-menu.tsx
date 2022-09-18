@@ -95,14 +95,14 @@ const HeaderMenuNav = styled.nav`
 `;
 const HeaderMenuText = styled.div`
   font-size: var(--font-size-m);
-  padding: var(--gap-l);
+  padding: var(--gap-xl);
   max-width: 50rem;
 `;
 const MenuImageDesktop = styled.div`
   position: relative;
   width: 70%;
   height: 100%;
-  border-left: 1px solid #000;
+  border-left: 1px solid var(--gray-3);
   padding: var(--gap-4xl);
   display: none;
 
@@ -165,7 +165,7 @@ const StyledNavLink = styled(m.div)`
   --dot-scale: scale(1);
 
   & a {
-    padding: var(--gap-xs);
+    padding: var(--gap-xs) var(--gap-xl);
   }
   &:first-of-type {
     border-top: 1px solid var(--gray-3);

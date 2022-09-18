@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const CombatLogo = () => {
+const CombatLogo = ({ isLoading }: { isLoading: boolean }) => {
   const drawnPaths = [
     "M13.57,30c-.47,0-.85,.15-1.14,.43-.29,.29-.43,.67-.43,1.14s.15,.85,.43,1.14c.29,.29,.67,.43,1.14,.43s.85-.15,1.14-.43c.29-.29,.43-.67,.43-1.14s-.15-.85-.43-1.14c-.29-.29-.67-.43-1.14-.43Z",
     "M19.57,30c-.47,0-.85,.15-1.14,.43-.29,.29-.43,.67-.43,1.14s.15,.85,.43,1.14c.29,.29,.67,.43,1.14,.43s.85-.15,1.14-.43c.29-.29,.43-.67,.43-1.14s-.15-.85-.43-1.14c-.29-.29-.67-.43-1.14-.43Z",
@@ -84,53 +84,58 @@ const CombatLogo = () => {
   ];
 
   return (
-    <Svg
-      id="Layer_2"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 207.14 33.14"
-    >
-      <g id="Borders">
-        {drawnPaths.map((d, i) => (
-          <Path d={d} key={i} delay={i} />
-        ))}
-      </g>
-    </Svg>
+    <>
+      <SvgFast
+        id="Layer_2"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 207.14 33.14"
+        isLoading={isLoading}
+      >
+        <g id="Borders">
+          {drawnPaths.map((d, i) => (
+            <PathFast d={d} key={i} delay={i} />
+          ))}
+        </g>
+      </SvgFast>
+      <Svg
+        id="Layer_2"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 207.14 33.14"
+        isLoading={isLoading}
+      >
+        <g id="Borders">
+          {drawnPaths.map((d, i) => (
+            <Path d={d} key={i} delay={i} />
+          ))}
+        </g>
+      </Svg>
+    </>
   );
 };
 
 export default CombatLogo;
 
-const Svg = styled.svg`
+const Svg = styled.svg<{ isLoading: boolean }>`
+  opacity: ${({ isLoading }) => (isLoading ? 0 : 1)};
+  transition: opacity 500ms;
   height: 100%;
 `;
+const SvgFast = styled.svg<{ isLoading: boolean }>`
+  opacity: ${({ isLoading }) => (isLoading ? 1 : 0)};
+  transition: opacity 500ms;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: var(--gap-s) var(--gap-xl);
+`;
 
-const Path = styled.path<{ delay: number }>`
+const Path = styled.path<{ delay: number; fast?: boolean }>`
   fill: #000;
-  --logo-animation-duration: 0.25s;
-  transition: fill var(--logo-animation-duration);
-  animation: FairyBreadBiatch 1.5s infinite;
+  animation: FairyBreadBiatch infinite;
+  animation-duration: ${({ fast }) => (fast ? `750ms` : `1500ms`)};
   animation-delay: ${({ delay }) => `${delay * 0.1}s`};
 
-  /* @keyframes FairyBreadBiatch {
-    0% {
-      fill: var(--green-2);
-    }
-    15% {
-      fill: var(--green-3);
-    }
-    25% {
-      fill: var(--yellow-1);
-    }
-    50% {
-      fill: orange;
-    }
-    75% {
-      fill: var(--olive-1);
-    }
-    100% {
-      fill: var(--green-2);
-    }
-  } */
   @keyframes FairyBreadBiatch {
     0% {
       fill: var(--yellow-1);
@@ -149,6 +154,34 @@ const Path = styled.path<{ delay: number }>`
     }
     100% {
       fill: var(--green-1);
+    }
+  }
+`;
+
+const PathFast = styled.path<{ delay: number; fast?: boolean }>`
+  fill: #000;
+  animation: FairyBreadBiatch2 infinite;
+  animation-duration: ${({ fast }) => (fast ? `750ms` : `1500ms`)};
+  animation-delay: ${({ delay }) => `${delay * 0.1}s`};
+
+  @keyframes FairyBreadBiatch2 {
+    0% {
+      fill: white;
+    }
+    15% {
+      fill: #3d315b;
+    }
+    25% {
+      fill: #444b6e;
+    }
+    50% {
+      fill: #708b75;
+    }
+    75% {
+      fill: #9ab87a;
+    }
+    100% {
+      fill: #f8f991;
     }
   }
 `;
