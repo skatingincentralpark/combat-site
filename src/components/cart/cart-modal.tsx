@@ -59,13 +59,11 @@ const CartModal = () => {
     open: {
       opacity: 1,
       y: 0,
-      background: "white",
       transition: { duration: 0.6, ease: [0.14, 0.62, 0.23, 0.98] },
     },
     closed: {
       opacity: 0,
       y: 60,
-      background: "var(--yellow-1)",
       transition: { duration: 0.6, ease: [0.04, 0.62, 0.23, 0.98] },
     },
   };
@@ -119,7 +117,6 @@ const CartModalWrapper = styled(m.div)`
   background-size: 400% 400%;
   animation: Combative 4s ease infinite;
   background-attachment: fixed;
-  background: var(--piss-1);
 
   @keyframes Combative {
     0% {
