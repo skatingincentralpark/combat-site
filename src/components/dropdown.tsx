@@ -3,17 +3,10 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 
-interface Item {
-  id: number;
-  title: string;
-  selected: boolean;
-  key: string;
-}
-
 interface DropdownProps {
-  list: Item[];
+  list: { title: string; id: number; selected: boolean }[];
   defaultTitle?: string;
-  setList: React.Dispatch<React.SetStateAction<Item[]>>;
+  setList: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
 const dropdownVariants = {
@@ -41,7 +34,7 @@ const Dropdown = ({
 
   const toggleList = () => setListOpen((x) => !x);
 
-  const selectItem = (item: Item) => {
+  const selectItem = (item: any) => {
     const { title, id } = item;
 
     setHeaderTitle(title);
@@ -50,12 +43,12 @@ const Dropdown = ({
   };
 
   const resetThenSet = (id: number) => {
-    const locationsNew = [...list];
+    const listNew = [...list];
 
-    locationsNew.forEach((item) => (item.selected = false));
-    locationsNew[id].selected = true;
+    listNew.forEach((item) => (item.selected = false));
+    listNew[id].selected = true;
 
-    setList(locationsNew);
+    setList(listNew);
   };
 
   const listRef = useRef<HTMLDivElement | null>(null);
@@ -133,7 +126,7 @@ export default Dropdown;
 
 const DdWrapper = styled.div`
   position: relative;
-  width: 12rem;
+  width: 15rem;
   user-select: none;
 `;
 const DdHeader = styled.button<{ listOpen: boolean }>`

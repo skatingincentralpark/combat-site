@@ -42,8 +42,6 @@ const Carousel = ({ lookbook }: LookbookType) => {
     },
   };
 
-  if (!lookbook) return <p>Loading...</p>;
-
   return (
     <Embla>
       <ButtonContainerFull>

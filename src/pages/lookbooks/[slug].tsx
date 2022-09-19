@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import client from "../../../client";
 import { GetStaticProps, GetStaticPaths } from "next";
@@ -7,45 +7,41 @@ import { LookbookType } from "../../types/lookbookTypes";
 import { StyledPageWrapperCentered } from "@components/shared-styles/page-wrappers";
 import { LookbookDescription } from "@components/lookbook-description";
 import Dropdown from "@components/dropdown";
+import { useRouter } from "next/router";
 
 const LookbookPage = ({ lookbook }: LookbookType) => {
-  const [seasons, setSeasons] = useState([
-    {
-      id: 0,
-      title: "2020SS",
-      selected: true,
-      key: "season",
-    },
-    {
-      id: 1,
-      title: "2020FW",
-      selected: false,
-      key: "season",
-    },
-    {
-      id: 2,
-      title: "2021SS",
-      selected: false,
-      key: "season",
-    },
-  ]);
+  const router = useRouter();
 
-  if (!lookbook) return <p>Loading...</p>;
+  // Default selected is true if it's current slug
+  const [slugs, setSlugs] = useState(
+    lookbook?.slugsAll?.map((x, i) => ({
+      title: x,
+      id: i,
+      selected: x === router.query.slug,
+    })) || []
+  );
+
+  // If selected slug and current slug are different, navigate
+  useEffect(() => {
+    const selectedSlug = slugs.find((x) => x.selected)?.title;
+    if (selectedSlug && selectedSlug !== router.query.slug)
+      router.push(selectedSlug);
+  }, [slugs]);
 
   return (
     <StyledPageWrapperCentered>
       <div>
         <Carousel lookbook={lookbook} />
         <LookbookDescription
-          title={lookbook.title}
-          season={lookbook.season}
-          date={lookbook.date}
-          description={lookbook.description}
+          title={lookbook?.title}
+          season={lookbook?.season}
+          date={lookbook?.date}
+          description={lookbook?.description}
         />
       </div>
       <DropdownWrapper>
         <span>Choose a Location:</span>
-        <Dropdown list={seasons} setList={setSeasons} />
+        <Dropdown list={slugs} setList={setSlugs} />
       </DropdownWrapper>
     </StyledPageWrapperCentered>
   );
@@ -73,13 +69,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  // It's important to default the slug so that it doesn't return "undefined"
+  // Should fix typing here
   const { slug = "" } = context.params!;
   const lookbook = await client.fetch(
     `
       *[_type == "lookbook" && slug.current == $slug] {
         _id,
         "slug": slug.current,
+        "slugsAll": *[_type == "lookbook"][].slug.current,
         season,
         date,
         description,
