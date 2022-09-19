@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
@@ -58,6 +58,34 @@ const Dropdown = ({
     setList(locationsNew);
   };
 
+  const listRef = useRef<HTMLDivElement | null>(null);
+
+  // Helper: Checks type at runtime
+  // https://stackoverflow.com/questions/71193818/react-onclick-argument-of-type-eventtarget-is-not-assignable-to-parameter-of-t
+  // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#assertion-functions
+  function assertIsNode(target: EventTarget | null): asserts target is Node {
+    if (!target || !("nodeType" in target)) {
+      throw new Error(`Node expected`);
+    }
+  }
+
+  // Close list if click outside
+  useEffect(() => {
+    const checkIfClickedOutside = (e: MouseEvent): void => {
+      assertIsNode(e.target);
+      if (listOpen && listRef.current && !e.target.contains(listRef.current)) {
+        setTimeout(() => setListOpen(false), 100);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [listOpen]);
+
+  // Temp: Random emojis for fun
   const emojiList = ["🐡", "🦧", "👩‍🎤", "🙀", "⭐️", "😽", "👽"];
   const randomNumber10 = () => Math.floor(Math.random() * emojiList.length);
 
@@ -83,6 +111,7 @@ const Dropdown = ({
             initial="collapsed"
             animate="open"
             exit="collapsed"
+            ref={listRef}
           >
             {list.map((item) => (
               <DdListItem
