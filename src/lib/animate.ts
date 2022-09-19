@@ -20,22 +20,18 @@ const headerButtonVariants = () => {
 const headerVariants = () => {
   return {
     initial: {
-      y: "-100%",
-      transition: {
-        ease: "easeIn",
-      },
+      opacity: 0,
+      y: 0,
     },
     animate: {
-      y: 0,
-      transition: {
-        ease: "easeOut",
-      },
+      opacity: 1,
+      y: 20,
+      transition: { duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] },
     },
     exit: {
-      y: "-100%",
-      transition: {
-        ease: "easeIn",
-      },
+      opacity: 0,
+      y: 0,
+      transition: { duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] },
     },
   };
 };

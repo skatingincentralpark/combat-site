@@ -172,16 +172,16 @@ const PathFast = styled.path<{ delay: number; fast?: boolean }>`
       fill: #3d315b;
     }
     25% {
-      fill: #444b6e;
+      fill: red;
     }
     50% {
-      fill: #708b75;
+      fill: #212c23;
     }
     75% {
-      fill: #9ab87a;
+      fill: #2e3923;
     }
     100% {
-      fill: #f8f991;
+      fill: #2e2f23;
     }
   }
 `;
