@@ -1,4 +1,4 @@
-export interface NewsItemType extends ImageType= {
+export type NewsItemType = {
   title: string;
   author: string;
   body: [];

@@ -1,15 +1,27 @@
-import NewsItem from "@components/news-item";
+import styled from "@emotion/styled";
+import { AnimatePresence, m } from "framer-motion";
+import Image from "next/image";
 import client from "../../../client";
+import { PortableText } from "@portabletext/react";
+
 import { StyledPageWrapper } from "@components/shared-styles/page-wrappers";
 import { NewsItemType } from "../../types/newsTypes";
+import { Heading, HeadingSm } from "@components/shared-styles/typography";
+import { useState } from "react";
 
-const NewsPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
+const NewsPocPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
   return (
-    <StyledPageWrapper px="l">
-      {newsItems.map((newsItem, i) => (
-        <NewsItem newsItem={newsItem} key={i} />
+    <NewsPageWrapper px="l">
+      {newsItems.map((newsItem) => (
+        <NewsItem newsItem={newsItem} key={`${newsItem.title}-1`} />
       ))}
-    </StyledPageWrapper>
+      {/* {newsItems.map((newsItem) => (
+        <NewsItem newsItem={newsItem} key={`${newsItem.title}-2`} />
+      ))}
+      {newsItems.map((newsItem) => (
+        <NewsItem newsItem={newsItem} key={`${newsItem.title}-3`} />
+      ))} */}
+    </NewsPageWrapper>
   );
 };
 
@@ -44,4 +56,171 @@ export async function getStaticProps() {
   };
 }
 
-export default NewsPage;
+export default NewsPocPage;
+
+const NewsPageWrapper = styled(StyledPageWrapper)`
+  max-width: 50rem; // test on bigger screen --> could use clamp
+  margin: auto;
+`;
+
+const NewsItem = ({ newsItem }: { newsItem: NewsItemType }) => {
+  const { title, description, category, date, image, location } = newsItem;
+  const { url, caption, palette } = image;
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <NewsItemWrapper onClick={() => setIsOpen((x) => !x)}>
+      <ImageGrid>
+        {[1, 2, 3, 4, 5, 6].map((x) => (
+          <div key={x}>
+            <Image
+              src={url}
+              alt={caption}
+              layout="fill"
+              objectFit="cover"
+              key={url}
+              style={{ backgroundColor: palette.dominant.background }}
+            />
+          </div>
+        ))}
+      </ImageGrid>
+      <NewsText
+        title={title}
+        description={description}
+        category={category}
+        date={date}
+        descriptionOpen={isOpen}
+        location={location}
+      />
+    </NewsItemWrapper>
+  );
+};
+
+const NewsItemWrapper = styled.div`
+  flex-direction: row;
+  justify-content: start;
+  margin-bottom: var(--gap-s);
+  position: relative;
+  display: block;
+
+  @media screen and (min-width: 700px) {
+    display: flex;
+  }
+`;
+
+const ImageGrid = styled.div`
+  flex-shrink: 0;
+  width: 70%;
+  height: fit-content;
+  position: relative;
+  cursor: crosshair;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: var(--gap-s);
+
+  @media screen and (min-width: 700px) {
+    width: 40%;
+  }
+
+  &:hover > div {
+    @media screen and (min-width: 700px) {
+      outline: 1px solid #000;
+    }
+  }
+
+  &:active > div {
+    outline: 1px solid magenta;
+  }
+
+  & > div {
+    width: 100%;
+    position: relative;
+    aspect-ratio: 1;
+    user-select: none;
+  }
+`;
+
+const NewsText = ({
+  title = "",
+  description = [],
+  category = "",
+  date = "",
+  location = { lat: 0, lng: 0 },
+  descriptionOpen = false,
+}) => {
+  const newsDescriptionVariants = {
+    initial: {
+      width: 0,
+      height: 0,
+      backgroundColor: "#000",
+    },
+    animate: {
+      width: "100%",
+      height: "20rem",
+      backgroundColor: "#fff",
+
+      // transition: { duration: 0.5, ease: "easeOut" },
+      transition: { duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] },
+    },
+    exit: {
+      width: 0,
+      height: 0,
+      backgroundColor: "#000",
+    },
+  };
+
+  return (
+    <NewsTextWrapper>
+      <div>{date}</div>
+      <div>
+        <Heading>{title}</Heading>
+        <HeadingSm>{category}</HeadingSm>
+        <AnimatePresence>
+          {descriptionOpen && (
+            <Description {...newsDescriptionVariants}>
+              <div>
+                <div>
+                  {location.lat.toFixed(2)} °S{" : "}
+                  {location.lng.toFixed(2)} °E
+                </div>
+                <PortableText value={description} />
+              </div>
+            </Description>
+          )}
+        </AnimatePresence>
+      </div>
+    </NewsTextWrapper>
+  );
+};
+
+const Description = styled(m.div)`
+  overflow: scroll;
+  max-height: 20rem;
+
+  & > div {
+    padding: var(--gap-xs);
+
+    & > div {
+      margin-bottom: var(--gap-3xs);
+      -webkit-font-smoothing: initial;
+    }
+  }
+`;
+const NewsTextWrapper = styled.div`
+  flex-grow: 1;
+  margin-left: var(--gap-s);
+  padding-left: var(--gap-s);
+  border-left: 0.5px solid var(--gray-4);
+  user-select: none;
+  padding-top: var(--gap-s);
+
+  @media screen and (min-width: 700px) {
+    padding-top: 0;
+  }
+  /* font-family: "Bitcount Mono Single Lt Circle", "Courier New", Courier; */
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
+  /* -webkit-font-smoothing: initial; */
+  /* font-weight: 400; */
+`;
