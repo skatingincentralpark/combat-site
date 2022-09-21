@@ -1,4 +1,4 @@
-export type NewsItemType = {
+export interface NewsItemType extends ImageType= {
   title: string;
   author: string;
   body: [];
@@ -10,13 +10,5 @@ export type NewsItemType = {
     lat: number;
     lng: number;
   };
-  image: {
-    aspectRatio: number;
-    height: number;
-    lqip: string;
-    palette: {};
-    width: number;
-    url: string;
-    caption: string;
-  };
+  image: ImageType;
 };

@@ -1,7 +1,7 @@
 import Image from "next/future/image";
 import styled from "@emotion/styled";
 
-export const CarouselSlide = ({ image }: ImageType) => {
+export const CarouselSlide = ({ image }: { image: ImageType }) => {
   const { aspectRatio, height, lqip, palette, width, url, caption } = image;
 
   return (

@@ -13,17 +13,15 @@ declare module "*.gif" {
 }
 
 type ImageType = {
-  image: {
-    aspectRatio: number;
-    height: number;
-    lqip: string;
-    palette: {
-      dominant: {
-        background: string;
-      };
+  aspectRatio: number;
+  height: number;
+  lqip: string;
+  palette: {
+    dominant: {
+      background: string;
     };
-    width: number;
-    url: string;
-    caption: string;
   };
+  width: number;
+  url: string;
+  caption: string;
 };
