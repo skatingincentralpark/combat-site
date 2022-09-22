@@ -16,17 +16,13 @@ const MusicPlayer = () => {
   };
 
   useEffect(() => {
-    if (!isPlaying) return;
-    ref.current.volume = 0;
+    if (!isPlaying || !ref.current) return;
+    const audio = ref.current;
+    audio.volume = 0;
 
-    const fadeAudio = setInterval(() => {
-      if (ref.current.volume >= 0.8) {
-        clearInterval(fadeAudio);
-      }
-
-      ref.current.volume += 0.09;
-
-      console.log(ref.current.volume);
+    const fadeInAudio = setInterval(() => {
+      if (audio.volume >= 0.8) clearInterval(fadeInAudio);
+      audio.volume += 0.09;
     }, 200);
   }, [isPlaying]);
 
