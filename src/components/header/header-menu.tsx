@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { default as NextImage } from "next/image";
 import { m } from "framer-motion";
 import styled from "@emotion/styled";
@@ -15,10 +16,8 @@ const navLinks = [
 ];
 
 const navText = [
-  "From the essays of Emerson, to the stories of the Beat, these vanguards of individualism, freedom and improvisation give us comfort and confidence to work towards these values - the values which we believe are key to living a fulfilling life.",
-  "We are moved firstly by the lessons written, and finally, from the atmosphere created by their words.",
-  "Recondo is a repository of ideas expressed through strong technical foundations in design and well made goods.",
-  "At its core, Recondo constructs end-to-end experiences through garments, site design, and visual - auditory media.",
+  'Once installed, trojans may perform a range of malicious actions. Many tend to contact one or more Command and Control (C2) servers across the Internet and await instruction. Since individual trojans typically use a specific set of ports for this communication, it can be relatively simple to detect them. Moreover, other malware could potentially "take over" the trojan, using it as a proxy for malicious action. [13]',
+  'In German-speaking countries, spyware used or made by the government is sometimes called govware. Govware is typically a Trojan software used to intercept communications from the target computer. Some countries like Switzerland and Germany have a legal framework governing the use of such software. [14] [15] Examples of govware trojans include the Swiss MiniPanzer and MegaPanzer [16] and the German "state trojan" nicknamed R2D2. [14] German govware works by exploiting security gaps unknown to the general public and accessing smartphone data before it becomes encrypted via other applications. [17]',
 ];
 
 const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
@@ -35,7 +34,7 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
         <MenuImageMobile>
           <div>
             <NextImage
-              src="/images/luxun.png"
+              src="/images/earth-laughs-in-flowers.png"
               layout="fill"
               objectFit="contain"
             />
@@ -52,7 +51,7 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
       <MenuImageDesktop>
         <div>
           <NextImage
-            src="/images/luxun.png"
+            src="/images/earth-laughs-in-flowers.png"
             layout="fill"
             objectFit="contain"
           />
@@ -87,14 +86,13 @@ const HeaderMenuInner = styled.div`
 const HeaderMenuNav = styled.nav`
   padding-top: calc(var(--header-height) + 2rem);
   transition: padding 250ms;
-  font-size: var(--font-size-xl);
+  font-size: 1.4rem;
 
   @media screen and (min-width: 700px) {
     padding-top: calc(var(--header-height) + 4rem);
   }
 `;
 const HeaderMenuText = styled.div`
-  font-size: var(--font-size-m);
   padding: var(--gap-xl);
   max-width: 50rem;
 `;
@@ -118,7 +116,6 @@ const MenuImageDesktop = styled.div`
 `;
 const MenuImageMobile = styled.div`
   position: relative;
-  height: 200px;
   display: flex;
   flex-grow: 1;
   justify-content: center;
@@ -126,14 +123,31 @@ const MenuImageMobile = styled.div`
   overflow: hidden;
   margin: var(--gap-l) 0 0 0;
 
-  & > div:last-of-type {
-    position: relative;
-    height: 300%;
-    width: 100%;
-  }
+  position: absolute;
+  right: var(--gap-l);
+  bottom: var(--gap-l);
+  height: 10rem;
+  width: 10rem;
+
+  opacity: 0.2;
+  animation: fadeOut 2s ease infinite alternate;
 
   @media screen and (min-width: 700px) {
     display: none;
+  }
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+      transform: rotate(0deg);
+    }
+    50% {
+      opacity: 0.2;
+    }
+    100% {
+      opacity: 0.2;
+      transform: rotate(360deg);
+    }
   }
 `;
 
@@ -146,10 +160,12 @@ const NavLink = ({
   onClick: () => void;
   href: string;
 }) => {
+  const router = useRouter();
+
   return (
     <StyledNavLink>
       <Link href={href} onClick={onClick}>
-        <StyledDot />
+        <StyledDot isActive={router.pathname === href} />
         {children}
       </Link>
     </StyledNavLink>
@@ -157,41 +173,45 @@ const NavLink = ({
 };
 
 const StyledNavLink = styled(m.div)`
-  border-bottom: 1px solid var(--gray-3);
   background-color: var(--nav-link-bg-color);
   color: var(--nav-link-color);
-  --nav-link-color: black;
-  --dot-color: var(--yellow-2); // scoped to link so the dot can use it
+  --nav-link-color: #000;
+  --dot-color: #fff; // scoped to link so the dot can use it
   --dot-scale: scale(1);
+  transition: background-color 0.1s, color 0.1s;
+  /* font-family: "Bitcount Mono Single Lt Circle", "Courier New", Courier,
+    monospace;
+  -webkit-font-smoothing: initial;
+  font-size: 1.6rem; */
 
   & a {
-    padding: var(--gap-xs) var(--gap-xl);
-  }
-  &:first-of-type {
-    border-top: 1px solid var(--gray-3);
+    padding: var(--gap-3xs) var(--gap-xl);
+    display: flex;
+    align-items: center;
   }
   &:hover {
     @media screen and (min-width: 700px) {
-      --nav-link-color: #fff;
-      --nav-link-bg-color: var(--yellow-1);
-      --dot-color: #fff; // scoped to link so the dot can use it
-      --dot-scale: scale(1.2);
+      /* --nav-link-color: #fff; */
+      --nav-link-bg-color: var(--piss-1);
+      --dot-color: #000; // scoped to link so the dot can use it
     }
   }
   &:active {
-    --nav-link-color: white;
-    --nav-link-bg-color: var(--yellow-2);
-    --dot-color: white; // scoped to link so the dot can use it
+    --nav-link-color: var(--piss-2);
+    --nav-link-bg-color: var(--yellow-4);
+    /* --dot-color: var(--piss-1); // scoped to link so the dot can use it */
     --dot-scale: scale(1.4);
   }
 `;
-const StyledDot = styled.span`
+const StyledDot = styled.span<{ isActive: boolean }>`
   display: inline-block;
-  width: 1rem;
-  height: 1rem;
+  width: 0.8rem;
+  height: 0.8rem;
   border-radius: 50%;
-  margin-right: var(--gap-s);
-  background-color: var(--dot-color);
+  border: 1px solid #000;
+  margin-right: var(--gap-xs);
+  background-color: ${({ isActive }) =>
+    isActive ? "#000" : "var(--dot-color)"};
   transform: var(--dot-scale);
   transition: background-color 0.25s, transform 0.25s;
 `;

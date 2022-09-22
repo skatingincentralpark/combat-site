@@ -15,6 +15,7 @@ const cssVariables = css`
     --yellow-3: #faff5a;
     --yellow-4: #f6ff00;
     --piss-1: #deff00;
+    --piss-2: #aec900;
     --olive-1: #564f0a;
     --text-primary: #000000;
     --text-secondary: #a4a6a9;

@@ -77,12 +77,16 @@ const HeaderWrapper = styled.header`
 const HeaderToggle = styled.button<{ navOpen: boolean }>`
   position: relative;
   padding: var(--gap-s) var(--gap-xl);
-  background-color: ${({ navOpen }) => !navOpen && "#000"};
+  background-color: #000;
 
   flex-grow: 1;
 
   height: 100%;
   cursor: pointer;
+
+  @media screen and (min-width: 700px) {
+    background-color: ${({ navOpen }) => (!navOpen ? "#000" : "initial")};
+  }
 
   &:hover {
     @media screen and (min-width: 700px) {
