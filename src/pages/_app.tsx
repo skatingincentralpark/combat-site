@@ -5,6 +5,7 @@ import GlobalStyles from "../styles/global";
 import Header from "@components/header/header";
 import Announcement from "@components/announcement";
 import PageTransitionWrapper from "@components/page-transition-wrapper";
+import MusicPlayer from "@components/music-player";
 
 import { deviceIsBrowser } from "@lib/helpers";
 import useIsLoading from "hooks/useIsLoading";
@@ -22,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyles />
       <LazyMotion features={domAnimation}>
         <Header isLoading={isLoading} />
+        <MusicPlayer />
         <Announcement />
         <PageTransitionWrapper loading={isLoading}>
           <Component {...pageProps} />
