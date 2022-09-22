@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useRouter } from "next/router";
 import { default as NextImage } from "next/image";
 import { m } from "framer-motion";
@@ -5,6 +6,7 @@ import styled from "@emotion/styled";
 import Link from "../link";
 import { headerVariants } from "@lib/animate";
 import { TextSm } from "@components/shared-styles/typography";
+import useLockBodyScroll from "../../hooks/useLockBodyScroll";
 
 const navLinks = [
   { href: "/", name: "Home" },
@@ -21,9 +23,12 @@ const navText = [
 ];
 
 const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
+  const refScrollable = useRef<HTMLDivElement>(null);
+  useLockBodyScroll(refScrollable);
+
   return (
     <HeaderMenuWrapper {...headerVariants()}>
-      <HeaderMenuInner>
+      <HeaderMenuInner ref={refScrollable}>
         <HeaderMenuNav>
           {navLinks.map((x, i) => (
             <NavLink key={i} onClick={closeNav} href={x.href}>

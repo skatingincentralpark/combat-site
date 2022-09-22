@@ -118,6 +118,10 @@ const CartModalWrapper = styled(m.div)`
   animation: Combative 4s ease infinite;
   background-attachment: fixed;
 
+  font-family: "Bitcount Mono Single Lt Circle", "Courier New", Courier,
+    monospace;
+  -webkit-font-smoothing: initial;
+
   @keyframes Combative {
     0% {
       background-position: 51% 0%;
