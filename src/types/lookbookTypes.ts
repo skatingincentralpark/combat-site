@@ -7,18 +7,6 @@ export type LookbookType = {
     date: string;
     description: [];
     title: string;
-    album: {
-      aspectRatio: number;
-      height: number;
-      lqip: string;
-      palette: {
-        dominant: {
-          background: string;
-        };
-      };
-      width: number;
-      url: string;
-      caption: string;
-    }[];
+    album: ImageType[];
   };
 };

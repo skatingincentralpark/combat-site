@@ -1,13 +1,13 @@
+import { useState } from "react";
+import Image from "next/image";
 import styled from "@emotion/styled";
 import { AnimatePresence, m } from "framer-motion";
-import Image from "next/image";
-import client from "../../../client";
 import { PortableText } from "@portabletext/react";
+import client from "../../../client";
 
 import { StyledPageWrapper } from "@components/shared-styles/page-wrappers";
 import { NewsItemType } from "../../types/newsTypes";
 import { Heading, HeadingSm } from "@components/shared-styles/typography";
-import { useState } from "react";
 
 const NewsPocPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
   return (
@@ -15,12 +15,6 @@ const NewsPocPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
       {newsItems.map((newsItem) => (
         <NewsItem newsItem={newsItem} key={`${newsItem.title}-1`} />
       ))}
-      {/* {newsItems.map((newsItem) => (
-        <NewsItem newsItem={newsItem} key={`${newsItem.title}-2`} />
-      ))}
-      {newsItems.map((newsItem) => (
-        <NewsItem newsItem={newsItem} key={`${newsItem.title}-3`} />
-      ))} */}
     </NewsPageWrapper>
   );
 };
@@ -37,7 +31,7 @@ export async function getStaticProps() {
       location { lat, lng },
       "slug": slug.current,
       title,
-      image {
+      images[] {
         caption,
         "url": asset -> url,
         "height": asset -> metadata.dimensions.height,
@@ -61,28 +55,28 @@ export default NewsPocPage;
 const NewsPageWrapper = styled(StyledPageWrapper)`
   max-width: 50rem; // test on bigger screen --> could use clamp
   margin: auto;
+  padding-top: var(--gap-page-top);
+
+  @media screen and (min-width: 700px) {
+    padding-top: 12rem;
+  }
 `;
 
 const NewsItem = ({ newsItem }: { newsItem: NewsItemType }) => {
-  const { title, description, category, date, image, location } = newsItem;
-  const { url, caption, palette } = image;
+  const { title, description, category, date, images, location } = newsItem;
 
   const [isOpen, setIsOpen] = useState(false);
+
+  // Creates an array of at least 6 items
+  const atLeastSixArray = images
+    ? [...images, ...Array(6 - images.length)]
+    : [...Array(6)];
 
   return (
     <NewsItemWrapper onClick={() => setIsOpen((x) => !x)}>
       <ImageGrid>
-        {[1, 2, 3, 4, 5, 6].map((x) => (
-          <div key={x}>
-            <Image
-              src={url}
-              alt={caption}
-              layout="fill"
-              objectFit="cover"
-              key={url}
-              style={{ backgroundColor: palette.dominant.background }}
-            />
-          </div>
+        {atLeastSixArray?.map((x, i) => (
+          <NewsImage key={i} image={x} />
         ))}
       </ImageGrid>
       <NewsText
@@ -114,7 +108,6 @@ const ImageGrid = styled.div`
   width: 70%;
   height: fit-content;
   position: relative;
-  cursor: crosshair;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: var(--gap-s);
@@ -125,19 +118,48 @@ const ImageGrid = styled.div`
 
   &:hover > div {
     @media screen and (min-width: 700px) {
-      outline: 1px solid #000;
+      outline: 1px solid var(--gray-2);
     }
   }
 
   &:active > div {
     outline: 1px solid magenta;
   }
+`;
 
-  & > div {
-    width: 100%;
-    position: relative;
-    aspect-ratio: 1;
-    user-select: none;
+const NewsImage = ({ image }: { image: ImageType | undefined }) => {
+  if (!image) return <ImageWrapper />;
+
+  const { url, caption, palette, aspectRatio } = image;
+
+  return (
+    <ImageWrapper
+      style={{
+        backgroundColor: `white`,
+        aspectRatio: `${aspectRatio} / 1`,
+      }}
+    >
+      <Image
+        src={url}
+        alt={caption}
+        layout="fill"
+        objectFit="cover"
+        key={url}
+      />
+    </ImageWrapper>
+  );
+};
+
+const ImageWrapper = styled.div`
+  background-color: var(--gray-1);
+  width: 100%;
+  position: relative;
+  aspect-ratio: 1;
+  user-select: none;
+  cursor: crosshair;
+
+  & > img {
+    height: 100%;
   }
 `;
 
@@ -159,8 +181,6 @@ const NewsText = ({
       width: "100%",
       height: "20rem",
       backgroundColor: "#fff",
-
-      // transition: { duration: 0.5, ease: "easeOut" },
       transition: { duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] },
     },
     exit: {
@@ -200,6 +220,10 @@ const Description = styled(m.div)`
 
   & > div {
     padding: var(--gap-xs);
+
+    @media screen and (min-width: 700px) {
+      padding: 0;
+    }
 
     & > div {
       margin-bottom: var(--gap-3xs);

@@ -10,5 +10,5 @@ export type NewsItemType = {
     lat: number;
     lng: number;
   };
-  image: ImageType;
+  images: ImageType[];
 };
