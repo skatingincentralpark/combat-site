@@ -24,8 +24,6 @@ const StyledPageWrapper = styled.div<PageWrapperProps>`
 
 const StyledPageWrapperCentered = styled(StyledPageWrapper)<PageWrapperProps>`
   position: relative;
-  transform: translateY(-50%);
-  top: 45%;
 `;
 
 export { StyledPageWrapper, StyledPageWrapperCentered };

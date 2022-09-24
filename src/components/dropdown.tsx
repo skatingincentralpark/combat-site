@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
@@ -28,17 +28,27 @@ const Dropdown = ({
   setList,
 }: DropdownProps) => {
   const [listOpen, setListOpen] = useState(false);
+  const [backdropOpen, setBackdropOpen] = useState(false);
   const [headerTitle, setHeaderTitle] = useState(
     list.find((x) => x.selected)?.title || defaultTitle
   );
 
-  const toggleList = () => setListOpen((x) => !x);
+  const toggleList = () => {
+    setListOpen((x) => !x);
+    setBackdropOpen((x) => !x);
+  };
+
+  const closeList = () => {
+    setListOpen((x) => false);
+    setBackdropOpen((x) => false);
+  };
 
   const selectItem = (item: any) => {
     const { title, id } = item;
 
     setHeaderTitle(title);
     setListOpen(false);
+    setBackdropOpen(false);
     resetThenSet(id);
   };
 
@@ -50,33 +60,6 @@ const Dropdown = ({
 
     setList(listNew);
   };
-
-  const listRef = useRef<HTMLDivElement | null>(null);
-
-  // Helper: Checks type at runtime
-  // https://stackoverflow.com/questions/71193818/react-onclick-argument-of-type-eventtarget-is-not-assignable-to-parameter-of-t
-  // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#assertion-functions
-  function assertIsNode(target: EventTarget | null): asserts target is Node {
-    if (!target || !("nodeType" in target)) {
-      throw new Error(`Node expected`);
-    }
-  }
-
-  // Close list if click outside
-  useEffect(() => {
-    const checkIfClickedOutside = (e: MouseEvent): void => {
-      assertIsNode(e.target);
-      if (listOpen && listRef.current && !e.target.contains(listRef.current)) {
-        setTimeout(() => setListOpen(false), 100);
-      }
-    };
-
-    document.addEventListener("mousedown", checkIfClickedOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
-    };
-  }, [listOpen]);
 
   // Temp: Random emojis for fun
   const emojiList = ["🐡", "🦧", "👩‍🎤", "🙀", "⭐️", "😽", "👽"];
@@ -98,26 +81,28 @@ const Dropdown = ({
       </DdHeader>
       <AnimatePresence>
         {listOpen && (
-          <DdList
-            role="list"
-            variants={dropdownVariants}
-            initial="collapsed"
-            animate="open"
-            exit="collapsed"
-            ref={listRef}
-          >
-            {list.map((item) => (
-              <DdListItem
-                type="button"
-                key={item.title}
-                onClick={() => selectItem(item)}
-              >
-                {item.selected && "✅"} {item.title}
-              </DdListItem>
-            ))}
-          </DdList>
+          <>
+            <DdList
+              role="list"
+              variants={dropdownVariants}
+              initial="collapsed"
+              animate="open"
+              exit="collapsed"
+            >
+              {list.map((item) => (
+                <DdListItem
+                  type="button"
+                  key={item.title}
+                  onClick={() => selectItem(item)}
+                >
+                  {item.selected && "✅"} {item.title}
+                </DdListItem>
+              ))}
+            </DdList>
+          </>
         )}
       </AnimatePresence>
+      {backdropOpen && <DdBackdrop listOpen={listOpen} onClick={closeList} />}
     </DdWrapper>
   );
 };
@@ -131,7 +116,7 @@ const DdWrapper = styled.div`
 `;
 const DdHeader = styled.button<{ listOpen: boolean }>`
   width: 100%;
-  z-index: 3;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -147,7 +132,6 @@ const DdHeader = styled.button<{ listOpen: boolean }>`
   &:active {
     border-color: magenta;
   }
-
   & > * {
     transition: scale 100ms;
     transform-origin: left;
@@ -163,7 +147,7 @@ const DdHeaderTitle = styled.div`
 `;
 const DdList = styled(m.div)`
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   width: 100%;
   max-height: 10rem;
   border: 1px solid var(--gray-2);
@@ -173,6 +157,18 @@ const DdList = styled(m.div)`
   background-color: white;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+`;
+const DdBackdrop = styled.div<{ listOpen: boolean }>`
+  display: ${({ listOpen }) => (listOpen ? "block" : "none")};
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: transparent;
+  cursor: default;
+  content: " ";
+  z-index: 2;
 `;
 const DdListItem = styled.button`
   width: 100%;
