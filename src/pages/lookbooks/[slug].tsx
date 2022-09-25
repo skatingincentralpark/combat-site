@@ -46,9 +46,12 @@ const SeasonDropdown = ({ lookbook }: LookbookType) => {
   // If selected slug and current slug are different, navigate
   useEffect(() => {
     const selectedSlug = slugs.find((x) => x.selected)?.title;
+
     if (selectedSlug && selectedSlug !== router.query.slug)
       router.push(selectedSlug);
-  }, [slugs, router]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slugs]); // TO-DO: router required here - https://github.com/vercel/next.js/issues/18127
 
   return (
     <DropdownWrapper>
