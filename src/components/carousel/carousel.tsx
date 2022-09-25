@@ -9,7 +9,7 @@ const Carousel = ({ lookbook }: LookbookType) => {
   const { album } = lookbook || {};
   const [viewportRef, embla] = useEmblaCarousel({
     containScroll: "trimSnaps",
-    startIndex: Math.min(album.length - 1, 10), // limit start index for initial slide in animation
+    startIndex: Math.min(album?.length - 1, 10), // limit start index for initial slide in animation
   });
 
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
@@ -43,7 +43,7 @@ const Carousel = ({ lookbook }: LookbookType) => {
       <EmblaViewPort ref={viewportRef}>
         <AnimatePresence>
           <EmblaContainer>
-            {album.map((image, i) => {
+            {album?.map((image, i) => {
               return <CarouselSlide image={image} key={i} />;
             })}
           </EmblaContainer>

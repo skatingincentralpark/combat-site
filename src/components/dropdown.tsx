@@ -63,13 +63,13 @@ const Dropdown = ({
 
   // Temp: Random emojis for fun
   const emojiList = ["🐡", "🦧", "👩‍🎤", "🙀", "⭐️", "😽", "👽"];
-  const randomNumber10 = () => Math.floor(Math.random() * emojiList.length);
 
   const [emoji, setEmoji] = useState(emojiList[0]);
 
   useEffect(() => {
+    const randomNumber10 = () => Math.floor(Math.random() * emojiList.length);
     if (headerTitle) setEmoji(emojiList[randomNumber10()]);
-  }, [headerTitle]);
+  }, [headerTitle, emojiList]);
 
   return (
     <DdWrapper>

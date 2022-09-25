@@ -48,7 +48,7 @@ const SeasonDropdown = ({ lookbook }: LookbookType) => {
     const selectedSlug = slugs.find((x) => x.selected)?.title;
     if (selectedSlug && selectedSlug !== router.query.slug)
       router.push(selectedSlug);
-  }, [slugs]);
+  }, [slugs, router]);
 
   return (
     <DropdownWrapper>
