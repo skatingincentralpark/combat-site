@@ -5,13 +5,22 @@ import { AnimatePresence, m } from "framer-motion";
 import { PortableText } from "@portabletext/react";
 import client from "../../../client";
 
-import { StyledPageWrapper } from "@components/shared-styles/page-wrappers";
 import { NewsItemType } from "../../types/newsTypes";
 import { Heading, HeadingSm } from "@components/shared-styles/typography";
 
 const NewsPocPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
   return (
-    <NewsPageWrapper px="l">
+    <NewsPageWrapper initial="hidden" animate="show" variants={container}>
       {newsItems.map((newsItem) => (
         <NewsItem newsItem={newsItem} key={`${newsItem.title}-1`} />
       ))}
@@ -52,7 +61,14 @@ export async function getStaticProps() {
 
 export default NewsPocPage;
 
-const NewsPageWrapper = styled(StyledPageWrapper)`
+const NewsPageWrapper = styled(m.div)`
+  width: 100%;
+  height: fit-content;
+  padding-top: var(--gap-page-top);
+  padding-bottom: var(--gap-xl);
+  padding-left: var(--gap-s);
+  padding-right: var(--gap-s);
+
   max-width: 50rem; // test on bigger screen --> could use clamp
   margin: auto;
   padding-top: var(--gap-page-top);
@@ -72,9 +88,26 @@ const NewsItem = ({ newsItem }: { newsItem: NewsItemType }) => {
     ? [...images, ...Array(6 - images.length)]
     : [...Array(6)];
 
+  const container = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.05 } },
+  };
+
+  const item = {
+    hidden: { opacity: 0, translateY: -30 },
+    show: {
+      opacity: 1,
+      translateY: 0,
+      transition: {
+        type: "spring",
+        bounce: 0.4,
+      },
+    },
+  };
+
   return (
-    <NewsItemWrapper onClick={() => setIsOpen((x) => !x)}>
-      <ImageGrid>
+    <NewsItemWrapper onClick={() => setIsOpen((x) => !x)} variants={item}>
+      <ImageGrid variants={container}>
         {atLeastSixArray?.map((x, i) => (
           <NewsImage key={i} image={x} />
         ))}
@@ -91,7 +124,7 @@ const NewsItem = ({ newsItem }: { newsItem: NewsItemType }) => {
   );
 };
 
-const NewsItemWrapper = styled.div`
+const NewsItemWrapper = styled(m.div)`
   flex-direction: row;
   justify-content: start;
   margin-bottom: var(--gap-s);
@@ -103,7 +136,7 @@ const NewsItemWrapper = styled.div`
   }
 `;
 
-const ImageGrid = styled.div`
+const ImageGrid = styled(m.div)`
   flex-shrink: 0;
   width: 70%;
   height: fit-content;
@@ -128,7 +161,40 @@ const ImageGrid = styled.div`
 `;
 
 const NewsImage = ({ image }: { image: ImageType | undefined }) => {
-  if (!image) return <ImageWrapper />;
+  const item = {
+    hidden: {
+      opacity: 0,
+      background: "#b3ff00",
+      translateY: -20,
+    },
+    show: {
+      opacity: 1,
+      background: "var(--gray-1)",
+      translateY: 0,
+      transition: {
+        type: "spring",
+        bounce: 0.4,
+      },
+    },
+  };
+  const itemWithImage = {
+    hidden: {
+      opacity: 0,
+      background: "#b3ff00",
+      translateY: -20,
+    },
+    show: {
+      opacity: 1,
+      background: "#ffffff",
+      translateY: 0,
+      transition: {
+        type: "spring",
+        bounce: 0.4,
+      },
+    },
+  };
+
+  if (!image) return <ImageWrapper variants={item} />;
 
   const { url, caption, palette, aspectRatio } = image;
 
@@ -138,6 +204,7 @@ const NewsImage = ({ image }: { image: ImageType | undefined }) => {
         backgroundColor: `white`,
         aspectRatio: `${aspectRatio} / 1`,
       }}
+      variants={itemWithImage}
     >
       <Image
         src={url}
@@ -150,7 +217,7 @@ const NewsImage = ({ image }: { image: ImageType | undefined }) => {
   );
 };
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled(m.div)`
   background-color: var(--gray-1);
   width: 100%;
   position: relative;
