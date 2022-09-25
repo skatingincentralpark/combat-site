@@ -98,8 +98,12 @@ const HeaderMenuNav = styled.nav`
   }
 `;
 const HeaderMenuText = styled.div`
-  padding: var(--gap-xl);
+  padding: var(--gap-s);
   max-width: 50rem;
+
+  @media screen and (min-width: 700px) {
+    padding: var(--gap-xl);
+  }
 `;
 const MenuImageDesktop = styled.div`
   position: relative;
@@ -180,6 +184,7 @@ const NavLink = ({
 const StyledNavLink = styled(m.div)`
   background-color: var(--nav-link-bg-color);
   color: var(--nav-link-color);
+  padding: var(--gap-3xs) var(--gap-s);
   --nav-link-color: #000;
   --dot-color: #fff; // scoped to link so the dot can use it
   --dot-scale: scale(1);
@@ -188,9 +193,11 @@ const StyledNavLink = styled(m.div)`
     monospace;
   -webkit-font-smoothing: initial;
   font-size: 1.6rem; */
+  @media screen and (min-width: 700px) {
+    padding: var(--gap-3xs) var(--gap-xl);
+  }
 
   & a {
-    padding: var(--gap-3xs) var(--gap-xl);
     display: flex;
     align-items: center;
   }
