@@ -6,8 +6,10 @@ import { LookbookType } from "../../types/lookbookTypes";
 import { CarouselSlide } from "./carousel-slide";
 
 const Carousel = ({ lookbook }: LookbookType) => {
+  const { album } = lookbook || {};
   const [viewportRef, embla] = useEmblaCarousel({
     containScroll: "trimSnaps",
+    startIndex: Math.min(album.length - 1, 10), // limit start index for initial slide in animation
   });
 
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
@@ -23,24 +25,14 @@ const Carousel = ({ lookbook }: LookbookType) => {
   }, [embla]);
 
   useEffect(() => {
+    if (embla) embla?.scrollTo(0);
+  }, [embla]);
+
+  useEffect(() => {
     if (!embla) return;
     embla.on("select", onSelect);
     onSelect();
   }, [embla, onSelect]);
-
-  const parentVariants = {
-    hidden: {
-      translateX: "var(--translate-distance)",
-    },
-    show: {
-      translateX: 0,
-      transition: {
-        duration: 0.8,
-        ease: "anticipate",
-        type: "tween",
-      },
-    },
-  };
 
   return (
     <Embla>
@@ -50,13 +42,8 @@ const Carousel = ({ lookbook }: LookbookType) => {
       </ButtonContainerFull>
       <EmblaViewPort ref={viewportRef}>
         <AnimatePresence>
-          <EmblaContainer
-            variants={parentVariants}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-          >
-            {lookbook?.album?.map((image, i) => {
+          <EmblaContainer>
+            {album.map((image, i) => {
               return <CarouselSlide image={image} key={i} />;
             })}
           </EmblaContainer>
@@ -81,12 +68,6 @@ const EmblaContainer = styled(m.div)`
   display: flex;
   user-select: none;
   height: 50vh;
-
-  --translate-distance: -900px;
-
-  @media screen and (min-width: 650px) {
-    --translate-distance: -1000px;
-  }
 `;
 const ButtonContainerFull = styled.div`
   width: 100%;

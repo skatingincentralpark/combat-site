@@ -10,6 +10,28 @@ import Dropdown from "@components/dropdown";
 import { useRouter } from "next/router";
 
 const LookbookPage = ({ lookbook }: LookbookType) => {
+  return (
+    <>
+      <StyledPageWrapperCentered>
+        <div>
+          <Carousel lookbook={lookbook} />
+          <LookbookDescription
+            title={lookbook?.title}
+            season={lookbook?.season}
+            date={lookbook?.date}
+            description={lookbook?.description}
+          />
+        </div>
+      </StyledPageWrapperCentered>
+      <SeasonDropdown lookbook={lookbook} />
+    </>
+  );
+};
+
+export default LookbookPage;
+
+// Seperated so dropdown state won't re-render Lookbook Page component
+const SeasonDropdown = ({ lookbook }: LookbookType) => {
   const router = useRouter();
 
   // Default selected is true if it's current slug
@@ -29,25 +51,12 @@ const LookbookPage = ({ lookbook }: LookbookType) => {
   }, [slugs]);
 
   return (
-    <StyledPageWrapperCentered>
-      <div>
-        <Carousel lookbook={lookbook} />
-        <LookbookDescription
-          title={lookbook?.title}
-          season={lookbook?.season}
-          date={lookbook?.date}
-          description={lookbook?.description}
-        />
-      </div>
-      <DropdownWrapper>
-        <span>Choose a Location:</span>
-        <Dropdown list={slugs} setList={setSlugs} />
-      </DropdownWrapper>
-    </StyledPageWrapperCentered>
+    <DropdownWrapper>
+      <span>Choose a Location:</span>
+      <Dropdown list={slugs} setList={setSlugs} />
+    </DropdownWrapper>
   );
 };
-
-export default LookbookPage;
 
 const DropdownWrapper = styled.div`
   padding: 0 var(--gap-xs);
