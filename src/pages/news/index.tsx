@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Image from "next/image";
 import FutureImage from "next/future/image";
 import styled from "@emotion/styled";
 import { AnimatePresence, m } from "framer-motion";
@@ -179,15 +178,15 @@ const NewsImage = ({ image }: { image: ImageType | undefined }) => {
     },
   };
 
-  if (!image) return <ImageWrapper variants={item} />;
-
-  const { url, caption, palette, aspectRatio, width, height } = image;
-
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const doFadeIn = () => {
     setImageLoaded(true);
   };
+
+  if (!image) return <ImageWrapper variants={item} />;
+
+  const { url, caption, palette, aspectRatio, width, height } = image;
 
   return (
     <ImageWrapper
