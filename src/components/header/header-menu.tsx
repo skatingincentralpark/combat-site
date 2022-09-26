@@ -184,7 +184,6 @@ const NavLink = ({
 const StyledNavLink = styled(m.div)`
   background-color: var(--nav-link-bg-color);
   color: var(--nav-link-color);
-  padding: var(--gap-3xs) var(--gap-s);
   --nav-link-color: #000;
   --dot-color: #fff; // scoped to link so the dot can use it
   --dot-scale: scale(1);
@@ -193,13 +192,17 @@ const StyledNavLink = styled(m.div)`
     monospace;
   -webkit-font-smoothing: initial;
   font-size: 1.6rem; */
-  @media screen and (min-width: 700px) {
-    padding: var(--gap-3xs) var(--gap-xl);
-  }
 
   & a {
     display: flex;
     align-items: center;
+    height: 100%;
+    flex-grow: 1;
+    padding: var(--gap-3xs) var(--gap-s);
+
+    @media screen and (min-width: 700px) {
+      padding: var(--gap-3xs) var(--gap-xl);
+    }
   }
   &:hover {
     @media screen and (min-width: 700px) {
