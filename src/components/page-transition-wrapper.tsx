@@ -31,7 +31,7 @@ const PageTransitionWrapper = ({ children, loading }: Props) => {
   };
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode="wait">
       {/* {loading && (
         <ImageWrapper
           initial={{
