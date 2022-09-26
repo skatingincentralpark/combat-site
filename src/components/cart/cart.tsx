@@ -29,8 +29,7 @@ export default Cart;
 
 const CartButtonWrapper = styled(m.button)`
   z-index: 9;
-  --back-button-width: 10rem;
-  width: var(--back-button-width);
+  --back-button-width: 8rem;
   height: 100%;
   cursor: pointer;
   white-space: nowrap;

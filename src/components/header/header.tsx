@@ -99,8 +99,7 @@ const HeaderToggle = styled.button<{ navOpen: boolean }>`
   }
 `;
 const HeaderBackButton = styled(m.button)`
-  --back-button-width: 10rem;
-  width: var(--back-button-width);
+  --back-button-width: 8rem;
   height: 100%;
   cursor: pointer;
   white-space: nowrap;
