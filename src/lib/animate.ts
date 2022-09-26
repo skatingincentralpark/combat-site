@@ -1,4 +1,4 @@
-const pageTransitionSpeed = 0;
+const pageTransitionSpeed = 200;
 
 const headerButtonVariants = () => {
   return {
