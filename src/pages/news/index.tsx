@@ -152,7 +152,7 @@ const ImageGrid = styled(m.div)`
 
   &:hover > div {
     @media screen and (min-width: 700px) {
-      outline: 1px solid var(--gray-2);
+      outline: 0.5px solid black;
     }
   }
 
@@ -178,36 +178,48 @@ const NewsImage = ({ image }: { image: ImageType | undefined }) => {
       },
     },
   };
-  const itemWithImage = {
-    hidden: {
-      opacity: 0,
-      background: "#b3ff00",
-      translateY: -20,
-    },
-    show: {
-      opacity: 1,
-      background: "#ffffff",
-      translateY: 0,
-      transition: {
-        type: "spring",
-        bounce: 0.4,
-      },
-    },
-  };
 
   if (!image) return <ImageWrapper variants={item} />;
 
   const { url, caption, palette, aspectRatio, width, height } = image;
 
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const doFadeIn = () => {
+    setImageLoaded(true);
+  };
+
   return (
     <ImageWrapper
       style={{
         aspectRatio: `${aspectRatio} / 1`,
-        // backgroundColor: palette.dominant.background, // not working as framer is setting bgColor
+        backgroundColor: palette.dominant.background,
       }}
-      variants={itemWithImage}
+      variants={{
+        hidden: {
+          opacity: 0,
+          background: "#ff0000",
+          translateY: -20,
+        },
+        show: {
+          opacity: 1,
+          background: palette.dominant.background,
+          translateY: 0,
+          transition: {
+            type: "spring",
+            bounce: 0.4,
+          },
+        },
+      }}
     >
-      <FutureImage src={url} alt={caption} width={width} height={height} />
+      <FutureImage
+        src={url}
+        alt={caption}
+        width={width}
+        height={height}
+        className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
+        onLoadingComplete={doFadeIn}
+      />
     </ImageWrapper>
   );
 };
@@ -219,9 +231,19 @@ const ImageWrapper = styled(m.div)`
   aspect-ratio: 1;
   user-select: none;
   cursor: crosshair;
+  outline: 1px solid white;
 
   & > img {
     height: 100%;
+
+    &.transparent {
+      opacity: 0;
+      transition: opacity 0.25s linear;
+      will-change: opacity;
+    }
+    &.hasLoaded {
+      opacity: 1;
+    }
   }
 `;
 
