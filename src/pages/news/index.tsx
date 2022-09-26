@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
+import FutureImage from "next/future/image";
 import styled from "@emotion/styled";
 import { AnimatePresence, m } from "framer-motion";
 import { PortableText } from "@portabletext/react";
@@ -196,23 +197,17 @@ const NewsImage = ({ image }: { image: ImageType | undefined }) => {
 
   if (!image) return <ImageWrapper variants={item} />;
 
-  const { url, caption, palette, aspectRatio } = image;
+  const { url, caption, palette, aspectRatio, width, height } = image;
 
   return (
     <ImageWrapper
       style={{
-        backgroundColor: `white`,
         aspectRatio: `${aspectRatio} / 1`,
+        // backgroundColor: palette.dominant.background, // not working as framer is setting bgColor
       }}
       variants={itemWithImage}
     >
-      <Image
-        src={url}
-        alt={caption}
-        layout="fill"
-        objectFit="cover"
-        key={url}
-      />
+      <FutureImage src={url} alt={caption} width={width} height={height} />
     </ImageWrapper>
   );
 };

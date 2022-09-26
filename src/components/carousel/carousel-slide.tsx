@@ -1,18 +1,31 @@
-import Image from "next/future/image";
+import { useState } from "react";
+import FutureImage from "next/future/image";
 import styled from "@emotion/styled";
 
 export const CarouselSlide = ({ image }: { image: ImageType }) => {
   const { aspectRatio, height, lqip, palette, width, url, caption } = image;
 
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const doFadeIn = () => {
+    setImageLoaded(true);
+  };
+
   return (
-    <EmblaSlide style={{ aspectRatio: `${aspectRatio} / 1` }}>
+    <EmblaSlide
+      style={{
+        aspectRatio: `${aspectRatio} / 1`,
+        backgroundColor: palette.dominant.background,
+      }}
+    >
       {caption && <SlideText>{caption}</SlideText>}
-      <Image
+      <FutureImage
         src={url}
+        alt={caption}
         width={width}
         height={height}
-        alt={caption}
-        style={{ backgroundColor: palette.dominant.background }}
+        className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
+        onLoadingComplete={doFadeIn}
       />
     </EmblaSlide>
   );
@@ -35,6 +48,15 @@ const EmblaSlide = styled.div`
 
   & > img {
     height: 100%;
+
+    &.transparent {
+      opacity: 0;
+      transition: opacity 0.25s linear;
+      will-change: opacity;
+    }
+    &.hasLoaded {
+      opacity: 1;
+    }
   }
 `;
 const SlideText = styled.div`
