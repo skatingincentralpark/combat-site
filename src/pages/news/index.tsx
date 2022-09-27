@@ -68,15 +68,16 @@ const NewsPageWrapper = styled(m.div)`
   height: fit-content;
   padding-top: var(--gap-page-top);
   padding-bottom: var(--gap-xl);
-  padding-left: var(--gap-s);
-  padding-right: var(--gap-s);
+  padding-left: 0;
+  padding-right: 0;
 
   max-width: 50rem; // test on bigger screen --> could use clamp
   margin: auto;
-  padding-top: var(--gap-page-top);
 
   @media screen and (min-width: 700px) {
     padding-top: 12rem;
+    padding-left: var(--gap-s);
+    padding-right: var(--gap-s);
   }
 `;
 
@@ -140,14 +141,16 @@ const NewsItemWrapper = styled(m.div)`
 
 const ImageGrid = styled(m.div)`
   flex-shrink: 0;
-  width: 70%;
+  width: 90%;
   height: fit-content;
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: var(--gap-s);
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: var(--gap-xxs);
 
   @media screen and (min-width: 700px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: var(--gap-s);
     width: 40%;
   }
 
@@ -193,7 +196,7 @@ const NewsImage = ({ image }: { image: ImageType | undefined }) => {
   return (
     <ImageWrapper
       style={{
-        aspectRatio: `${aspectRatio} / 1`,
+        // aspectRatio: `${aspectRatio} / 1`,
         backgroundColor: palette.dominant.background,
       }}
       variants={{
@@ -233,9 +236,11 @@ const ImageWrapper = styled(m.div)`
   user-select: none;
   cursor: crosshair;
   outline: 1px solid white;
+  overflow: hidden;
 
   & > img {
     height: 100%;
+    object-fit: cover;
 
     &.transparent {
       opacity: 0;
