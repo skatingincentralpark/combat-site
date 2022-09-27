@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/router";
 import { default as NextImage } from "next/image";
 import { m } from "framer-motion";
@@ -25,6 +25,12 @@ const navText = [
 const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
   const refScrollable = useRef<HTMLDivElement>(null);
   useLockBodyScroll(refScrollable);
+
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const doFadeIn = () => {
+    setImageLoaded(true);
+  };
 
   return (
     <HeaderMenuWrapper {...headerVariants()}>
@@ -59,6 +65,8 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
             src="/images/earth-laughs-in-flowers.png"
             layout="fill"
             objectFit="contain"
+            className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
+            onLoadingComplete={doFadeIn}
           />
         </div>
       </MenuImageDesktop>
@@ -121,6 +129,17 @@ const MenuImageDesktop = styled.div`
     position: relative;
     height: 100%;
     width: 100%;
+  }
+
+  & img {
+    &.transparent {
+      opacity: 0;
+      transition: opacity 0.25s linear;
+      will-change: opacity;
+    }
+    &.hasLoaded {
+      opacity: 1;
+    }
   }
 `;
 const MenuImageMobile = styled.div`

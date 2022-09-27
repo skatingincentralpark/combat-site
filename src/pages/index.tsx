@@ -1,17 +1,43 @@
-import { default as NextImage } from "next/image";
+import { useState } from "react";
+import FutureImage from "next/future/image";
+import { GetStaticProps } from "next";
 import styled from "@emotion/styled";
 import { StyledPageWrapperCentered } from "@components/shared-styles/page-wrappers";
+import client from "../../client";
 
-const HomePage = () => {
+const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
+  const {
+    url,
+    width,
+    height,
+    caption,
+    aspectRatio,
+    palette: {
+      dominant: { background },
+    },
+  } = homePageImage;
+
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const doFadeIn = () => {
+    setImageLoaded(true);
+  };
+
   return (
     <StyledPageWrapperCentered px="xl">
       <ColorStrips />
-      <BillWrapper>
-        <NextImage
-          src="/images/bill-splat.png"
-          alt="Something"
-          layout="fill"
-          objectFit="cover"
+      <BillWrapper
+        style={{
+          aspectRatio: `${aspectRatio} / 1`,
+        }}
+      >
+        <FutureImage
+          src={url}
+          alt={caption}
+          width={width}
+          height={height}
+          className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
+          onLoadingComplete={doFadeIn}
         />
       </BillWrapper>
     </StyledPageWrapperCentered>
@@ -20,11 +46,47 @@ const HomePage = () => {
 
 export default HomePage;
 
+export const getStaticProps: GetStaticProps = async () => {
+  const homePageData = await client.fetch(
+    `
+    *[_type == "generalSettings"]{
+      homePageImage{
+        caption,
+        "url": asset -> url,
+        "height": asset -> metadata.dimensions.height,
+        "width": asset -> metadata.dimensions.width,
+        "aspectRatio": asset -> metadata.dimensions.aspectRatio,
+        "lqip": asset -> metadata.lqip,
+        "palette": asset -> metadata.palette
+      },
+    }[0]
+  `
+  );
+
+  return {
+    props: {
+      homePageImage: homePageData.homePageImage,
+    },
+  };
+};
+
 const BillWrapper = styled.div`
   position: relative;
   max-height: 50rem;
-  aspect-ratio: 2381 / 1849;
   margin-left: auto;
+
+  & > img {
+    height: 100%;
+
+    &.transparent {
+      opacity: 0;
+      transition: opacity 0.25s linear;
+      will-change: opacity;
+    }
+    &.hasLoaded {
+      opacity: 1;
+    }
+  }
 `;
 
 const ColorStrips = () => {
