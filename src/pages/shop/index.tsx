@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import ShopItemSummary from "@components/shop-item-summary";
+import HeadSEO from "@components/head-seo";
 
 const ShopPage = () => {
   const products = [
@@ -43,6 +44,7 @@ const ShopPage = () => {
 
   return (
     <PageWrapper>
+      <HeadSEO title="Shop" />
       {products.map((product, i) => (
         <ShopItemSummary product={product} key={i} />
       ))}

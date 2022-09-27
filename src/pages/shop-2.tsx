@@ -3,6 +3,7 @@ import { default as NextImage } from "next/image";
 import { HeadingSm, TextSm } from "@components/shared-styles/typography";
 import { StyledPageWrapper } from "@components/shared-styles/page-wrappers";
 import Link from "@components/link";
+import HeadSEO from "@components/head-seo";
 
 const products = [
   {
@@ -56,6 +57,7 @@ const infoCards = [
 const ShopPage = () => {
   return (
     <ShopPageWrapper>
+      <HeadSEO title="Shop 2" />
       <IntroText>
         <HeadingSm>
           From the essays of Emerson, to the stories of the Beat, these

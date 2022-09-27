@@ -1,4 +1,5 @@
 import ColorStrips from "@components/color-strips";
+import HeadSEO from "@components/head-seo";
 import { StyledPageWrapper } from "@components/shared-styles/page-wrappers";
 
 const ColoursPage = () => {
@@ -16,6 +17,7 @@ const ColoursPage = () => {
 
   return (
     <StyledPageWrapper>
+      <HeadSEO title="Colours" />
       <ColorStrips colors={colors} />
     </StyledPageWrapper>
   );

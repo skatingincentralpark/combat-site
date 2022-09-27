@@ -1,6 +1,7 @@
 import Link from "next/link";
 import client from "../../../client";
 import { StyledPageWrapperCentered } from "@components/shared-styles/page-wrappers";
+import HeadSEO from "@components/head-seo";
 
 type Props = {
   slugs: string[];
@@ -9,6 +10,7 @@ type Props = {
 const Index = ({ slugs }: Props) => {
   return (
     <StyledPageWrapperCentered px="m">
+      <HeadSEO title="Lookbooks" />
       {!!slugs &&
         slugs.map((slug, i) => (
           <div key={i}>

@@ -7,10 +7,12 @@ import {
   Text,
   TextSm,
 } from "../components/shared-styles/typography";
+import HeadSEO from "@components/head-seo";
 
 const DesignSystemPage = () => {
   return (
     <StyledPageWrapper px="l">
+      <HeadSEO title="Design System" />
       <HeaderSection>
         <Heading>
           <strong>Heading 1:</strong> Helvetica

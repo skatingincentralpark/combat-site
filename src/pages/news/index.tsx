@@ -7,6 +7,7 @@ import client from "../../../client";
 
 import { NewsItemType } from "../../types/newsTypes";
 import { Heading, HeadingSm } from "@components/shared-styles/typography";
+import HeadSEO from "@components/head-seo";
 
 const NewsPocPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
   const container = {
@@ -21,6 +22,7 @@ const NewsPocPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
 
   return (
     <NewsPageWrapper initial="hidden" animate="show" variants={container}>
+      <HeadSEO title="News" />
       {newsItems.map((newsItem) => (
         <NewsItem newsItem={newsItem} key={`${newsItem.title}-1`} />
       ))}

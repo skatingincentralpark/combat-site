@@ -8,10 +8,12 @@ import { StyledPageWrapperCentered } from "@components/shared-styles/page-wrappe
 import { LookbookDescription } from "@components/lookbook-description";
 import Dropdown from "@components/dropdown";
 import { useRouter } from "next/router";
+import HeadSEO from "@components/head-seo";
 
 const LookbookPage = ({ lookbook }: LookbookType) => {
   return (
     <>
+      <HeadSEO title={`Lookbook / ${lookbook?.title}`} />
       <StyledPageWrapperCentered>
         <div>
           <Carousel lookbook={lookbook} />

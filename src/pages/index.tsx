@@ -4,6 +4,7 @@ import { GetStaticProps } from "next";
 import styled from "@emotion/styled";
 import { StyledPageWrapperCentered } from "@components/shared-styles/page-wrappers";
 import client from "../../client";
+import HeadSEO from "@components/head-seo";
 
 const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
   const {
@@ -25,6 +26,7 @@ const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
 
   return (
     <StyledPageWrapperCentered px="xl">
+      <HeadSEO title="Home" />
       <ColorStrips />
       <BillWrapper
         style={{
