@@ -6,7 +6,11 @@ import { PortableText } from "@portabletext/react";
 import client from "../../../client";
 
 import { NewsItemType } from "../../types/newsTypes";
-import { Heading, HeadingSm } from "@components/shared-styles/typography";
+import {
+  Heading,
+  HeadingSm,
+  TextXsm,
+} from "@components/shared-styles/typography";
 import HeadSEO from "@components/head-seo";
 
 const NewsPocPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
@@ -218,7 +222,7 @@ const NewsImage = ({ image }: { image: ImageType | undefined }) => {
     >
       <FutureImage
         src={url}
-        alt={caption}
+        alt={caption || "News Image"}
         width={width}
         height={height}
         className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
@@ -263,18 +267,19 @@ const NewsText = ({
 }) => {
   const newsDescriptionVariants = {
     initial: {
-      width: 0,
+      // width: 0,
       height: 0,
       backgroundColor: "#000",
     },
     animate: {
-      width: "100%",
-      height: "20rem",
+      // width: "100%",
+      // height: "20rem",
+      height: "fit-content",
       backgroundColor: "#fff",
       transition: { duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] },
     },
     exit: {
-      width: 0,
+      // width: 0,
       height: 0,
       backgroundColor: "#000",
     },
@@ -290,7 +295,7 @@ const NewsText = ({
           {descriptionOpen && (
             <Description {...newsDescriptionVariants}>
               <div>
-                <div>
+                <div className="desc-coords">
                   {location.lat.toFixed(2)} °S{" : "}
                   {location.lng.toFixed(2)} °E
                 </div>
@@ -306,7 +311,8 @@ const NewsText = ({
 
 const Description = styled(m.div)`
   overflow: scroll;
-  max-height: 20rem;
+  /* max-height: 20rem; */
+  margin-top: 3rem;
 
   & > div {
     padding: var(--gap-xs);
@@ -319,6 +325,10 @@ const Description = styled(m.div)`
       margin-bottom: var(--gap-3xs);
       -webkit-font-smoothing: initial;
     }
+  }
+
+  .desc-coords {
+    font-family: "Courier New", Courier, monospace;
   }
 `;
 const NewsTextWrapper = styled.div`
