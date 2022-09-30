@@ -96,4 +96,28 @@ const TextSm = styled.p<TextProps>`
   }
 `;
 
-export { Heading, HeadingSm, Text, TextSm };
+const TextXsm = styled.p<TextProps>`
+  font-size: 12px;
+  line-height: 1.5em;
+  letter-spacing: 0.01em;
+
+  &:not(:last-of-type) {
+    margin-bottom: ${({ paragraph }) => paragraph && "1em"};
+  }
+
+  @media screen and (min-width: 650px) {
+    &:hover {
+      background-color: lightslategray;
+    }
+
+    line-height: 1.5em;
+  }
+
+  @media (min-width: 1024px) {
+    &:hover {
+      background-color: #eaacf1;
+    }
+  }
+`;
+
+export { Heading, HeadingSm, Text, TextSm, TextXsm };
