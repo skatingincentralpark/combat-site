@@ -64,9 +64,6 @@ const LookbookList = styled.ul`
     & > button {
       display: block;
       padding: var(--gap-3xs) var(--gap-l);
-      /* font-family: "Bitcount Mono Single Lt Circle", "Courier New", Courier,
-        monospace;
-      -webkit-font-smoothing: initial; */
       font-weight: 600;
       font-size: 14px;
       width: 100%;
@@ -115,6 +112,9 @@ const DummyListItem = styled.li`
   list-style: none;
   border-left: 0.8rem solid var(--gray-2);
   color: var(--gray-2);
+  font-family: "Bitcount Mono Single Lt Circle", "Courier New", Courier,
+    monospace;
+  -webkit-font-smoothing: initial;
 
   &:hover {
     @media screen and (min-width: 700px) {
