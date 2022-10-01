@@ -270,18 +270,21 @@ const NewsText = ({
       // width: 0,
       height: 0,
       backgroundColor: "#000",
+      marginTop: 0,
     },
     animate: {
       // width: "100%",
       // height: "20rem",
       height: "fit-content",
       backgroundColor: "#fff",
+      marginTop: "3rem",
       transition: { duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] },
     },
     exit: {
       // width: 0,
       height: 0,
       backgroundColor: "#000",
+      marginTop: 0,
     },
   };
 
@@ -310,8 +313,9 @@ const NewsText = ({
 };
 
 const Description = styled(m.div)`
-  overflow: scroll;
+  /* overflow: scroll; */
   /* max-height: 20rem; */
+  overflow: hidden;
   margin-top: 3rem;
 
   & > div {
@@ -341,7 +345,13 @@ const NewsTextWrapper = styled.div`
 
   @media screen and (min-width: 700px) {
     padding-top: 0;
+
+    h2 {
+      // using margin collapse, add margin-top to h2 to create a nicer animation
+      margin-bottom: 3rem;
+    }
   }
+
   /* font-family: "Bitcount Mono Single Lt Circle", "Courier New", Courier; */
   /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */

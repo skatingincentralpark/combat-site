@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import styled from "@emotion/styled";
 import FutureImage from "next/future/image";
-import sing from "../../public/images/sing.png";
+import popupImage from "../../public/images/picasso.jpeg";
 import { AnimatePresence, m } from "framer-motion";
 
 const MusicPlayer = () => {
@@ -48,15 +48,22 @@ const MusicPlayer = () => {
         <button onClick={!isPlaying ? play : pause} id="playPauseBtn">
           {!isPlaying ? "Play" : "Pause"}
         </button>
-        <div onClick={click}>{sentence[wordIndex]} ////////////</div>
+        <div onClick={click}>
+          {sentence[wordIndex]} {`////////////`}
+        </div>
         <AnimatePresence>
           {wordIndex !== 0 && wordIndex % 4 == 0 && (
             <ImageWrapper
               initial={{ opacity: 0, y: `100%`, scale: 0 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: `100%`, scale: 0 }}
+              exit={{
+                opacity: 0,
+                y: `100%`,
+                scale: 0,
+                transition: { duration: 0.5, ease: `easeInOut` },
+              }}
             >
-              <FutureImage src={sing} alt="Drawing of a skeleton" />
+              <FutureImage src={popupImage} alt="Drawing of a skeleton" />
             </ImageWrapper>
           )}
         </AnimatePresence>
