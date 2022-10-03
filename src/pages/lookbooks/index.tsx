@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { m } from "framer-motion";
 import client from "../../../client";
 import HeadSEO from "@components/head-seo";
 import styled from "@emotion/styled";
@@ -21,12 +22,41 @@ const Index = ({ slugs }: Props) => {
 
   const router = useRouter();
 
+  const parentVariants = {
+    hidden: {
+      opacity: 0,
+    },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.05 },
+    },
+    exit: { transition: { duration: 0 } },
+  };
+
+  const childVariants = {
+    hidden: { background: `var(--piss-1)`, opacity: 0, x: 60 },
+    show: {
+      background: `#fff`,
+      opacity: 1,
+      x: 0,
+    },
+  };
+
   return (
     <PageWrapper>
       <HeadSEO title="Lookbooks" />
-      <LookbookList>
+      <LookbookList
+        variants={parentVariants}
+        initial="hidden"
+        animate="show"
+        exit="exit"
+      >
         {arr.map((item, i) => (
-          <ListItem key={item.slug} borderColor={item.color}>
+          <ListItem
+            variants={childVariants}
+            key={item.slug}
+            borderColor={item.color}
+          >
             <button onClick={() => router.push(`lookbooks/${item.slug}`)}>
               <span>{`0${i}`}</span>
               <span>{slugToText(item.slug)}</span>
@@ -36,7 +66,7 @@ const Index = ({ slugs }: Props) => {
         ))}
 
         {dummyArr.map((_, i) => (
-          <DummyListItem key={i}>
+          <DummyListItem variants={childVariants} key={i}>
             <button>
               <span />
               <span>null</span>
@@ -57,7 +87,7 @@ const PageWrapper = styled.div`
   overflow: hidden;
 `;
 
-const LookbookList = styled.ul`
+const LookbookList = styled(m.ul)`
   padding: 0;
 
   & > li {
@@ -86,7 +116,7 @@ const LookbookList = styled.ul`
   }
 `;
 
-const ListItem = styled.li<{ borderColor: string }>`
+const ListItem = styled(m.li)<{ borderColor: string }>`
   border-bottom: 0.5px solid var(--gray-4);
   list-style: none;
   border-left: 0.8rem solid var(--gray-2);
@@ -94,7 +124,7 @@ const ListItem = styled.li<{ borderColor: string }>`
 
   &:hover {
     @media screen and (min-width: 700px) {
-      background-color: black;
+      background-color: black !important;
       color: white;
     }
   }
@@ -107,7 +137,7 @@ const ListItem = styled.li<{ borderColor: string }>`
     cursor: pointer;
   }
 `;
-const DummyListItem = styled.li`
+const DummyListItem = styled(m.li)`
   border-bottom: 0.5px solid var(--gray-4);
   list-style: none;
   border-left: 0.8rem solid var(--gray-2);

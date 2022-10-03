@@ -63,7 +63,11 @@ const MusicPlayer = () => {
                 transition: { duration: 0.5, ease: `easeInOut` },
               }}
             >
-              <FutureImage src={popupImage} alt="Drawing of a skeleton" />
+              <FutureImage
+                src={popupImage}
+                alt="Drawing of a skeleton"
+                priority={true}
+              />
             </ImageWrapper>
           )}
         </AnimatePresence>
