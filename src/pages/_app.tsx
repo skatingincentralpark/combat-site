@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <LazyMotion features={domAnimation}>
         <Header isLoading={isLoading} />
         <MusicPlayer />
-        <Announcement />
+        {/* <Announcement /> */}
         <PageTransitionWrapper loading={isLoading}>
           <Component {...pageProps} />
         </PageTransitionWrapper>

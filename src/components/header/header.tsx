@@ -44,9 +44,14 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
 
         <HeaderToggle onClick={toggleNav} navOpen={navOpen}>
           <CombatLogo isLoading={isLoading} />
+          {/* <img
+            src="/images/test/logo-2.png"
+            alt=""
+            style={{ height: `100%` }}
+          /> */}
         </HeaderToggle>
 
-        <Cart />
+        {/* <Cart /> */}
       </HeaderWrapper>
 
       <AnimatePresence>

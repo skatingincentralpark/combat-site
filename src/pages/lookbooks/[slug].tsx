@@ -24,8 +24,8 @@ const LookbookPage = ({ lookbook }: LookbookType) => {
             description={lookbook?.description}
           />
         </div>
+        <SeasonDropdown lookbook={lookbook} />
       </StyledPageWrapperCentered>
-      <SeasonDropdown lookbook={lookbook} />
     </>
   );
 };

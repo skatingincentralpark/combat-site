@@ -15,7 +15,7 @@ const gap = {
 
 const StyledPageWrapper = styled.div<PageWrapperProps>`
   width: 100%;
-  height: fit-content;
+  height: 100%;
   padding-top: var(--gap-page-top);
   padding-bottom: var(--gap-xl);
   padding-left: ${({ px }) => (px ? gap[px] : 0)};

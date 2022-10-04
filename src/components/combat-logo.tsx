@@ -147,7 +147,7 @@ const Path = styled.path<{ delay: number; fast?: boolean }>`
       fill: var(--yellow-1);
     }
     50% {
-      fill: var(--white);
+      fill: #000;
     }
     75% {
       fill: var(--piss-1);

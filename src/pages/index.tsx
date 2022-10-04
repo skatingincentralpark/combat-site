@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FutureImage from "next/future/image";
 import { GetStaticProps } from "next";
 import styled from "@emotion/styled";
-import { StyledPageWrapperCentered } from "@components/shared-styles/page-wrappers";
+import { StyledPageWrapper } from "@components/shared-styles/page-wrappers";
 import client from "../../client";
 import HeadSEO from "@components/head-seo";
 
@@ -24,10 +24,41 @@ const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
     setImageLoaded(true);
   };
 
+  const testImages = [
+    `/images/test/1.jpg`,
+    `/images/test/2.jpg`,
+    `/images/test/3.jpg`,
+    `/images/test/4.jpg`,
+    `/images/test/5.jpg`,
+    `/images/test/6.jpg`,
+    `/images/test/7.jpg`,
+  ];
+
+  const [selectedImage, setSelectedImage] = useState(0);
+
+  useEffect(() => {
+    const imageIndex = setInterval(() => {
+      setSelectedImage((selectedImage) => (selectedImage + 1) % 7);
+    }, 1500);
+
+    return () => clearInterval(imageIndex);
+  }, []);
+
   return (
-    <StyledPageWrapperCentered px="xl">
+    <PageWrapper px="xl">
       <HeadSEO title="Home" />
-      <ColorStrips />
+      <img
+        src={testImages[selectedImage]}
+        style={{
+          margin: `auto`,
+          maxWidth: `100%`,
+          width: `60rem`,
+          maxHeight: `50rem`,
+          objectFit: `contain`,
+        }}
+      />
+      {/* <ColorStrips /> */}
+      {/*
       <BillWrapper
         style={{
           aspectRatio: `${aspectRatio} / 1`,
@@ -41,8 +72,8 @@ const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
           className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
           onLoadingComplete={doFadeIn}
         />
-      </BillWrapper>
-    </StyledPageWrapperCentered>
+      </BillWrapper> */}
+    </PageWrapper>
   );
 };
 
@@ -71,6 +102,13 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   };
 };
+
+const PageWrapper = styled(StyledPageWrapper)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0;
+`;
 
 const BillWrapper = styled.div`
   position: relative;
