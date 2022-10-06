@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import FutureImage from "next/future/image";
 import { GetStaticProps } from "next";
 import styled from "@emotion/styled";
@@ -18,12 +18,14 @@ const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
     },
   } = homePageImage;
 
+  // Bill Image
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const doFadeIn = () => {
     setImageLoaded(true);
   };
 
+  // Slideshow
   const testImages = [
     `/images/test/1.jpg`,
     `/images/test/2.jpg`,
@@ -44,35 +46,69 @@ const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
     return () => clearInterval(imageIndex);
   }, []);
 
+  // Video
+  const ref = useRef<HTMLVideoElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(
+    ref.current?.paused || true
+  );
+
+  const handlePlayVideo = () => {
+    if (ref.current?.paused) {
+      ref.current?.play();
+      setIsPlaying(true);
+    } else {
+      ref.current?.pause();
+      setIsPlaying(false);
+    }
+  };
+
   return (
     <PageWrapper px="xl">
       <HeadSEO title="Home" />
-      <img
-        src={testImages[selectedImage]}
-        style={{
-          margin: `auto`,
-          maxWidth: `100%`,
-          width: `60rem`,
-          maxHeight: `50rem`,
-          objectFit: `contain`,
-        }}
-      />
-      {/* <ColorStrips /> */}
-      {/*
-      <BillWrapper
-        style={{
-          aspectRatio: `${aspectRatio} / 1`,
-        }}
-      >
-        <FutureImage
-          src={url}
-          alt={caption}
-          width={width}
-          height={height}
-          className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
-          onLoadingComplete={doFadeIn}
+
+      <PageSection>
+        <VideoWrapper>
+          <button onClick={handlePlayVideo}>
+            {isPlaying ? "Pause" : "Play"}
+          </button>
+          <Video autoPlay playsInline muted loop ref={ref}>
+            {/* <source src="/videos/happiness-cage-wirc.mp4" /> */}
+            <source src="/videos/hiromix-2.mp4" />
+          </Video>
+        </VideoWrapper>
+      </PageSection>
+
+      {/* <PageSection>
+        <img
+          src={testImages[selectedImage]}
+          style={{
+            margin: `auto`,
+            maxWidth: `100%`,
+            width: `60rem`,
+            maxHeight: `50rem`,
+            objectFit: `contain`,
+          }}
         />
-      </BillWrapper> */}
+      </PageSection> */}
+
+      {/* <PageSection>
+        <ColorStrips />
+
+        <BillWrapper
+          style={{
+            aspectRatio: `${aspectRatio} / 1`,
+          }}
+        >
+          <FutureImage
+            src={url}
+            alt={caption}
+            width={width}
+            height={height}
+            className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
+            onLoadingComplete={doFadeIn}
+          />
+        </BillWrapper>
+      </PageSection> */}
     </PageWrapper>
   );
 };
@@ -104,10 +140,11 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const PageWrapper = styled(StyledPageWrapper)`
-  display: flex;
+  /* display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 0;
+  padding-top: 0; */
 `;
 
 const BillWrapper = styled.div`
@@ -159,4 +196,28 @@ const StyledColorStrips = styled.div`
   & > *:nth-of-type(3) {
     background-color: #ebc815;
   }
+`;
+
+const PageSection = styled.section`
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:first-of-type {
+    /* height: calc(100vh - var(--header-height)); */
+    height: 100%;
+
+    & > * {
+      margin-bottom: 12rem;
+    }
+  }
+`;
+const VideoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const Video = styled.video`
+  max-height: 20rem;
 `;
