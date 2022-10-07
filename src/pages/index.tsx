@@ -72,8 +72,8 @@ const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
             {isPlaying ? "Pause" : "Play"}
           </button>
           <Video autoPlay playsInline muted loop ref={ref}>
-            {/* <source src="/videos/happiness-cage-wirc.mp4" /> */}
-            <source src="/videos/hiromix-2.mp4" />
+            <source src="/videos/happiness-cage-wirc.mp4" />
+            {/* <source src="/videos/hiromix-2.mp4" /> */}
           </Video>
         </VideoWrapper>
       </PageSection>
