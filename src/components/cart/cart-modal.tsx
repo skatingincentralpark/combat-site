@@ -4,6 +4,7 @@ import { AnimatePresence, m } from "framer-motion";
 import Accordion from "../accordion/accordion";
 import CartItem from "./cart-item";
 import { default as NextImage } from "next/image";
+import FutureImage from "next/future/image";
 import CartCta from "./cart-cta";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import useLockBodyScroll from "../../hooks/useLockBodyScroll";
@@ -77,11 +78,11 @@ const CartModal = () => {
     >
       <CartModalInner ref={refScrollable}>
         <CartFunWrapper>
-          <NextImage
+          <FutureImage
             src="/images/otter-cheeks.jpeg"
             alt="Something"
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: `cover` }}
           />
         </CartFunWrapper>
         <CartItemWrapper>
