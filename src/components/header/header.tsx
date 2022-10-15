@@ -26,7 +26,7 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
     setNavOpen(false);
     setIsShopPath(null);
   };
-  const navigateToShop = () => router.push("/shop");
+  const navigateToShop = () => router.push("/shop-2");
 
   return (
     <>

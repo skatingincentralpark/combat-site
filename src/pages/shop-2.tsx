@@ -57,6 +57,24 @@ const infoCards = [
 const ShopPage = () => {
   return (
     <ShopPageWrapper>
+      <ItemWrapper>
+        {products.map((product, i) => (
+          <div key={i}>
+            <Link href="/shop/item-1">
+              <NextImage
+                src={product.image}
+                layout="fill"
+                objectFit="contain"
+              />
+            </Link>
+          </div>
+        ))}
+      </ItemWrapper>
+    </ShopPageWrapper>
+  );
+
+  return (
+    <ShopPageWrapper>
       <HeadSEO title="Shop 2" />
       <IntroText>
         <HeadingSm>
@@ -90,7 +108,27 @@ const ShopPage = () => {
 
 export default ShopPage;
 
-const ShopPageWrapper = styled.main``;
+const ItemWrapper = styled.section`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: var(--gap-m);
+  max-width: 50rem;
+  margin: auto;
+  flex-grow: 1;
+
+  & > * {
+    display: block;
+    aspect-ratio: 1;
+  }
+`;
+
+const ShopPageWrapper = styled.main`
+  padding-top: var(--header-height);
+  padding: var(--gap-m) var(--gap-xxl) var(--gap-m) var(--gap-xxl);
+  height: 100%;
+  display: flex;
+`;
+
 const IntroText = styled.div`
   padding: var(--gap-xxl) var(--gap-xxl) 0 var(--gap-xxl);
   max-width: 70rem;
