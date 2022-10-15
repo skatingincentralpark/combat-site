@@ -84,13 +84,13 @@ const NewsItemPage = () => {
           work as well. I think it’s because I grew up in the 2000s; I was a
           teenager at that time, so I was learning how to communicate with the
           world through fashion by exploring a Y2K aesthetic. It’s just
-          something that's naturally getting attached to our generation of
+          something that&apos;s naturally getting attached to our generation of
           designers. Like a learned fashion language through experience.
-          Whenever I'm speaking I will have this accent—I'm speaking English,
-          but I definitely have my Eastern European accent. Fashion language is
-          the same, unconsciously. I never intentionally set out to create 2000s
-          looks. This new collection for me feels a little bit costume, and that
-          just naturally happened.
+          Whenever I&apos;m speaking I will have this accent—I&apos;m speaking
+          English, but I definitely have my Eastern European accent. Fashion
+          language is the same, unconsciously. I never intentionally set out to
+          create 2000s looks. This new collection for me feels a little bit
+          costume, and that just naturally happened.
         </p>
       </BodyText>
     </div>
