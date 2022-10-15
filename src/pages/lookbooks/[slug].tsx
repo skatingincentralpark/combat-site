@@ -4,7 +4,6 @@ import client from "../../../client";
 import { GetStaticProps, GetStaticPaths } from "next";
 import Carousel from "@components/carousel/carousel";
 import { LookbookType } from "../../types/lookbookTypes";
-import { StyledPageWrapperCentered } from "@components/shared-styles/page-wrappers";
 import { LookbookDescription } from "@components/lookbook-description";
 import Dropdown from "@components/dropdown";
 import { useRouter } from "next/router";
@@ -14,7 +13,7 @@ const LookbookPage = ({ lookbook }: LookbookType) => {
   return (
     <>
       <HeadSEO title={`Lookbook / ${lookbook?.title}`} />
-      <StyledPageWrapperCentered>
+      <PageWrapper>
         <div>
           <Carousel lookbook={lookbook} />
           <LookbookDescription
@@ -25,12 +24,21 @@ const LookbookPage = ({ lookbook }: LookbookType) => {
           />
         </div>
         <SeasonDropdown lookbook={lookbook} />
-      </StyledPageWrapperCentered>
+      </PageWrapper>
     </>
   );
 };
 
 export default LookbookPage;
+
+const PageWrapper = styled.main`
+  padding-top: var(--gap-page-top);
+  padding-bottom: var(--gap-xxl);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 
 // Seperated so dropdown state won't re-render Lookbook Page component
 const SeasonDropdown = ({ lookbook }: LookbookType) => {

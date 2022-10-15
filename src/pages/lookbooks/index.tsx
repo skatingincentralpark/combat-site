@@ -81,7 +81,7 @@ const Index = ({ slugs }: Props) => {
 
 export default Index;
 
-const PageWrapper = styled.div`
+const PageWrapper = styled.main`
   padding-top: var(--gap-page-top);
   max-height: 100%;
   overflow: hidden;

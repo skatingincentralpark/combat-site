@@ -90,7 +90,7 @@ const ShopPage = () => {
 
 export default ShopPage;
 
-const ShopPageWrapper = styled(StyledPageWrapper)``;
+const ShopPageWrapper = styled.main``;
 const IntroText = styled.div`
   padding: var(--gap-xxl) var(--gap-xxl) 0 var(--gap-xxl);
   max-width: 70rem;

@@ -13,7 +13,7 @@ const gap = {
   xxl: "var(--gap-l)",
 };
 
-const StyledPageWrapper = styled.div<PageWrapperProps>`
+const StyledPageWrapper = styled.main<PageWrapperProps>`
   width: 100%;
   height: 100%;
   padding-top: var(--gap-page-top);
@@ -22,8 +22,6 @@ const StyledPageWrapper = styled.div<PageWrapperProps>`
   padding-right: ${({ px }) => (px ? gap[px] : 0)};
 `;
 
-const StyledPageWrapperCentered = styled(StyledPageWrapper)<PageWrapperProps>`
-  position: relative;
-`;
+const StyledPageWrapperCentered = styled(StyledPageWrapper)<PageWrapperProps>``;
 
 export { StyledPageWrapper, StyledPageWrapperCentered };

@@ -87,7 +87,7 @@ const DesignSystemPage = () => {
 export default DesignSystemPage;
 
 // Sections
-const HeaderSection = styled.div`
+const HeaderSection = styled.main`
   border-bottom: 0.5px solid black;
   height: 5rem;
   display: flex;

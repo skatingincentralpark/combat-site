@@ -67,7 +67,7 @@ export async function getStaticProps() {
 
 export default NewsPocPage;
 
-const NewsPageWrapper = styled(m.div)`
+const NewsPageWrapper = styled(m.main)`
   width: 100%;
   height: fit-content;
   padding-top: var(--gap-page-top);
