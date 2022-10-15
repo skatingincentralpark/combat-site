@@ -18,6 +18,18 @@ const NewsItemPage = () => {
         </HeroText>
         <HeroImage src="https://japan-photo.info/wp-content/uploads/2008/04/KAWAUCHI-Utatane_044-685.jpg" />
       </PageHero>
+      <SoundcloudWrapper>
+        <div />
+        <iframe
+          style={{ padding: `2rem 2rem 0 2rem` }}
+          width="100%"
+          height="166"
+          scrolling="no"
+          frameBorder="no"
+          // allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/852891706&color=%2384d0e0&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+        ></iframe>
+      </SoundcloudWrapper>
       <IntroText>
         <p>
           Theories suggest that recurring dreams are related to an unresolved
@@ -196,5 +208,22 @@ const ArticleGroupImages = styled.div`
     object-fit: contain;
     min-width: 0;
     padding: 0 var(--gap-m);
+  }
+`;
+
+const SoundcloudWrapper = styled.div`
+  margin-top: 1rem;
+  position: relative;
+
+  & > div {
+    position: absolute;
+    background-color: #7b007b;
+    mix-blend-mode: difference;
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover > div {
+    display: none;
   }
 `;
