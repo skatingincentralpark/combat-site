@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import { default as NextImage } from "next/image";
 import { m } from "framer-motion";
@@ -34,6 +34,14 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
     setImageLoaded(true);
   };
 
+  const refVideo = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    console.log(refVideo.current?.playbackRate);
+    console.log(refVideo);
+    if (refVideo.current) refVideo.current.playbackRate = 0.5;
+  }, [refVideo.current]);
+
   return (
     <HeaderMenuWrapper {...headerVariants()}>
       <HeaderMenuInner ref={refScrollable}>
@@ -64,7 +72,28 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
       <MenuImageDesktop>
         <div>
           <NextImage
-            src="/images/earth-laughs-in-flowers.png"
+            src="/images/skull/1.png"
+            layout="fill"
+            objectFit="contain"
+            className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
+            onLoadingComplete={doFadeIn}
+          />
+          <NextImage
+            src="/images/skull/2.png"
+            layout="fill"
+            objectFit="contain"
+            className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
+            onLoadingComplete={doFadeIn}
+          />
+          <NextImage
+            src="/images/skull/3.png"
+            layout="fill"
+            objectFit="contain"
+            className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
+            onLoadingComplete={doFadeIn}
+          />
+          <NextImage
+            src="/images/skull/4.png"
             layout="fill"
             objectFit="contain"
             className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
@@ -90,6 +119,10 @@ const HeaderMenuWrapper = styled(m.div)`
   font-weight: 300;
   display: flex;
   flex-direction: row;
+
+  & video {
+    border: 1px solid black;
+  }
 `;
 const HeaderMenuInner = styled.div`
   height: 100%;
@@ -121,6 +154,7 @@ const MenuImageDesktop = styled.div`
   height: 100%;
   border-left: 1px solid var(--gray-3);
   padding: var(--gap-4xl);
+  padding-top: 9rem;
   display: none;
 
   @media screen and (min-width: 700px) {
@@ -152,13 +186,11 @@ const MenuImageMobile = styled.div`
   align-items: center;
   overflow: hidden;
   margin: var(--gap-l) 0 0 0;
-
   position: absolute;
   right: var(--gap-l);
   bottom: var(--gap-l);
   height: 10rem;
   width: 10rem;
-
   opacity: 0.2;
   animation: fadeOut 2s ease infinite alternate;
 

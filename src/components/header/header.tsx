@@ -44,14 +44,9 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
 
         <HeaderToggle onClick={toggleNav} navOpen={navOpen}>
           <CombatLogo isLoading={isLoading} />
-          {/* <img
-            src="/images/test/logo-2.png"
-            alt=""
-            style={{ height: `100%` }}
-          /> */}
         </HeaderToggle>
 
-        {/* <Cart /> */}
+        <Cart />
       </HeaderWrapper>
 
       <AnimatePresence>
@@ -67,15 +62,11 @@ const HeaderWrapper = styled.header`
   position: fixed;
   top: 0;
   left: 0;
-
   z-index: 8;
-
   display: flex;
   flex-direction: row;
-
   width: 100%;
   height: var(--header-height);
-
   align-items: center;
   justify-content: flex-start;
 `;
@@ -83,15 +74,9 @@ const HeaderToggle = styled.button<{ navOpen: boolean }>`
   position: relative;
   padding: var(--gap-s) var(--gap-xl);
   background-color: #000;
-
   flex-grow: 1;
-
   height: 100%;
   cursor: pointer;
-
-  @media screen and (min-width: 700px) {
-    background-color: ${({ navOpen }) => (!navOpen ? "#000" : "initial")};
-  }
 
   &:hover {
     @media screen and (min-width: 700px) {
