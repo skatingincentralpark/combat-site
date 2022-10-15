@@ -33,10 +33,6 @@ const GlobalStyles = () => {
         height: 100%;
       }
 
-      body {
-        min-height: 100%;
-      }
-
       html {
         background: white;
         font-family: var(--font-family-primary);

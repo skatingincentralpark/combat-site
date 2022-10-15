@@ -1,8 +1,6 @@
-import { default as NextImage } from "next/image";
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import { AnimatePresence, m } from "framer-motion";
-import { pageTransitionSpeed } from "@lib/animate";
 
 type Props = {
   children: React.ReactNode;
@@ -31,41 +29,9 @@ const PageTransitionWrapper = ({ children, loading }: Props) => {
   };
 
   return (
-    <AnimatePresence mode="wait">
-      {/* {loading && (
-        <ImageWrapper
-          initial={{
-            opacity: 0,
-            x: "-200%",
-            y: "-50%",
-          }}
-          animate={{
-            opacity: 1,
-            x: "-50%",
-            y: "-50%",
-            transition: {
-              opacity: { duration: pageTransitionSpeed / 1000 },
-            },
-          }}
-          exit={{
-            opacity: 0,
-            x: "200%",
-            y: "-50%",
-            transition: {
-              opacity: { duration: 0.2 },
-            },
-          }}
-        >
-          <NextImage
-            src="/images/otter-cheeks.jpeg"
-            alt="Something"
-            layout="fill"
-            objectFit="cover"
-          />
-        </ImageWrapper>
-      )} */}
+    <AnimatePresence>
       {!loading && (
-        <StyledMotionDiv
+        <TransitionWrapper
           key={router.pathname}
           variants={variants}
           initial="initial"
@@ -73,7 +39,7 @@ const PageTransitionWrapper = ({ children, loading }: Props) => {
           animate="animate"
         >
           {children}
-        </StyledMotionDiv>
+        </TransitionWrapper>
       )}
     </AnimatePresence>
   );
@@ -81,29 +47,6 @@ const PageTransitionWrapper = ({ children, loading }: Props) => {
 
 export default PageTransitionWrapper;
 
-const StyledMotionDiv = styled(m.div)`
+const TransitionWrapper = styled(m.div)`
   height: 100%;
-  width: 100%;
-`;
-const ImageWrapper = styled(m.div)`
-  height: 300px;
-  width: 300px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  animation: IAmDeeCaptunNow 1s infinite;
-
-  @keyframes IAmDeeCaptunNow {
-    0% {
-      filter: invert(0);
-    }
-    50% {
-      filter: invert(1);
-    }
-    100% {
-      filter: invert(0);
-    }
-  }
 `;
