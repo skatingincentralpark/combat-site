@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { default as NextImage } from "next/image";
 import { HeadingSm, TextSm } from "@components/shared-styles/typography";
-import { StyledPageWrapper } from "@components/shared-styles/page-wrappers";
 import Link from "@components/link";
 import HeadSEO from "@components/head-seo";
+import { useEffect, useState } from "react";
 
 const products = [
   {
@@ -55,71 +55,85 @@ const infoCards = [
 ];
 
 const ShopPage = () => {
-  return (
-    <ShopPageWrapper>
-      <ItemWrapper>
-        {products.map((product, i) => (
-          <div key={i}>
-            <Link href="/shop/item-1">
-              <NextImage
-                src={product.image}
-                layout="fill"
-                objectFit="contain"
-              />
-            </Link>
-          </div>
-        ))}
-      </ItemWrapper>
-    </ShopPageWrapper>
-  );
+  const colors = ["orange", "purple", "green"];
+
+  const [colorIndex, setColorIndex] = useState(0);
+
+  const cycleColor = () =>
+    setColorIndex(colors.length - 1 === colorIndex ? 0 : colorIndex + 1);
 
   return (
     <ShopPageWrapper>
-      <HeadSEO title="Shop 2" />
-      <IntroText>
-        <HeadingSm>
-          From the essays of Emerson, to the stories of the Beat, these
-          vanguards of individualism, freedom and improvisation give us comfort
-          and confidence to work towards these values - the values which we
-          believe are key to living a fulfilling life.
-        </HeadingSm>
-      </IntroText>
-      <ProductGroup>
+      <Items>
         {products.map((product, i) => (
-          <Product key={i}>
-            <Link href="#">
+          <Item key={i} color={colors[colorIndex]} onMouseDown={cycleColor}>
+            <Link href="/shop/item-1">
+              <Dot color={colors[colorIndex]} />
               <NextImage
                 src={product.image}
                 layout="fill"
                 objectFit="contain"
               />
             </Link>
-          </Product>
+          </Item>
         ))}
-      </ProductGroup>
-      <InfoCardGroup>
-        {infoCards.map((x) => (
-          <InfoCard title={x.title} key={x.title} />
-        ))}
-      </InfoCardGroup>
+      </Items>
     </ShopPageWrapper>
   );
 };
 
 export default ShopPage;
 
-const ItemWrapper = styled.section`
+const Items = styled.section`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: var(--gap-m);
   max-width: 50rem;
   margin: auto;
   flex-grow: 1;
+`;
+
+const Item = styled.div`
+  display: block;
+  aspect-ratio: 1;
 
   & > * {
-    display: block;
-    aspect-ratio: 1;
+    border-radius: 1rem;
+    border: 1px dashed var(--gray-2);
+    transition: border 200ms ease, outline 200ms ease;
+    overflow: hidden;
+    --dot-opacity: 0;
+    --dot-scale: 3;
+
+    &:hover {
+      @media screen and (min-width: 700px) {
+        border-color: var(--gray-4);
+      }
+    }
+
+    &:active {
+      border: 1px dashed ${({ color }) => color && color};
+      --dot-opacity: 100%;
+      --dot-scale: 1;
+    }
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+`;
+
+const Dot = styled.div`
+  position: absolute;
+  z-index: 1;
+  width: 10%;
+  height: 10%;
+  border-radius: 50%;
+  background-color: ${({ color }) => color && color};
+  opacity: var(--dot-opacity);
+  transform: scale(var(--dot-scale));
+  transform-origin: center;
+  transition: opacity 150ms, transform 150ms, background 150ms;
 `;
 
 const ShopPageWrapper = styled.main`
@@ -127,100 +141,4 @@ const ShopPageWrapper = styled.main`
   padding: var(--gap-m) var(--gap-xxl) var(--gap-m) var(--gap-xxl);
   height: 100%;
   display: flex;
-`;
-
-const IntroText = styled.div`
-  padding: var(--gap-xxl) var(--gap-xxl) 0 var(--gap-xxl);
-  max-width: 70rem;
-  margin: auto;
-  text-align: center;
-  font-family: "Bitcount Mono Single Lt Circle", "Courier New", Courier,
-    monospace;
-  -webkit-font-smoothing: initial;
-`;
-const ProductGroup = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  padding: var(--gap-m) var(--gap-xl) 0 var(--gap-xl);
-  margin: auto;
-`;
-
-const Product = styled.div`
-  position: relative;
-  margin: var(--gap-xs);
-  width: calc(50% - var(--gap-xs) * 2);
-  aspect-ratio: 1;
-  border-radius: 1rem;
-  overflow: hidden;
-  border: 1px solid transparent;
-  transition: border-color 100ms;
-
-  @media screen and (min-width: 900px) {
-    width: calc(25% - var(--gap-m) * 2);
-    margin: var(--gap-m);
-  }
-
-  &:hover {
-    @media screen and (min-width: 700px) {
-      border-color: magenta;
-    }
-  }
-
-  &:active {
-    border-color: red;
-  }
-`;
-
-const InfoCardGroup = styled.div`
-  padding: var(--gap-m) var(--gap-xl) var(--gap-xl) var(--gap-xl);
-  margin: auto;
-
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: initial;
-
-  overflow-x: auto;
-  overscroll-behavior-x: none;
-
-  @media screen and (min-width: 900px) {
-    justify-content: center;
-  }
-`;
-
-const InfoCard = ({ title }: { title: string }) => {
-  return (
-    <InfoCardWrapper>
-      <HeadingSm>{title}</HeadingSm>
-      <TextSm>
-        We keep a project’s team small enough that it can be fed by two (large)
-        pizzas to ensure high levels of care, low levels of politics and a
-        vested interest in the project.
-      </TextSm>
-    </InfoCardWrapper>
-  );
-};
-
-const InfoCardWrapper = styled.div`
-  background-color: #f7f7f7;
-  width: 32rem;
-  border-radius: 1rem;
-  padding: var(--gap-l) var(--gap-xl);
-  margin: var(--gap-xs);
-  flex-shrink: 0;
-
-  @media screen and (min-width: 900px) {
-    flex-shrink: initial;
-  }
-
-  & > h2 {
-    margin-bottom: var(--gap-3xs);
-    font-weight: 400;
-  }
-
-  & > p {
-    color: #999999;
-  }
 `;
