@@ -134,7 +134,6 @@ const BodyText = styled.div`
 `;
 
 const ArticleGroupImages = styled.div`
-  width: 100vw;
   display: flex;
   flex-direction: row;
   align-items: start;

@@ -22,7 +22,8 @@ const HeroSideBySideOverlap = () => {
         </HeroText>
         <HeroImage
           //   src="https://japan-photo.info/wp-content/uploads/2008/04/KAWAUCHI-Utatane_044-685.jpg"
-          src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2020%2F08%2Fbornxraised-wacko-maria-collaborative-capsule-2020-info-9.jpg?q=75&w=800&cbr=1&fit=max"
+          // src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2020%2F08%2Fbornxraised-wacko-maria-collaborative-capsule-2020-info-9.jpg?q=75&w=800&cbr=1&fit=max"
+          src="/images/tomaskii.png"
         />
       </PageHero>
     </>

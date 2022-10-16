@@ -19,6 +19,7 @@ const HeroSideBySide = () => {
       <HeroImage
         // src="https://japan-photo.info/wp-content/uploads/2008/04/KAWAUCHI-Utatane_044-685.jpg"
         src="https://a.1stdibscdn.com/rinko-kawauchi-1972-japanese-photography-untitled-from-the-series-of-hanabi-rinko-kawauchi-sky-firework-night-for-sale/a_12801/a_58919321584524511679/Christophe_Guye_Galerie_Rinko_Kawauchi_HANABI_H31_master.jpg?width=1500"
+        // src="/images/tomaskii.png"
       />
     </PageHero>
   );
@@ -40,6 +41,7 @@ const HeroText = styled.div`
   padding-left: var(--gap-xl);
   padding-right: var(--gap-xl);
   color: #333333;
+  min-width: 0;
 
   h1 {
     font-size: 10rem;
@@ -63,7 +65,7 @@ const HeroText = styled.div`
   }
 
   @media screen and (min-width: 700px) {
-    /* width: 50%; */
+    width: 50%;
   }
 `;
 
@@ -77,6 +79,6 @@ const HeroImage = styled.img`
     padding-top: 0;
     margin-left: auto;
     min-width: 0;
-    /* width: 50%; */
+    width: 50%;
   }
 `;

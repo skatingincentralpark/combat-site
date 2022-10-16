@@ -33,6 +33,11 @@ const GlobalStyles = () => {
         height: 100%;
       }
 
+      ::selection {
+        color: var(--green-3);
+        background: var(--piss-1);
+      }
+
       html {
         background: white;
         font-family: var(--font-family-primary);
