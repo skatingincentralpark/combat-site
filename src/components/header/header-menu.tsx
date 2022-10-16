@@ -38,8 +38,6 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
   const refVideo = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    console.log(refVideo.current?.playbackRate);
-    console.log(refVideo);
     if (refVideo.current) refVideo.current.playbackRate = 0.5;
   }, [refVideo.current]);
 

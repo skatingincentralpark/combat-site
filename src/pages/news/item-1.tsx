@@ -1,27 +1,16 @@
 import styled from "@emotion/styled";
 import { clamp } from "@lib/helpers";
+import HeroSideBySide from "@components/news/hero-side-by-side";
+import HeroStacked from "@components/news/hero-stacked";
+import HeroSideBySideOverlap from "@components/news/hero-side-by-side-overlap";
 
 const NewsItemPage = () => {
   return (
     <div style={{ height: `100%` }}>
-      <PageHero>
-        <HeroText>
-          <h1>MASHA POPOVA IS FINDING VELOCITY</h1>
-          <h2>
-            Real Talk with the Ukrainian Designer About Her First Runway Show,
-            Inspiration, and the Industry
-          </h2>
-          <small>
-            Interview: Rebecca Storm Photography: Rebecca Storm, Yaroslav
-            Prytula
-          </small>
-        </HeroText>
-        <HeroImage
-          // src="https://japan-photo.info/wp-content/uploads/2008/04/KAWAUCHI-Utatane_044-685.jpg"
-          src="https://a.1stdibscdn.com/rinko-kawauchi-1972-japanese-photography-untitled-from-the-series-of-hanabi-rinko-kawauchi-sky-firework-night-for-sale/a_12801/a_58919321584524511679/Christophe_Guye_Galerie_Rinko_Kawauchi_HANABI_H31_master.jpg?width=1500"
-        />
-      </PageHero>
-      {/* <SoundcloudWrapper>
+      <HeroSideBySide />
+      <HeroStacked />
+      <HeroSideBySideOverlap />
+      <SoundcloudWrapper>
         <div />
         <iframe
           style={{ padding: `2rem 2rem 0 2rem` }}
@@ -32,7 +21,7 @@ const NewsItemPage = () => {
           // allow="autoplay"
           src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/852891706&color=%2384d0e0&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
         ></iframe>
-      </SoundcloudWrapper> */}
+      </SoundcloudWrapper>
       <IntroText>
         <p>
           Theories suggest that recurring dreams are related to an unresolved
@@ -114,122 +103,6 @@ const NewsItemPage = () => {
 
 export default NewsItemPage;
 
-const PageHero = styled.section`
-  margin-top: var(--header-height);
-  position: relative;
-
-  @media screen and (min-width: 700px) {
-    display: flex;
-  }
-`;
-
-const HeroText = styled.div`
-  padding-top: var(--gap-l);
-  padding-left: var(--gap-xl);
-  padding-right: var(--gap-xl);
-  width: 100%;
-  color: #333333;
-
-  h1 {
-    font-size: 10rem;
-    font-size: ${clamp(50, 120)};
-    line-height: 1.1em;
-    letter-spacing: -0.02em;
-    font-weight: 300;
-  }
-
-  h2 {
-    font-size: 3rem;
-    font-size: ${clamp(24, 36)};
-    line-height: 1.4em;
-    letter-spacing: -0.02em;
-  }
-
-  small {
-    display: inline-block;
-    margin-top: 2rem;
-  }
-
-  @media screen and (min-width: 700px) {
-    width: 50%;
-  }
-`;
-
-const HeroImage = styled.img`
-  padding-top: var(--gap-m);
-  right: 0;
-  object-fit: cover;
-  object-position: left;
-  width: 100%;
-
-  @media screen and (min-width: 700px) {
-    padding-top: 0;
-    margin-left: auto;
-    width: 50%;
-  }
-`;
-
-// const PageHero = styled.section`
-//   margin-top: var(--header-height);
-//   position: relative;
-
-//   @media screen and (min-width: 700px) {
-//     display: flex;
-//   }
-// `;
-
-// const HeroText = styled.div`
-//   padding-top: var(--gap-l);
-//   padding-left: var(--gap-xl);
-//   padding-right: var(--gap-xl);
-//   width: 100%;
-
-//   h1 {
-//     font-size: 10rem;
-//     font-size: ${clamp(50, 120)};
-//     line-height: 1.1em;
-//     letter-spacing: -0.02em;
-//     font-weight: 300;
-//   }
-
-//   h2 {
-//     font-size: 3rem;
-//     font-size: ${clamp(24, 36)};
-//     line-height: 1.4em;
-//     letter-spacing: -0.02em;
-//   }
-
-//   small {
-//     display: inline-block;
-//     margin-top: 2rem;
-//   }
-
-//   @media screen and (min-width: 700px) {
-//     position: sticky;
-//     z-index: 1;
-//     width: ${clamp(350, 700, 700, 1400)};
-//   }
-//   @media screen and (min-width: 1400px) {
-//     width: ${clamp(700, 1400, 1400, 1900)};
-//   }
-// `;
-
-// const HeroImage = styled.img`
-//   padding-top: var(--gap-m);
-//   right: 0;
-//   object-fit: cover;
-//   object-position: left;
-//   width: 100%;
-
-//   @media screen and (min-width: 700px) {
-//     padding-top: 0;
-//     position: sticky;
-//     margin-left: auto;
-//     width: ${clamp(400, 700)};
-//     height: 100%;
-//   }
-// `;
-
 const IntroText = styled.div`
   width: 70%;
   margin-top: var(--gap-3xl);
@@ -275,15 +148,15 @@ const ArticleGroupImages = styled.div`
 `;
 
 const SoundcloudWrapper = styled.div`
-  margin-top: 1rem;
+  margin: 2rem 0;
   position: relative;
 
   & > div {
-    position: absolute;
+    /* position: absolute;
     background-color: #7b007b;
     mix-blend-mode: difference;
     width: 100%;
-    height: 100%;
+    height: 100%; */
   }
 
   &:hover > div {
