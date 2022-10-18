@@ -186,8 +186,8 @@ const MenuImageMobile = styled.div`
   overflow: hidden;
   margin: var(--gap-l) 0 0 0;
   position: absolute;
-  right: var(--gap-l);
-  bottom: var(--gap-l);
+  right: var(--gap-xl);
+  bottom: var(--gap-xl);
   height: 10rem;
   width: 10rem;
   opacity: 0.2;

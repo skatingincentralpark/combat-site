@@ -47,11 +47,8 @@ const ShopCta = ({ sizes, selectedSize, setSelectedSize }: Props) => {
 export default ShopCta;
 
 const ShopCtaWrapper = styled(m.div)`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  padding: 0;
   width: 100%;
+  margin-bottom: 2rem;
 
   @media screen and (min-width: 650px) {
     position: inherit;

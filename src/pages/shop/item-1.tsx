@@ -1,7 +1,7 @@
 import HeadSEO from "@components/head-seo";
 import { useState } from "react";
 import styled from "@emotion/styled";
-import Image from "next/image";
+import FutureImage from "next/future/image";
 import ShopCta from "@components/shop-cta";
 import productImage from "../../../public/images/tee-bill.png";
 
@@ -28,16 +28,11 @@ const ShopItem = ({ sizes }: Props) => {
   return (
     <PageWrapper>
       <StyledImage>
-        <Image
-          src={productImage}
-          alt="Something"
-          quality={100}
-          placeholder="blur"
-        />
+        <FutureImage src={productImage} alt="Something" />
       </StyledImage>
       <InfoWrapper>
         <StyledTitle>
-          <span>Viktor Tee</span>
+          <h1>Viktor Tee</h1>
           <span>$70 AUD</span>
         </StyledTitle>
         <StyledDescription>
@@ -88,19 +83,37 @@ const InfoWrapper = styled.div`
 const StyledTitle = styled.div`
   display: flex;
   flex-direction: column;
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: var(--gap-s);
+  font-size: 17px;
+  line-height: 1.6em;
+  letter-spacing: -0.02em;
+  text-align: left;
 
-  & > span:nth-of-type(2) {
-    color: var(--gray-3);
+  @media screen and (min-width: 650px) {
+    line-height: 1.5em;
+    font-size: 12px;
+  }
+
+  & > span {
+    color: var(--green-2);
+    font-size: 14px;
   }
 
   @media screen and (min-width: 650px) {
     min-width: 10rem;
+
+    & > span {
+      color: var(--green-2);
+      font-size: 12px;
+    }
   }
 `;
 const StyledDescription = styled.div`
-  padding-bottom: 8rem;
+  padding-bottom: 2rem;
+  font-size: 14px;
+  line-height: 1.5em;
+  text-align: left;
 
   & > p {
     display: block;
@@ -108,6 +121,7 @@ const StyledDescription = styled.div`
   }
 
   @media screen and (min-width: 650px) {
+    font-size: 12px;
     padding-bottom: 0;
     margin-right: 5rem;
   }
@@ -123,11 +137,22 @@ const StyledDescription = styled.div`
   }
 `;
 const StyledImage = styled.div`
-  aspect-ratio: 1 / 1;
-  padding: 0 var(--gap-s);
+  & > img {
+    object-fit: contain;
+    height: fit-content;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 2rem;
+    border: 1px solid gray;
+    overflow: hidden;
+    padding: var(--gap-xs);
+  }
 
   @media screen and (min-width: 650px) {
     max-width: 30rem;
     padding: 0;
+
+    & > img {
+      border: none;
+    }
   }
 `;
