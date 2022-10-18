@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import { clamp } from "@lib/helpers";
-import HeroSideBySide from "@components/news/hero-side-by-side";
+import HeroStacked from "@components/news/hero-stacked";
 
-const NewsItemPage = () => {
+const NewsItemPage2 = () => {
   return (
     <div style={{ height: `100%` }}>
-      <HeroSideBySide />
+      <HeroStacked />
       <SoundcloudWrapper>
         <div />
         <iframe
@@ -97,7 +97,7 @@ const NewsItemPage = () => {
   );
 };
 
-export default NewsItemPage;
+export default NewsItemPage2;
 
 const IntroText = styled.div`
   width: 70%;

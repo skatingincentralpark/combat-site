@@ -14,7 +14,9 @@ const navLinks = [
   { href: "/shop-2", name: "Shop POC" },
   { href: "/design-system", name: "Design System" },
   { href: "/news", name: "News" },
-  { href: "/news/item-1", name: "News Item POC" },
+  { href: "/news/item-1", name: "News Item Variation 1" },
+  { href: "/news/item-2", name: "News Item Variation 2" },
+  { href: "/news/item-3", name: "News Item Variation 3" },
   { href: "/lookbooks", name: "Lookbooks" },
 ];
 

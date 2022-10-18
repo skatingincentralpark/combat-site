@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import { clamp } from "@lib/helpers";
-import HeroSideBySide from "@components/news/hero-side-by-side";
+import HeroSideBySideOverlap from "@components/news/hero-side-by-side-overlap";
 
 const NewsItemPage = () => {
   return (
     <div style={{ height: `100%` }}>
-      <HeroSideBySide />
+      <HeroSideBySideOverlap />
       <SoundcloudWrapper>
         <div />
         <iframe
@@ -15,7 +15,7 @@ const NewsItemPage = () => {
           scrolling="no"
           frameBorder="no"
           allow="autoplay"
-          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/852891706&color=%2384d0e0&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/30931388&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
         ></iframe>
       </SoundcloudWrapper>
       <IntroText>
