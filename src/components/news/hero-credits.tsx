@@ -1,29 +1,29 @@
 import styled from "@emotion/styled";
 import { clamp } from "@lib/helpers";
 
-interface HeadlineOptions {
-  fontSize: "small" | "medium" | "large";
+interface CreditsOptions {
+  fontSize?: "small" | "medium" | "large";
   fontWeight?: "light" | "regular" | "bold";
   width?: 30 | 50 | 60 | 100;
   textAlign?: "left" | "right" | "center";
   containerAlign?: "left" | "right" | "center";
 }
 
-interface Props extends HeadlineOptions {
+interface Props extends CreditsOptions {
   children: React.ReactNode;
 }
 
-const HeroHeadlineSwitcher = ({ children, ...props }: Props) => {
-  return <Headline {...props}>{children}</Headline>;
+const HeroCredits = ({ children, ...props }: Props) => {
+  return <Credits {...props}>{children}</Credits>;
 };
 
-export default HeroHeadlineSwitcher;
+export default HeroCredits;
 
 const o = {
   sizes: {
-    small: clamp(34, 80),
-    medium: clamp(50, 100),
-    large: clamp(50, 120),
+    small: clamp(10, 11),
+    medium: clamp(10, 11),
+    large: clamp(10, 11),
   },
   weights: {
     light: 300,
@@ -48,14 +48,14 @@ const o = {
   },
 };
 
-const Headline = styled.h1<HeadlineOptions>`
-  line-height: 1.1em;
-  letter-spacing: -0.02em;
+const Credits = styled.small<CreditsOptions>`
+  line-height: 1.6em;
+  letter-spacing: 0;
   width: 100%;
   margin-bottom: 0.6em;
 
   font-size: ${({ fontSize }) => o.sizes[fontSize || "medium"]};
-  font-weight: ${({ fontWeight }) => o.weights[fontWeight || "regular"]};
+  font-weight: ${({ fontWeight }) => o.weights[fontWeight || "light"]};
 
   @media screen and (min-width: 700px) {
     width: ${({ width }) => o.widths[width || 50]};

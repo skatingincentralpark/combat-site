@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { clamp } from "@lib/helpers";
 import HeroHeadlineSwitcher from "./hero-headline-switcher";
 import HeroSubheadlineSwitcher from "./hero-subheadline-switcher";
+import HeroCredits from "./hero-credits";
 
 const HeroSideBySideOverlap = () => {
   return (
@@ -30,11 +31,11 @@ const HeroSideBySideOverlap = () => {
           Dirt Bikes and Quads are the Vehicles of Choice for this
           Intergenerational Group of Riders
         </HeroSubheadlineSwitcher>
-        <small>
+        <HeroCredits>
           Interview: Rebecca Storm
           <br />
           Photography: Rebecca Storm, Yaroslav Prytula
-        </small>
+        </HeroCredits>
       </HeroText>
       <HeroImage src="https://www.theartstory.org/blog/wp-content/uploads/2015/05/Gustav_Klimt_016-1024x1024.jpg" />
     </PageHero>

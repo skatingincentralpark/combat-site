@@ -49,7 +49,6 @@ const o = {
 };
 
 const Subheadline = styled.h2<SubheadlineOptions>`
-  font-weight: 400;
   line-height: 1.4em;
   letter-spacing: -0.02em;
   width: 100%;
