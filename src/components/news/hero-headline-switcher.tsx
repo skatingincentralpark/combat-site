@@ -49,7 +49,6 @@ const o = {
 };
 
 const Headline = styled.h1<HeadlineOptions>`
-  font-weight: 400;
   line-height: 1.1em;
   letter-spacing: -0.02em;
   width: 100%;
@@ -60,6 +59,6 @@ const Headline = styled.h1<HeadlineOptions>`
   @media screen and (min-width: 700px) {
     width: ${({ width }) => o.widths[width || 50]};
     text-align: ${({ textAlign }) => o.textAligns[textAlign || "left"]};
-    ${o.containerAligns.right};
+    ${({ containerAlign }) => o.containerAligns[containerAlign || "left"]};
   }
 `;
