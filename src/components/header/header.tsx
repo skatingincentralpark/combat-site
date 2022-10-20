@@ -46,7 +46,7 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
           <CombatLogo isLoading={isLoading} />
         </HeaderToggle>
 
-        {/* <Cart /> */}
+        <Cart />
       </HeaderWrapper>
 
       <AnimatePresence>

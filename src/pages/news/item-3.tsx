@@ -4,9 +4,9 @@ import HeroSideBySideOverlap from "@components/news/hero-side-by-side-overlap";
 
 const NewsItemPage = () => {
   return (
-    <div style={{ height: `100%` }}>
+    <NewsWrapper style={{ height: `100%` }}>
       <HeroSideBySideOverlap />
-      <SoundcloudWrapper>
+      {/* <SoundcloudWrapper>
         <div />
         <iframe
           style={{ padding: `2rem 2rem 0 2rem` }}
@@ -14,10 +14,10 @@ const NewsItemPage = () => {
           height="166"
           scrolling="no"
           frameBorder="no"
-          allow="autoplay"
+          // allow="autoplay  "
           src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/30931388&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
         ></iframe>
-      </SoundcloudWrapper>
+      </SoundcloudWrapper> */}
       <IntroText>
         <p>
           Theories suggest that recurring dreams are related to an unresolved
@@ -93,11 +93,13 @@ const NewsItemPage = () => {
           costume, and that just naturally happened.
         </p>
       </BodyText>
-    </div>
+    </NewsWrapper>
   );
 };
 
 export default NewsItemPage;
+
+const NewsWrapper = styled.div``;
 
 const IntroText = styled.div`
   width: 70%;
@@ -118,7 +120,7 @@ const BodyText = styled.div`
 
   p,
   strong {
-    font-size: ${clamp(14, 18)};
+    font-size: ${clamp(14, 16)};
     line-height: 1.5em;
     max-width: 40em;
     margin: var(--gap-l) auto;
