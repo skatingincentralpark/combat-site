@@ -13,11 +13,11 @@ interface Props extends SubheadlineOptions {
   children: React.ReactNode;
 }
 
-const HeroSubheadlineSwitcher = ({ children, ...props }: Props) => {
-  return <Subheadline {...props}>{children}</Subheadline>;
+const HeroSubheadline = ({ children, ...props }: Props) => {
+  return <SubheadlineStyled {...props}>{children}</SubheadlineStyled>;
 };
 
-export default HeroSubheadlineSwitcher;
+export default HeroSubheadline;
 
 const o = {
   sizes: {
@@ -48,7 +48,7 @@ const o = {
   },
 };
 
-const Subheadline = styled.h2<SubheadlineOptions>`
+const SubheadlineStyled = styled.h2<SubheadlineOptions>`
   line-height: 1.4em;
   letter-spacing: -0.02em;
   width: 100%;

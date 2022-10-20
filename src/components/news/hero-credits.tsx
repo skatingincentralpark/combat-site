@@ -14,7 +14,7 @@ interface Props extends CreditsOptions {
 }
 
 const HeroCredits = ({ children, ...props }: Props) => {
-  return <Credits {...props}>{children}</Credits>;
+  return <CreditsStyled {...props}>{children}</CreditsStyled>;
 };
 
 export default HeroCredits;
@@ -48,7 +48,7 @@ const o = {
   },
 };
 
-const Credits = styled.small<CreditsOptions>`
+const CreditsStyled = styled.small<CreditsOptions>`
   line-height: 1.6em;
   letter-spacing: 0;
   width: 100%;

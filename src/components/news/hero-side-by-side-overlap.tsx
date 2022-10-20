@@ -1,14 +1,14 @@
 import styled from "@emotion/styled";
 import { clamp } from "@lib/helpers";
-import HeroHeadlineSwitcher from "./hero-headline-switcher";
-import HeroSubheadlineSwitcher from "./hero-subheadline-switcher";
+import HeroHeadline from "./hero-headline";
+import HeroSubheadline from "./hero-subheadline";
 import HeroCredits from "./hero-credits";
 
 const HeroSideBySideOverlap = () => {
   return (
     <PageHero>
       <HeroText>
-        <HeroHeadlineSwitcher
+        <HeroHeadline
           fontSize="small"
           fontWeight="light"
           width={60}
@@ -20,8 +20,8 @@ const HeroSideBySideOverlap = () => {
           THE LA BIKE LIFE CREW
           <br />
           AND CLARKS ORIGINALS FW22
-        </HeroHeadlineSwitcher>
-        <HeroSubheadlineSwitcher
+        </HeroHeadline>
+        <HeroSubheadline
           fontSize="small"
           fontWeight="light"
           width={50}
@@ -30,7 +30,7 @@ const HeroSideBySideOverlap = () => {
         >
           Dirt Bikes and Quads are the Vehicles of Choice for this
           Intergenerational Group of Riders
-        </HeroSubheadlineSwitcher>
+        </HeroSubheadline>
         <HeroCredits>
           Interview: Rebecca Storm
           <br />

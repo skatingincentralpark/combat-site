@@ -13,11 +13,11 @@ interface Props extends HeadlineOptions {
   children: React.ReactNode;
 }
 
-const HeroHeadlineSwitcher = ({ children, ...props }: Props) => {
-  return <Headline {...props}>{children}</Headline>;
+const HeroHeadline = ({ children, ...props }: Props) => {
+  return <HeadlineStyled {...props}>{children}</HeadlineStyled>;
 };
 
-export default HeroHeadlineSwitcher;
+export default HeroHeadline;
 
 const o = {
   sizes: {
@@ -48,7 +48,7 @@ const o = {
   },
 };
 
-const Headline = styled.h1<HeadlineOptions>`
+const HeadlineStyled = styled.h1<HeadlineOptions>`
   line-height: 1.1em;
   letter-spacing: -0.02em;
   width: 100%;
