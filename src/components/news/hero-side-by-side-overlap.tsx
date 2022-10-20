@@ -1,15 +1,25 @@
 import styled from "@emotion/styled";
 import { clamp } from "@lib/helpers";
+import HeroHeadlineSwitcher from "./hero-headline-switcher";
 
 const HeroSideBySideOverlap = () => {
   return (
     <>
       <PageHero>
-        {/* <Before /> */}
         <HeroText>
-          <h1>
-            RIDING OUT WITH THE LA BIKE LIFE CREW AND CLARKS ORIGINALS FW22
-          </h1>
+          <HeroHeadlineSwitcher
+            fontSize="small"
+            fontWeight="light"
+            width={60}
+            textAlign="left"
+            containerAlign="left"
+          >
+            RIDING OUT WITH
+            <br />
+            THE LA BIKE LIFE CREW
+            <br />
+            AND CLARKS ORIGINALS FW22
+          </HeroHeadlineSwitcher>
           <h2>
             Dirt Bikes and Quads are the Vehicles of Choice for this
             Intergenerational Group of Riders
@@ -23,7 +33,9 @@ const HeroSideBySideOverlap = () => {
         <HeroImage
           //   src="https://japan-photo.info/wp-content/uploads/2008/04/KAWAUCHI-Utatane_044-685.jpg"
           // src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2020%2F08%2Fbornxraised-wacko-maria-collaborative-capsule-2020-info-9.jpg?q=75&w=800&cbr=1&fit=max"
-          src="/images/tomaskii.png"
+          // src="/images/tomaskii.png"
+          // src="https://www.nuanhoart.com/static/8d5129e8eb040641fa8fb3f3537435c0/4423a/Nurse.jpg"
+          src="https://www.theartstory.org/blog/wp-content/uploads/2015/05/Gustav_Klimt_016-1024x1024.jpg"
         />
       </PageHero>
     </>
@@ -32,16 +44,13 @@ const HeroSideBySideOverlap = () => {
 
 export default HeroSideBySideOverlap;
 
-const Before = styled.div`
-  aspect-ratio: 1;
-  width: 50%;
-  outline: 5px solid green;
-  position: relative;
-`;
 const PageHero = styled.section`
   margin-top: var(--header-height);
   position: relative;
   height: fit-content;
+  /* min-height: calc(1 * 50vw); */
+  width: 100%;
+  min-height: calc(1 * 50vw);
 
   @media screen and (min-width: 700px) {
     display: flex;
@@ -53,26 +62,30 @@ const HeroText = styled.div`
   width: 100%;
 
   h1 {
-    font-size: ${clamp(34, 80)};
+    font-weight: 400;
     line-height: 1.1em;
     letter-spacing: -0.02em;
-    width: ${clamp(400, 850, 800, 1400)};
+    width: 100%;
     margin-bottom: 0.6em;
+
+    @media screen and (min-width: 700px) {
+      width: 65%;
+    }
   }
 
   h2 {
     font-size: ${clamp(24, 36)};
     line-height: 1.4em;
     letter-spacing: -0.02em;
+    width: 100%;
     margin-bottom: 0.7em;
+
+    @media screen and (min-width: 700px) {
+      width: 30%;
+    }
   }
 
   small {
-  }
-
-  @media screen and (min-width: 700px) {
-    position: relative;
-    width: 50%;
   }
 `;
 
@@ -83,9 +96,9 @@ const HeroImage = styled.img`
 
   @media screen and (min-width: 700px) {
     padding-top: 0;
-    position: static;
+    position: absolute;
+    z-index: -1;
     width: 50%;
     height: fit-content;
-    /* aspect-ratio: 1; */
   }
 `;
