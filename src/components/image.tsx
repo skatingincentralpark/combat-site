@@ -1,49 +1,35 @@
-import { default as NextImage } from "next/image";
+import { useState } from "react";
 import styled from "@emotion/styled";
+import FutureImage from "next/future/image";
 
-type Props = {
-  src: StaticImageData;
-  padding?: string;
-  width?: string;
-  widthMobile?: string;
-  margin?: string;
-};
+const Image = ({ image }: { image: ImageType }) => {
+  const { url, caption, palette, aspectRatio, width, height } = image;
 
-const Image = ({ src, ...rest }: Props) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const doFadeIn = () => {
+    setImageLoaded(true);
+  };
+
   return (
-    <ImageWrapper {...rest}>
-      <NextImage
-        src={src.src}
-        alt="Picture of the author"
-        layout="responsive"
-        objectFit="contain"
-        width="100%"
-        height="100%"
-        placeholder="blur"
-        blurDataURL={src.blurDataURL}
-      />
-    </ImageWrapper>
+    <FutureImageStyled
+      src={url}
+      alt={caption || "News Image"}
+      width={width}
+      height={height}
+      onLoadingComplete={doFadeIn}
+      loaded={imageLoaded}
+    />
   );
 };
 
 export default Image;
 
-type ImageWrapperProps = {
-  padding?: string;
-  width?: string;
-  widthMobile?: string;
-  margin?: string;
-};
-
-const ImageWrapper = styled.div<ImageWrapperProps>`
-  padding: ${({ padding }) => (padding ? padding : `0`)};
-  margin: ${({ margin }) => (margin ? margin : `0`)};
-  width: ${({ width }) => (width ? width : `100%`)};
+const FutureImageStyled = styled(FutureImage)<{ loaded: boolean }>`
   height: 100%;
+  object-fit: cover;
 
-  position: relative;
-
-  @media screen and (min-width: 700px) {
-    width: ${({ widthMobile }) => (widthMobile ? widthMobile : `100%`)};
-  }
+  opacity: ${({ loaded }) => (loaded ? 1 : 0)};
+  transition: opacity 0.25s linear;
+  will-change: opacity;
 `;

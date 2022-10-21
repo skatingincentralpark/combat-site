@@ -1,8 +1,4 @@
 import styled from "@emotion/styled";
-import Image from "../image";
-import image1 from "../../../public/images/tee-bill.png";
-import image2 from "../../../public/images/tee-viktor.png";
-import image3 from "../../../public/images/tee-laughing.png";
 
 type Props = {
   tee: number;
@@ -11,9 +7,9 @@ type Props = {
 const CartItem = ({ tee }: Props) => {
   return (
     <CartItemWrapper>
-      {tee === 1 && <Image src={image1} />}
-      {tee === 2 && <Image src={image2} />}
-      {tee === 3 && <Image src={image3} />}
+      {tee === 1 && <img src="/images/tee-bill.png" />}
+      {tee === 2 && <img src="/images/tee-viktor.png" />}
+      {tee === 3 && <img src="/images/tee-laughing.png" />}
       <CartItemBody>
         <strong>Viktor Tee</strong>
         <strong>$70 AUD</strong>
