@@ -44,7 +44,7 @@ const o = {
   containerAligns: {
     left: `margin-right: auto`,
     right: `margin-left: auto`,
-    center: `margin: auto`,
+    center: `margin-left: auto; margin-right: auto`,
   },
 };
 
