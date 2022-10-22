@@ -1,11 +1,48 @@
 import styled from "@emotion/styled";
 import { clamp } from "@lib/helpers";
-import HeroSideBySideOverlap from "@components/news/hero-side-by-side-overlap";
+
+import Hero from "@components/news/hero";
+import HeroHeadline from "@components/news/hero-headline";
+import HeroSubheadline from "@components/news/hero-subheadline";
+import HeroCredits from "@components/news/hero-credits";
 
 const NewsItemPage = () => {
   return (
     <NewsWrapper style={{ height: `100%` }}>
-      <HeroSideBySideOverlap />
+      <Hero>
+        <HeroText>
+          <HeroHeadline
+            fontSize="small"
+            fontWeight="regular"
+            width={50}
+            textAlign="left"
+            containerAlign="left"
+          >
+            RIDING OUT WITH
+            <br />
+            THE LA BIKE LIFE CREW
+            <br />
+            AND CLARKS ORIGINALS FW22
+          </HeroHeadline>
+          <HeroSubheadline
+            fontSize="small"
+            fontWeight="light"
+            width={50}
+            textAlign="left"
+            containerAlign="left"
+          >
+            Dirt Bikes and Quads are the Vehicles of Choice for this
+            Intergenerational Group of Riders
+          </HeroSubheadline>
+          <HeroCredits textAlign="left" containerAlign="left">
+            Interview: Rebecca Storm
+            <br />
+            Photography: Rebecca Storm, Yaroslav Prytula
+          </HeroCredits>
+        </HeroText>
+        <HeroImage src="https://www.theartstory.org/blog/wp-content/uploads/2015/05/Gustav_Klimt_016-1024x1024.jpg" />
+      </Hero>
+
       {/* <SoundcloudWrapper>
         <div />
         <iframe
@@ -100,6 +137,27 @@ const NewsItemPage = () => {
 export default NewsItemPage;
 
 const NewsWrapper = styled.div``;
+
+const HeroText = styled.div`
+  padding: var(--gap-l) var(--gap-xl) 0 var(--gap-xl);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const HeroImage = styled.img`
+  padding-top: var(--gap-m);
+  right: 0;
+  width: 100%;
+
+  @media screen and (min-width: 700px) {
+    padding-top: 0;
+    position: absolute;
+    z-index: -1;
+    width: 50%;
+    height: fit-content;
+  }
+`;
 
 const IntroText = styled.div`
   width: 70%;

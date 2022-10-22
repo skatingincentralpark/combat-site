@@ -86,7 +86,8 @@ const NewsPageWrapper = styled(m.main)`
 `;
 
 const NewsItem = ({ newsItem }: { newsItem: NewsItemType }) => {
-  const { title, description, category, date, images, location } = newsItem;
+  const { title, description, category, date, images, location, body } =
+    newsItem;
 
   const [isOpen, setIsOpen] = useState(false);
 

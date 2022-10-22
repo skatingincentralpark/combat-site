@@ -7,9 +7,7 @@ const Image = ({ image }: { image: ImageType }) => {
 
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const doFadeIn = () => {
-    setImageLoaded(true);
-  };
+  const doFadeIn = () => setImageLoaded(true);
 
   return (
     <FutureImageStyled

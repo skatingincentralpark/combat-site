@@ -12,7 +12,7 @@ declare module "*.gif" {
   export default content;
 }
 
-type ImageType = {
+interface ImageType {
   aspectRatio: number;
   height: number;
   lqip: string;
@@ -24,4 +24,4 @@ type ImageType = {
   width: number;
   url: string;
   caption: string;
-};
+}
