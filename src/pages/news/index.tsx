@@ -37,16 +37,18 @@ const NewsPocPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
 export async function getStaticProps() {
   const newsItems = await client.fetch(`
     *[_type == "newsItem"] {
-      "author": author -> name,
-      body,
-      date,
-      description,
-      body,
-      "category": category -> title,
-      location { lat, lng },
-      "slug": slug.current,
       title,
-      images[] {
+      subtitle,
+      "slug": slug.current,
+      excerpt,
+      location { lat, lng },
+      credits[] {
+        "author": author -> name,
+        role
+      },
+      category,
+      date,
+      previewImages[] {
         caption,
         "url": asset -> url,
         "height": asset -> metadata.dimensions.height,
@@ -54,7 +56,18 @@ export async function getStaticProps() {
         "aspectRatio": asset -> metadata.dimensions.aspectRatio,
         "lqip": asset -> metadata.lqip,
         "palette": asset -> metadata.palette
-      }
+      },
+      heroImage {
+        caption,
+        "url": asset -> url,
+        "height": asset -> metadata.dimensions.height,
+        "width": asset -> metadata.dimensions.width,
+        "aspectRatio": asset -> metadata.dimensions.aspectRatio,
+        "lqip": asset -> metadata.lqip,
+        "palette": asset -> metadata.palette
+      },
+      body,
+      heroTextStyles
     }
   `);
 
