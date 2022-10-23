@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import FutureImage from "next/future/image";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
-import { NewsItemType } from "types/newsTypes";
 import { css } from "@emotion/react";
 import { clamp } from "@lib/helpers";
 import client from "../../../client";
@@ -11,7 +10,7 @@ import { getFile, SanityFileSource } from "@sanity/asset-utils";
 
 const Article = ({ body }: { body: [] }) => {
   return (
-    <ArticleContainer style={{ marginTop: `10rem` }}>
+    <ArticleContainer>
       <PortableText value={body} components={pt} />
     </ArticleContainer>
   );
