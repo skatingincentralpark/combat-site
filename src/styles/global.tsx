@@ -87,6 +87,7 @@ const GlobalStyles = () => {
       h5,
       h6,
       a,
+      blockquote,
       span,
       button {
         background: none;

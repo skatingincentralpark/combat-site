@@ -1,30 +1,13 @@
 import { GetStaticProps, GetStaticPaths } from "next";
 import client from "../../../client";
 import { NewsItemType } from "types/newsTypes";
-import { css } from "@emotion/react";
+import { ParsedUrlQuery } from "querystring";
+import Article from "components/news/article";
 
-import { PortableText } from "@portabletext/react";
-
-const fixed = css`
-  border: 1px solid pink;
-  margin: auto;
-`;
-
-const myPortableTextComponents = {
-  types: {
-    //   image: ({value}) => <img src={value.imageUrl} />
-    image: ({ value }) => <div>{JSON.stringify(value)}</div>,
-  },
-};
 const NewsArticle = ({ data }: { data: NewsItemType }) => {
   console.log(data);
-  const { body } = data;
-  return (
-    <main>
-      {/* <div css={fixed}>{JSON.stringify(data)}</div> */}
-      <PortableText value={body} components={myPortableTextComponents} />
-    </main>
-  );
+  const { body } = data || {};
+  return <Article body={body} />;
 };
 
 export default NewsArticle;
@@ -38,9 +21,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
+interface IParams extends ParsedUrlQuery {
+  slug: string;
+}
+
 export const getStaticProps: GetStaticProps = async (context) => {
-  // Should fix typing here
-  const { slug = "" } = context.params!;
+  const { slug = "" } = context.params as IParams;
   const data = await client.fetch(
     `
       *[_type == "newsItem" && slug.current == $slug] {
