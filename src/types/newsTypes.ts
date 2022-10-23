@@ -8,7 +8,16 @@ export interface NewsItemType {
   category: string;
   date: string;
   previewImages: ImageType[];
-  heroImage: ImageType;
+  heroMedia: HeroMediaType;
   body: [];
   heroTextStyles: [];
+}
+
+export interface HeroMediaType {
+  type: string;
+  image: ImageType;
+  video: {
+    caption: string;
+    url: string;
+  };
 }

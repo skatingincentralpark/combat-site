@@ -9,17 +9,17 @@ import Hero from "@components/news/hero";
 import HeroHeadline from "@components/news/hero-headline";
 import HeroSubheadline from "@components/news/hero-subheadline";
 import HeroCredits from "@components/news/hero-credits";
+import HeroMedia from "@components/news/hero-media";
 
 const NewsArticle = ({ data }: { data: NewsItemType }) => {
-  console.log(data);
-  const { body, title, subtitle, heroImage, heroTextStyles, credits } =
+  const { body, title, subtitle, heroMedia, heroTextStyles, credits } =
     data || {};
 
   const { headline } = heroTextStyles;
 
   return (
     <>
-      <Hero heroImageAspect={heroImage.aspectRatio}>
+      <Hero>
         <HeroText>
           <HeroHeadline
             fontSize={headline.fontSize}
@@ -43,7 +43,7 @@ const NewsArticle = ({ data }: { data: NewsItemType }) => {
             Credits: WIP
           </HeroCredits>
         </HeroText>
-        <HeroImage src={heroImage.url} />
+        <HeroMedia heroMedia={heroMedia} />
       </Hero>
       <Article body={body} />;
     </>
@@ -57,20 +57,6 @@ const HeroText = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-`;
-
-const HeroImage = styled.img`
-  padding-top: var(--gap-m);
-  right: 0;
-  width: 100%;
-
-  @media screen and (min-width: 700px) {
-    padding-top: 0;
-    position: absolute;
-    z-index: -1;
-    width: 50%;
-    height: fit-content;
-  }
 `;
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -110,6 +96,22 @@ export const getStaticProps: GetStaticProps = async (context) => {
           "aspectRatio": asset -> metadata.dimensions.aspectRatio,
           "lqip": asset -> metadata.lqip,
           "palette": asset -> metadata.palette
+        },
+        heroMedia {
+          type,
+          image {
+            caption,
+            "url": asset -> url,
+            "height": asset -> metadata.dimensions.height,
+            "width": asset -> metadata.dimensions.width,
+            "aspectRatio": asset -> metadata.dimensions.aspectRatio,
+            "lqip": asset -> metadata.lqip,
+            "palette": asset -> metadata.palette
+          },
+          video {
+            caption,
+            "url": asset -> url,
+          }
         },
         heroImage {
           caption,
