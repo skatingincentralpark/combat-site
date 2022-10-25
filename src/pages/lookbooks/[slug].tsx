@@ -110,7 +110,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
           "width": asset -> metadata.dimensions.width,
           "aspectRatio": asset -> metadata.dimensions.aspectRatio,
           "lqip": asset -> metadata.lqip,
-          "palette": asset -> metadata.palette
+          "dominantColor": asset -> metadata.palette.dominant.background,
         }
       }[0]
     `,

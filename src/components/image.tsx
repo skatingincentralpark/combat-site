@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import FutureImage from "next/future/image";
 
 const Image = ({ image }: { image: ImageType }) => {
-  const { url, caption, palette, aspectRatio, width, height } = image;
+  const { url, caption, dominantColor, aspectRatio, width, height } = image;
 
   const [imageLoaded, setImageLoaded] = useState(false);
 

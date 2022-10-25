@@ -1,28 +1,40 @@
 import styled from "@emotion/styled";
 import { HeroMediaType } from "types/newsTypes";
+import Video from "@components/video";
+import { css } from "@emotion/react";
+import FutureImage from "next/future/image";
 
 const HeroMedia = ({ heroMedia }: { heroMedia: HeroMediaType }) => {
-  const { type, image, video } = heroMedia;
+  const { type, image, video } = heroMedia || {};
 
   if (type === "video")
-    return (
-      <HeroVideo autoPlay playsInline muted loop>
-        <source src={video?.url} />
-        <meta itemProp="description" content="some caption" />
-      </HeroVideo>
-    );
+    return <Video asset={video} videoStyles={videoStyles} />;
 
-  if (type === "image") return <HeroImage src={image.url} />;
+  if (type === "image") return <HeroImage image={image} />;
 
   return null;
 };
 
 export default HeroMedia;
 
-const HeroImage = styled.img`
+const HeroImage = ({ image }: { image: ImageType }) => {
+  const { url, caption, dominantColor, aspectRatio, width, height } = image;
+
+  return (
+    <HeroImageStyled
+      src={url}
+      alt={caption || "News Image"}
+      width={width}
+      height={height}
+    />
+  );
+};
+
+const HeroImageStyled = styled(FutureImage)`
   padding-top: var(--gap-m);
   right: 0;
   width: 100%;
+  height: 100%;
 
   @media screen and (min-width: 700px) {
     padding-top: 0;
@@ -33,16 +45,13 @@ const HeroImage = styled.img`
   }
 `;
 
-const HeroVideo = styled.video`
+const videoStyles = css`
   padding-top: var(--gap-m);
-  right: 0;
-  width: 100%;
 
   @media screen and (min-width: 700px) {
     padding-top: 0;
     position: absolute;
-    z-index: -1;
+    right: 0;
     width: 50%;
-    height: fit-content;
   }
 `;

@@ -6,7 +6,7 @@ import { clamp } from "@lib/helpers";
 import client from "../../../client";
 
 import { useNextSanityImage } from "next-sanity-image";
-import { getFile, SanityFileSource } from "@sanity/asset-utils";
+import Video from "@components/video";
 
 const Article = ({ body }: { body: [] }) => {
   return (
@@ -47,10 +47,24 @@ const ArticleContainer = styled.main`
 
 // Extra props for images and files (videos)
 type BlockMediaProps = {
-  value: SanityFileSource & {
+  value: {
     caption: string;
     width: 20 | 25 | 33 | 50 | 66 | 75 | 100;
     align: "left" | "right" | "center";
+  };
+};
+type BlockMediaPropsCloudinary = {
+  value: {
+    caption: string;
+    alt: string;
+    autoplay: boolean;
+    width: 20 | 25 | 33 | 50 | 66 | 75 | 100;
+    align: "left" | "right" | "center";
+    asset: {
+      url: string;
+      height: number;
+      width: number;
+    };
   };
 };
 
@@ -90,32 +104,33 @@ const BlockImage = ({ value }: BlockMediaProps) => {
   );
 };
 
-const BlockVideo = ({ value }: BlockMediaProps) => {
-  const {
-    asset: { url },
-  } =
-    getFile(value, {
-      projectId: process.env.NEXT_PUBLIC_SANITY_STUDIO_API_PROJECT_ID!,
-      dataset: process.env.NEXT_PUBLIC_SANITY_STUDIO_API_DATASET!,
-    }) || {};
-  const { caption, width, align } = value;
+const BlockVideoCloudinary = ({ value }: BlockMediaPropsCloudinary) => {
+  const { caption, alt, width, align, autoplay, asset } = value;
 
-  if (!url) return null;
+  const assetObject = {
+    url: asset.url,
+    height: asset.height,
+    width: asset.width,
+    caption,
+    alt,
+    autoplay,
+  };
+
+  if (!asset?.url) return null;
 
   return (
-    <div
-      css={css`
-        width: ${(width / 100) * 100}%;
+    <Video
+      asset={assetObject}
+      videoStyles={css`
+        width: 100%;
         ${o.containerAligns[align]}
-        width: 30%;
         display: inline-block;
+
+        @media screen and (min-width: 700px) {
+          width: ${(width / 100) * 100}%;
+        }
       `}
-    >
-      <video autoPlay playsInline muted loop>
-        <source src={url} />
-        <meta itemProp="description" content={caption} />
-      </video>
-    </div>
+    />
   );
 };
 
@@ -125,6 +140,6 @@ const BlockVideo = ({ value }: BlockMediaProps) => {
 const pt: PortableTextComponents = {
   types: {
     image: BlockImage,
-    file: BlockVideo,
+    video: BlockVideoCloudinary,
   },
 };

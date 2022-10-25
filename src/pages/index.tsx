@@ -4,31 +4,29 @@ import client from "../../client";
 import HeadSEO from "@components/head-seo";
 
 const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
-  const {
-    url,
-    width,
-    height,
-    caption,
-    aspectRatio,
-    palette: {
-      dominant: { background },
-    },
-  } = homePageImage;
+  const { url, width, height, caption, aspectRatio, dominantColor } =
+    homePageImage;
 
   return (
-    <LandingPageWrapper>
+    <>
       <HeadSEO title="Home" />
-      <PageSectionRow>
-        <img src="/images/poster/dog.png" />
-        <img src="/images/poster/puffer.png" />
-      </PageSectionRow>
-      <PageSection>
+      <div>
+        <img
+          src="/images/poster/puffer.png"
+          style={{
+            width: `45rem`,
+            paddingTop: `var(--header-height)`,
+            margin: `auto`,
+          }}
+        />
+      </div>
+      {/* <PageSection>
         <img style={{ width: `100%` }} src="/images/poster/glitch.png" />
       </PageSection>
       <PageSection>
         <img style={{ width: `100%` }} src="/images/poster/baby.png" />
-      </PageSection>
-    </LandingPageWrapper>
+      </PageSection> */}
+    </>
   );
 };
 
@@ -45,7 +43,7 @@ export const getStaticProps: GetStaticProps = async () => {
         "width": asset -> metadata.dimensions.width,
         "aspectRatio": asset -> metadata.dimensions.aspectRatio,
         "lqip": asset -> metadata.lqip,
-        "palette": asset -> metadata.palette
+        "dominantColor": asset -> metadata.palette.dominant.background,
       },
     }[0]
   `
@@ -67,14 +65,14 @@ const PageSection = styled.section`
   align-items: center;
   min-height: 100vh;
 
-  &:first-of-type {
-    margin-top: var(--header-height);
-    min-height: calc(100vh - var(--header-height));
-  }
-
   & > * {
     min-height: 100vh;
     object-fit: cover;
+  }
+
+  &:first-of-type {
+    margin-top: var(--header-height);
+    min-height: calc(100vh - var(--header-height));
   }
 `;
 const PageSectionRow = styled.section`

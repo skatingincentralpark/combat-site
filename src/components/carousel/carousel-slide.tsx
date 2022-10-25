@@ -3,7 +3,8 @@ import FutureImage from "next/future/image";
 import styled from "@emotion/styled";
 
 export const CarouselSlide = ({ image }: { image: ImageType }) => {
-  const { aspectRatio, height, lqip, palette, width, url, caption } = image;
+  const { aspectRatio, height, lqip, dominantColor, width, url, caption } =
+    image;
 
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -15,7 +16,7 @@ export const CarouselSlide = ({ image }: { image: ImageType }) => {
     <EmblaSlide
       style={{
         aspectRatio: `${aspectRatio} / 1`,
-        backgroundColor: palette.dominant.background,
+        backgroundColor: dominantColor,
       }}
     >
       {caption && <SlideText>{caption}</SlideText>}

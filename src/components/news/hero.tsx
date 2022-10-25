@@ -9,15 +9,15 @@ import styled from "@emotion/styled";
 
 interface HeroOptions {
   layout?: "block" | "flex";
-  heroImageAspect: number;
+  heroMediaAspect: number;
 }
 
 interface Props extends HeroOptions {
   children: React.ReactNode;
 }
 
-const Hero = ({ children, heroImageAspect }: Props) => {
-  return <PageHero heroImageAspect={heroImageAspect}>{children}</PageHero>;
+const Hero = ({ children, heroMediaAspect }: Props) => {
+  return <PageHero heroMediaAspect={heroMediaAspect}>{children}</PageHero>;
 };
 
 export default Hero;
@@ -27,10 +27,9 @@ const PageHero = styled.section<HeroOptions>`
   position: relative;
   height: fit-content;
   width: 100%;
-  min-height: ${({ heroImageAspect }) => `calc(1 / ${heroImageAspect} * 50vw)`};
+  min-height: ${({ heroMediaAspect }) => `calc(1 / ${heroMediaAspect} * 50vw)`};
 
   @media screen and (min-width: 700px) {
-    display: flex;
     display: ${({ layout }) => layout || "flex"};
   }
 `;

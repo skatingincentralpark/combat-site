@@ -4,16 +4,13 @@ import styled from "@emotion/styled";
 import { AnimatePresence, m } from "framer-motion";
 import { PortableText } from "@portabletext/react";
 import client from "../../../client";
+import Link from "next/link";
 
-import { NewsItemType } from "../../types/newsTypes";
-import {
-  Heading,
-  HeadingSm,
-  TextXsm,
-} from "@components/shared-styles/typography";
+import { NewsItemType } from "types/newsTypes";
+import { Heading, HeadingSm } from "@components/shared-styles/typography";
 import HeadSEO from "@components/head-seo";
 
-const NewsPocPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
+const NewsIndexPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -35,7 +32,7 @@ const NewsPocPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
 };
 
 export async function getStaticProps() {
-  const newsItems = await client.fetch(`
+  const newsItems: NewsItemType[] = await client.fetch(`
     *[_type == "newsItem"] {
       title,
       subtitle,
@@ -55,19 +52,8 @@ export async function getStaticProps() {
         "width": asset -> metadata.dimensions.width,
         "aspectRatio": asset -> metadata.dimensions.aspectRatio,
         "lqip": asset -> metadata.lqip,
-        "palette": asset -> metadata.palette
-      },
-      heroImage {
-        caption,
-        "url": asset -> url,
-        "height": asset -> metadata.dimensions.height,
-        "width": asset -> metadata.dimensions.width,
-        "aspectRatio": asset -> metadata.dimensions.aspectRatio,
-        "lqip": asset -> metadata.lqip,
-        "palette": asset -> metadata.palette
-      },
-      body,
-      heroTextStyles
+        "dominantColor": asset -> metadata.palette.dominant.background,
+      }
     }
   `);
 
@@ -78,7 +64,7 @@ export async function getStaticProps() {
   };
 }
 
-export default NewsPocPage;
+export default NewsIndexPage;
 
 const NewsPageWrapper = styled(m.main)`
   width: 100%;
@@ -99,14 +85,14 @@ const NewsPageWrapper = styled(m.main)`
 `;
 
 const NewsItem = ({ newsItem }: { newsItem: NewsItemType }) => {
-  const { title, description, category, date, images, location, body } =
-    newsItem;
+  const { title, excerpt, category, date, previewImages, location, slug } =
+    newsItem || {};
 
   const [isOpen, setIsOpen] = useState(false);
 
   // Creates an array of at least 6 items
-  const atLeastSixArray = images
-    ? [...images, ...Array(6 - images.length)]
+  const atLeastSixArray = previewImages
+    ? [...previewImages, ...Array(6 - previewImages.length)]
     : [...Array(6)];
 
   const container = {
@@ -135,11 +121,12 @@ const NewsItem = ({ newsItem }: { newsItem: NewsItemType }) => {
       </ImageGrid>
       <NewsText
         title={title}
-        description={description}
+        excerpt={excerpt}
         category={category}
         date={date}
         descriptionOpen={isOpen}
         location={location}
+        slug={slug}
       />
     </NewsItemWrapper>
   );
@@ -207,15 +194,14 @@ const NewsImage = ({ image }: { image: ImageType | undefined }) => {
     setImageLoaded(true);
   };
 
-  if (!image) return <ImageWrapper variants={item} />;
+  if (!image) return <ImageWrapper variants={item} />; // return dummy item
 
-  const { url, caption, palette, aspectRatio, width, height } = image;
+  const { url, caption, dominantColor, aspectRatio, width, height } = image;
 
   return (
     <ImageWrapper
       style={{
-        // aspectRatio: `${aspectRatio} / 1`,
-        backgroundColor: palette.dominant.background,
+        backgroundColor: dominantColor,
       }}
       variants={{
         hidden: {
@@ -225,7 +211,7 @@ const NewsImage = ({ image }: { image: ImageType | undefined }) => {
         },
         show: {
           opacity: 1,
-          background: palette.dominant.background,
+          background: dominantColor,
           translateY: 0,
           transition: {
             type: "spring",
@@ -273,11 +259,12 @@ const ImageWrapper = styled(m.div)`
 
 const NewsText = ({
   title = "",
-  description = [],
+  excerpt = [],
   category = "",
   date = "",
   location = { lat: 0, lng: 0 },
   descriptionOpen = false,
+  slug = "",
 }) => {
   const newsDescriptionVariants = {
     initial: {
@@ -313,14 +300,15 @@ const NewsText = ({
             <Description {...newsDescriptionVariants}>
               <div>
                 <div className="desc-coords">
-                  {location.lat.toFixed(2)} °S{" : "}
-                  {location.lng.toFixed(2)} °E
+                  {location?.lat.toFixed(2) || "--"} °S{" : "}
+                  {location?.lng.toFixed(2) || "--"} °E
                 </div>
-                <PortableText value={description} />
+                <PortableText value={excerpt} />
               </div>
             </Description>
           )}
         </AnimatePresence>
+        <Link href={`news/${slug}`}>Read More</Link>
       </div>
     </NewsTextWrapper>
   );
@@ -329,6 +317,7 @@ const NewsText = ({
 const Description = styled(m.div)`
   /* overflow: scroll; */
   /* max-height: 20rem; */
+  white-space: ellipsis;
   overflow: hidden;
   margin-top: 3rem;
 

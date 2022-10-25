@@ -1,48 +1,32 @@
 import { GetStaticProps, GetStaticPaths } from "next";
-import styled from "@emotion/styled";
 import client from "../../../client";
-import { NewsItemType } from "types/newsTypes";
+import { NewsItemArticle } from "types/newsTypes";
 import { ParsedUrlQuery } from "querystring";
 
 import Article from "@components/news/article";
 import Hero from "@components/news/hero";
-import HeroHeadline from "@components/news/hero-headline";
-import HeroSubheadline from "@components/news/hero-subheadline";
-import HeroCredits from "@components/news/hero-credits";
 import HeroMedia from "@components/news/hero-media";
+import HeroText from "@components/news/hero-text";
 
-const NewsArticle = ({ data }: { data: NewsItemType }) => {
+const NewsArticle = ({ data }: { data: NewsItemArticle }) => {
   const { body, title, subtitle, heroMedia, heroTextStyles, credits } =
     data || {};
 
-  const { headline } = heroTextStyles;
+  const { image, video, type } = heroMedia || {};
+  const { height = 1, width = 1 } = video || {};
+
+  const aspectForSectionHeight =
+    type === "image" ? image.aspectRatio : width / height;
 
   return (
     <>
-      <Hero>
-        <HeroText>
-          <HeroHeadline
-            fontSize={headline.fontSize}
-            fontWeight={headline.fontWeight}
-            width={headline.width}
-            textAlign={headline.textAlign}
-            containerAlign={headline.containerAlign}
-          >
-            {title}
-          </HeroHeadline>
-          <HeroSubheadline
-            fontSize="small"
-            fontWeight="light"
-            width={50}
-            textAlign="left"
-            containerAlign="left"
-          >
-            {subtitle}
-          </HeroSubheadline>
-          <HeroCredits textAlign="left" containerAlign="left">
-            Credits: WIP
-          </HeroCredits>
-        </HeroText>
+      <Hero heroMediaAspect={aspectForSectionHeight}>
+        <HeroText
+          headlineText={title}
+          subheadlineText={subtitle}
+          creditsText={credits}
+          heroTextStyles={heroTextStyles}
+        />
         <HeroMedia heroMedia={heroMedia} />
       </Hero>
       <Article body={body} />;
@@ -51,13 +35,6 @@ const NewsArticle = ({ data }: { data: NewsItemType }) => {
 };
 
 export default NewsArticle;
-
-const HeroText = styled.div`
-  padding: var(--gap-l) var(--gap-xl) 0 var(--gap-xl);
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await client.fetch(`*[_type == "newsItem"][].slug.current`);
@@ -109,8 +86,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
             "palette": asset -> metadata.palette
           },
           video {
+            "url": asset.url,
+            "height": asset.height,
+            "width": asset.width,
+            autoplay,
             caption,
-            "url": asset -> url,
+            alt
           }
         },
         heroImage {
@@ -123,7 +104,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
           "palette": asset -> metadata.palette
         },
         body,
-        heroTextStyles
+        heroTextStyles {
+          credits { containerAlign, fontSize, fontWeight, textAlign, width },
+          headline { containerAlign, fontSize, fontWeight, textAlign, width },
+          subheadline { containerAlign, fontSize, fontWeight, textAlign, width },
+        }
       }[0]
     `,
     { slug }

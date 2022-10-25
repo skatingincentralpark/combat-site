@@ -16,12 +16,16 @@ interface ImageType {
   aspectRatio: number;
   height: number;
   lqip: string;
-  palette: {
-    dominant: {
-      background: string;
-    };
-  };
+  dominantColor: string;
   width: number;
   url: string;
   caption: string;
+}
+interface VideoType {
+  url: string;
+  height?: number;
+  width?: number;
+  caption: string;
+  alt: string;
+  autoplay: boolean;
 }

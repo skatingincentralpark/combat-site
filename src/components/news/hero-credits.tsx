@@ -1,13 +1,6 @@
 import styled from "@emotion/styled";
 import { clamp } from "@lib/helpers";
-
-interface CreditsOptions {
-  fontSize?: "small" | "medium" | "large";
-  fontWeight?: "light" | "regular" | "bold";
-  width?: 30 | 50 | 60 | 100;
-  textAlign?: "left" | "right" | "center";
-  containerAlign?: "left" | "right" | "center";
-}
+import { CreditsOptions } from "types/newsTypes";
 
 interface Props extends CreditsOptions {
   children: React.ReactNode;
@@ -32,8 +25,10 @@ const o = {
   },
   widths: {
     30: `30%`,
+    40: `40%`,
     50: `50%`,
     60: `60%`,
+    70: `70%`,
     100: `100%`,
   },
   textAligns: {
