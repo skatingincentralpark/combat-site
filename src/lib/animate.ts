@@ -1,13 +1,30 @@
 const pageTransitionSpeed = 300;
 
-const headerButtonVariants = () => {
+const headerBackButtonVariants = () => {
   return {
     initial: {
       width: 0,
       backgroundColor: "#d9ff00",
     },
     animate: {
-      width: "var(--back-button-width)",
+      width: "8rem",
+      backgroundColor: "var(--yellow-1)",
+    },
+    exit: {
+      width: 0,
+      backgroundColor: "#fff",
+    },
+  };
+};
+
+const headerCartVariants = () => {
+  return {
+    initial: {
+      width: 0,
+      backgroundColor: "#d9ff00",
+    },
+    animate: {
+      width: "6rem",
       backgroundColor: "var(--yellow-1)",
     },
     exit: {
@@ -36,4 +53,9 @@ const headerVariants = () => {
   };
 };
 
-export { pageTransitionSpeed, headerButtonVariants, headerVariants };
+export {
+  pageTransitionSpeed,
+  headerBackButtonVariants,
+  headerCartVariants,
+  headerVariants,
+};

@@ -142,7 +142,6 @@ const StyledImage = styled.div`
     height: fit-content;
     aspect-ratio: 1 / 1;
     margin-bottom: 2rem;
-    border: 1px solid gray;
     overflow: hidden;
     padding: var(--gap-xs);
   }

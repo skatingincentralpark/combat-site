@@ -4,7 +4,7 @@ import { m, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import CombatLogo from "../combat-logo";
 import Cart from "../cart/cart";
-import { headerButtonVariants } from "@lib/animate";
+import { headerBackButtonVariants } from "@lib/animate";
 import HeaderMenu from "./header-menu";
 
 const Header = ({ isLoading }: { isLoading: boolean }) => {
@@ -35,7 +35,7 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
           {isShopPath && !navOpen && (
             <HeaderBackButton
               onClick={navigateToShop}
-              {...headerButtonVariants()}
+              {...headerBackButtonVariants()}
             >
               back
             </HeaderBackButton>
@@ -89,7 +89,6 @@ const HeaderToggle = styled.button<{ navOpen: boolean }>`
   }
 `;
 const HeaderBackButton = styled(m.button)`
-  --back-button-width: 8rem;
   height: 100%;
   cursor: pointer;
   white-space: nowrap;

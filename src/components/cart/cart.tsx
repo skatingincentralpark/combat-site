@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import { m, AnimatePresence } from "framer-motion";
 import CartModal from "./cart-modal";
-import { headerButtonVariants } from "@lib/animate";
+import { headerCartVariants } from "@lib/animate";
 
 const Cart = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -14,7 +14,7 @@ const Cart = () => {
         {cartHasItems && (
           <CartButtonWrapper
             onClick={() => setCartOpen((x) => !x)}
-            {...headerButtonVariants()}
+            {...headerCartVariants()}
           >
             {!cartOpen ? "Cart (1)" : "Close"}
           </CartButtonWrapper>
