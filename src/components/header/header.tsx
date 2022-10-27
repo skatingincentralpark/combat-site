@@ -77,6 +77,7 @@ const HeaderToggle = styled.button<{ navOpen: boolean }>`
   flex-grow: 1;
   height: 100%;
   cursor: pointer;
+  width: 0;
 
   &:hover {
     @media screen and (min-width: 700px) {
