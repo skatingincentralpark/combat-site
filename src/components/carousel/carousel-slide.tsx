@@ -16,7 +16,7 @@ export const CarouselSlide = ({ image }: { image: ImageType }) => {
     <EmblaSlide
       style={{
         aspectRatio: `${aspectRatio} / 1`,
-        backgroundColor: dominantColor,
+        // backgroundColor: dominantColor,
       }}
     >
       {caption && <SlideText>{caption}</SlideText>}
@@ -25,8 +25,10 @@ export const CarouselSlide = ({ image }: { image: ImageType }) => {
         alt={caption}
         width={width}
         height={height}
-        className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
-        onLoadingComplete={doFadeIn}
+        // className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
+        // onLoadingComplete={doFadeIn}
+        placeholder="blur"
+        blurDataURL={lqip}
       />
     </EmblaSlide>
   );

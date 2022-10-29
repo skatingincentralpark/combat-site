@@ -18,7 +18,8 @@ const HeroMedia = ({ heroMedia }: { heroMedia: HeroMediaType }) => {
 export default HeroMedia;
 
 const HeroImage = ({ image }: { image: ImageType }) => {
-  const { url, caption, dominantColor, aspectRatio, width, height } = image;
+  const { url, caption, dominantColor, aspectRatio, width, height, lqip } =
+    image;
 
   return (
     <HeroImageStyled
@@ -26,6 +27,8 @@ const HeroImage = ({ image }: { image: ImageType }) => {
       alt={caption || "News Image"}
       width={width}
       height={height}
+      placeholder="blur"
+      blurDataURL={lqip}
     />
   );
 };
