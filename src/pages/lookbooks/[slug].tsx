@@ -66,7 +66,7 @@ const SeasonDropdown = ({ lookbook }: LookbookType) => {
 
   return (
     <DropdownWrapper>
-      <span>Choose a Location:</span>
+      <span>Choose a collection:</span>
       <Dropdown list={slugs} setList={setSlugs} />
     </DropdownWrapper>
   );

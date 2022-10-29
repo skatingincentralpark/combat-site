@@ -1,8 +1,15 @@
 import { useState } from "react";
 import FutureImage from "next/future/image";
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
-export const CarouselSlide = ({ image }: { image: ImageType }) => {
+export const CarouselSlide = ({
+  image,
+  onClick,
+}: {
+  image: ImageType;
+  onClick?: any;
+}) => {
   const { aspectRatio, height, lqip, dominantColor, width, url, caption } =
     image;
 
@@ -14,10 +21,10 @@ export const CarouselSlide = ({ image }: { image: ImageType }) => {
 
   return (
     <EmblaSlide
-      style={{
-        aspectRatio: `${aspectRatio} / 1`,
-        // backgroundColor: dominantColor,
-      }}
+      css={css`
+        aspect-ratio: ${aspectRatio / 1};
+      `}
+      onClick={onClick && onClick}
     >
       {caption && <SlideText>{caption}</SlideText>}
       <FutureImage

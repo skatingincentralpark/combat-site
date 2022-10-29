@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import FutureImage from "next/future/image";
 import styled from "@emotion/styled";
 import useEmblaCarousel from "embla-carousel-react";
 import { m, AnimatePresence } from "framer-motion";
@@ -34,17 +35,35 @@ const Carousel = ({ lookbook }: LookbookType) => {
     onSelect();
   }, [embla, onSelect]);
 
+  const [lightboxImageIndex, setLightboxImageIndex] = useState<number | null>(
+    null
+  );
+  // console.log(embla?.clickAllowed);
+  const openLightbox = (i: number) => {
+    embla?.clickAllowed() && setLightboxImageIndex(i);
+  };
+  const closeLightbox = () => setLightboxImageIndex(null);
+
   return (
     <Embla>
-      <ButtonContainerFull>
+      {/* <ButtonContainerFull>
         <button onClick={scrollPrev} />
         <button onClick={scrollNext} />
-      </ButtonContainerFull>
+      </ButtonContainerFull> */}
+      {typeof lightboxImageIndex === "number" && (
+        <Lightbox image={album[lightboxImageIndex]} onClick={closeLightbox} />
+      )}
       <EmblaViewPort ref={viewportRef}>
         <AnimatePresence>
           <EmblaContainer>
             {album?.map((image, i) => {
-              return <CarouselSlide image={image} key={i} />;
+              return (
+                <CarouselSlide
+                  image={image}
+                  key={i}
+                  onClick={() => openLightbox(i)}
+                />
+              );
             })}
           </EmblaContainer>
         </AnimatePresence>
@@ -98,4 +117,58 @@ const ButtonContainerFull = styled.div`
   @media screen and (min-width: 650px) {
     display: flex;
   }
+`;
+
+const Lightbox = ({
+  image,
+  onClick,
+}: {
+  image: ImageType;
+  onClick: () => void;
+}) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  if (!image) return null;
+
+  const doFadeIn = () => setImageLoaded(true);
+
+  return (
+    <LightboxStyled onClick={onClick}>
+      <FutureImageStyled
+        src={image.url}
+        alt={image.caption}
+        width={image.width}
+        height={image.height}
+        loaded={imageLoaded}
+        className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
+        onLoadingComplete={doFadeIn}
+        // placeholder="blur"
+        // blurDataURL={image.lqip}
+      />
+    </LightboxStyled>
+  );
+};
+
+const LightboxStyled = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 8;
+  backdrop-filter: blur(10px);
+  background-color: white;
+
+  img {
+    height: 100%;
+    object-fit: contain;
+  }
+`;
+const FutureImageStyled = styled(FutureImage)<{ loaded: boolean }>`
+  height: 100%;
+  object-fit: cover;
+
+  opacity: ${({ loaded }) => (loaded ? 1 : 0)};
+  transition: opacity 0.3s linear;
+  will-change: opacity;
 `;
