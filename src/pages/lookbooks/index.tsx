@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { m } from "framer-motion";
-import client from "../../../client";
+import { client } from "@lib/sanity";
 import HeadSEO from "@components/head-seo";
 import styled from "@emotion/styled";
 import { slugToText } from "@lib/helpers";

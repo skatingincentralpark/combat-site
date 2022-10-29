@@ -1,6 +1,6 @@
 import { GetStaticProps } from "next";
 import styled from "@emotion/styled";
-import client from "../../client";
+import { client } from "@lib/sanity";
 import HeadSEO from "@components/head-seo";
 
 const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {

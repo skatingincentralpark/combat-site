@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import client from "../../../client";
+import { client } from "@lib/sanity";
 import { GetStaticProps, GetStaticPaths } from "next";
 import Carousel from "@components/carousel/carousel";
 import { LookbookType } from "../../types/lookbookTypes";

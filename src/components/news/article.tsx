@@ -3,7 +3,7 @@ import FutureImage from "next/future/image";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import { css } from "@emotion/react";
 import { clamp } from "@lib/helpers";
-import client from "../../../client";
+import { client } from "@lib/sanity";
 
 import { useNextSanityImage } from "next-sanity-image";
 import Video from "@components/video";

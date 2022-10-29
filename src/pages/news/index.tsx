@@ -3,7 +3,7 @@ import FutureImage from "next/future/image";
 import styled from "@emotion/styled";
 import { AnimatePresence, m } from "framer-motion";
 import { PortableText } from "@portabletext/react";
-import client from "../../../client";
+import { client } from "@lib/sanity";
 import Link from "next/link";
 
 import { NewsItemType } from "types/newsTypes";
