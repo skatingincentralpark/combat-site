@@ -2,6 +2,7 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import { client } from "@lib/sanity";
 import { NewsItemArticle } from "types/newsTypes";
 import { ParsedUrlQuery } from "querystring";
+import queries from "@lib/queries";
 
 import Article from "@components/news/article";
 import Hero from "@components/news/hero";
@@ -66,24 +67,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
         category,
         date,
         previewImages[] {
-          caption,
-          "url": asset -> url,
-          "height": asset -> metadata.dimensions.height,
-          "width": asset -> metadata.dimensions.width,
-          "aspectRatio": asset -> metadata.dimensions.aspectRatio,
-          "lqip": asset -> metadata.lqip,
-          "palette": asset -> metadata.palette
+          ${queries.imageMeta}
         },
         heroMedia {
           type,
           image {
-            caption,
-            "url": asset -> url,
-            "height": asset -> metadata.dimensions.height,
-            "width": asset -> metadata.dimensions.width,
-            "aspectRatio": asset -> metadata.dimensions.aspectRatio,
-            "lqip": asset -> metadata.lqip,
-            "palette": asset -> metadata.palette
+            ${queries.imageMeta}
           },
           video {
             "url": asset.url,
@@ -95,13 +84,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
           }
         },
         heroImage {
-          caption,
-          "url": asset -> url,
-          "height": asset -> metadata.dimensions.height,
-          "width": asset -> metadata.dimensions.width,
-          "aspectRatio": asset -> metadata.dimensions.aspectRatio,
-          "lqip": asset -> metadata.lqip,
-          "palette": asset -> metadata.palette
+          ${queries.imageMeta}
         },
         body,
         heroTextStyles {

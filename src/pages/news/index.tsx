@@ -5,6 +5,7 @@ import { AnimatePresence, m } from "framer-motion";
 import { PortableText } from "@portabletext/react";
 import { client } from "@lib/sanity";
 import Link from "next/link";
+import queries from "@lib/queries";
 
 import { NewsItemType } from "types/newsTypes";
 import { Heading, HeadingSm } from "@components/shared-styles/typography";
@@ -46,13 +47,7 @@ export async function getStaticProps() {
       category,
       date,
       previewImages[] {
-        caption,
-        "url": asset -> url,
-        "height": asset -> metadata.dimensions.height,
-        "width": asset -> metadata.dimensions.width,
-        "aspectRatio": asset -> metadata.dimensions.aspectRatio,
-        "lqip": asset -> metadata.lqip,
-        "dominantColor": asset -> metadata.palette.dominant.background,
+        ${queries.imageMeta}
       }
     }
   `);

@@ -8,6 +8,7 @@ import { LookbookDescription } from "@components/lookbook-description";
 import Dropdown from "@components/dropdown";
 import { useRouter } from "next/router";
 import HeadSEO from "@components/head-seo";
+import queries from "@lib/queries";
 
 const LookbookPage = ({ lookbook }: LookbookType) => {
   return (
@@ -104,13 +105,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         description,
         title,
         album[]{ 
-          caption,
-          "url": asset -> url,
-          "height": asset -> metadata.dimensions.height,
-          "width": asset -> metadata.dimensions.width,
-          "aspectRatio": asset -> metadata.dimensions.aspectRatio,
-          "lqip": asset -> metadata.lqip,
-          "dominantColor": asset -> metadata.palette.dominant.background,
+          ${queries.imageMeta}
         }
       }[0]
     `,

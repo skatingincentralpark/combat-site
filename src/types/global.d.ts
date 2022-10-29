@@ -12,14 +12,20 @@ declare module "*.gif" {
   export default content;
 }
 
+interface AssetType {
+  _ref: string;
+  _type: string;
+}
 interface ImageType {
-  aspectRatio: number;
-  height: number;
-  lqip: string;
-  dominantColor: string;
-  width: number;
-  url: string;
   caption: string;
+  asset: AssetType;
+  url: string;
+  height: number;
+  width: number;
+  aspectRatio: number;
+  lqip: string;
+  blurHash: string;
+  dominantColor: string;
 }
 interface VideoType {
   url: string;

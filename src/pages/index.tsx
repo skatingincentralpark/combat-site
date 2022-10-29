@@ -2,6 +2,7 @@ import { GetStaticProps } from "next";
 import styled from "@emotion/styled";
 import { client } from "@lib/sanity";
 import HeadSEO from "@components/head-seo";
+import queries from "@lib/queries";
 
 const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
   const { url, width, height, caption, aspectRatio, dominantColor } =
@@ -37,13 +38,7 @@ export const getStaticProps: GetStaticProps = async () => {
     `
     *[_type == "generalSettings"]{
       homePageImage{
-        caption,
-        "url": asset -> url,
-        "height": asset -> metadata.dimensions.height,
-        "width": asset -> metadata.dimensions.width,
-        "aspectRatio": asset -> metadata.dimensions.aspectRatio,
-        "lqip": asset -> metadata.lqip,
-        "dominantColor": asset -> metadata.palette.dominant.background,
+        ${queries.imageMeta}
       },
     }[0]
   `
