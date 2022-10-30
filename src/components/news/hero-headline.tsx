@@ -47,7 +47,7 @@ const HeadlineStyled = styled.h1<HeadlineOptions>`
   line-height: 1.1em;
   letter-spacing: -0.02em;
   width: 100%;
-  margin-bottom: 0.6em;
+  margin-bottom: 1rem;
 
   font-size: ${({ fontSize }) => o.sizes[fontSize || "medium"]};
   font-weight: ${({ fontWeight }) => o.weights[fontWeight || "regular"]};
