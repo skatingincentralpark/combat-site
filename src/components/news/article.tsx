@@ -28,7 +28,7 @@ const ArticleContainer = styled.main`
     line-height: 1.5em;
     font-size: ${clamp(14, 18)};
     max-width: 40em;
-    margin: 0 auto;
+    margin: 1em auto;
   }
 
   p {
@@ -46,27 +46,20 @@ const ArticleContainer = styled.main`
 `;
 
 // Extra props for images and files (videos)
-type BlockMediaProps = {
-  value: {
-    caption: string;
-    width: 20 | 25 | 33 | 50 | 66 | 75 | 100;
-    align: "left" | "right" | "center";
+interface BlockMediaProps {
+  caption: string;
+  alt: string;
+  width: 20 | 25 | 33 | 50 | 66 | 75 | 100;
+  align: "left" | "right" | "center";
+}
+interface BlockMediaPropsCloudinary extends BlockMediaProps {
+  autoplay: boolean;
+  asset: {
+    url: string;
+    height: number;
+    width: number;
   };
-};
-type BlockMediaPropsCloudinary = {
-  value: {
-    caption: string;
-    alt: string;
-    autoplay: boolean;
-    width: 20 | 25 | 33 | 50 | 66 | 75 | 100;
-    align: "left" | "right" | "center";
-    asset: {
-      url: string;
-      height: number;
-      width: number;
-    };
-  };
-};
+}
 
 const o = {
   containerAligns: {
@@ -76,7 +69,7 @@ const o = {
   },
 };
 
-const BlockImage = ({ value }: BlockMediaProps) => {
+const BlockImage = ({ value }: { value: BlockMediaProps }) => {
   const imageProps = useNextSanityImage(client, value);
   const { caption, width, align } = value;
 
@@ -104,7 +97,11 @@ const BlockImage = ({ value }: BlockMediaProps) => {
   );
 };
 
-const BlockVideoCloudinary = ({ value }: BlockMediaPropsCloudinary) => {
+const BlockVideoCloudinary = ({
+  value,
+}: {
+  value: BlockMediaPropsCloudinary;
+}) => {
   const { caption, alt, width, align, autoplay, asset } = value;
 
   const assetObject = {
@@ -125,6 +122,7 @@ const BlockVideoCloudinary = ({ value }: BlockMediaPropsCloudinary) => {
         width: 100%;
         ${o.containerAligns[align]}
         display: inline-block;
+        margin: 1em 0;
 
         @media screen and (min-width: 700px) {
           width: ${(width / 100) * 100}%;
