@@ -1,39 +1,41 @@
-import styled from "@emotion/styled";
 import { HeroMediaType } from "types/newsTypes";
 import Video from "@components/video";
 import { css } from "@emotion/react";
-import FutureImage from "next/future/image";
+import { HeroLayoutType } from "types/newsTypes";
+import Image from "@components/image";
 
-const HeroMedia = ({ heroMedia }: { heroMedia: HeroMediaType }) => {
+/*
+ * Returns Video or Image, these will be absolute or static dependant on heroLayout
+ * Video and Image are styled with mediaStyles and a custom position dependant on heroLayout prop
+ */
+
+const HeroMedia = ({
+  heroMedia,
+  heroLayout,
+}: {
+  heroMedia: HeroMediaType;
+  heroLayout: HeroLayoutType;
+}) => {
   const { type, image, video } = heroMedia || {};
 
-  if (type === "video")
-    return <Video asset={video} containerStyles={videoStyles} />;
+  const position = css`
+    @media screen and (min-width: 700px) {
+      position: ${heroLayout === "row" ? "absolute" : "static"};
+    }
+  `;
 
-  if (type === "image") return <HeroImage image={image} />;
+  if (type === "video")
+    return <Video asset={video} containerStyles={[mediaStyles, position]} />;
+
+  if (type === "image")
+    return <Image image={image} styles={[mediaStyles, position]} />;
 
   return null;
 };
 
 export default HeroMedia;
 
-const HeroImage = ({ image }: { image: ImageType }) => {
-  const { url, caption, dominantColor, aspectRatio, width, height, lqip } =
-    image;
-
-  return (
-    <HeroImageStyled
-      src={url}
-      alt={caption || "News Image"}
-      width={width}
-      height={height}
-      placeholder="blur"
-      blurDataURL={lqip}
-    />
-  );
-};
-
-const HeroImageStyled = styled(FutureImage)`
+const mediaStyles = css`
   padding-top: var(--gap-m);
   right: 0;
   width: 100%;
@@ -42,19 +44,7 @@ const HeroImageStyled = styled(FutureImage)`
   @media screen and (min-width: 700px) {
     padding-top: 0;
     position: absolute;
-    z-index: -1;
     width: 50%;
     height: fit-content;
-  }
-`;
-
-const videoStyles = css`
-  padding-top: var(--gap-m);
-
-  @media screen and (min-width: 700px) {
-    padding-top: 0;
-    position: absolute;
-    right: 0;
-    width: 50%;
   }
 `;

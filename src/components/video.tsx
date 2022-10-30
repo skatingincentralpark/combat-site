@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
-import styled, { Interpolation } from "@emotion/styled";
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
 /*
  * This component returns a container, with a video and two buttons absolutely positioned in it
@@ -7,14 +8,10 @@ import styled, { Interpolation } from "@emotion/styled";
  * The buttons have some simple styles that indicate
  */
 
-interface VideoProps {
-  containerStyles?: Interpolation<React.CSSProperties>;
-}
-interface ButtonProps {
-  buttonStyles?: Interpolation<React.CSSProperties>;
-}
-interface Props extends VideoProps, ButtonProps {
+interface Props {
   asset: VideoType;
+  containerStyles?: CssProperties;
+  buttonStyles?: CssProperties;
 }
 
 const Video = ({ asset, containerStyles, buttonStyles }: Props) => {
@@ -43,35 +40,37 @@ const Video = ({ asset, containerStyles, buttonStyles }: Props) => {
   };
 
   return (
-    <>
-      <VideoContainer containerStyles={containerStyles}>
-        <VideoButtons buttonStyles={buttonStyles} isPlaying={isPlaying}>
-          <button onClick={handlePlayVideo}>
-            {isPlaying ? "Pause" : "Play"}
-          </button>
-          <button onClick={handleMuteVideo}>
-            {isMuted ? "Mute" : "Unmute"}
-          </button>
-        </VideoButtons>
-        <video
-          autoPlay={autoplay || true}
-          playsInline
-          muted
-          loop
-          ref={ref}
-          onClick={handlePlayVideo}
-        >
-          <source src={url} />
-          <meta itemProp="description" content={alt} />
-        </video>
-      </VideoContainer>
-    </>
+    <VideoContainer
+      containerStyles={containerStyles}
+      css={css`
+        height: ${height}px;
+        width: ${width}px;
+      `}
+    >
+      <VideoButtons buttonStyles={buttonStyles} isPlaying={isPlaying}>
+        <button onClick={handlePlayVideo}>
+          {isPlaying ? "Pause" : "Play"}
+        </button>
+        <button onClick={handleMuteVideo}>{isMuted ? "Mute" : "Unmute"}</button>
+      </VideoButtons>
+      <video
+        autoPlay={autoplay || true}
+        playsInline
+        muted
+        loop
+        ref={ref}
+        onClick={handlePlayVideo}
+      >
+        <source src={url} />
+        <meta itemProp="description" content={alt} />
+      </video>
+    </VideoContainer>
   );
 };
 
 export default Video;
 
-const VideoContainer = styled.div<VideoProps>`
+const VideoContainer = styled.div<{ containerStyles: CssProperties }>`
   position: relative;
   width: 100%;
   height: 100%;
@@ -82,13 +81,13 @@ const VideoContainer = styled.div<VideoProps>`
   }
 
   ${({ containerStyles }) => containerStyles}
+  background-color: red;
 `;
 
-interface ButtonPropsExtended extends ButtonProps {
+const VideoButtons = styled.div<{
+  buttonStyles: CssProperties;
   isPlaying: boolean;
-}
-
-const VideoButtons = styled.div<ButtonPropsExtended>`
+}>`
   position: absolute;
   z-index: 1;
 

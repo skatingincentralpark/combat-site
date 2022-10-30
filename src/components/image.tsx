@@ -1,9 +1,14 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import FutureImage from "next/future/image";
+interface Props {
+  image: ImageType;
+  styles?: CssProperties;
+}
 
-const Image = ({ image }: { image: ImageType }) => {
-  const { url, caption, dominantColor, aspectRatio, width, height } = image;
+const Image = ({ image, styles }: Props) => {
+  const { url, caption, lqip, dominantColor, aspectRatio, width, height } =
+    image;
 
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -12,22 +17,26 @@ const Image = ({ image }: { image: ImageType }) => {
   return (
     <FutureImageStyled
       src={url}
-      alt={caption || "News Image"}
+      alt={caption}
       width={width}
       height={height}
+      blurDataURL={lqip}
       onLoadingComplete={doFadeIn}
       loaded={imageLoaded}
+      styles={styles}
     />
   );
 };
 
 export default Image;
 
-const FutureImageStyled = styled(FutureImage)<{ loaded: boolean }>`
-  height: 100%;
-  object-fit: cover;
-
+const FutureImageStyled = styled(FutureImage)<{
+  loaded: boolean;
+  styles?: CssProperties;
+}>`
   opacity: ${({ loaded }) => (loaded ? 1 : 0)};
   transition: opacity 0.25s linear;
   will-change: opacity;
+
+  ${({ styles }) => styles}
 `;

@@ -35,3 +35,4 @@ interface VideoType {
   alt: string;
   autoplay: boolean;
 }
+type CssProperties = Interpolation<React.CSSProperties>;

@@ -10,8 +10,15 @@ import HeroMedia from "@components/news/hero-media";
 import HeroText from "@components/news/hero-text";
 
 const NewsArticle = ({ data }: { data: NewsItemArticle }) => {
-  const { body, title, subtitle, heroMedia, heroTextStyles, credits } =
-    data || {};
+  const {
+    body,
+    title,
+    subtitle,
+    heroLayout,
+    heroMedia,
+    heroTextStyles,
+    credits,
+  } = data || {};
 
   const { image, video, type } = heroMedia || {};
   const { height = 1, width = 1 } = video || {};
@@ -21,14 +28,14 @@ const NewsArticle = ({ data }: { data: NewsItemArticle }) => {
 
   return (
     <>
-      <Hero heroMediaAspect={aspectForSectionHeight}>
+      <Hero heroMediaAspect={aspectForSectionHeight} heroLayout={heroLayout}>
         <HeroText
           headlineText={title}
           subheadlineText={subtitle}
           creditsText={credits}
           heroTextStyles={heroTextStyles}
         />
-        <HeroMedia heroMedia={heroMedia} />
+        <HeroMedia heroMedia={heroMedia} heroLayout={heroLayout} />
       </Hero>
       <Article body={body} />;
     </>
@@ -69,6 +76,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         previewImages[] {
           ${queries.imageMeta}
         },
+        heroLayout,
         heroMedia {
           type,
           image {

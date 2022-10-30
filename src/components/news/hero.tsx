@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { HeroLayoutType } from "types/newsTypes";
 
 /*
  * Hero:
@@ -8,7 +9,7 @@ import styled from "@emotion/styled";
  */
 
 interface HeroOptions {
-  layout?: "block" | "flex";
+  heroLayout: HeroLayoutType;
   heroMediaAspect: number;
 }
 
@@ -16,8 +17,12 @@ interface Props extends HeroOptions {
   children: React.ReactNode;
 }
 
-const Hero = ({ children, heroMediaAspect }: Props) => {
-  return <PageHero heroMediaAspect={heroMediaAspect}>{children}</PageHero>;
+const Hero = ({ children, heroMediaAspect, heroLayout }: Props) => {
+  return (
+    <PageHero heroMediaAspect={heroMediaAspect} heroLayout={heroLayout}>
+      {children}
+    </PageHero>
+  );
 };
 
 export default Hero;
@@ -30,6 +35,6 @@ const PageHero = styled.section<HeroOptions>`
   min-height: ${({ heroMediaAspect }) => `calc(1 / ${heroMediaAspect} * 50vw)`};
 
   @media screen and (min-width: 700px) {
-    display: ${({ layout }) => layout || "flex"};
+    display: ${({ heroLayout }) => (heroLayout === "row" ? "flex" : "block")};
   }
 `;

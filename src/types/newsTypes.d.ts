@@ -12,7 +12,9 @@ export interface NewsItemType {
 /**
  * Extended with extra fields used on the article page
  */
+export type HeroLayoutType = "row" | "column";
 export interface NewsItemArticle extends NewsItemType {
+  heroLayout: HeroLayoutType;
   heroMedia: HeroMediaType;
   body: [];
   heroTextStyles: {
