@@ -7,9 +7,11 @@ import { m, AnimatePresence } from "framer-motion";
 import { client, imageBuilder } from "@lib/sanity";
 import { LookbookType } from "types/lookbookTypes";
 import queries from "@lib/queries";
+import Lightbox from "@components/lightbox";
 
 const LookbookPOC = ({ lookbook }: LookbookType) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const media = lookbook.album;
   const length = media.length;
 
@@ -26,8 +28,20 @@ const LookbookPOC = ({ lookbook }: LookbookType) => {
   return (
     <PageWrapper>
       <Wrapper>
+        <AnimatePresence>
+          {lightboxOpen && (
+            <Lightbox
+              image={media[selectedIndex]}
+              onClick={() => setLightboxOpen(false)}
+            />
+          )}
+        </AnimatePresence>
         <MainImageContainer>
-          <MainImage media={media} selectedIndex={selectedIndex} />
+          <MainImage
+            media={media}
+            selectedIndex={selectedIndex}
+            onClick={() => setLightboxOpen(true)}
+          />
           <TextContainer>
             <div>
               {selectedIndex + 1}/{length}
@@ -154,9 +168,11 @@ const TextContainer = styled.div`
 const MainImage = ({
   media,
   selectedIndex,
+  onClick,
 }: {
   media: ImageType[];
   selectedIndex: number;
+  onClick: () => void;
 }) => {
   const variants = {
     out: { opacity: 0, transition: { duration: 0.05 } },
@@ -177,6 +193,7 @@ const MainImage = ({
           aspect-ratio: 2 / 3;
           outline: 1px solid black;
         `}
+        onClick={onClick}
       >
         <FutureImage
           src={image.url}
