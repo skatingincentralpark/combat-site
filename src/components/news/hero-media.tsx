@@ -8,7 +8,7 @@ const HeroMedia = ({ heroMedia }: { heroMedia: HeroMediaType }) => {
   const { type, image, video } = heroMedia || {};
 
   if (type === "video")
-    return <Video asset={video} videoStyles={videoStyles} />;
+    return <Video asset={video} containerStyles={videoStyles} />;
 
   if (type === "image") return <HeroImage image={image} />;
 

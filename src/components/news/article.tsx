@@ -118,7 +118,7 @@ const BlockVideoCloudinary = ({
   return (
     <Video
       asset={assetObject}
-      videoStyles={css`
+      containerStyles={css`
         width: 100%;
         ${o.containerAligns[align]}
         display: inline-block;

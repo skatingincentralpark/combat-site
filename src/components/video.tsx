@@ -8,7 +8,7 @@ import styled, { Interpolation } from "@emotion/styled";
  */
 
 interface VideoProps {
-  videoStyles?: Interpolation<React.CSSProperties>;
+  containerStyles?: Interpolation<React.CSSProperties>;
 }
 interface ButtonProps {
   buttonStyles?: Interpolation<React.CSSProperties>;
@@ -17,7 +17,7 @@ interface Props extends VideoProps, ButtonProps {
   asset: VideoType;
 }
 
-const Video = ({ asset, videoStyles, buttonStyles }: Props) => {
+const Video = ({ asset, containerStyles, buttonStyles }: Props) => {
   const { url, height, width, caption, alt, autoplay } = asset;
 
   const ref = useRef<HTMLVideoElement | null>(null);
@@ -44,7 +44,7 @@ const Video = ({ asset, videoStyles, buttonStyles }: Props) => {
 
   return (
     <>
-      <VideoContainer videoStyles={videoStyles}>
+      <VideoContainer containerStyles={containerStyles}>
         <VideoButtons buttonStyles={buttonStyles} isPlaying={isPlaying}>
           <button onClick={handlePlayVideo}>
             {isPlaying ? "Pause" : "Play"}
@@ -81,7 +81,7 @@ const VideoContainer = styled.div<VideoProps>`
     height: 100%;
   }
 
-  ${({ videoStyles }) => videoStyles}
+  ${({ containerStyles }) => containerStyles}
 `;
 
 interface ButtonPropsExtended extends ButtonProps {
