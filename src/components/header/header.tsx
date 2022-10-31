@@ -1,51 +1,24 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { m, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/router";
 import CombatLogo from "../combat-logo";
-import Cart from "../cart/cart";
-import { headerBackButtonVariants } from "@lib/animate";
+import Cart from "@components/cart/cart";
 import HeaderMenu from "./header-menu";
+import BackButton from "./backButton";
 
 const Header = ({ isLoading }: { isLoading: boolean }) => {
-  const router = useRouter();
-  const checkIfShopPath = useCallback(
-    () => router.pathname.match(/\/shop\//),
-    [router.pathname]
-  );
-
   const [navOpen, setNavOpen] = useState(false);
-  const [isShopPath, setIsShopPath] = useState(checkIfShopPath || null);
-
-  useEffect(() => {
-    setIsShopPath(checkIfShopPath());
-  }, [router.pathname, checkIfShopPath]);
 
   const toggleNav = () => setNavOpen((x) => !x);
-  const closeNav = () => {
-    setNavOpen(false);
-    setIsShopPath(null);
-  };
-  const navigateToShop = () => router.push("/shop-2");
+  const closeNav = () => setNavOpen(false);
 
   return (
     <>
       <HeaderWrapper>
-        <AnimatePresence>
-          {isShopPath && !navOpen && (
-            <HeaderBackButton
-              onClick={navigateToShop}
-              {...headerBackButtonVariants()}
-            >
-              back
-            </HeaderBackButton>
-          )}
-        </AnimatePresence>
-
+        <BackButton navOpen={navOpen} />
         <HeaderToggle onClick={toggleNav} navOpen={navOpen}>
           <CombatLogo isLoading={isLoading} />
         </HeaderToggle>
-
         <Cart />
       </HeaderWrapper>
 
