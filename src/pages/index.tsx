@@ -11,7 +11,7 @@ const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
   return (
     <>
       <HeadSEO title="Home" />
-      <div>
+      {/* <div>
         <img
           src="/images/poster/puffer.png"
           style={{
@@ -20,13 +20,10 @@ const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
             margin: `auto`,
           }}
         />
-      </div>
-      {/* <PageSection>
+      </div> */}
+      <PageSection>
         <img style={{ width: `100%` }} src="/images/poster/glitch.png" />
       </PageSection>
-      <PageSection>
-        <img style={{ width: `100%` }} src="/images/poster/baby.png" />
-      </PageSection> */}
     </>
   );
 };
