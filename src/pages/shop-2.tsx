@@ -1,9 +1,7 @@
 import styled from "@emotion/styled";
 import { default as NextImage } from "next/image";
-import { HeadingSm, TextSm } from "@components/shared-styles/typography";
 import Link from "@components/link";
-import HeadSEO from "@components/head-seo";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const products = [
   {
@@ -68,7 +66,6 @@ const ShopPage = () => {
         {products.map((product, i) => (
           <Item key={i} color={colors[colorIndex]} onMouseDown={cycleColor}>
             <Link href="/shop/item-1">
-              <Dot color={colors[colorIndex]} />
               <NextImage
                 src={product.image}
                 layout="fill"
@@ -98,44 +95,12 @@ const Item = styled.div`
   aspect-ratio: 1;
 
   & > * {
-    border-radius: 1rem;
-    border: 1px dashed var(--gray-2);
-    transition: border 200ms ease, outline 200ms ease;
     overflow: hidden;
-    --dot-opacity: 0;
-    --dot-scale: 3;
-
-    &:hover {
-      @media screen and (min-width: 700px) {
-        border-color: var(--gray-4);
-      }
-    }
-
-    &:active {
-      border: 1px dashed ${({ color }) => color && color};
-      --dot-opacity: 100%;
-      --dot-scale: 1;
-    }
-
     display: flex;
     justify-content: center;
     align-items: center;
   }
 `;
-
-const Dot = styled.div`
-  position: absolute;
-  z-index: 1;
-  width: 10%;
-  height: 10%;
-  border-radius: 50%;
-  background-color: ${({ color }) => color && color};
-  opacity: var(--dot-opacity);
-  transform: scale(var(--dot-scale));
-  transform-origin: center;
-  transition: opacity 150ms, transform 150ms, background 150ms;
-`;
-
 const ShopPageWrapper = styled.main`
   padding-top: var(--header-height);
   padding: var(--gap-m) var(--gap-xxl) var(--gap-m) var(--gap-xxl);
