@@ -97,6 +97,7 @@ const BlockImage = ({ value }: { value: BlockMediaImageProps }) => {
           ${o.containerAligns[align]}
           display: inline-block;
           padding: 0;
+          cursor: pointer;
 
           @media screen and (min-width: 700px) {
             padding: var(--gap-m);
@@ -133,6 +134,7 @@ const BlockVideoCloudinary = ({
         ${o.containerAligns[align]}
         display: inline-block;
         margin: 1em 0;
+        z-index: 999;
 
         @media screen and (min-width: 700px) {
           width: ${(width / 100) * 100}%;

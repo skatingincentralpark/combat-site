@@ -42,7 +42,7 @@ const mediaStyles = css`
   height: 100%;
 
   @media screen and (min-width: 700px) {
-    padding-top: 0;
+    margin-top: 0;
     position: absolute;
     width: 50%;
     height: fit-content;

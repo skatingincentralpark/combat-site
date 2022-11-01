@@ -73,6 +73,7 @@ const VideoContainer = styled.div<{ containerStyles: CssProperties }>`
   position: relative;
   width: 100%;
   height: 100%;
+  cursor: pointer;
 
   video {
     width: 100%;
@@ -89,6 +90,7 @@ const VideoButtons = styled.div<{
 }>`
   position: absolute;
   z-index: 1;
+  cursor: pointer;
 
   button {
     padding: var(--gap-m);
