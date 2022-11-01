@@ -1,15 +1,13 @@
 import styled from "@emotion/styled";
-import FutureImage from "next/future/image";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import { css } from "@emotion/react";
 import { clamp } from "@lib/helpers";
-import { client } from "@lib/sanity";
 
-import { useNextSanityImage, UseNextSanityImageProps } from "next-sanity-image";
 import Video from "@components/video";
 import Lightbox from "@components/lightbox";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import Image from "@components/image";
 
 const Article = ({ body }: { body: [] }) => {
   return (
@@ -55,6 +53,9 @@ interface BlockMediaProps {
   width: 20 | 25 | 33 | 50 | 66 | 75 | 100;
   align: "left" | "right" | "center";
 }
+interface BlockMediaImageProps extends BlockMediaProps {
+  image: ImageType;
+}
 interface BlockMediaPropsCloudinary extends BlockMediaProps {
   autoplay: boolean;
   asset: {
@@ -72,35 +73,26 @@ const o = {
   },
 };
 
-const BlockImage = ({ value }: { value: BlockMediaProps }) => {
-  const imageProps: UseNextSanityImageProps = useNextSanityImage(client, value);
-  const { caption, width, align } = value;
+const BlockImage = ({ value }: { value: BlockMediaImageProps }) => {
+  const { width, align, image } = value;
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
-
-  if (!imageProps) return null;
-
-  const imageObjForLightbox = {
-    url: imageProps.src,
-    width: imageProps.width,
-    height: imageProps.height,
-    blurHash: imageProps.blurDataURL,
-    caption: caption,
-  };
 
   return (
     <>
       <AnimatePresence>
         {lightboxOpen && (
-          <Lightbox
-            image={imageObjForLightbox}
-            onClick={() => setLightboxOpen(false)}
-          />
+          <Lightbox image={image} onClick={() => setLightboxOpen(false)} />
         )}
       </AnimatePresence>
-      <div
+
+      <Image
+        image={image}
         onClick={() => setLightboxOpen(true)}
-        css={css`
+        styles={css`
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
           width: ${(width / 100) * 100}%;
           ${o.containerAligns[align]}
           display: inline-block;
@@ -110,13 +102,7 @@ const BlockImage = ({ value }: { value: BlockMediaProps }) => {
             padding: var(--gap-m);
           }
         `}
-      >
-        <FutureImage
-          {...imageProps}
-          alt={caption}
-          style={{ width: `100%`, height: `100%`, objectFit: `contain` }}
-        />
-      </div>
+      />
     </>
   );
 };
