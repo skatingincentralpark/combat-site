@@ -55,7 +55,7 @@ const Index = ({ slugs }: Props) => {
           <ListItem
             variants={childVariants}
             key={item.slug}
-            borderColor={item.color}
+            style={{ ["--border-left-color" as any]: item.color }}
           >
             <button onClick={() => router.push(`lookbooks/${item.slug}`)}>
               <span>{`0${i}`}</span>
@@ -116,11 +116,11 @@ const LookbookList = styled(m.ul)`
   }
 `;
 
-const ListItem = styled(m.li)<{ borderColor: string }>`
+const ListItem = styled(m.li)`
   border-bottom: 0.5px solid var(--gray-4);
-  list-style: none;
   border-left: 0.8rem solid var(--gray-2);
-  border-left-color: ${({ borderColor }) => borderColor && borderColor};
+  border-left-color: var(--border-left-color);
+  list-style: none;
 
   &:hover {
     @media screen and (min-width: 700px) {
