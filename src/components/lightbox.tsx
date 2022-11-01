@@ -1,4 +1,4 @@
-import React from "react";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { m } from "framer-motion";
 import FutureImage from "next/future/image";
@@ -11,6 +11,7 @@ const Lightbox = ({
   onClick: () => void;
 }) => {
   if (!image) return null;
+
   const {
     caption,
     url,
@@ -21,8 +22,6 @@ const Lightbox = ({
     blurHash,
     dominantColor,
   } = image;
-
-  console.log(lqip);
 
   const variants = {
     initial: {
@@ -73,5 +72,6 @@ const LightboxStyled = styled(m.div)`
 `;
 const FutureImageStyled = styled(FutureImage)`
   height: 100%;
+  width: fit-content;
   object-fit: cover;
 `;

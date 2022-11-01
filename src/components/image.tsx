@@ -4,9 +4,10 @@ import FutureImage from "next/future/image";
 interface Props {
   image: ImageType;
   styles?: CssProperties;
+  onClick?: () => void;
 }
 
-const Image = ({ image, styles }: Props) => {
+const Image = ({ image, styles, onClick }: Props) => {
   const { url, caption, lqip, dominantColor, aspectRatio, width, height } =
     image;
 
@@ -24,6 +25,7 @@ const Image = ({ image, styles }: Props) => {
       onLoadingComplete={doFadeIn}
       loaded={imageLoaded}
       styles={styles}
+      onClick={onClick}
     />
   );
 };
