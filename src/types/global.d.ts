@@ -18,14 +18,14 @@ interface AssetType {
 }
 interface ImageType {
   caption: string;
-  asset: AssetType;
+  asset?: AssetType;
   url: string;
   height: number;
   width: number;
-  aspectRatio: number;
-  lqip: string;
-  blurHash: string;
-  dominantColor: string;
+  aspectRatio?: number;
+  lqip?: string;
+  blurHash?: string;
+  dominantColor?: string;
 }
 interface VideoType {
   url: string;

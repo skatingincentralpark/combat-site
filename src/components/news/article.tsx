@@ -5,8 +5,11 @@ import { css } from "@emotion/react";
 import { clamp } from "@lib/helpers";
 import { client } from "@lib/sanity";
 
-import { useNextSanityImage } from "next-sanity-image";
+import { useNextSanityImage, UseNextSanityImageProps } from "next-sanity-image";
 import Video from "@components/video";
+import Lightbox from "@components/lightbox";
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 
 const Article = ({ body }: { body: [] }) => {
   return (
@@ -70,30 +73,51 @@ const o = {
 };
 
 const BlockImage = ({ value }: { value: BlockMediaProps }) => {
-  const imageProps = useNextSanityImage(client, value);
+  const imageProps: UseNextSanityImageProps = useNextSanityImage(client, value);
   const { caption, width, align } = value;
+
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   if (!imageProps) return null;
 
-  return (
-    <div
-      css={css`
-        width: ${(width / 100) * 100}%;
-        ${o.containerAligns[align]}
-        display: inline-block;
-        padding: 0;
+  const imageObjForLightbox = {
+    url: imageProps.src,
+    width: imageProps.width,
+    height: imageProps.height,
+    blurHash: imageProps.blurDataURL,
+    caption: caption,
+  };
 
-        @media screen and (min-width: 700px) {
-          padding: var(--gap-m);
-        }
-      `}
-    >
-      <FutureImage
-        {...imageProps}
-        alt={caption}
-        style={{ width: `100%`, height: `100%`, objectFit: `contain` }}
-      />
-    </div>
+  return (
+    <>
+      <AnimatePresence>
+        {lightboxOpen && (
+          <Lightbox
+            image={imageObjForLightbox}
+            onClick={() => setLightboxOpen(false)}
+          />
+        )}
+      </AnimatePresence>
+      <div
+        onClick={() => setLightboxOpen(true)}
+        css={css`
+          width: ${(width / 100) * 100}%;
+          ${o.containerAligns[align]}
+          display: inline-block;
+          padding: 0;
+
+          @media screen and (min-width: 700px) {
+            padding: var(--gap-m);
+          }
+        `}
+      >
+        <FutureImage
+          {...imageProps}
+          alt={caption}
+          style={{ width: `100%`, height: `100%`, objectFit: `contain` }}
+        />
+      </div>
+    </>
   );
 };
 

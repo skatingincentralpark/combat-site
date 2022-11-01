@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "@emotion/styled";
 import { m } from "framer-motion";
 import FutureImage from "next/future/image";
@@ -10,6 +11,19 @@ const Lightbox = ({
   onClick: () => void;
 }) => {
   if (!image) return null;
+  const {
+    caption,
+    url,
+    height,
+    width,
+    aspectRatio,
+    lqip,
+    blurHash,
+    dominantColor,
+  } = image;
+
+  console.log(lqip);
+
   const variants = {
     initial: {
       opacity: 0,
@@ -25,12 +39,14 @@ const Lightbox = ({
   };
 
   return (
-    <LightboxStyled onClick={onClick} {...variants}>
+    <LightboxStyled onClick={onClick}>
       <FutureImageStyled
-        src={image.url}
-        alt={image.caption}
-        width={image.width}
-        height={image.height}
+        src={url}
+        alt={caption}
+        width={width}
+        height={height}
+        blurDataURL={lqip || blurHash}
+        placeholder="blur"
       />
     </LightboxStyled>
   );

@@ -36,7 +36,7 @@ const HeroMedia = ({
 export default HeroMedia;
 
 const mediaStyles = css`
-  padding-top: var(--gap-m);
+  margin-top: var(--gap-m);
   right: 0;
   width: 100%;
   height: 100%;

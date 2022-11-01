@@ -15,7 +15,7 @@ interface Props {
 }
 
 const Video = ({ asset, containerStyles, buttonStyles }: Props) => {
-  const { url, height, width, caption, alt, autoplay } = asset;
+  const { url, height = 1, width = 1, caption, alt, autoplay } = asset;
 
   const ref = useRef<HTMLVideoElement | null>(null);
   const [isMuted, setIsMuted] = useState<boolean>(ref.current?.muted || false);
@@ -43,8 +43,7 @@ const Video = ({ asset, containerStyles, buttonStyles }: Props) => {
     <VideoContainer
       containerStyles={containerStyles}
       css={css`
-        height: ${height}px;
-        width: ${width}px;
+        aspect-ratio: ${width} / ${height};
       `}
     >
       <VideoButtons buttonStyles={buttonStyles} isPlaying={isPlaying}>

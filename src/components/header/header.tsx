@@ -15,7 +15,7 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
   return (
     <>
       <HeaderWrapper>
-        <BackButton navOpen={navOpen} />
+        <BackButton navOpen={navOpen} isLoading={isLoading} />
         <HeaderToggle onClick={toggleNav} navOpen={navOpen}>
           <CombatLogo isLoading={isLoading} />
         </HeaderToggle>
