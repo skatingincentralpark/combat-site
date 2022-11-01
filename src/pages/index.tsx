@@ -11,16 +11,6 @@ const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
   return (
     <>
       <HeadSEO title="Home" />
-      {/* <div>
-        <img
-          src="/images/poster/puffer.png"
-          style={{
-            width: `45rem`,
-            paddingTop: `var(--header-height)`,
-            margin: `auto`,
-          }}
-        />
-      </div> */}
       <PageSection>
         <img style={{ width: `100%` }} src="/images/poster/glitch.png" />
       </PageSection>
@@ -48,8 +38,6 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const LandingPageWrapper = styled.main``;
-
 const PageSection = styled.section`
   position: relative;
   display: flex;
@@ -65,21 +53,5 @@ const PageSection = styled.section`
   &:first-of-type {
     margin-top: var(--header-height);
     min-height: calc(100vh - var(--header-height));
-  }
-`;
-const PageSectionRow = styled.section`
-  display: flex;
-  max-width: 100vw;
-  width: 100%;
-  display: block;
-
-  @media screen and (min-width: 700px) {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  & > * {
-    min-height: 100vh;
-    object-fit: cover;
   }
 `;

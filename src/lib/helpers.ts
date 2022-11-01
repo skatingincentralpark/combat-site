@@ -33,3 +33,11 @@ export const clamp = (
     ${maxSizeNew}rem
     )`;
 };
+
+/*
+ * Prevents props with "$" from being sent to the underlying DOM element
+ * Without this, would get errors like: Warning: Received `false` for a non-boolean attribute `someAttribute`.
+ */
+export const transientOptions = {
+  shouldForwardProp: (propName: string) => !propName.startsWith("$"),
+};

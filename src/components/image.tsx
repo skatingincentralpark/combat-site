@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import FutureImage from "next/future/image";
+import { transientOptions } from "@lib/helpers";
+
 interface Props {
   image: ImageType;
   styles?: CssProperties;
@@ -23,7 +25,7 @@ const Image = ({ image, styles, onClick }: Props) => {
       height={height}
       blurDataURL={lqip}
       onLoadingComplete={doFadeIn}
-      loaded={imageLoaded}
+      $loaded={imageLoaded}
       styles={styles}
       onClick={onClick}
     />
@@ -32,11 +34,11 @@ const Image = ({ image, styles, onClick }: Props) => {
 
 export default Image;
 
-const FutureImageStyled = styled(FutureImage)<{
-  loaded: boolean;
+const FutureImageStyled = styled(FutureImage, transientOptions)<{
+  $loaded: boolean;
   styles?: CssProperties;
 }>`
-  opacity: ${({ loaded }) => (loaded ? 1 : 0)};
+  opacity: ${({ $loaded }) => ($loaded ? 1 : 0)};
   transition: opacity 0.25s linear;
   will-change: opacity;
 

@@ -16,7 +16,7 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
     <>
       <HeaderWrapper>
         <BackButton navOpen={navOpen} isLoading={isLoading} />
-        <HeaderToggle onClick={toggleNav} navOpen={navOpen}>
+        <HeaderToggle onClick={toggleNav}>
           <CombatLogo isLoading={isLoading} />
         </HeaderToggle>
         <Cart />
@@ -43,7 +43,7 @@ const HeaderWrapper = styled.header`
   align-items: center;
   justify-content: flex-start;
 `;
-const HeaderToggle = styled.button<{ navOpen: boolean }>`
+const HeaderToggle = styled.button`
   position: relative;
   padding: var(--gap-s) var(--gap-xl);
   background-color: #000;
@@ -61,10 +61,4 @@ const HeaderToggle = styled.button<{ navOpen: boolean }>`
   &:active {
     background-color: var(--yellow-2);
   }
-`;
-const HeaderBackButton = styled(m.button)`
-  height: 100%;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
 `;

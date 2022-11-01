@@ -191,7 +191,6 @@ const MainImage = ({
         exit="out"
         css={css`
           aspect-ratio: 2 / 3;
-          outline: 1px solid black;
         `}
         onClick={onClick}
       >
