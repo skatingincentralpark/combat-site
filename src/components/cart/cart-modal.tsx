@@ -3,11 +3,15 @@ import styled from "@emotion/styled";
 import { AnimatePresence, m } from "framer-motion";
 import Accordion from "../accordion/accordion";
 import CartItem from "./cart-item";
-import { default as NextImage } from "next/image";
 import FutureImage from "next/future/image";
 import CartCta from "./cart-cta";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import useLockBodyScroll from "../../hooks/useLockBodyScroll";
+import {
+  headerVariants,
+  headerInnerVariants,
+  cartModalMobileCtaVariants,
+} from "@lib/animate";
 
 const accordionOptions = [
   {
@@ -36,47 +40,9 @@ const CartModal = () => {
 
   useLockBodyScroll(refScrollable);
 
-  const slideUpVariant = {
-    initial: {
-      opacity: 0,
-      y: 100,
-    },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-      },
-    },
-    exit: {
-      opacity: 0,
-      y: 100,
-      transition: { duration: 0.3, ease: "easeIn" },
-    },
-  };
-
-  const parentVariants = {
-    open: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.14, 0.62, 0.23, 0.98] },
-    },
-    closed: {
-      opacity: 0,
-      y: 60,
-      transition: { duration: 0.6, ease: [0.04, 0.62, 0.23, 0.98] },
-    },
-  };
-
   return (
-    <CartModalWrapper
-      variants={parentVariants}
-      initial="closed"
-      animate="open"
-      exit="closed"
-    >
-      <CartModalInner ref={refScrollable}>
+    <CartModalWrapper {...headerVariants}>
+      <CartModalInner ref={refScrollable} {...headerInnerVariants}>
         <CartFunWrapper>
           <FutureImage
             src="/images/otter-cheeks.jpeg"
@@ -95,7 +61,7 @@ const CartModal = () => {
       </CartModalInner>
       <AnimatePresence>
         {!isVisible && (
-          <TempSlideUpModal {...slideUpVariant}>
+          <TempSlideUpModal {...cartModalMobileCtaVariants}>
             <CartCta />
           </TempSlideUpModal>
         )}
@@ -113,8 +79,10 @@ const CartModalWrapper = styled(m.div)`
   left: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 
-  background: linear-gradient(180deg, #e6ff40, #b7ff01, #ffffff);
+  /* background: linear-gradient(180deg, #e6ff40, #b7ff01, #ffffff); */
+  background: #ebebeb;
   background-size: 400% 400%;
   animation: Combative 4s ease infinite;
   background-attachment: fixed;
@@ -136,10 +104,10 @@ const CartModalWrapper = styled(m.div)`
 
   overflow: scroll;
 `;
-const CartModalInner = styled.div`
+const CartModalInner = styled(m.div)`
   padding: var(--gap-s) var(--gap-l) var(--gap-s) var(--gap-l);
   overflow-y: auto;
-  height: 100%;
+  height: 100vh;
 `;
 const CartItemWrapper = styled.div`
   display: flex;
