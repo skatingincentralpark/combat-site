@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import FutureImage from "next/future/image";
 
 type Props = {
   tee: number;
@@ -7,9 +8,9 @@ type Props = {
 const CartItem = ({ tee }: Props) => {
   return (
     <CartItemWrapper>
-      {tee === 1 && <img src="/images/tee-bill.png" />}
-      {tee === 2 && <img src="/images/tee-viktor.png" />}
-      {tee === 3 && <img src="/images/tee-laughing.png" />}
+      <ImageWrapper>
+        <FutureImage src="/images/tee-bill.png" alt="Something" fill />
+      </ImageWrapper>
       <CartItemBody>
         <strong>Viktor Tee</strong>
         <strong>$70 AUD</strong>
@@ -43,8 +44,18 @@ const CartItemWrapper = styled.div`
   }
 
   & > div:first-of-type {
-    border-radius: 1.5rem;
     overflow: hidden;
+  }
+`;
+const ImageWrapper = styled.div`
+  position: relative;
+  border-radius: 1rem;
+  aspect-ratio: 1 / 1;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
   }
 `;
 const CartItemBody = styled.div`
@@ -54,7 +65,7 @@ const CartItemBody = styled.div`
   margin-left: var(--gap-xs);
 
   @media screen and (min-width: 650px) {
-    border-top: 0.5px solid var(--olive-1);
+    border-top: 0.5px solid #000;
     padding: var(--gap-s) 0;
     margin-top: var(--gap-l);
   }

@@ -1,12 +1,12 @@
 import { useRef } from "react";
+import FutureImage from "next/future/image";
 import styled from "@emotion/styled";
 import { AnimatePresence, m } from "framer-motion";
 import Accordion from "../accordion/accordion";
 import CartItem from "./cart-item";
-import FutureImage from "next/future/image";
 import CartCta from "./cart-cta";
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
-import useLockBodyScroll from "../../hooks/useLockBodyScroll";
+import useIntersectionObserver from "@hooks/useIntersectionObserver";
+import useLockBodyScroll from "@hooks/useLockBodyScroll";
 import {
   headerVariants,
   headerInnerVariants,
@@ -53,8 +53,6 @@ const CartModal = () => {
         </CartFunWrapper>
         <CartItemWrapper>
           <CartItem tee={1} />
-          <CartItem tee={2} />
-          <CartItem tee={3} />
         </CartItemWrapper>
         <Accordion options={accordionOptions} />
         <CartCta ref={ref} />
