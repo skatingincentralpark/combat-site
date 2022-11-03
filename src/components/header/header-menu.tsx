@@ -4,7 +4,7 @@ import FutureImage from "next/future/image";
 import { m } from "framer-motion";
 import styled from "@emotion/styled";
 import Link from "@components/link";
-import { headerVariants } from "@lib/animate";
+import { headerVariants, headerInnerVariants } from "@lib/animate";
 import { TextSm } from "@components/shared-styles/typography";
 import useLockBodyScroll from "@hooks/useLockBodyScroll";
 import PinkSkull from "../../../public/images/pink-skull.png";
@@ -40,33 +40,35 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
   }, [refVideo.current]);
 
   return (
-    <HeaderMenuWrapper {...headerVariants()}>
-      <HeaderMenuInner ref={refScrollable}>
-        <HeaderMenuNav>
-          {navLinks.map((x, i) => (
-            <NavLink key={i} onClick={closeNav} href={x.href}>
-              {x.name}
-            </NavLink>
-          ))}
-        </HeaderMenuNav>
-        <HeaderMenuText>
-          {navText.map((x) => (
-            <TextSm paragraph key={x.slice(0, 8)}>
-              {x}
-            </TextSm>
-          ))}
-        </HeaderMenuText>
+    <HeaderMenuWrapper {...headerVariants}>
+      <HeaderMenuInner {...headerInnerVariants}>
+        <HeaderMenuLeft ref={refScrollable}>
+          <HeaderMenuNav>
+            {navLinks.map((x, i) => (
+              <NavLink key={i} onClick={closeNav} href={x.href}>
+                {x.name}
+              </NavLink>
+            ))}
+          </HeaderMenuNav>
+          <HeaderMenuText>
+            {navText.map((x) => (
+              <TextSm paragraph key={x.slice(0, 8)}>
+                {x}
+              </TextSm>
+            ))}
+          </HeaderMenuText>
+        </HeaderMenuLeft>
+        <MenuImageDesktop>
+          <div>
+            <FutureImage
+              src={PinkSkull}
+              alt="skull"
+              className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
+              onLoadingComplete={doFadeIn}
+            />
+          </div>
+        </MenuImageDesktop>
       </HeaderMenuInner>
-      <MenuImageDesktop>
-        <div>
-          <FutureImage
-            src={PinkSkull}
-            alt="skull"
-            className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
-            onLoadingComplete={doFadeIn}
-          />
-        </div>
-      </MenuImageDesktop>
     </HeaderMenuWrapper>
   );
 };
@@ -77,20 +79,25 @@ const HeaderMenuWrapper = styled(m.div)`
   position: fixed;
   top: 0;
   left: 0;
-  overflow-y: auto;
+  overflow: hidden;
   z-index: 7;
   width: 100%;
-  height: 100vh;
+
   background-color: white;
   font-weight: 300;
-  display: flex;
-  flex-direction: row;
+
+  border-bottom: 1px solid black;
 
   & video {
     border: 1px solid black;
   }
 `;
-const HeaderMenuInner = styled.div`
+const HeaderMenuInner = styled(m.div)`
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+`;
+const HeaderMenuLeft = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
