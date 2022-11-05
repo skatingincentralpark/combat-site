@@ -64,6 +64,7 @@ const GlobalStyles = () => {
       body {
         padding: 0;
         margin: 0;
+        overflow: auto;
       }
       img,
       picture,
