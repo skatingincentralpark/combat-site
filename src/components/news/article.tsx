@@ -86,24 +86,27 @@ const BlockImage = ({ value }: { value: BlockMediaImageProps }) => {
         )}
       </AnimatePresence>
 
-      <Image
-        image={image}
-        onClick={() => setLightboxOpen(true)}
-        styles={css`
+      <div
+        css={css`
+          aspect-ratio: ${image.aspectRatio};
           width: 100%;
-          height: 100%;
-          object-fit: contain;
           width: ${(width / 100) * 100}%;
+          height: fit-content;
           ${o.containerAligns[align]}
           display: inline-block;
-          padding: 0;
-          cursor: pointer;
 
           @media screen and (min-width: 700px) {
             padding: var(--gap-m);
           }
+
+          & > img {
+            width: 100%;
+            cursor: pointer;
+          }
         `}
-      />
+      >
+        <Image image={image} onClick={() => setLightboxOpen(true)} />
+      </div>
     </>
   );
 };
@@ -134,7 +137,7 @@ const BlockVideoCloudinary = ({
         ${o.containerAligns[align]}
         display: inline-block;
         margin: 1em 0;
-        z-index: 999;
+        z-index: 0;
 
         @media screen and (min-width: 700px) {
           width: ${(width / 100) * 100}%;

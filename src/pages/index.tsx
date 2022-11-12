@@ -3,16 +3,19 @@ import styled from "@emotion/styled";
 import { client } from "@lib/sanity";
 import HeadSEO from "@components/head-seo";
 import queries from "@lib/queries";
+import Image from "@components/image";
 
 const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
-  const { url, width, height, caption, aspectRatio, dominantColor } =
-    homePageImage;
+  // const { url, width, height, caption, aspectRatio, dominantColor } =
+  //   homePageImage;
 
   return (
     <>
       <HeadSEO title="Home" />
       <PageSection>
-        <img style={{ width: `100%` }} src="/images/poster/glitch.png" />
+        <Image image={homePageImage} />
+
+        {/* <img src="/images/poster/glitch.png" /> */}
       </PageSection>
     </>
   );
@@ -45,9 +48,12 @@ const PageSection = styled.section`
   align-items: center;
   min-height: 100vh;
 
-  & > * {
+  & > img {
     min-height: 100vh;
     object-fit: cover;
+    height: 100%;
+    width: 100%;
+    object-position: top;
   }
 
   &:first-of-type {

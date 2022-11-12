@@ -22,7 +22,7 @@ interface ImageType {
   url: string;
   height: number;
   width: number;
-  aspectRatio: number;
+  aspectRatio: number | Property.AspectRatio;
   lqip?: string;
   blurHash?: string;
   dominantColor?: string;

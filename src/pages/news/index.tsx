@@ -11,9 +11,6 @@ import { NewsItemType } from "types/newsTypes";
 import { Heading, HeadingSm } from "@components/shared-styles/typography";
 import HeadSEO from "@components/head-seo";
 
-// Have the first item open when you land on the page (first time) 0.5s
-// the enter link will be inside the open body - not sure how to style
-
 const NewsIndexPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
   const container = {
     hidden: { opacity: 0 },

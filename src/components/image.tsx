@@ -28,6 +28,9 @@ const Image = ({ image, styles, onClick }: Props) => {
       $loaded={imageLoaded}
       styles={styles}
       onClick={onClick}
+      placeholder="blur"
+      quality={100}
+      style={{ aspectRatio: aspectRatio }}
     />
   );
 };
@@ -38,9 +41,10 @@ const FutureImageStyled = styled(FutureImage, transientOptions)<{
   $loaded: boolean;
   styles?: CssProperties;
 }>`
-  opacity: ${({ $loaded }) => ($loaded ? 1 : 0)};
-  transition: opacity 0.25s linear;
+  /* opacity: ${({ $loaded }) => ($loaded ? 1 : 0)};
+  transition: opacity 0.25s linear; */
   will-change: opacity;
-
+  width: fit-content;
+  height: fit-content;
   ${({ styles }) => styles}
 `;
