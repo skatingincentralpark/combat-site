@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FutureImage from "next/future/image";
 import styled from "@emotion/styled";
 import { AnimatePresence, m } from "framer-motion";
@@ -10,6 +10,9 @@ import queries from "@lib/queries";
 import { NewsItemType } from "types/newsTypes";
 import { Heading, HeadingSm } from "@components/shared-styles/typography";
 import HeadSEO from "@components/head-seo";
+
+// Have the first item open when you land on the page (first time) 0.5s
+// the enter link will be inside the open body - not sure how to style
 
 const NewsIndexPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
   const container = {
@@ -25,8 +28,8 @@ const NewsIndexPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
   return (
     <NewsPageWrapper initial="hidden" animate="show" variants={container}>
       <HeadSEO title="News" />
-      {newsItems.map((newsItem) => (
-        <NewsItem newsItem={newsItem} key={`${newsItem.title}-1`} />
+      {newsItems.map((newsItem, i) => (
+        <NewsItem newsItem={newsItem} key={`${newsItem.title}-1`} index={i} />
       ))}
     </NewsPageWrapper>
   );
@@ -79,11 +82,27 @@ const NewsPageWrapper = styled(m.main)`
   }
 `;
 
-const NewsItem = ({ newsItem }: { newsItem: NewsItemType }) => {
+const NewsItem = ({
+  newsItem,
+  index,
+}: {
+  newsItem: NewsItemType;
+  index: number;
+}) => {
   const { title, excerpt, category, date, previewImages, location, slug } =
     newsItem || {};
 
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const openFirstItem = setTimeout(() => {
+      if (index === 0) {
+        setIsOpen(true);
+      }
+    }, 200);
+
+    return () => clearTimeout(openFirstItem);
+  }, []);
 
   // Creates an array of at least 6 items
   const atLeastSixArray = previewImages
@@ -108,8 +127,8 @@ const NewsItem = ({ newsItem }: { newsItem: NewsItemType }) => {
   };
 
   return (
-    <NewsItemWrapper onClick={() => setIsOpen((x) => !x)} variants={item}>
-      <ImageGrid variants={container}>
+    <NewsItemWrapper variants={item}>
+      <ImageGrid variants={container} onClick={() => setIsOpen((x) => !x)}>
         {atLeastSixArray?.map((x, i) => (
           <NewsImage key={i} image={x} />
         ))}
@@ -122,6 +141,7 @@ const NewsItem = ({ newsItem }: { newsItem: NewsItemType }) => {
         descriptionOpen={isOpen}
         location={location}
         slug={slug}
+        onClick={() => setIsOpen((x) => !x)}
       />
     </NewsItemWrapper>
   );
@@ -260,24 +280,21 @@ const NewsText = ({
   location = { lat: 0, lng: 0 },
   descriptionOpen = false,
   slug = "",
+  onClick = () => {},
 }) => {
   const newsDescriptionVariants = {
     initial: {
-      // width: 0,
       height: 0,
       backgroundColor: "#000",
       marginTop: 0,
     },
     animate: {
-      // width: "100%",
-      // height: "20rem",
       height: "fit-content",
       backgroundColor: "#fff",
       marginTop: "3rem",
       transition: { duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] },
     },
     exit: {
-      // width: 0,
       height: 0,
       backgroundColor: "#000",
       marginTop: 0,
@@ -286,35 +303,40 @@ const NewsText = ({
 
   return (
     <NewsTextWrapper>
-      <div>{date}</div>
-      <div>
-        <Heading>{title}</Heading>
-        <HeadingSm>{category}</HeadingSm>
-        <AnimatePresence>
-          {descriptionOpen && (
-            <Description {...newsDescriptionVariants}>
-              <div>
-                <div className="desc-coords">
-                  {location?.lat.toFixed(2) || "--"} °S{" : "}
-                  {location?.lng.toFixed(2) || "--"} °E
-                </div>
-                <PortableText value={excerpt} />
+      <NewsTextHeading onClick={onClick}>
+        <div>
+          <div>{date}</div>
+          <Heading>{title}</Heading>
+          <HeadingSm>{category}</HeadingSm>
+        </div>
+      </NewsTextHeading>
+      <AnimatePresence>
+        {descriptionOpen && (
+          <Description {...newsDescriptionVariants}>
+            <Cta>
+              <Link href={`news/${slug}`}>Read More</Link>
+            </Cta>
+            <DescriptionBody>
+              <div className="coords">
+                {location?.lat.toFixed(2) || "--"} °S{" : "}
+                {location?.lng.toFixed(2) || "--"} °E
               </div>
-            </Description>
-          )}
-        </AnimatePresence>
-        <Link href={`news/${slug}`}>Read More</Link>
-      </div>
+              <PortableText value={excerpt} />
+            </DescriptionBody>
+          </Description>
+        )}
+      </AnimatePresence>
     </NewsTextWrapper>
   );
 };
 
 const Description = styled(m.div)`
-  /* overflow: scroll; */
-  /* max-height: 20rem; */
   white-space: ellipsis;
   overflow: hidden;
   margin-top: 3rem;
+`;
+const DescriptionBody = styled.div`
+  margin-bottom: 3rem;
 
   & > div {
     padding: var(--gap-xs);
@@ -329,19 +351,50 @@ const Description = styled(m.div)`
     }
   }
 
-  .desc-coords {
-    font-family: "Courier New", Courier, monospace;
+  .coords {
+    margin-bottom: var(--gap-s);
+    padding-left: 0;
+  }
+`;
+const Cta = styled.div`
+  display: block;
+  cursor: pointer;
+  /* background-color: lightgray;
+  border-radius: 0.25rem; */
+  border-top: 0.5px solid var(--gray-4);
+  border-bottom: 0.5px solid var(--gray-4);
+  margin-top: 2rem;
+
+  @media screen and (min-width: 700px) {
+    margin-bottom: 2rem;
+  }
+
+  & > a {
+    display: block;
+    padding: 0.25rem 0.75rem;
+  }
+
+  &:hover {
+    @media screen and (min-width: 700px) {
+      background-color: var(--yellow-1);
+    }
+  }
+
+  &:active {
+    background-color: var(--yellow-2);
   }
 `;
 const NewsTextWrapper = styled.div`
   flex-grow: 1;
   margin-left: var(--gap-s);
-  padding-left: var(--gap-s);
   border-left: 0.5px solid var(--gray-4);
   user-select: none;
+  padding-left: var(--gap-s);
+  padding-right: var(--gap-s);
   padding-top: var(--gap-s);
 
   @media screen and (min-width: 700px) {
+    padding-right: 0;
     padding-top: 0;
 
     h2 {
@@ -349,10 +402,26 @@ const NewsTextWrapper = styled.div`
       margin-bottom: 3rem;
     }
   }
+`;
+const NewsTextHeading = styled.div`
+  cursor: pointer;
 
-  /* font-family: "Bitcount Mono Single Lt Circle", "Courier New", Courier; */
-  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
-  /* -webkit-font-smoothing: initial; */
-  /* font-weight: 400; */
+  &:hover > div {
+    @media screen and (min-width: 700px) {
+      /* border-width: 10px;
+      padding-left: var(--gap-s); */
+      transform: translateX(5px);
+    }
+  }
+
+  &:active > div {
+    /* border-width: 10px;
+    padding-left: var(--gap-s);
+    border-color: var(--gray-2); */
+  }
+
+  & > div {
+    border-left: 0px solid var(--gray-1);
+    transition: transform 0.1s ease, border 0.1s ease;
+  }
 `;

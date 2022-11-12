@@ -28,6 +28,8 @@ const cssVariables = css`
     // Font Family
     --font-family-primary: Helvetica, -apple-system, Arial, sans-serif,
       Courier New;
+    --font-family-primary: "Jost", Helvetica, Helvetica, -apple-system, Arial,
+      sans-serif, Courier New;
     // Gap
     --gap-4xs: 0.25rem;
     --gap-3xs: 0.5rem;
