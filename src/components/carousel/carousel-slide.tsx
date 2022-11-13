@@ -1,7 +1,7 @@
 import { useState } from "react";
-import FutureImage from "next/future/image";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import Image from "@components/image";
 
 export const CarouselSlide = ({
   image,
@@ -27,16 +27,7 @@ export const CarouselSlide = ({
       onClick={onClick && onClick}
     >
       {caption && <SlideText>{caption}</SlideText>}
-      <FutureImage
-        src={url}
-        alt={caption}
-        width={width}
-        height={height}
-        // className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
-        // onLoadingComplete={doFadeIn}
-        placeholder="blur"
-        blurDataURL={lqip}
-      />
+      <Image image={image} quality={75} />
     </EmblaSlide>
   );
 };
@@ -58,15 +49,6 @@ const EmblaSlide = styled.div`
 
   & > img {
     height: 100%;
-
-    &.transparent {
-      opacity: 0;
-      transition: opacity 0.25s linear;
-      will-change: opacity;
-    }
-    &.hasLoaded {
-      opacity: 1;
-    }
   }
 `;
 const SlideText = styled.div`

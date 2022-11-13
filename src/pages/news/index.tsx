@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import FutureImage from "next/future/image";
 import styled from "@emotion/styled";
 import { AnimatePresence, m } from "framer-motion";
 import { PortableText } from "@portabletext/react";
@@ -10,6 +9,7 @@ import queries from "@lib/queries";
 import { NewsItemType } from "types/newsTypes";
 import { Heading, HeadingSm } from "@components/shared-styles/typography";
 import HeadSEO from "@components/head-seo";
+import Image from "@components/image";
 
 const NewsIndexPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
   const container = {
@@ -232,14 +232,7 @@ const NewsImage = ({ image }: { image: ImageType | undefined }) => {
         },
       }}
     >
-      <FutureImage
-        src={url}
-        alt={caption || "News Image"}
-        width={width}
-        height={height}
-        className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
-        onLoadingComplete={doFadeIn}
-      />
+      <Image image={image} />
     </ImageWrapper>
   );
 };

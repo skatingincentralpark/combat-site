@@ -5,11 +5,12 @@ import { transientOptions } from "@lib/helpers";
 
 interface Props {
   image: ImageType;
+  quality?: number;
   styles?: CssProperties;
   onClick?: () => void;
 }
 
-const Image = ({ image, styles, onClick }: Props) => {
+const Image = ({ image, quality, styles, onClick }: Props) => {
   const { url, caption, lqip, dominantColor, aspectRatio, width, height } =
     image;
 
@@ -24,12 +25,12 @@ const Image = ({ image, styles, onClick }: Props) => {
       width={width}
       height={height}
       blurDataURL={lqip}
-      onLoadingComplete={doFadeIn}
+      // onLoadingComplete={doFadeIn}
       $loaded={imageLoaded}
       styles={styles}
       onClick={onClick}
       placeholder="blur"
-      quality={100}
+      quality={quality || 100}
       style={{ aspectRatio: aspectRatio }}
     />
   );

@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyles />
       <LazyMotion features={domAnimation}>
         <Header isLoading={isLoading} />
-        {/* <MusicPlayer /> */}
+        <MusicPlayer />
         <PageTransitionWrapper loading={isLoading}>
           <Component {...pageProps} />
         </PageTransitionWrapper>
