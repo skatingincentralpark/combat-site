@@ -1,10 +1,14 @@
 import { useState } from "react";
+import FutureImage from "next/future/image";
 import styled from "@emotion/styled";
 import Link from "next/link";
+import { clamp } from "@lib/helpers";
+import tshirt from "../../../public/images/tee-viktor.png";
 
 const StyledCenteredWrapper = styled.div`
-  height: 100%;
+  height: fit-content;
   margin: auto;
+  min-height: 100%;
 
   display: flex;
   justify-content: center;
@@ -20,10 +24,7 @@ const ShopItemPage = () => {
   return (
     <StyledCenteredWrapper>
       <ShopItemWrapper>
-        <img
-          src="/images/tee-viktor.png"
-          style={{ flexShrink: 0, maxWidth: `50%` }}
-        />
+        <FutureImage src={tshirt} alt="Viktor T-Shirt" priority={true} />
         <ShopItemInfo>
           <ShopItemHeader>
             <span>Viktor Tee</span>
@@ -31,15 +32,17 @@ const ShopItemPage = () => {
           </ShopItemHeader>
           <ShopItemBody>
             <div>
-              100% Deadstock American cotton. Lightweight and soft. Spun to
-              create slubby texture (similar to t-shirts from the mid-90s).
-              Silkscreen graphic printed. Boxy fit – longer sleeves and
-              shortened body.
-              <br />
-              <br />
-              Please be aware that the t-shirt will stretch 2-3cm in the
-              shoulders & chest with wear. The collar is initially snug, however
-              will stretch to a perfect fit with wear.
+              <p>
+                100% Deadstock American cotton. Lightweight and soft. Spun to
+                create slubby texture (similar to t-shirts from the mid-90s).
+                Silkscreen graphic printed. Boxy fit – longer sleeves and
+                shortened body.
+              </p>
+              <p>
+                Please be aware that the t-shirt will stretch 2-3cm in the
+                shoulders & chest with wear. The collar is initially snug,
+                however will stretch to a perfect fit with wear.
+              </p>
             </div>
             <div>
               <RadioGroup>
@@ -73,16 +76,22 @@ const ShopItemWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  flex-wrap: wrap;
+  padding: var(--gap-page-top) var(--gap-m) var(--gap-m) var(--gap-m);
 
-  @media screen and (max-width: 700px) {
-    flex-wrap: wrap;
+  @media screen and (min-width: 600px) {
+    padding-top: 0;
+    flex-wrap: nowrap;
   }
 
-  & > span:first-of-type {
-    flex-shrink: 0;
+  & > img {
+    height: auto;
+    width: 100%;
+    max-width: 40rem;
 
-    @media screen and (max-width: 700px) {
-      flex-grow: 1;
+    @media screen and (min-width: 600px) {
+      max-width: 50%;
     }
   }
 `;
@@ -92,12 +101,13 @@ const ShopItemInfo = styled.div`
   border-radius: 16px;
 
   height: fit-content;
-  margin-left: 2rem;
+  margin-left: 0;
 
   overflow: hidden;
+  width: 100%;
 
-  @media screen and (max-width: 700px) {
-    margin-left: 0;
+  @media screen and (min-width: 600px) {
+    margin-left: 2rem;
   }
 `;
 
@@ -121,13 +131,20 @@ const ShopItemHeader = styled.div`
 const ShopItemBody = styled.div`
   padding: 0 1rem;
 
+  p,
+  strong,
+  ul {
+    line-height: 1.5em;
+    font-size: ${clamp(12, 14, 1440, 2560)};
+    margin: 1em auto;
+  }
+
   & > * {
     margin-bottom: 1rem;
   }
 
   & > div:first-of-type {
-    padding: 1rem 0;
-    border-bottom: 1px solid #969696;
+    border-bottom: 0.5px solid var(--gray-4);
   }
 `;
 
@@ -173,7 +190,7 @@ const RadioButton = ({
         value={value}
         name={name}
       />
-      {children}
+      <div>{children}</div>
     </StyledRadioLabelInput>
   );
 };
@@ -215,6 +232,14 @@ const StyledRadioLabelInput = styled.label<StyledRadioLabelInputProps>`
     opacity: 0;
     position: fixed;
     width: 0;
+  }
+
+  &:active > div {
+    transform: scale(0.8);
+  }
+
+  & > div {
+    transition: transform 100ms;
   }
 `;
 
