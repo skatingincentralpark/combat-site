@@ -93,7 +93,7 @@ const CombatLogo = ({ isLoading }: { isLoading: boolean }) => {
       >
         <g id="Borders">
           {drawnPaths.map((d, i) => (
-            <PathFast d={d} key={i} delay={i} />
+            <Path d={d} key={i} style={{ ["--delay" as any]: i }} fast />
           ))}
         </g>
       </SvgFast>
@@ -105,7 +105,7 @@ const CombatLogo = ({ isLoading }: { isLoading: boolean }) => {
       >
         <g id="Borders">
           {drawnPaths.map((d, i) => (
-            <Path d={d} key={i} delay={i} />
+            <Path d={d} key={i} style={{ ["--delay" as any]: i }} />
           ))}
         </g>
       </Svg>
@@ -130,11 +130,12 @@ const SvgFast = styled.svg<{ isLoading: boolean }>`
   padding: var(--gap-s) var(--gap-xl);
 `;
 
-const Path = styled.path<{ delay: number; fast?: boolean }>`
+const Path = styled.path<{ fast?: boolean }>`
   fill: #000;
-  animation: FairyBreadBiatch infinite;
-  animation-duration: ${({ fast }) => (fast ? `750ms` : `1500ms`)};
-  animation-delay: ${({ delay }) => `${delay * 0.1}s`};
+  animation: ${({ fast }) =>
+    fast ? `FairyBreadBiatch2 infinite` : `FairyBreadBiatch infinite`};
+  animation-duration: ${({ fast }) => (fast ? `1000ms` : `1500ms`)};
+  animation-delay: calc(var(--delay) * 0.1s);
 
   @keyframes FairyBreadBiatch {
     0% {
@@ -156,13 +157,6 @@ const Path = styled.path<{ delay: number; fast?: boolean }>`
       fill: var(--green-1);
     }
   }
-`;
-
-const PathFast = styled.path<{ delay: number; fast?: boolean }>`
-  fill: #000;
-  animation: FairyBreadBiatch2 infinite;
-  animation-duration: ${({ fast }) => (fast ? `750ms` : `1500ms`)};
-  animation-delay: ${({ delay }) => `${delay * 0.1}s`};
 
   @keyframes FairyBreadBiatch2 {
     0% {
