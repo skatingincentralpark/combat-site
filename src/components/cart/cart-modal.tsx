@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import FutureImage from "next/future/image";
+import FutureImage from "next/image";
 import styled from "@emotion/styled";
 import { AnimatePresence, m } from "framer-motion";
 import Accordion from "../accordion/accordion";
@@ -85,8 +85,7 @@ const CartModalWrapper = styled(m.div)`
   animation: Combative 4s ease infinite;
   background-attachment: fixed;
 
-  font-family: "Bitcount Mono Single Bk Circle", "Courier New", Courier,
-    monospace;
+  font-family: var(--font-mono);
 
   @keyframes Combative {
     0% {

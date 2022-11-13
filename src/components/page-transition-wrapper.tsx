@@ -5,9 +5,10 @@ import { AnimatePresence, m } from "framer-motion";
 type Props = {
   children: React.ReactNode;
   loading: boolean;
+  className?: string;
 };
 
-const PageTransitionWrapper = ({ children, loading }: Props) => {
+const PageTransitionWrapper = ({ children, loading, className }: Props) => {
   const router = useRouter();
 
   const variants = {
@@ -37,6 +38,7 @@ const PageTransitionWrapper = ({ children, loading }: Props) => {
           initial="initial"
           exit="exit"
           animate="animate"
+          className={className}
         >
           {children}
         </TransitionWrapper>

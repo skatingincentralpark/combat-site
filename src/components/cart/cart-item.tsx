@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import FutureImage from "next/future/image";
+import FutureImage from "next/image";
 
 type Props = {
   tee: number;

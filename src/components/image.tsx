@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import FutureImage from "next/future/image";
+import FutureImage from "next/image";
 import { transientOptions } from "@lib/helpers";
 
 interface Props {

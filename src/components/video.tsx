@@ -96,8 +96,7 @@ const VideoButtons = styled.div<{
     padding: var(--gap-m);
     color: white;
     font-weight: 400;
-    font-family: "Bitcount Mono Single Bk Circle", "Courier New", Courier,
-      monospace;
+    font-family: var(--font-mono);
 
     &:first-of-type {
       background-color: ${({ isPlaying }) =>

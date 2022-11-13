@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
-import FutureImage from "next/future/image";
+import FutureImage from "next/image";
 import { m } from "framer-motion";
 import styled from "@emotion/styled";
 import Link from "@components/link";

@@ -1,7 +1,7 @@
 import HeadSEO from "@components/head-seo";
 import { useState } from "react";
 import styled from "@emotion/styled";
-import FutureImage from "next/future/image";
+import FutureImage from "next/image";
 import ShopCta from "@components/shop-cta";
 import productImage from "../../../public/images/tee-bill.png";
 

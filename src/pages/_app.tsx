@@ -9,6 +9,10 @@ import MusicPlayer from "@components/music-player";
 import { deviceIsBrowser } from "@lib/helpers";
 import useIsLoading from "hooks/useIsLoading";
 
+import { Jost } from "@next/font/google";
+
+const jost = Jost({ subsets: ["latin"] });
+
 if (deviceIsBrowser) {
   console.log(`Greetings, Traveller 🦧`);
   console.log(`https://www.nakedlunch.studio/about`);
@@ -22,6 +26,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyles />
       <LazyMotion features={domAnimation}>
         <Header isLoading={isLoading} />
+        <style jsx global>{`
+          html {
+            font-family: ${jost.style.fontFamily};
+          }
+        `}</style>
         {/* <MusicPlayer /> */}
         <PageTransitionWrapper loading={isLoading}>
           <Component {...pageProps} />

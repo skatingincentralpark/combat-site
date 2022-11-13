@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import styled from "@emotion/styled";
-import FutureImage from "next/future/image";
+import FutureImage from "next/image";
 import popupImage from "../../public/images/picasso.jpeg";
 import { AnimatePresence, m } from "framer-motion";
 
@@ -85,8 +85,7 @@ const MusicPlayerWrapper = styled.div`
   z-index: 9999;
   width: 300px;
   opacity: 1;
-  font-family: "Bitcount Mono Single Lt Circle", "Courier New", Courier,
-    monospace;
+  font-family: var(--font-mono);
   -webkit-font-smoothing: initial;
 `;
 

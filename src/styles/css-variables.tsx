@@ -26,10 +26,10 @@ const cssVariables = css`
     --font-size-l: 1.2rem;
     --font-size-xl: 1.4rem;
     // Font Family
-    --font-family-primary: Helvetica, -apple-system, Arial, sans-serif,
-      Courier New;
-    --font-family-primary: "Jost", Helvetica, Helvetica, -apple-system, Arial,
+    --font-primary: "Jost", Helvetica, Helvetica, -apple-system, Arial,
       sans-serif, Courier New;
+    --font-mono: "Bitcount Mono Single Bk Circle", "Courier New", Courier,
+      monospace;
     // Gap
     --gap-4xs: 0.25rem;
     --gap-3xs: 0.5rem;

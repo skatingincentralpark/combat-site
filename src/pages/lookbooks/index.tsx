@@ -142,8 +142,7 @@ const DummyListItem = styled(m.li)`
   list-style: none;
   border-left: 0.8rem solid var(--gray-2);
   color: var(--gray-2);
-  font-family: "Bitcount Mono Single Bk Circle", "Courier New", Courier,
-    monospace;
+  font-family: var(--font-mono);
 
   &:hover {
     @media screen and (min-width: 700px) {

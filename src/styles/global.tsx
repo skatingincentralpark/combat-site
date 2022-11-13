@@ -5,28 +5,6 @@ const GlobalStyles = () => {
   const styles = [
     cssVariables,
     css`
-      @font-face {
-        font-family: "IBM Plex Mono";
-        src: url(/fonts/IBMPlexMono-Regular.ttf) format("truetype");
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "IBM Plex Mono";
-        src: url(/fonts/IBMPlexMono-ExtraLight.ttf) format("truetype");
-        font-style: normal;
-        font-weight: 200;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "IBM Plex Mono";
-        src: url(/fonts/IBMPlexMono-Light.ttf) format("truetype");
-        font-style: normal;
-        font-weight: 300;
-        font-display: swap;
-      }
-
       html,
       body,
       body > div:first-of-type {
@@ -40,7 +18,6 @@ const GlobalStyles = () => {
 
       html {
         background: white;
-        font-family: var(--font-family-primary);
         font-size: 12px;
         line-height: 1.4em;
         font-weight: 300;

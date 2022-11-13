@@ -9,15 +9,15 @@ type Props = {
 
 const Link = ({ children, href, onClick }: Props) => {
   return (
-    <NextLink href={href}>
-      <StyledLink onClick={onClick}>{children}</StyledLink>
-    </NextLink>
+    <StyledLink href={href} onClick={onClick}>
+      {children}
+    </StyledLink>
   );
 };
 
 export default Link;
 
-const StyledLink = styled.a`
+const StyledLink = styled(NextLink)`
   position: relative;
   display: block;
   width: 100%;

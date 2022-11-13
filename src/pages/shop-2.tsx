@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { default as NextImage } from "next/image";
+import { default as NextImage } from "next/legacy/image";
 import Link from "@components/link";
 import { useState } from "react";
 

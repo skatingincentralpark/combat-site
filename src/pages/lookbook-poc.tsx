@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import FutureImage from "next/future/image";
+import FutureImage from "next/image";
 import { clamp } from "@lib/helpers";
 import { m, AnimatePresence } from "framer-motion";
 import { client, imageBuilder } from "@lib/sanity";

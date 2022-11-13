@@ -1,5 +1,5 @@
 import { useState } from "react";
-import FutureImage from "next/future/image";
+import FutureImage from "next/image";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import { clamp } from "@lib/helpers";

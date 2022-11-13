@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import productImage from "../../public/images/tee-bill.png";
 
