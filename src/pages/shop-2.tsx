@@ -65,7 +65,7 @@ const ShopPage = () => {
       <Items>
         {products.map((product, i) => (
           <Item key={i} color={colors[colorIndex]} onMouseDown={cycleColor}>
-            <Link href="/shop/item-1">
+            <Link href="/shop/item-2">
               <NextImage
                 src={product.image}
                 layout="fill"
