@@ -83,10 +83,23 @@ const HeaderMenuWrapper = styled(m.div)`
   z-index: 7;
   width: 100%;
 
-  background-color: white;
+  background-color: black;
   font-weight: 300;
 
   border-bottom: 1px solid black;
+
+  & * {
+    color: white;
+  }
+
+  @media screen and (min-width: 700px) {
+    background-color: white;
+    border-bottom: none;
+
+    & * {
+      color: black;
+    }
+  }
 
   & video {
     border: 1px solid black;
@@ -214,8 +227,12 @@ const StyledDot = styled.span<{ isActive: boolean }>`
   border-radius: 50%;
   border: 1px solid #000;
   margin-right: var(--gap-xs);
-  background-color: ${({ isActive }) =>
-    isActive ? "#000" : "var(--dot-color)"};
+  background-color: white;
   transform: var(--dot-scale);
   transition: background-color 0.25s, transform 0.25s;
+
+  @media screen and (min-width: 700px) {
+    background-color: ${({ isActive }) =>
+      isActive ? "#000" : "var(--dot-color)"};
+  }
 `;

@@ -19,9 +19,9 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
         <HeaderToggle onClick={toggleNav}>
           <CombatLogo isLoading={isLoading} />
         </HeaderToggle>
-        <Suspense fallback="">
+        {/* <Suspense fallback="">
           <Cart />
-        </Suspense>
+        </Suspense> */}
       </HeaderWrapper>
 
       <Suspense fallback="">
