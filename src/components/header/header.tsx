@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import styled from "@emotion/styled";
-import { m, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import CombatLogo from "../combat-logo";
-import Cart from "@components/cart/cart";
-import HeaderMenu from "./header-menu";
 import BackButton from "./backButton";
+const Cart = lazy(() => import("@components/cart/cart"));
+const HeaderMenu = lazy(() => import("./header-menu"));
 
 const Header = ({ isLoading }: { isLoading: boolean }) => {
   const [navOpen, setNavOpen] = useState(false);
@@ -19,12 +19,16 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
         <HeaderToggle onClick={toggleNav}>
           <CombatLogo isLoading={isLoading} />
         </HeaderToggle>
-        <Cart />
+        <Suspense fallback="">
+          <Cart />
+        </Suspense>
       </HeaderWrapper>
 
-      <AnimatePresence>
-        {navOpen && <HeaderMenu closeNav={closeNav} />}
-      </AnimatePresence>
+      <Suspense fallback="">
+        <AnimatePresence>
+          {navOpen && <HeaderMenu closeNav={closeNav} />}
+        </AnimatePresence>
+      </Suspense>
     </>
   );
 };

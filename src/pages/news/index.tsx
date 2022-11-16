@@ -91,15 +91,15 @@ const NewsItem = ({
 
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    const openFirstItem = setTimeout(() => {
-      if (index === 0) {
-        setIsOpen(true);
-      }
-    }, 200);
+  // useEffect(() => {
+  //   const openFirstItem = setTimeout(() => {
+  //     if (index === 0) {
+  //       setIsOpen(true);
+  //     }
+  //   }, 200);
 
-    return () => clearTimeout(openFirstItem);
-  }, []);
+  //   return () => clearTimeout(openFirstItem);
+  // }, []);
 
   // Creates an array of at least 6 items
   const atLeastSixArray = previewImages
