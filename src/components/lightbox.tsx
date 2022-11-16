@@ -39,5 +39,6 @@ const LightboxStyled = styled.div`
     margin: auto;
     height: 100%;
     user-select: none;
+    object-fit: contain;
   }
 `;
