@@ -58,11 +58,13 @@ const HeaderToggle = styled.button`
 
   &:hover {
     @media screen and (min-width: 700px) {
-      background-color: var(--yellow-1);
+      /* background-color: var(--yellow-1); */
+      background-color: var(--piss-1);
     }
   }
 
   &:active {
-    background-color: var(--yellow-2);
+    /* background-color: var(--yellow-2); */
+    background-color: white;
   }
 `;
