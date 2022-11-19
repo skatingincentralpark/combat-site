@@ -1,7 +1,19 @@
 import styled from "@emotion/styled";
-import { default as NextImage } from "next/legacy/image";
+import NextImage from "next/image";
 import Link from "@components/link";
 import { useState } from "react";
+
+import TeeOne from "../../public/images/tee-laughing.png";
+import TeeTwo from "../../public/images/tee-viktor.png";
+import TeeThree from "../../public/images/tee-bill.png";
+import TeeFour from "../../public/images/tee-wartime.png";
+
+const getImage = (index: number) => {
+  if (index === 0) return TeeOne;
+  if (index === 1) return TeeTwo;
+  if (index === 2) return TeeThree;
+  return TeeFour;
+};
 
 const products = [
   {
@@ -12,7 +24,6 @@ const products = [
     material: "USA Cotton",
     made: "Japan",
     sizes: ["S", "M", "L", "XL"],
-    image: "/images/tee-laughing.png",
   },
   {
     title: "Aftermath",
@@ -22,7 +33,6 @@ const products = [
     material: "USA Cotton",
     made: "Japan",
     sizes: ["S", "M", "L", "XL"],
-    image: "/images/tee-viktor.png",
   },
   {
     title: "Aftermath",
@@ -32,7 +42,6 @@ const products = [
     material: "USA Cotton",
     made: "Japan",
     sizes: ["S", "M", "L", "XL"],
-    image: "/images/tee-bill.png",
   },
   {
     title: "Aftermath",
@@ -42,7 +51,6 @@ const products = [
     material: "USA Cotton",
     made: "Japan",
     sizes: ["S", "M", "L", "XL"],
-    image: "/images/tee-wartime.png",
   },
 ];
 
@@ -67,9 +75,11 @@ const ShopPage = () => {
           <Item key={i} color={colors[colorIndex]} onMouseDown={cycleColor}>
             <Link href="/shop/item-2">
               <NextImage
-                src={product.image}
+                src={getImage(i)}
+                alt="T-shirt"
                 layout="fill"
                 objectFit="contain"
+                placeholder="blur"
               />
             </Link>
           </Item>
