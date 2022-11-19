@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import { AnimatePresence } from "framer-motion";
 import CombatLogo from "../combat-logo";
 import BackButton from "./backButton";
-const Cart = lazy(() => import("@components/cart/cart"));
 const HeaderMenu = lazy(() => import("./header-menu"));
 
 const Header = ({ isLoading }: { isLoading: boolean }) => {
@@ -19,9 +18,6 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
         <HeaderToggle onClick={toggleNav}>
           <CombatLogo isLoading={isLoading} />
         </HeaderToggle>
-        {/* <Suspense fallback="">
-          <Cart />
-        </Suspense> */}
       </HeaderWrapper>
 
       <Suspense fallback="">

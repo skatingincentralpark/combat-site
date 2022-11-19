@@ -5,6 +5,7 @@ import GlobalStyles from "../styles/global";
 import Header from "@components/header/header";
 import PageTransitionWrapper from "@components/page-transition-wrapper";
 import MusicPlayer from "@components/music-player";
+import Cart from "@components/cart/cart";
 
 import { deviceIsBrowser } from "@lib/helpers";
 import useIsLoading from "hooks/useIsLoading";
@@ -14,8 +15,24 @@ import { Jost } from "@next/font/google";
 const jost = Jost({ subsets: ["latin"] });
 
 if (deviceIsBrowser) {
-  console.log(`Greetings, Traveller 🦧`);
-  console.log(`https://www.nakedlunch.studio/about`);
+  console.log(
+    `%c
+                                                                          
+  .     |___________________________________                              
+  |-----|- - -|''''|''''|''''|''''|''''|'##\|__                            
+  |- -  |  cc 6    5    4    3    2    1 ### __]==----------------------  
+  |-----|________________________________##/|                             
+  'jgs  |"""""""""""""""""""""""""""""""""""                              
+                                                                          
+
+Developer looking for something new and exciting?  I wish you the best of luck 😂
+
+More here: https://www.nakedlunch.studio/about
+
+ASCII by Joan G. Stark`,
+
+    "background: #f7ff04; color: #bada55"
+  );
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -26,6 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyles />
       <LazyMotion features={domAnimation}>
         <Header isLoading={isLoading} />
+        <Cart />
         <style jsx global>{`
           html {
             font-family: ${jost.style.fontFamily};

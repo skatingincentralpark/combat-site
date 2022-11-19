@@ -20,16 +20,19 @@ const headerBackButtonVariants = () => {
 const headerCartVariants = () => {
   return {
     initial: {
-      width: 0,
+      height: 0,
       backgroundColor: "#d9ff00",
     },
     animate: {
-      width: "6rem",
+      height: "3rem",
       backgroundColor: "var(--yellow-1)",
     },
     exit: {
-      width: 0,
+      height: 0,
       backgroundColor: "#fff",
+      transition: {
+        when: "afterChildren",
+      },
     },
   };
 };
@@ -65,6 +68,20 @@ const headerInnerVariants = {
   },
 };
 
+const cartModalVariants = {
+  initial: {
+    height: 0,
+  },
+  animate: {
+    height: "100%",
+    transition: { duration: 0.5, ease: "circOut" },
+  },
+  exit: {
+    height: 0,
+    transition: { duration: 0.5, ease: "circOut", when: "afterChildren" },
+  },
+};
+
 const cartModalMobileCtaVariants = {
   initial: {
     opacity: 0,
@@ -93,5 +110,6 @@ export {
   headerVariants,
   headerInnerVariants,
   // cart
+  cartModalVariants,
   cartModalMobileCtaVariants,
 };

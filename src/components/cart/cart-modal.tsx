@@ -8,7 +8,7 @@ import CartCta from "./cart-cta";
 import useIntersectionObserver from "@hooks/useIntersectionObserver";
 import useLockBodyScroll from "@hooks/useLockBodyScroll";
 import {
-  headerVariants,
+  cartModalVariants,
   headerInnerVariants,
   cartModalMobileCtaVariants,
 } from "@lib/animate";
@@ -36,35 +36,48 @@ const CartModal = () => {
     root: refScrollable?.current,
     rootMargin: "100px",
   });
+
   const isVisible = !!entry?.isIntersecting;
 
   useLockBodyScroll(refScrollable);
 
   return (
-    <CartModalWrapper {...headerVariants}>
-      <CartModalInner ref={refScrollable} {...headerInnerVariants}>
-        <CartFunWrapper>
-          <FutureImage
-            src="/images/otter-cheeks.jpeg"
-            alt="Something"
-            fill
-            style={{ objectFit: `cover` }}
-          />
-        </CartFunWrapper>
-        <CartItemWrapper>
-          <CartItem tee={1} />
-        </CartItemWrapper>
-        <Accordion options={accordionOptions} />
-        <CartCta ref={ref} />
-      </CartModalInner>
-      <AnimatePresence>
-        {!isVisible && (
-          <TempSlideUpModal {...cartModalMobileCtaVariants}>
-            <CartCta />
-          </TempSlideUpModal>
-        )}
-      </AnimatePresence>
-    </CartModalWrapper>
+    <>
+      <m.div
+        {...cartModalMobileCtaVariants}
+        style={{
+          position: `fixed`,
+          bottom: `3rem`,
+          width: `100%`,
+          zIndex: 9,
+        }}
+      >
+        <AnimatePresence>
+          {!isVisible && (
+            <TempSlideUpModal {...cartModalMobileCtaVariants} key="cart-cta">
+              <CartCta />
+            </TempSlideUpModal>
+          )}
+        </AnimatePresence>
+      </m.div>
+      <CartModalWrapper {...cartModalVariants}>
+        <CartModalInner ref={refScrollable} {...headerInnerVariants}>
+          <CartFunWrapper>
+            <FutureImage
+              src="/images/otter-cheeks.jpeg"
+              alt="Something"
+              fill
+              style={{ objectFit: `cover` }}
+            />
+          </CartFunWrapper>
+          <CartItemWrapper>
+            <CartItem tee={1} />
+          </CartItemWrapper>
+          <Accordion options={accordionOptions} />
+          <CartCta ref={ref} />
+        </CartModalInner>
+      </CartModalWrapper>
+    </>
   );
 };
 
@@ -102,7 +115,7 @@ const CartModalWrapper = styled(m.div)`
   overflow: scroll;
 `;
 const CartModalInner = styled(m.div)`
-  padding: var(--gap-s) var(--gap-l) var(--gap-s) var(--gap-l);
+  padding: var(--gap-s) var(--gap-l) 3rem var(--gap-l);
   overflow-y: auto;
   height: 100vh;
 `;
@@ -130,8 +143,9 @@ const TempSlideUpModal = styled(m.div)`
   width: 100%;
 
   background-color: var(--piss-1);
-  position: fixed;
-  bottom: 0;
+  /* position: fixed;
+  bottom: 3rem;
+  z-index: 9; */
   padding: 0 var(--gap-m);
 
   @media screen and (min-width: 650px) {
