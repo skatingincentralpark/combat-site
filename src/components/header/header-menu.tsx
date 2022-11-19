@@ -127,7 +127,7 @@ const HeaderMenuNav = styled.nav`
   }
 `;
 const HeaderMenuText = styled.div`
-  padding: var(--gap-s);
+  padding: var(--gap-s) var(--gap-s) var(--gap-6xl) var(--gap-s);
   max-width: 50rem;
 
   @media screen and (min-width: 700px) {
