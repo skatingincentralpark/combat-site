@@ -74,13 +74,7 @@ const ShopPage = () => {
         {products.map((product, i) => (
           <Item key={i} color={colors[colorIndex]} onMouseDown={cycleColor}>
             <Link href="/shop/item-2">
-              <NextImage
-                src={getImage(i)}
-                alt="T-shirt"
-                layout="fill"
-                objectFit="contain"
-                placeholder="blur"
-              />
+              <NextImage src={getImage(i)} alt="T-shirt" placeholder="blur" />
             </Link>
           </Item>
         ))}
@@ -109,6 +103,12 @@ const Item = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  & img {
+    object-fit: contain;
+    width: auto;
+    height: auto;
   }
 `;
 const ShopPageWrapper = styled.main`
