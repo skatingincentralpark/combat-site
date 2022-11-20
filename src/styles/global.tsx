@@ -22,7 +22,6 @@ const GlobalStyles = () => {
         line-height: 1.4em;
         font-weight: 300;
         color: var(--black);
-        overflow-y: scroll;
         -webkit-font-smoothing: antialiased;
 
         @media screen and (min-width: 1550px) {
@@ -41,7 +40,7 @@ const GlobalStyles = () => {
       body {
         padding: 0;
         margin: 0;
-        overflow: initial;
+        overflow-y: auto;
       }
       img,
       picture,

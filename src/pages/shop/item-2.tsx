@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import { clamp } from "@lib/helpers";
 import tshirt from "../../../public/images/tee-viktor.png";
+import { ButtonBase } from "@components/ui";
 
 const StyledCenteredWrapper = styled.div`
   height: fit-content;
@@ -61,7 +62,7 @@ const ShopItemPage = () => {
             </div>
             <ShopButtonGroup>
               <Button onClick={() => {}}>Add To Cart</Button>
-              <ButtonLink href="/shop">View All</ButtonLink>
+              <ButtonLink href="/shop-2">View All</ButtonLink>
             </ShopButtonGroup>
           </ShopItemBody>
         </ShopItemInfo>
@@ -252,7 +253,7 @@ type Props = {
 const Button = ({ onClick, children, noBg = false }: Props) => {
   return (
     <StyledButton onClick={() => onClick()} noBg={noBg}>
-      {children}
+      <span>{children}</span>
     </StyledButton>
   );
 };
@@ -260,7 +261,7 @@ const Button = ({ onClick, children, noBg = false }: Props) => {
 type StyledButtonProps = {
   noBg: boolean;
 };
-const StyledButton = styled.button<StyledButtonProps>`
+const StyledButton = styled(ButtonBase)<StyledButtonProps>`
   background-color: ${({ noBg }) => (noBg ? "none" : "#37B44A")};
 
   padding: calc(2.75rem / 3) 1rem;
@@ -286,14 +287,10 @@ type ButtonLinkProps = {
 };
 
 const ButtonLink = ({ href, children }: ButtonLinkProps) => {
-  return (
-    <Link href={href}>
-      <StyledLink>{children}</StyledLink>
-    </Link>
-  );
+  return <StyledLink href={href}>{children}</StyledLink>;
 };
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   padding: calc(2.75rem / 3) 1rem;
   height: 2.75rem;
 

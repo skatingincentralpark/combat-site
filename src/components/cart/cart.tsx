@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { m, AnimatePresence } from "framer-motion";
 import CartModal from "./cart-modal";
 import { headerCartVariants } from "@lib/animate";
+import { ButtonBaseMotion } from "@components/ui";
 
 const Cart = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -14,9 +15,9 @@ const Cart = () => {
     <>
       <AnimatePresence>
         {cartHasItems && (
-          <CartButtonWrapper onClick={onClick} {...headerCartVariants()}>
-            {!cartOpen ? "Cart (1)" : "Close"}
-          </CartButtonWrapper>
+          <CartButton onClick={onClick} {...headerCartVariants()}>
+            <div>{!cartOpen ? "Cart (1)" : "Close"}</div>
+          </CartButton>
         )}
       </AnimatePresence>
       <AnimatePresence>{cartOpen && <CartModal />}</AnimatePresence>
@@ -26,7 +27,7 @@ const Cart = () => {
 
 export default Cart;
 
-const CartButtonWrapper = styled(m.button)`
+const CartButton = styled(ButtonBaseMotion)`
   position: fixed;
   bottom: 0;
   z-index: 10;

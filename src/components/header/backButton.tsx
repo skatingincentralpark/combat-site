@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { AnimatePresence, m } from "framer-motion";
 import { headerBackButtonVariants } from "@lib/animate";
+import { ButtonBaseMotion } from "@components/ui";
 
 const BackButton = ({
   navOpen,
@@ -36,8 +37,6 @@ const BackButton = ({
   const navigateToNews = () => router.push("/news");
   const navigateToLookbook = () => router.push("/lookbooks");
 
-  // const navOpenAndSiteLoading = !navOpen && !isLoading
-
   return (
     <AnimatePresence>
       {isShopPath && !navOpen && !isLoading && (
@@ -45,7 +44,7 @@ const BackButton = ({
           onClick={navigateToShop}
           {...headerBackButtonVariants()}
         >
-          back
+          <div>back</div>
         </HeaderBackButton>
       )}
       {isNewsPath && !navOpen && !isLoading && (
@@ -53,7 +52,7 @@ const BackButton = ({
           onClick={navigateToNews}
           {...headerBackButtonVariants()}
         >
-          back
+          <div>back</div>
         </HeaderBackButton>
       )}
       {isLookbookPath && !navOpen && !isLoading && (
@@ -61,7 +60,7 @@ const BackButton = ({
           onClick={navigateToLookbook}
           {...headerBackButtonVariants()}
         >
-          back
+          <div>back</div>
         </HeaderBackButton>
       )}
     </AnimatePresence>
@@ -70,7 +69,7 @@ const BackButton = ({
 
 export default BackButton;
 
-const HeaderBackButton = styled(m.button)`
+const HeaderBackButton = styled(ButtonBaseMotion)`
   height: 100%;
   cursor: pointer;
   white-space: nowrap;
