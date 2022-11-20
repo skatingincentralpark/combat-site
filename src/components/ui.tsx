@@ -19,10 +19,6 @@ const ButtonBase = styled.button`
 `;
 
 const ButtonBaseMotion = styled(m.button)`
-  &:active {
-    opacity: 0.7;
-  }
-
   &:hover > * {
     @media screen and (min-width: 700px) {
       color: var(--green-3);
