@@ -61,22 +61,10 @@ const Dropdown = ({
     setList(listNew);
   };
 
-  // Temp: Random emojis for fun
-  const emojiList = ["🐡", "🦧", "👩‍🎤", "🙀", "⭐️", "😽", "👽"];
-
-  const [emoji, setEmoji] = useState(emojiList[0]);
-
-  useEffect(() => {
-    const randomNumber10 = () => Math.floor(Math.random() * emojiList.length);
-    if (headerTitle) setEmoji(emojiList[randomNumber10()]);
-  }, [headerTitle, emojiList]);
-
   return (
     <DdWrapper>
       <DdHeader type="button" onClick={toggleList} listOpen={listOpen}>
-        <DdHeaderTitle>
-          {headerTitle} {emoji}
-        </DdHeaderTitle>
+        <DdHeaderTitle>{headerTitle}</DdHeaderTitle>
         <Chevron listOpen={listOpen} />
       </DdHeader>
       <AnimatePresence>
@@ -95,7 +83,11 @@ const Dropdown = ({
                   key={item.title}
                   onClick={() => selectItem(item)}
                 >
-                  {item.selected && "✅"} {item.title}
+                  {item.selected ? (
+                    <strong>{item.title}</strong>
+                  ) : (
+                    <>{item.title}</>
+                  )}
                 </DdListItem>
               ))}
             </DdList>

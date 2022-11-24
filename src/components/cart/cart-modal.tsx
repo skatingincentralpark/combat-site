@@ -98,7 +98,7 @@ const CartModalWrapper = styled(m.div)`
   animation: Combative 4s ease infinite;
   background-attachment: fixed;
 
-  font-family: var(--font-mono);
+  /* font-family: var(--font-mono); */
 
   @keyframes Combative {
     0% {

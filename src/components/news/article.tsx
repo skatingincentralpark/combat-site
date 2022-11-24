@@ -56,7 +56,7 @@ interface BlockMediaProps {
 interface BlockMediaImageProps extends BlockMediaProps {
   image: ImageType;
 }
-interface BlockMediaPropsCloudinary extends BlockMediaProps {
+interface BlockMediaImageProps extends BlockMediaProps {
   autoplay: boolean;
   asset: {
     url: string;
@@ -111,11 +111,7 @@ const BlockImage = ({ value }: { value: BlockMediaImageProps }) => {
   );
 };
 
-const BlockVideoCloudinary = ({
-  value,
-}: {
-  value: BlockMediaPropsCloudinary;
-}) => {
+const BlockVideoCloudinary = ({ value }: { value: BlockMediaImageProps }) => {
   const { caption, alt, width, align, autoplay, asset } = value;
 
   const assetObject = {
@@ -147,6 +143,24 @@ const BlockVideoCloudinary = ({
   );
 };
 
+interface BlockSoundcloudProps {
+  url: string;
+  title: string;
+}
+
+const SoundcloudEmbed = ({ value }: { value: BlockSoundcloudProps }) => {
+  return (
+    <iframe
+      width="100%"
+      height="166"
+      scrolling="no"
+      frameBorder="no"
+      allow=""
+      src={value.url}
+    ></iframe>
+  );
+};
+
 // Config object that lets you customise the components used for different pt types
 // Guide: https://github.com/sanity-io/block-content-to-react/issues/29#issuecomment-772393191
 // Discussion on Typescript: https://github.com/portabletext/react-portabletext/issues/5#issuecomment-1057294157
@@ -154,5 +168,6 @@ const pt: PortableTextComponents = {
   types: {
     image: BlockImage,
     video: BlockVideoCloudinary,
+    soundcloudEmbed: SoundcloudEmbed,
   },
 };

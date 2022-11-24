@@ -202,10 +202,10 @@ const StyledNavLink = styled(m.div)`
     align-items: center;
     height: 100%;
     flex-grow: 1;
-    padding: var(--gap-3xs) var(--gap-s);
+    padding: var(--gap-3xs) var(--gap-xl);
+    /* padding: var(--gap-3xs) var(--gap-s); */
 
     @media screen and (min-width: 700px) {
-      padding: var(--gap-3xs) var(--gap-xl);
     }
   }
   &:hover {
