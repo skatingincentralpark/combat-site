@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { client } from "@lib/sanity";
 import { GetStaticProps, GetStaticPaths } from "next";
 import Carousel from "@components/carousel/carousel";
-import { LookbookType } from "../../types/lookbookTypes";
+import { LookbookType } from "types/lookbookTypes";
 import { LookbookDescription } from "@components/lookbook-description";
 import Dropdown from "@components/dropdown";
 import { useRouter } from "next/router";

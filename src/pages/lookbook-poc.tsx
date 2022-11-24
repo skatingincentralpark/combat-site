@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 import FutureImage from "next/image";
 import { clamp } from "@lib/helpers";
 import { m, AnimatePresence } from "framer-motion";
-import { client, imageBuilder } from "@lib/sanity";
+import { client } from "@lib/sanity";
 import { LookbookType } from "types/lookbookTypes";
 import queries from "@lib/queries";
 import Lightbox from "@components/lightbox";

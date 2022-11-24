@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
-import { StyledPageWrapper } from "../components/shared-styles/page-wrappers";
-import { StyledButton } from "../components/shared-styles/buttons";
+import { StyledPageWrapper } from "@components/shared-styles/page-wrappers";
+import { StyledButton } from "@components/shared-styles/buttons";
 import {
   Heading,
   HeadingSm,
   Text,
   TextSm,
-} from "../components/shared-styles/typography";
+} from "@components/shared-styles/typography";
 import HeadSEO from "@components/head-seo";
 
 const DesignSystemPage = () => {

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import styled from "@emotion/styled";
 import useEmblaCarousel from "embla-carousel-react";
 import { m, AnimatePresence } from "framer-motion";
-import { LookbookType } from "../../types/lookbookTypes";
+import { LookbookType } from "types/lookbookTypes";
 import { CarouselSlide } from "./carousel-slide";
 import Lightbox from "@components/lightbox";
 
