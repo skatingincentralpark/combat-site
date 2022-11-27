@@ -86,6 +86,10 @@ const ShopItemWrapper = styled.div`
     flex-wrap: nowrap;
   }
 
+  & * {
+    font-size: ${clamp(12, 14, 1440, 2560)};
+  }
+
   & > img {
     height: auto;
     width: 100%;
@@ -135,7 +139,7 @@ const ShopItemBody = styled.div`
   p,
   strong,
   ul {
-    line-height: 1.5em;
+    line-height: ${clamp(18, 16, 1440, 2560)};
     font-size: ${clamp(12, 14, 1440, 2560)};
     margin: 1em auto;
   }
