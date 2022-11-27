@@ -5,7 +5,6 @@ import GlobalStyles from "../styles/global";
 import Header from "@components/header/header";
 import PageTransitionWrapper from "@components/page-transition-wrapper";
 import MusicPlayer from "@components/music-player";
-import Cart from "@components/cart/cart";
 
 import { deviceIsBrowser } from "@lib/helpers";
 import useIsLoading from "hooks/useIsLoading";
@@ -43,7 +42,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyles />
       <LazyMotion features={domAnimation}>
         <Header isLoading={isLoading} />
-        <Cart />
         <style jsx global>{`
           html {
             font-family: ${jost.style.fontFamily};

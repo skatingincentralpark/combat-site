@@ -5,22 +5,27 @@ import CartModal from "./cart-modal";
 import { headerCartVariants } from "@lib/animate";
 import { ButtonBaseMotion } from "@components/ui";
 
-const Cart = () => {
-  const [cartOpen, setCartOpen] = useState(false);
+const Cart = ({
+  cartOpen,
+  toggleCart,
+  navOpen,
+}: {
+  cartOpen: boolean;
+  toggleCart: () => void;
+  navOpen: boolean;
+}) => {
   const [cartHasItems, setCartHasItems] = useState(true);
-
-  const onClick = () => setCartOpen((x) => !x);
 
   return (
     <>
       <AnimatePresence>
         {cartHasItems && (
-          <CartButton onClick={onClick} {...headerCartVariants()}>
+          <CartButton onClick={toggleCart} {...headerCartVariants()}>
             <div>{!cartOpen ? "Cart (1)" : "Close"}</div>
           </CartButton>
         )}
       </AnimatePresence>
-      <AnimatePresence>{cartOpen && <CartModal />}</AnimatePresence>
+      <AnimatePresence>{cartOpen && !navOpen && <CartModal />}</AnimatePresence>
     </>
   );
 };

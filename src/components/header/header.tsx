@@ -3,16 +3,28 @@ import styled from "@emotion/styled";
 import { AnimatePresence } from "framer-motion";
 import CombatLogo from "../combat-logo";
 import BackButton from "./backButton";
+import Cart from "@components/cart/cart";
 const HeaderMenu = lazy(() => import("./header-menu"));
 
 const Header = ({ isLoading }: { isLoading: boolean }) => {
   const [navOpen, setNavOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
 
-  const toggleNav = () => setNavOpen((x) => !x);
   const closeNav = () => setNavOpen(false);
+  const closeCart = () => setCartOpen(false);
+
+  const toggleNav = () => {
+    setNavOpen((x) => !x);
+    closeCart();
+  };
+  const toggleCart = () => {
+    setCartOpen((x) => !x);
+    closeNav();
+  };
 
   return (
     <>
+      <Cart navOpen={navOpen} cartOpen={cartOpen} toggleCart={toggleCart} />
       <HeaderWrapper>
         <BackButton navOpen={navOpen} isLoading={isLoading} />
         <HeaderToggle onClick={toggleNav}>

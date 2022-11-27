@@ -85,7 +85,7 @@ export default CartModal;
 
 const CartModalWrapper = styled(m.div)`
   position: fixed;
-  z-index: 8;
+  z-index: 9;
   top: 0;
   left: 0;
   width: 100%;
@@ -115,7 +115,7 @@ const CartModalWrapper = styled(m.div)`
   overflow: scroll;
 `;
 const CartModalInner = styled(m.div)`
-  padding: var(--gap-s) var(--gap-l) 3rem var(--gap-l);
+  padding: var(--gap-page-top) var(--gap-l) 3rem var(--gap-l);
   overflow-y: auto;
   height: 100vh;
 `;

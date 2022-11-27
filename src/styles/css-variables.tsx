@@ -31,10 +31,10 @@ const cssVariables = css`
     --font-mono: "Bitcount Mono Single Bk Circle", "Courier New", Courier,
       monospace;
     // Gap
-    --gap-4xs: 0.25rem;
-    --gap-3xs: 0.5rem;
-    --gap-xxs: 0.75rem;
-    --gap-xs: 1rem;
+    --gap-4xs: 0.25rem; // 3px to 3.25px
+    --gap-3xs: 0.5rem; // 6px to 6.5px
+    --gap-xxs: 0.75rem; // 9px to 9.75px
+    --gap-xs: 1rem; // 12px to 13px
     --gap-s: 1.25rem;
     --gap-m: 1.5rem;
     --gap-l: 2rem;
@@ -44,6 +44,8 @@ const cssVariables = css`
     --gap-4xl: 5rem;
     --gap-5xl: 6rem;
     --gap-6xl: 7rem;
+    // Border Radius
+    --border-radius-m: 3rem;
     // Stuff
     --button-height: 3rem;
     --header-height: 5rem;

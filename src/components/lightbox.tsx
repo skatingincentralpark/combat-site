@@ -29,7 +29,7 @@ const LightboxStyled = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 8;
+  z-index: 10;
   backdrop-filter: blur(10px);
   background-color: white;
   padding: var(--gap-m);
