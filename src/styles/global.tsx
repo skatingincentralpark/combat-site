@@ -9,6 +9,7 @@ const GlobalStyles = () => {
       body,
       body > div:first-of-type {
         height: 100%;
+        -webkit-tap-highlight-color: none;
       }
 
       ::selection {

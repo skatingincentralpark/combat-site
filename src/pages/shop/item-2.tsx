@@ -62,7 +62,7 @@ const ShopItemPage = () => {
             </div>
             <ShopButtonGroup>
               <Button onClick={() => {}}>Add To Cart</Button>
-              <ButtonLink href="/shop-2">View All</ButtonLink>
+              <ButtonLink href="/shop">View All</ButtonLink>
             </ShopButtonGroup>
           </ShopItemBody>
         </ShopItemInfo>
@@ -156,6 +156,8 @@ const ShopItemBody = styled.div`
 const RadioGroup = styled.div`
   display: flex;
   justify-content: flex-start;
+  width: fit-content;
+  border-radius: 8px;
 `;
 
 const ShopButtonGroup = styled.div`
@@ -205,9 +207,9 @@ type StyledRadioLabelInputProps = {
 };
 const StyledRadioLabelInput = styled.label<StyledRadioLabelInputProps>`
   background-color: ${({ checked }) => (checked ? "#37B44A" : "#DDDDDD")};
-  border-left: 1px solid #b7b7b8;
-  border-top: 1px solid #b7b7b8;
-  border-bottom: 1px solid #b7b7b8;
+  /* border-left: 1px solid #b7b7b8; */
+  /* border-top: 1px solid #b7b7b8; */
+  /* border-bottom: 1px solid #b7b7b8; */
 
   transition: background-color 0.25s cubic-bezier(0.25, 1, 0.5, 1);
 
@@ -229,7 +231,7 @@ const StyledRadioLabelInput = styled.label<StyledRadioLabelInputProps>`
   }
 
   &:last-of-type {
-    border-right: 1px solid #b7b7b8;
+    /* border-right: 1px solid #b7b7b8; */
     border-radius: 0 8px 8px 0;
   }
 
@@ -239,8 +241,14 @@ const StyledRadioLabelInput = styled.label<StyledRadioLabelInputProps>`
     width: 0;
   }
 
+  &:hover {
+    @media screen and (min-width: 700px) {
+      background-color: green;
+    }
+  }
+
   &:active > div {
-    transform: scale(0.8);
+    transform: scale(0.9);
   }
 
   & > div {
@@ -267,24 +275,13 @@ type StyledButtonProps = {
 };
 const StyledButton = styled(ButtonBase)<StyledButtonProps>`
   background-color: ${({ noBg }) => (noBg ? "none" : "#37B44A")};
-
-  padding: calc(2.75rem / 3) 1rem;
-  height: 2.75rem;
-
   font-weight: 600;
-  color: ${({ noBg }) => (noBg ? "#969696" : "white")};
-
+  color: #fff;
   border-radius: 8px;
-
   cursor: pointer;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 // Link that looks like a button
-
 type ButtonLinkProps = {
   href: string;
   children: string;
@@ -307,6 +304,8 @@ const StyledLink = styled(Link)`
   align-items: center;
 
   &:hover {
-    color: red;
+    @media screen and (min-width: 700px) {
+      color: red;
+    }
   }
 `;

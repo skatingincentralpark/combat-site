@@ -24,11 +24,12 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
 
   return (
     <>
-      <Cart navOpen={navOpen} cartOpen={cartOpen} toggleCart={toggleCart} />
+      {/* <Cart navOpen={navOpen} cartOpen={cartOpen} toggleCart={toggleCart} /> */}
       <HeaderWrapper>
         <BackButton navOpen={navOpen} isLoading={isLoading} />
         <HeaderToggle onClick={toggleNav}>
           <CombatLogo isLoading={isLoading} />
+          <Circle />
         </HeaderToggle>
       </HeaderWrapper>
 
@@ -63,16 +64,35 @@ const HeaderToggle = styled.button`
   height: 100%;
   cursor: pointer;
   width: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   &:hover {
     @media screen and (min-width: 700px) {
-      /* background-color: var(--yellow-1); */
-      background-color: var(--piss-1);
+      background-color: var(--yellow-1);
+
+      & > div {
+        background-color: yellow;
+        transform: scale(0.9);
+      }
     }
   }
 
   &:active {
-    /* background-color: var(--yellow-2); */
-    background-color: white;
+    background-color: var(--yellow-2);
+    & > div {
+      background-color: #f200ff;
+      transform: scale(1.1);
+    }
   }
+`;
+const Circle = styled.div`
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: white;
+  transition: transform 0.2s;
 `;

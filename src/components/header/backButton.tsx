@@ -33,7 +33,7 @@ const BackButton = ({
     setIsLookbookPath(checkIfLookbookPath());
   }, [router.pathname, checkIfShopPath]);
 
-  const navigateToShop = () => router.push("/shop-2");
+  const navigateToShop = () => router.push("/shop");
   const navigateToNews = () => router.push("/news");
   const navigateToLookbook = () => router.push("/lookbooks");
 

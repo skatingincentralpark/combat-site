@@ -49,7 +49,7 @@ const cssVariables = css`
     // Stuff
     --button-height: 3rem;
     --header-height: 5rem;
-    --gap-page-top: calc(var(--header-height) + var(--gap-m));
+    --gap-page-top: calc(var(--header-height) + var(--gap-s));
 
     @media screen and (min-width: 650px) {
       --button-height: 2.5rem;

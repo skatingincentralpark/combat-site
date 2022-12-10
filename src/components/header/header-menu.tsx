@@ -12,7 +12,6 @@ import PinkSkull from "../../../public/images/pink-skull.png";
 const navLinks = [
   { href: "/", name: "Home" },
   { href: "/shop", name: "Shop" },
-  { href: "/shop-2", name: "Shop POC" },
   { href: "/design-system", name: "Design System" },
   { href: "/news", name: "News" },
   { href: "/lookbooks", name: "Lookbooks" },
@@ -97,12 +96,8 @@ const HeaderMenuWrapper = styled(m.div)`
     border-bottom: none;
 
     & * {
-      color: black;
+      color: #000;
     }
-  }
-
-  & video {
-    border: 1px solid black;
   }
 `;
 const HeaderMenuInner = styled(m.div)`
@@ -118,12 +113,12 @@ const HeaderMenuLeft = styled.div`
   flex-grow: 1;
 `;
 const HeaderMenuNav = styled.nav`
-  padding-top: calc(var(--header-height) + 2rem);
+  padding-top: 7rem;
   transition: padding 250ms;
   font-size: 1.4rem;
 
   @media screen and (min-width: 700px) {
-    padding-top: calc(var(--header-height) + 4rem);
+    padding-top: 9rem;
   }
 `;
 const HeaderMenuText = styled.div`
@@ -203,10 +198,6 @@ const StyledNavLink = styled(m.div)`
     height: 100%;
     flex-grow: 1;
     padding: var(--gap-3xs) var(--gap-xl);
-    /* padding: var(--gap-3xs) var(--gap-s); */
-
-    @media screen and (min-width: 700px) {
-    }
   }
   &:hover {
     @media screen and (min-width: 700px) {
@@ -222,11 +213,11 @@ const StyledNavLink = styled(m.div)`
 `;
 const StyledDot = styled.span<{ isActive: boolean }>`
   display: inline-block;
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 1.1rem;
+  height: 1.1rem;
   border-radius: 50%;
   border: 1px solid #000;
-  margin-right: var(--gap-xs);
+  margin-right: var(--gap-xxs);
   background-color: white;
   transform: var(--dot-scale);
   transition: background-color 0.25s, transform 0.25s;

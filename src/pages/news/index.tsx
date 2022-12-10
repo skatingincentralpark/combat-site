@@ -68,12 +68,14 @@ const NewsPageWrapper = styled(m.main)`
   padding-bottom: var(--gap-xl);
   padding-left: 0;
   padding-right: 0;
+  display: flex;
+  flex-direction: column;
 
   max-width: 50rem; // test on bigger screen --> could use clamp
   margin: auto;
 
   @media screen and (min-width: 700px) {
-    padding-top: 12rem;
+    padding-top: 10rem;
     padding-left: var(--gap-s);
     padding-right: var(--gap-s);
   }

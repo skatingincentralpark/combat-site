@@ -5,18 +5,17 @@ import { m } from "framer-motion";
  * Buttons
  */
 const ButtonBase = styled.button`
-  &:hover > * {
+  &:hover {
     @media screen and (min-width: 700px) {
-      color: var(--green-3);
+      background-color: green;
     }
   }
 
-  &:active > * {
-    transform: scale(0.8);
-    color: red;
+  &:active {
+    transform: scale(0.97);
   }
 
-  & > * {
+  & {
     transition: transform 100ms;
   }
 `;
