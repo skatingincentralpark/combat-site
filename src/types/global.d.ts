@@ -18,11 +18,11 @@ interface AssetType {
 }
 interface ImageType {
   caption: string;
-  asset?: AssetType;
   url: string;
   height: number;
   width: number;
   aspectRatio: number | Property.AspectRatio;
+  asset?: AssetType;
   lqip?: string;
   blurHash?: string;
   dominantColor?: string;

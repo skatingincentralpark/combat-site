@@ -7,6 +7,7 @@ import { headerVariants, headerInnerVariants } from "@lib/animate";
 import { TextSm } from "@components/shared-styles/typography";
 import useLockBodyScroll from "@hooks/useLockBodyScroll";
 import PinkSkull from "../../../public/images/pink-skull.png";
+import SplatterMan from "../../../public/images/poster/profile-man.png";
 import Image from "@components/image";
 
 const navLinks = [
@@ -40,6 +41,14 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
     aspectRatio: PinkSkull.height / PinkSkull.width,
   };
 
+  const imageObjectMobile = {
+    caption: "Menu Image",
+    url: SplatterMan.src,
+    height: SplatterMan.height,
+    width: SplatterMan.width,
+    aspectRatio: SplatterMan.height / SplatterMan.width,
+  };
+
   return (
     <HeaderMenuWrapper {...headerVariants}>
       <HeaderMenuInner {...headerInnerVariants}>
@@ -51,6 +60,9 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
               </NavLink>
             ))}
           </HeaderMenuNav>
+          <MenuImageMobile>
+            <Image image={imageObjectMobile} />
+          </MenuImageMobile>
           <HeaderMenuText>
             {navText.map((x) => (
               <TextSm paragraph key={x.slice(0, 8)}>
@@ -78,27 +90,19 @@ const HeaderMenuWrapper = styled(m.div)`
   overflow: hidden;
   z-index: 7;
   width: 100%;
-
-  background-color: black;
+  background-color: white;
   font-weight: 300;
   border-bottom: 1px solid black;
-
-  & * {
-    color: white;
-  }
-
-  @media screen and (min-width: 700px) {
-    background-color: white;
-
-    & * {
-      color: #000;
-    }
-  }
 `;
 const HeaderMenuInner = styled(m.div)`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100vh;
+  overflow-y: auto;
+
+  @media screen and (min-width: 700px) {
+    flex-direction: row;
+  }
 `;
 const HeaderMenuLeft = styled.div`
   height: 100%;
@@ -143,6 +147,15 @@ const MenuImageDesktop = styled.div`
     width: 100%;
   }
 `;
+const MenuImageMobile = styled.div`
+  display: block;
+  width: 50%;
+  padding: var(--gap-m) 0;
+
+  @media screen and (min-width: 700px) {
+    display: none;
+  }
+`;
 
 const NavLink = ({
   children,
@@ -154,11 +167,20 @@ const NavLink = ({
   href: string;
 }) => {
   const router = useRouter();
+  // const hrefText = href.replace("/", ""); // shop, news
+  const isActive =
+    router.pathname !== "/" && href === "/"
+      ? false
+      : router.pathname.includes(href);
+  // if
+  // router.pathname === '/' ? "/"
+
+  console.log(router.asPath);
 
   return (
     <StyledNavLink>
       <Link href={href} onClick={onClick}>
-        <StyledDot isActive={router.pathname === href} />
+        <StyledDot isActive={isActive} />
         {children}
       </Link>
     </StyledNavLink>
@@ -202,9 +224,9 @@ const StyledDot = styled.span<{ isActive: boolean }>`
   background-color: white;
   transform: var(--dot-scale);
   transition: background-color 0.25s, transform 0.25s;
+  background-color: ${({ isActive }) =>
+    isActive ? "#000" : "var(--dot-color)"};
+}
 
   @media screen and (min-width: 700px) {
-    background-color: ${({ isActive }) =>
-      isActive ? "#000" : "var(--dot-color)"};
-  }
 `;
