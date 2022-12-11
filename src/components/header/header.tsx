@@ -28,7 +28,7 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
       <HeaderWrapper>
         <BackButton navOpen={navOpen} isLoading={isLoading} />
         <HeaderToggle onClick={toggleNav}>
-          <CombatLogo isLoading={isLoading} />
+          {/* <CombatLogo isLoading={isLoading} /> */}
           <Circle />
         </HeaderToggle>
       </HeaderWrapper>
