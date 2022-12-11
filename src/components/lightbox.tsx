@@ -34,11 +34,14 @@ const LightboxStyled = styled.div`
   background-color: white;
   padding: var(--gap-m);
   display: flex;
+  justify-content: center;
 
-  img {
+  & > div {
     margin: auto;
     height: 100%;
+    width: fit-content;
     user-select: none;
     object-fit: contain;
+    cursor: pointer;
   }
 `;

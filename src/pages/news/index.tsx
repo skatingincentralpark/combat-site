@@ -249,7 +249,7 @@ const ImageWrapper = styled(m.div)`
   outline: 1px solid white;
   overflow: hidden;
 
-  & > img {
+  & img {
     height: 100%;
     object-fit: cover;
 

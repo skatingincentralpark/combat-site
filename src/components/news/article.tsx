@@ -87,6 +87,7 @@ const BlockImage = ({ value }: { value: BlockMediaImageProps }) => {
       </AnimatePresence>
 
       <div
+        onClick={() => setLightboxOpen(true)}
         css={css`
           aspect-ratio: ${image.aspectRatio};
           width: 100%;
@@ -94,18 +95,19 @@ const BlockImage = ({ value }: { value: BlockMediaImageProps }) => {
           height: fit-content;
           ${o.containerAligns[align]}
           display: inline-block;
+          position: relative;
 
           @media screen and (min-width: 700px) {
             padding: var(--gap-m);
           }
 
-          & > img {
+          & > div {
             width: 100%;
             cursor: pointer;
           }
         `}
       >
-        <Image image={image} onClick={() => setLightboxOpen(true)} />
+        <Image image={image} />
       </div>
     </>
   );

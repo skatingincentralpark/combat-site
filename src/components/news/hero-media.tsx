@@ -20,7 +20,7 @@ const HeroMedia = ({
 
   const position = css`
     @media screen and (min-width: 700px) {
-      position: ${heroLayout === "row" ? "absolute" : "static"};
+      position: ${heroLayout === "row" ? "absolute" : "relative"};
       width: ${heroLayout === "row" ? "50%" : "100%"};
     }
   `;

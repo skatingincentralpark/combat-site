@@ -84,7 +84,6 @@ const HeaderMenuWrapper = styled(m.div)`
 
   background-color: black;
   font-weight: 300;
-
   border-bottom: 1px solid black;
 
   & * {
@@ -93,7 +92,6 @@ const HeaderMenuWrapper = styled(m.div)`
 
   @media screen and (min-width: 700px) {
     background-color: white;
-    border-bottom: none;
 
     & * {
       color: #000;
