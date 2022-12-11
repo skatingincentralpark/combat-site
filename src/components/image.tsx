@@ -51,7 +51,7 @@ const Image = ({
         $loaded={placeholder === "blur" ? true : imageLoaded}
         onClick={onClick}
         placeholder={placeholder}
-        quality={quality || 100}
+        quality={quality || undefined}
       />
     </ImageContainer>
   );

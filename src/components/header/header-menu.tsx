@@ -1,6 +1,5 @@
 import { useRef, useEffect } from "react";
 import { useRouter } from "next/router";
-import FutureImage from "next/image";
 import { m } from "framer-motion";
 import styled from "@emotion/styled";
 import Link from "@components/link";
@@ -8,6 +7,7 @@ import { headerVariants, headerInnerVariants } from "@lib/animate";
 import { TextSm } from "@components/shared-styles/typography";
 import useLockBodyScroll from "@hooks/useLockBodyScroll";
 import PinkSkull from "../../../public/images/pink-skull.png";
+import Image from "@components/image";
 
 const navLinks = [
   { href: "/", name: "Home" },
@@ -32,6 +32,14 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
     if (refVideo.current) refVideo.current.playbackRate = 0.5;
   }, [refVideo.current]);
 
+  const imageObject = {
+    caption: "Menu Image",
+    url: PinkSkull.src,
+    height: PinkSkull.height,
+    width: PinkSkull.width,
+    aspectRatio: PinkSkull.height / PinkSkull.width,
+  };
+
   return (
     <HeaderMenuWrapper {...headerVariants}>
       <HeaderMenuInner {...headerInnerVariants}>
@@ -53,7 +61,7 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
         </HeaderMenuLeft>
         <MenuImageDesktop>
           <div>
-            <FutureImage src={PinkSkull} alt="skull" />
+            <Image image={imageObject} />
           </div>
         </MenuImageDesktop>
       </HeaderMenuInner>
@@ -133,11 +141,6 @@ const MenuImageDesktop = styled.div`
     position: relative;
     height: 100%;
     width: 100%;
-  }
-
-  & img {
-    height: 100%;
-    object-fit: contain;
   }
 `;
 
