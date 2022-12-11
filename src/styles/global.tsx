@@ -5,7 +5,7 @@ const GlobalStyles = () => {
   const styles = [
     cssVariables,
     css`
-      html,
+      /* html,
       body,
       body > div:first-of-type {
         height: 100%;
@@ -78,7 +78,7 @@ const GlobalStyles = () => {
         font-weight: inherit;
         text-decoration: inherit;
         overflow-wrap: break-word;
-      }
+      } */
     `,
   ];
 

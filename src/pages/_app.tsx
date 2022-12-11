@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      {/* <GlobalStyles /> */}
+      <GlobalStyles />
       <LazyMotion features={domAnimation} strict>
         <Header isLoading={isLoading} />
         {/* <style jsx global>{`
