@@ -51,7 +51,7 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
 
   return (
     <HeaderMenuWrapper {...headerVariants}>
-      <HeaderMenuInner {...headerInnerVariants}>
+      <HeaderMenuInner>
         <HeaderMenuLeft ref={refScrollable}>
           <HeaderMenuNav>
             {navLinks.map((x, i) => (
