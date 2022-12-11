@@ -202,12 +202,6 @@ const NewsImage = ({ image }: { image: ImageType | undefined }) => {
     },
   };
 
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  const doFadeIn = () => {
-    setImageLoaded(true);
-  };
-
   if (!image) return <ImageWrapper variants={item} />; // return dummy item
 
   const { url, caption, dominantColor, aspectRatio, width, height } = image;
@@ -252,15 +246,6 @@ const ImageWrapper = styled(m.div)`
   & img {
     height: 100%;
     object-fit: cover;
-
-    &.transparent {
-      opacity: 0;
-      transition: opacity 0.25s linear;
-      will-change: opacity;
-    }
-    &.hasLoaded {
-      opacity: 1;
-    }
   }
 `;
 

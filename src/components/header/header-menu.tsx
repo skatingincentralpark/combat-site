@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import FutureImage from "next/image";
 import { m } from "framer-motion";
@@ -25,12 +25,6 @@ const navText = [
 const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
   const refScrollable = useRef<HTMLDivElement>(null);
   useLockBodyScroll(refScrollable);
-
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  const doFadeIn = () => {
-    setImageLoaded(true);
-  };
 
   const refVideo = useRef<HTMLVideoElement | null>(null);
 
@@ -59,12 +53,7 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
         </HeaderMenuLeft>
         <MenuImageDesktop>
           <div>
-            <FutureImage
-              src={PinkSkull}
-              alt="skull"
-              className={`transparent ${imageLoaded ? "hasLoaded" : ""}`}
-              onLoadingComplete={doFadeIn}
-            />
+            <FutureImage src={PinkSkull} alt="skull" />
           </div>
         </MenuImageDesktop>
       </HeaderMenuInner>
@@ -149,15 +138,6 @@ const MenuImageDesktop = styled.div`
   & img {
     height: 100%;
     object-fit: contain;
-
-    &.transparent {
-      opacity: 0;
-      transition: opacity 0.25s linear;
-      will-change: opacity;
-    }
-    &.hasLoaded {
-      opacity: 1;
-    }
   }
 `;
 
