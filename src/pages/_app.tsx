@@ -39,18 +39,18 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <GlobalStyles />
-      <LazyMotion features={domAnimation}>
+      {/* <GlobalStyles /> */}
+      <LazyMotion features={domAnimation} strict>
         <Header isLoading={isLoading} />
-        <style jsx global>{`
+        {/* <style jsx global>{`
           html {
             font-family: ${jost.style.fontFamily};
           }
-        `}</style>
+        `}</style> */}
         {/* <MusicPlayer /> */}
-        <PageTransitionWrapper loading={isLoading}>
-          <Component {...pageProps} />
-        </PageTransitionWrapper>
+        {/* <PageTransitionWrapper loading={isLoading}> */}
+        <Component {...pageProps} />
+        {/* </PageTransitionWrapper> */}
       </LazyMotion>
     </>
   );
