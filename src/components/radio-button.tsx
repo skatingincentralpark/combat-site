@@ -17,6 +17,7 @@ const RadioButton = ({ value, name, selected, onClick, children }: Props) => {
         value={value}
         name={name}
       />
+      <Circle />
       {children}
     </RadioLabelInputWrapper>
   );
@@ -29,33 +30,38 @@ type RadioLabelInputWrapperProps = {
 };
 const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
   background-color: ${({ checked }) =>
-    checked ? "var(--green-2)" : "var(--gray-2)"};
+    checked ? "var(--green-1)" : "rgb(221, 221, 221)"};
 
   transition: background-color 0.1s;
 
   height: var(--button-height);
-  flex-grow: 1;
+  aspect-ratio: 1;
 
   font-weight: 600;
   color: white;
   text-align: center;
 
   cursor: pointer;
+  touch-action: manipulation;
 
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+
+  --circle-opacity: 0;
+  --circle-transform: scale(0.5);
+
+  &:hover {
+    @media screen and (min-width: 700px) {
+      background-color: var(--green-2);
+    }
+  }
 
   &:active {
     background-color: var(--green-3);
-  }
-
-  &:nth-of-type(1) {
-    border-radius: var(--gap-3xs) 0 0 0;
-  }
-
-  &:last-of-type {
-    border-radius: 0 var(--gap-3xs) 0 0;
+    --circle-opacity: 1;
+    --circle-transform: scale(0.8);
   }
 
   & > input {
@@ -63,4 +69,24 @@ const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
     position: fixed;
     width: 0;
   }
+
+  &:nth-of-type(1) {
+    border-radius: var(--gap-xxs) 0 0 var(--gap-xxs);
+  }
+
+  &:last-of-type {
+    border-radius: 0 var(--gap-xxs) var(--gap-xxs) 0;
+  }
+`;
+const Circle = styled.div`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: black;
+
+  transition: opacity 100ms, transform 100ms;
+  opacity: var(--circle-opacity);
+  transform: var(--circle-transform);
 `;

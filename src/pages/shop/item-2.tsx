@@ -5,6 +5,7 @@ import Link from "next/link";
 import { clamp } from "@lib/helpers";
 import tshirt from "../../../public/images/tee-viktor.png";
 import { ButtonBase } from "@components/ui";
+import ShopCta from "@components/shop-cta";
 
 const StyledCenteredWrapper = styled.div`
   height: fit-content;
@@ -45,25 +46,11 @@ const ShopItemPage = () => {
                 however will stretch to a perfect fit with wear.
               </p>
             </div>
-            <div>
-              <RadioGroup>
-                {sizes.map((size) => (
-                  <RadioButton
-                    key={size}
-                    value={size}
-                    name="size"
-                    selected={selectedSize}
-                    onClick={setSelectedSize}
-                  >
-                    {size.toUpperCase()}
-                  </RadioButton>
-                ))}
-              </RadioGroup>
-            </div>
-            <ShopButtonGroup>
-              <Button onClick={() => {}}>Add To Cart</Button>
-              <ButtonLink href="/shop">View All</ButtonLink>
-            </ShopButtonGroup>
+            <ShopCta
+              sizes={sizes}
+              selectedSize={selectedSize}
+              setSelectedSize={setSelectedSize}
+            />
           </ShopItemBody>
         </ShopItemInfo>
       </ShopItemWrapper>
@@ -158,11 +145,13 @@ const RadioGroup = styled.div`
   justify-content: flex-start;
   width: fit-content;
   border-radius: 8px;
+  width: 100%;
 `;
 
 const ShopButtonGroup = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 100%;
 
   & > button:first-of-type {
     flex-grow: 2;
@@ -193,6 +182,7 @@ const RadioButton = ({
     <StyledRadioLabelInput checked={selected === value}>
       <input
         onClick={() => onClick(value)}
+        onTouchStart={() => {}}
         type="radio"
         value={value}
         name={name}
@@ -247,8 +237,12 @@ const StyledRadioLabelInput = styled.label<StyledRadioLabelInputProps>`
     }
   }
 
+  &:active {
+    background-color: var(--green-3);
+  }
+
   &:active > div {
-    transform: scale(0.9);
+    transform: scale(0.8);
   }
 
   & > div {
@@ -279,6 +273,10 @@ const StyledButton = styled(ButtonBase)<StyledButtonProps>`
   color: #fff;
   border-radius: 8px;
   cursor: pointer;
+
+  &:active {
+    background-color: red;
+  }
 `;
 
 // Link that looks like a button

@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 
 module.exports = {
-  compiler: {},
+  compiler: {
+    emotion: {
+      autoLabel: "dev-only",
+    },
+  },
   reactStrictMode: true,
   images: {
     domains: ["cdn.sanity.io"],

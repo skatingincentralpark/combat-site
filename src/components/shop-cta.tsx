@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { m } from "framer-motion";
 import RadioButton from "@components/radio-button";
 import { StyledButton } from "@components/shared-styles/buttons";
+import Link from "next/link";
 
 type Props = {
   sizes: string[];
@@ -39,7 +40,10 @@ const ShopCta = ({ sizes, selectedSize, setSelectedSize }: Props) => {
           </RadioButton>
         ))}
       </RadioGroup>
-      <Button onClick={() => {}}>Add To Cart</Button>
+      <Row>
+        <Button onClick={() => {}}>Add To Cart</Button>
+        <StyledLink href="/shop">View All</StyledLink>
+      </Row>
     </ShopCtaWrapper>
   );
 };
@@ -48,18 +52,29 @@ export default ShopCta;
 
 const ShopCtaWrapper = styled(m.div)`
   width: 100%;
-  margin-bottom: 2rem;
-
-  @media screen and (min-width: 650px) {
-    position: inherit;
-    max-width: 17.5rem;
-    min-width: 15rem;
-  }
+  margin-bottom: var(--gap-xs);
 `;
 const RadioGroup = styled.div`
   display: flex;
   justify-content: flex-start;
+  margin-bottom: var(--gap-xxs);
 `;
 const Button = styled(StyledButton)`
-  border-radius: 0 0 var(--gap-3xs) var(--gap-3xs);
+  border-radius: var(--gap-xxs);
+  font-weight: 600;
+  transition: transform 200ms;
+
+  &:active {
+    transform: scale(0.95);
+  }
+`;
+const Row = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const StyledLink = styled(Link)`
+  white-space: nowrap;
+  margin-left: var(--gap-s);
+  padding: 0 var(--gap-s);
+  color: var(--gray-4);
 `;
