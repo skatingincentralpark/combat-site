@@ -33,7 +33,7 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
     if (refVideo.current) refVideo.current.playbackRate = 0.5;
   }, [refVideo.current]);
 
-  const imageObject = {
+  const imageObject: ImageType = {
     caption: "Menu Image",
     url: PinkSkull.src,
     height: PinkSkull.height,
@@ -41,12 +41,13 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
     aspectRatio: PinkSkull.height / PinkSkull.width,
   };
 
-  const imageObjectMobile = {
+  const imageObjectMobile: ImageType = {
     caption: "Menu Image",
     url: SplatterMan.src,
     height: SplatterMan.height,
     width: SplatterMan.width,
     aspectRatio: SplatterMan.height / SplatterMan.width,
+    dominantColor: "#fff000",
   };
 
   return (
@@ -72,7 +73,7 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
           </HeaderMenuText>
         </HeaderMenuLeft>
         <MenuImageDesktop>
-          <div>
+          <div style={{ aspectRatio: imageObject.aspectRatio }}>
             <Image image={imageObject} />
           </div>
         </MenuImageDesktop>
@@ -98,6 +99,7 @@ const HeaderMenuInner = styled(m.div)`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100%;
   overflow-y: auto;
 
   @media screen and (min-width: 700px) {
@@ -130,7 +132,7 @@ const HeaderMenuText = styled.div`
 `;
 const MenuImageDesktop = styled.div`
   position: relative;
-  width: 70%;
+  width: 60%;
   height: 100%;
   border-left: 1px solid var(--gray-3);
   padding: var(--gap-4xl);
@@ -138,13 +140,13 @@ const MenuImageDesktop = styled.div`
   display: none;
 
   @media screen and (min-width: 700px) {
-    display: block;
+    display: flex;
+    align-items: center;
   }
 
   & > div {
-    position: relative;
-    height: 100%;
     width: 100%;
+    height: fit-content;
   }
 `;
 const MenuImageMobile = styled.div`
