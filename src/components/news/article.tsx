@@ -152,14 +152,22 @@ interface BlockSoundcloudProps {
 
 const SoundcloudEmbed = ({ value }: { value: BlockSoundcloudProps }) => {
   return (
-    <iframe
-      width="100%"
-      height="166"
-      scrolling="no"
-      frameBorder="no"
-      allow=""
-      src={value.url}
-    ></iframe>
+    <div
+      css={css`
+        height: 180px;
+        background: #eeeeee;
+        border-radius: 1rem;
+      `}
+    >
+      <iframe
+        width="100%"
+        height="180"
+        scrolling="no"
+        frameBorder="no"
+        allow=""
+        src={value.url}
+      ></iframe>
+    </div>
   );
 };
 
