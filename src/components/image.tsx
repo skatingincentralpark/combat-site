@@ -81,7 +81,6 @@ const DominantColor = styled("div", transientOptions)<{
   $loaded: boolean;
 }>`
   opacity: ${({ $loaded }) => ($loaded ? 0 : 1)};
-  transition: opacity 0.25s linear;
   transition: opacity 500ms linear 0s;
   border-radius: 2rem;
   position: absolute;
