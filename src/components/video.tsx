@@ -1,11 +1,12 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import useOnScreen from "@hooks/useOnScreen";
 
 /*
- * This component returns a container, with a video and two buttons absolutely positioned in it
- * It handles play/pause and mute/unmute
- * The buttons have some simple styles that indicate
+ * This component has:
+ *  Lazy Loading: detects when it's in view via intersection observer - changes the src to video and ref.current.load()
+ *  canPlay: uses canPlay to switch dominantColor for video and allow for handlePlayVideo usage
  */
 
 interface Props {
@@ -19,11 +20,18 @@ const Video = ({ asset, containerStyles, buttonStyles }: Props) => {
 
   const ref = useRef<HTMLVideoElement | null>(null);
   const [isMuted, setIsMuted] = useState<boolean>(ref.current?.muted || false);
-  const [isPlaying, setIsPlaying] = useState<boolean>(
-    ref.current?.paused || true
-  );
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const [canPlay, setCanPlay] = useState<boolean>(false);
+
+  const isOnScreen = useOnScreen(ref);
+
+  // when intersecting, load the video
+  useEffect(() => {
+    if (isOnScreen && ref.current) ref.current?.load();
+  }, [ref.current]);
 
   const handlePlayVideo = () => {
+    if (!canPlay) return;
     if (ref.current?.paused) {
       ref.current?.play();
       setIsPlaying(true);
@@ -46,23 +54,30 @@ const Video = ({ asset, containerStyles, buttonStyles }: Props) => {
         aspect-ratio: ${width} / ${height};
       `}
     >
-      <VideoButtons buttonStyles={buttonStyles} isPlaying={isPlaying}>
+      <DominantColor canPlay={canPlay} />
+      <VideoButtons
+        buttonStyles={buttonStyles}
+        isPlaying={isPlaying}
+        canPlay={canPlay}
+      >
         <button onClick={handlePlayVideo}>
           {isPlaying ? "Pause" : "Play"}
         </button>
         <button onClick={handleMuteVideo}>{isMuted ? "Mute" : "Unmute"}</button>
       </VideoButtons>
-      <video
+      <StyledVideo
         autoPlay={autoplay || true}
         playsInline
         muted
         loop
         ref={ref}
         onClick={handlePlayVideo}
+        canPlay={canPlay}
+        onCanPlay={() => setCanPlay(true)}
       >
-        <source src={url} />
+        <source src={isOnScreen ? url : ""} />
         <meta itemProp="description" content={alt} />
-      </video>
+      </StyledVideo>
     </VideoContainer>
   );
 };
@@ -74,29 +89,32 @@ const VideoContainer = styled.div<{ containerStyles: CssProperties }>`
   width: 100%;
   height: 100%;
   cursor: pointer;
-
-  video {
-    width: 100%;
-    height: 100%;
-  }
+  border-radius: 2rem;
 
   ${({ containerStyles }) => containerStyles}
-  background-color: red;
 `;
-
+const StyledVideo = styled.video<{ canPlay: boolean }>`
+  opacity: ${({ canPlay }) => (canPlay ? 1 : 0)};
+  transition: opacity 0.25s linear;
+  width: 100%;
+  height: 100%;
+`;
 const VideoButtons = styled.div<{
   buttonStyles: CssProperties;
   isPlaying: boolean;
+  canPlay: boolean;
 }>`
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   cursor: pointer;
 
   button {
     padding: var(--gap-m);
     color: white;
+    opacity: ${({ canPlay }) => (canPlay ? 1 : 0)};
     font-weight: 400;
     font-family: var(--font-mono);
+    transition: background 200ms, opacity 200ms, transform 200ms;
 
     &:first-of-type {
       background-color: ${({ isPlaying }) =>
@@ -110,7 +128,25 @@ const VideoButtons = styled.div<{
         color: #fff;
       }
     }
+
+    &:active {
+      transform: scale(0.95);
+    }
   }
 
   ${({ buttonStyles }) => buttonStyles}
+`;
+const DominantColor = styled.div<{
+  canPlay: boolean;
+}>`
+  opacity: ${({ canPlay }) => (canPlay ? 0 : 1)};
+  transition: opacity 500ms linear 0s;
+  border-radius: 2rem;
+  position: absolute;
+  inset: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: var(--piss-1);
+  pointer-events: none;
 `;
