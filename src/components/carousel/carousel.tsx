@@ -11,6 +11,7 @@ const Carousel = ({ lookbook }: LookbookType) => {
   const [viewportRef, embla] = useEmblaCarousel({
     containScroll: "trimSnaps",
     startIndex: Math.min(album?.length - 1, 10), // limit start index for initial slide in animation
+    slidesToScroll: "auto", // TO-DO: Make this only on desktop viewports I think
   });
 
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
@@ -38,7 +39,7 @@ const Carousel = ({ lookbook }: LookbookType) => {
   const [lightboxImageIndex, setLightboxImageIndex] = useState<number | null>(
     null
   );
-  // console.log(embla?.clickAllowed);
+
   const openLightbox = (i: number) => {
     embla?.clickAllowed() && setLightboxImageIndex(i);
   };
@@ -46,14 +47,13 @@ const Carousel = ({ lookbook }: LookbookType) => {
 
   return (
     <Embla>
-      {/* <ButtonContainerFull>
-        <button onClick={scrollPrev} />
-        <button onClick={scrollNext} />
-      </ButtonContainerFull> */}
+      <ButtonContainer>
+        <button onClick={scrollPrev}>Prev</button>
+        <button onClick={scrollNext}>Next</button>
+      </ButtonContainer>
       <AnimatePresence>
         {typeof lightboxImageIndex === "number" && (
           <Lightbox image={album[lightboxImageIndex]} onClick={closeLightbox} />
-          // <Lightbox image={album[lightboxImageIndex]} onClick={closeLightbox} />
         )}
       </AnimatePresence>
       <EmblaViewPort ref={viewportRef}>
@@ -90,6 +90,18 @@ const EmblaContainer = styled(m.div)`
   display: flex;
   user-select: none;
   height: 50vh;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+`;
+const ButtonContainer = styled.div`
+  margin-bottom: var(--gap-s);
+
+  & > * {
+    margin-right: var(--gap-s);
+  }
 `;
 const ButtonContainerFull = styled.div`
   width: 100%;
@@ -100,11 +112,14 @@ const ButtonContainerFull = styled.div`
   left: 0;
   display: none;
   flex-direction: row;
+  justify-content: space-between;
+  pointer-events: none;
 
   & > button {
-    flex-grow: 1;
+    width: 10%;
     outline: 1px dashed transparent;
     transition: outline 300ms;
+    animation: CarouselNav 1000ms ease forwards;
 
     &:active {
       outline: 1px dashed magenta;
@@ -115,6 +130,18 @@ const ButtonContainerFull = styled.div`
   }
   & > button:last-of-type {
     cursor: e-resize;
+  }
+
+  @keyframes CarouselNav {
+    0% {
+      background-color: var(--yellow-2);
+    }
+    50% {
+      background-color: var(--yellow-2);
+    }
+    100% {
+      background-color: transparent;
+    }
   }
 
   @media screen and (min-width: 650px) {

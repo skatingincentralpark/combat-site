@@ -34,14 +34,9 @@ export const CarouselSlide = ({
 
 const EmblaSlide = styled.div`
   transition: min-width 1s ease;
-  cursor: grab;
   margin-right: var(--gap-xs); // gap between slides
   height: 100%;
   position: relative;
-
-  &:active {
-    cursor: grabbing;
-  }
 
   &:last-of-type {
     margin-right: 0;
