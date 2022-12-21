@@ -1,81 +1,28 @@
+import { GetStaticProps } from "next";
 import styled from "@emotion/styled";
-import NextImage from "next/image";
 import Link from "@components/link";
-import { useState } from "react";
+import { shopifyClient, parseShopifyResponse } from "@lib/shopify";
+import Image from "@components/image";
 
-import TeeOne from "../../../public/images/tee-laughing.png";
-import TeeTwo from "../../../public/images/tee-viktor.png";
-import TeeThree from "../../../public/images/tee-bill.png";
-import TeeFour from "../../../public/images/tee-wartime.png";
-
-const getImage = (index: number) => {
-  if (index === 0) return TeeOne;
-  if (index === 1) return TeeTwo;
-  if (index === 2) return TeeThree;
-  return TeeFour;
-};
-
-const products = [
-  {
-    title: "Aftermath",
-    price: "60",
-    collection: "Spring Song Recondo",
-    year: "2022",
-    material: "USA Cotton",
-    made: "Japan",
-    sizes: ["S", "M", "L", "XL"],
-  },
-  {
-    title: "Aftermath",
-    price: "60",
-    collection: "Spring Song Recondo",
-    year: "2022",
-    material: "USA Cotton",
-    made: "Japan",
-    sizes: ["S", "M", "L", "XL"],
-  },
-  {
-    title: "Aftermath",
-    price: "60",
-    collection: "Spring Song Recondo",
-    year: "2022",
-    material: "USA Cotton",
-    made: "Japan",
-    sizes: ["S", "M", "L", "XL"],
-  },
-  {
-    title: "Aftermath",
-    price: "60",
-    collection: "Spring Song Recondo",
-    year: "2022",
-    material: "USA Cotton",
-    made: "Japan",
-    sizes: ["S", "M", "L", "XL"],
-  },
-];
-
-const infoCards = [
-  { title: "Silky USA Cotton" },
-  { title: "Made in Japan" },
-  { title: "Double Wrapped Neck" },
-];
-
-const ShopPage = () => {
-  const colors = ["orange", "purple", "green"];
-
-  const [colorIndex, setColorIndex] = useState(0);
-
-  const cycleColor = () =>
-    setColorIndex(colors.length - 1 === colorIndex ? 0 : colorIndex + 1);
-
+const ShopPage = ({ products }: { products: Product[] }) => {
   return (
     <ShopPageWrapper>
       <Items>
         {products.map((product, i) => (
-          <Item key={i} color={colors[colorIndex]} onMouseDown={cycleColor}>
-            <Link href="/shop/item-2">
-              <NextImage src={getImage(i)} alt="T-shirt" placeholder="blur" />
+          <Item key={product.title}>
+            <Link href={`/shop/${product.handle}`}>
+              <Image
+                image={{
+                  caption: product.title,
+                  url: product.images[0].src,
+                  height: product.images[0].height,
+                  width: product.images[0].width,
+                  aspectRatio:
+                    product.images[0].height / product.images[0].width,
+                }}
+              />
             </Link>
+            {product.title}
           </Item>
         ))}
       </Items>
@@ -84,6 +31,17 @@ const ShopPage = () => {
 };
 
 export default ShopPage;
+
+export const getStaticProps: GetStaticProps = async () => {
+  // Fetch all the products
+  const products = await shopifyClient.product.fetchAll();
+
+  return {
+    props: {
+      products: parseShopifyResponse(products),
+    },
+  };
+};
 
 const Items = styled.section`
   display: grid;

@@ -3,16 +3,26 @@ import styled from "@emotion/styled";
 type Props = {
   value: string;
   name: string;
-  selected: string; // current selected state
+  index: number;
+  selected: number | undefined;
   onClick: Function;
+  available: boolean;
   children: string;
 };
 
-const RadioButton = ({ value, name, selected, onClick, children }: Props) => {
+const RadioButton = ({
+  value,
+  name,
+  index,
+  selected,
+  onClick,
+  available,
+  children,
+}: Props) => {
   return (
-    <RadioLabelInputWrapper checked={selected === value}>
+    <RadioLabelInputWrapper checked={selected === index} available={available}>
       <input
-        onClick={() => onClick(value)}
+        onClick={() => onClick(index)}
         type="radio"
         value={value}
         name={name}
@@ -27,18 +37,22 @@ export default RadioButton;
 
 type RadioLabelInputWrapperProps = {
   checked: boolean;
+  available: boolean;
 };
 const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
   background-color: ${({ checked }) =>
     checked ? "var(--green-1)" : "rgb(221, 221, 221)"};
 
-  transition: background-color 0.1s;
+  background-color: ${({ available }) => !available && "var(--gray-2)"};
+  color: ${({ available }) => (!available ? "var(--gray-3)" : "white")};
+  pointer-events: ${({ available }) => !available && "none"};
+
+  transition: background-color 0.3s, color 0.3s;
 
   height: var(--button-height);
   aspect-ratio: 1;
 
   font-weight: 600;
-  color: white;
   text-align: center;
 
   cursor: pointer;

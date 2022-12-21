@@ -169,15 +169,11 @@ const NavLink = ({
   href: string;
 }) => {
   const router = useRouter();
-  // const hrefText = href.replace("/", ""); // shop, news
+
   const isActive =
     router.pathname !== "/" && href === "/"
       ? false
       : router.pathname.includes(href);
-  // if
-  // router.pathname === '/' ? "/"
-
-  console.log(router.asPath);
 
   return (
     <StyledNavLink>
