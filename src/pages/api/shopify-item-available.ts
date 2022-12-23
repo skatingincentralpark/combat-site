@@ -26,8 +26,9 @@ export default async function available(
     return res.status(401).json({ error: "Product ID required" });
   }
 
-  const domain = process.env.SHOPIFY_STORE_DOMAIN;
-  const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+  const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
+  const storefrontAccessToken =
+    process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
   async function ShopifyData(query: string) {
     if (!storefrontAccessToken || !domain) {
