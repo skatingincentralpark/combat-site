@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { GetStaticProps, GetStaticPaths } from "next";
 import styled from "@emotion/styled";
 import { clamp } from "@lib/helpers";
@@ -6,6 +6,7 @@ import ShopCta from "@components/shop-cta";
 import { client } from "@lib/sanity";
 import { shopifyClient, parseShopifyResponse } from "@lib/shopify";
 import Image from "@components/image";
+import CartContext from "@lib/cart-context";
 
 import useSWR from "swr";
 import axios from "axios";
@@ -54,6 +55,12 @@ const ShopItemPage = ({ product }: { product: Product }) => {
     );
   }, [latestVariants]);
 
+  const { updateLineItem } = useContext(CartContext);
+
+  const submit = () =>
+    typeof selectedSize !== "undefined" &&
+    updateLineItem({ variantId: latestVariants[selectedSize].id, quantity: 1 });
+
   return (
     <StyledCenteredWrapper>
       <ShopItemWrapper>
@@ -78,6 +85,7 @@ const ShopItemPage = ({ product }: { product: Product }) => {
               variants={latestVariants || product?.variants}
               selectedSize={selectedSize}
               setSelectedSize={setSelectedSize}
+              submit={submit}
             />
           </ShopItemBody>
         </ShopItemInfo>

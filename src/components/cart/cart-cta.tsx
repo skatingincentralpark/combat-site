@@ -2,25 +2,29 @@ import React from "react";
 import styled from "@emotion/styled";
 import { StyledButton } from "../shared-styles/buttons";
 
-const CartCta = React.forwardRef<HTMLDivElement>((_, ref) => {
-  return (
-    <CartCtaInner ref={ref || null}>
-      <CartDescriptionItem>
-        <span>Subtotal</span>
-        <span>$60</span>
-      </CartDescriptionItem>
-      <CartDescriptionItem>
-        <span>Shipping</span>
-        <span>FREE</span>
-      </CartDescriptionItem>
-      <CartDescriptionItem>
-        <span>Total (Duties Included)</span>
-        <span>$60</span>
-      </CartDescriptionItem>
-      <StyledButton>Checkout</StyledButton>
-    </CartCtaInner>
-  );
-});
+const CartCta = React.forwardRef<HTMLDivElement, { totalPrice: string }>(
+  ({ totalPrice }, ref) => {
+    const currentPrice = parseInt(totalPrice).toFixed(2);
+
+    return (
+      <CartCtaInner ref={ref || null}>
+        <CartDescriptionItem>
+          <span>Subtotal</span>
+          <span>$60</span>
+        </CartDescriptionItem>
+        <CartDescriptionItem>
+          <span>Shipping</span>
+          <span>FREE</span>
+        </CartDescriptionItem>
+        <CartDescriptionItem>
+          <span>Total (Duties Included)</span>
+          <span>${currentPrice}</span>
+        </CartDescriptionItem>
+        <StyledButton>Checkout</StyledButton>
+      </CartCtaInner>
+    );
+  }
+);
 
 export default CartCta;
 

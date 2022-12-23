@@ -24,7 +24,7 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
 
   return (
     <>
-      {/* <Cart navOpen={navOpen} cartOpen={cartOpen} toggleCart={toggleCart} /> */}
+      <Cart navOpen={navOpen} cartOpen={cartOpen} toggleCart={toggleCart} />
       <HeaderWrapper>
         <BackButton navOpen={navOpen} isLoading={isLoading} />
         <HeaderToggle onClick={toggleNav}>

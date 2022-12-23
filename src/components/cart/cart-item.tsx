@@ -1,31 +1,62 @@
+import { useContext } from "react";
 import styled from "@emotion/styled";
-import FutureImage from "next/image";
+import CartContext from "@lib/cart-context";
+import Image from "@components/image";
 
-type Props = {
-  tee: number;
-};
+interface Props {
+  variant: ShopifyVariant;
+  title: string;
+  quantity: number;
+}
 
-const CartItem = ({ tee }: Props) => {
+const CartItem = ({ variant, title, quantity }: Props) => {
+  const currentPrice = parseInt(variant.price.amount).toFixed(2);
+  const compareAtPrice = parseInt(variant.compareAtPrice.amount).toFixed(2);
+
+  const { updateLineItem } = useContext(CartContext);
+
+  const imageObject: ImageType = {
+    caption: variant.image.altText || title,
+    url: variant.image.src,
+    height: variant.image.height,
+    width: variant.image.width,
+    aspectRatio: variant.image.height / variant.image.width,
+  };
+
   return (
     <CartItemWrapper>
       <ImageWrapper>
-        <FutureImage src="/images/tee-bill.png" alt="Something" fill />
+        <Image image={imageObject} />
       </ImageWrapper>
       <CartItemBody>
-        <strong>Viktor Tee</strong>
-        <strong>$70 AUD</strong>
+        <strong>
+          {title}
+          {!variant.available && <small> (sold out - please remove) </small>}
+        </strong>
+        <strong>
+          <SalePrice>
+            ${compareAtPrice} {variant.compareAtPrice.currencyCode}
+          </SalePrice>
+          ${currentPrice} {variant.price.currencyCode}
+        </strong>
         <CartItemBodySummary>
           <div>
             <strong>Color:</strong> <span>White</span>
           </div>
           <div>
-            <strong>Size:</strong> <span>S</span>
+            <strong>Size:</strong> <span>{variant.title}</span>
           </div>
           <div>
-            <strong>Quantity:</strong> <span>1</span>
+            <strong>Quantity:</strong> <span>{quantity}</span>
           </div>
         </CartItemBodySummary>
-        <CartRemove>Remove</CartRemove>
+        <CartRemove
+          onClick={() =>
+            updateLineItem({ variantId: variant.id, quantity: -1 })
+          }
+        >
+          Remove
+        </CartRemove>
       </CartItemBody>
     </CartItemWrapper>
   );
@@ -39,7 +70,7 @@ const CartItemWrapper = styled.div`
   margin: 2rem 2rem 2rem 0;
   transition: width 0.5s ease;
 
-  @media screen and (min-width: 850px) {
+  @media screen and (min-width: 1000px) {
     width: calc(20% - 2rem);
   }
 
@@ -78,4 +109,9 @@ const CartRemove = styled.button`
   width: fit-content;
   cursor: pointer;
   text-decoration: underline;
+`;
+const SalePrice = styled.span`
+  text-decoration: line-through;
+  color: red;
+  margin-right: 0.7em;
 `;

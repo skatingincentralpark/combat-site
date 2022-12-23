@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import FutureImage from "next/image";
 import styled from "@emotion/styled";
 import { AnimatePresence, m } from "framer-motion";
@@ -12,6 +12,7 @@ import {
   headerInnerVariants,
   cartModalMobileCtaVariants,
 } from "@lib/animate";
+import CartContext from "@lib/cart-context";
 
 const accordionOptions = [
   {
@@ -41,6 +42,8 @@ const CartModal = () => {
 
   useLockBodyScroll(refScrollable);
 
+  const { checkout } = useContext(CartContext);
+
   return (
     <>
       <m.div
@@ -49,13 +52,13 @@ const CartModal = () => {
           position: `fixed`,
           bottom: `3rem`,
           width: `100%`,
-          zIndex: 9,
+          zIndex: 10,
         }}
       >
         <AnimatePresence>
           {!isVisible && (
             <TempSlideUpModal {...cartModalMobileCtaVariants} key="cart-cta">
-              <CartCta />
+              <CartCta totalPrice={checkout?.totalPriceV2.amount || "0"} />
             </TempSlideUpModal>
           )}
         </AnimatePresence>
@@ -70,11 +73,23 @@ const CartModal = () => {
               style={{ objectFit: `cover` }}
             />
           </CartFunWrapper>
-          <CartItemWrapper>
-            <CartItem tee={1} />
-          </CartItemWrapper>
+
+          <CartItemsWrapper>
+            {checkout?.lineItems?.map((item) => (
+              <CartItem
+                key={item.variant.id}
+                variant={item.variant}
+                title={item.title}
+                quantity={item.quantity}
+              />
+            ))}
+          </CartItemsWrapper>
+
           <Accordion options={accordionOptions} />
-          <CartCta ref={ref} />
+          <CartCta
+            ref={ref}
+            totalPrice={checkout?.totalPriceV2.amount || "0"}
+          />
         </CartModalInner>
       </CartModalWrapper>
     </>
@@ -92,13 +107,10 @@ const CartModalWrapper = styled(m.div)`
   height: 100%;
   overflow: hidden;
 
-  /* background: linear-gradient(180deg, #e6ff40, #b7ff01, #ffffff); */
   background: #ebebeb;
   background-size: 400% 400%;
   animation: Combative 4s ease infinite;
   background-attachment: fixed;
-
-  /* font-family: var(--font-mono); */
 
   @keyframes Combative {
     0% {
@@ -119,7 +131,7 @@ const CartModalInner = styled(m.div)`
   overflow-y: auto;
   height: 100vh;
 `;
-const CartItemWrapper = styled.div`
+const CartItemsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: var(--gap-l);
@@ -143,9 +155,6 @@ const TempSlideUpModal = styled(m.div)`
   width: 100%;
 
   background-color: var(--piss-1);
-  /* position: fixed;
-  bottom: 3rem;
-  z-index: 9; */
   padding: 0 var(--gap-m);
 
   @media screen and (min-width: 650px) {

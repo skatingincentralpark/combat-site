@@ -12,9 +12,15 @@ type Props = {
   }[];
   selectedSize?: number | undefined;
   setSelectedSize: Function;
+  submit: () => void;
 };
 
-const ShopCta = ({ variants, selectedSize, setSelectedSize }: Props) => {
+const ShopCta = ({
+  variants,
+  selectedSize,
+  setSelectedSize,
+  submit,
+}: Props) => {
   const framerVariants = {
     initial: {
       y: "100%",
@@ -49,7 +55,7 @@ const ShopCta = ({ variants, selectedSize, setSelectedSize }: Props) => {
         ))}
       </RadioGroup>
       <Row>
-        <Button available={availabilityLoading}>
+        <Button available={availabilityLoading} onClick={submit}>
           {availabilityLoading ? "Waiting..." : "Add To Cart"}
         </Button>
         <StyledLink href="/shop">View All</StyledLink>

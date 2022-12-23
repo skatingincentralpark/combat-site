@@ -10,6 +10,7 @@ import { deviceIsBrowser } from "@lib/helpers";
 import useIsLoading from "hooks/useIsLoading";
 
 import { Jost } from "@next/font/google";
+import { CartContextProvider } from "@lib/cart-context";
 
 const jost = Jost({ subsets: ["latin"] });
 
@@ -36,7 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const isLoading = useIsLoading();
 
   return (
-    <>
+    <CartContextProvider>
       <GlobalStyles />
       <LazyMotion features={domAnimation}>
         <Header isLoading={isLoading} />
@@ -50,7 +51,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </PageTransitionWrapper>
       </LazyMotion>
-    </>
+    </CartContextProvider>
   );
 }
 

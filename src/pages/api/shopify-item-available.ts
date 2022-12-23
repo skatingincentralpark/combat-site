@@ -1,14 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type Data = {
+interface Variant {
+  available: boolean;
   id: string;
-  available: string;
   title: string;
-}[];
+}
+
+type Data = Variant[];
 
 type Error = {
   error: string;
 };
+
+/*
+ * Used to update variants with latest availabilities
+ */
 
 export default async function available(
   req: NextApiRequest,
@@ -77,14 +83,8 @@ export default async function available(
 
   const products = await getProduct(id);
 
-  interface Node {
-    available: boolean;
-    id: string;
-    title: string;
-  }
-
   const latestVariants = products?.variants?.edges?.map(
-    ({ node }: { node: Node }) => node
+    ({ node }: { node: Variant }) => node
   );
 
   res.status(200);
