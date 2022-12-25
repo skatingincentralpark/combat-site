@@ -55,7 +55,7 @@ const CartContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [successfulOrder, setSuccessfulOrder] = useState(null);
   // actual checkout object, which will be created once for a checkout
   // initially undefined, until updateLineItem is called to create new
-  const [checkout, setCheckout] = useState(() => {
+  const [checkout, setCheckout] = useState<Checkout | null>(() => {
     const checkoutFromStorage =
       typeof window !== "undefined" ? localStorage.getItem("checkout") : null;
 
@@ -139,7 +139,7 @@ const CartContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   const removeLineItem = async (lineItemId: string) => {
     setIsLoading(true);
-    const newCheckout = await client.checkout.removeLineItems(checkout.id, [
+    const newCheckout = await client.checkout.removeLineItems(checkout?.id, [
       lineItemId,
     ]);
     setCheckout(newCheckout);

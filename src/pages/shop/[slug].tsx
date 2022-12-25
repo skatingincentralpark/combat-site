@@ -163,6 +163,7 @@ const ShopItemWrapper = styled.div`
 const ShopItemInfo = styled.div`
   border: 1px solid #d2dc9f;
   border-radius: 16px;
+  position: relative;
 
   height: fit-content;
   margin-left: 0;
