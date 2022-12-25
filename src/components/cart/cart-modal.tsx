@@ -110,21 +110,7 @@ const CartItemsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: var(--gap-l);
-`;
-const CartFunWrapper = styled.div`
-  margin-bottom: var(--gap-m);
-  aspect-ratio: 2 / 3;
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  max-width: 10rem;
-  flex-shrink: 0;
-  transition: aspect-ratio 1s, width 1s, aspect-ratio 1s;
-
-  @media screen and (min-width: 650px) {
-    margin-right: var(--gap-m);
-    aspect-ratio: 1 / 1;
-  }
+  gap: 1rem;
 `;
 const TempSlideUpModal = styled(m.div)`
   width: 100%;

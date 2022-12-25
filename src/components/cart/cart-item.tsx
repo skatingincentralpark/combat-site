@@ -86,9 +86,8 @@ const CartItemWrapper = styled(m.div, transientOptions)<{
   $loading: boolean;
 }>`
   display: block;
-  width: calc(50% - 2rem);
+  width: calc(50% - 0.5rem);
   height: min-content;
-  margin: 0 2rem 2rem 0;
   transition: width 0.5s ease;
   cursor: ${({ $loading }) => ($loading ? "wait" : "initial")};
   border: 1px dashed var(--gray-3);
@@ -98,7 +97,7 @@ const CartItemWrapper = styled(m.div, transientOptions)<{
   overflow: hidden;
 
   @media screen and (min-width: 1000px) {
-    width: calc(20% - 2rem);
+    width: calc(20% - 0.8rem);
   }
 `;
 const ImageWrapper = styled.div`

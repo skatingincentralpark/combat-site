@@ -50,7 +50,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             font-family: ${jost.style.fontFamily};
           }
         `}</style>
-        <MusicPlayer />
+        {/* <MusicPlayer /> */}
         <PageTransitionWrapper loading={isLoading}>
           <Component {...pageProps} />
         </PageTransitionWrapper>
