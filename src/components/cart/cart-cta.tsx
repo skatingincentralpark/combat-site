@@ -51,4 +51,4 @@ const CartDescriptionItem = styled.div`
   }
 `;
 
-CartCta.displayName = "Input";
+CartCta.displayName = "CartCta";

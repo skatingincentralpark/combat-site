@@ -148,3 +148,5 @@ const SalePrice = styled.span`
   color: red;
   margin-right: 0.7em;
 `;
+
+CartItem.displayName = "CartItem";
