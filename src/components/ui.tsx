@@ -42,40 +42,15 @@ const ButtonBaseMotion = styled(m.button)`
   }
 `;
 
-/*
- * Page Wrappers
- */
-// const HomePageWrapper = styled.main`
-//   margin-top: var(--header-height);
-//   position: relative;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   min-height: 100vh;
-// `;
-// const ShopPageWrapper = styled.main`
-//   padding-top: var(--header-height);
-//   padding: var(--gap-m) var(--gap-xxl) var(--gap-m) var(--gap-xxl);
-//   height: 100%;
-//   display: flex;
-// `;
-// const NewsPageWrapper = styled(m.main)`
-//   width: 100%;
-//   height: fit-content;
-//   padding-top: var(--gap-page-top);
-//   padding-bottom: var(--gap-xl);
-//   padding-left: 0;
-//   padding-right: 0;
-
-//   max-width: 50rem; // test on bigger screen --> could use clamp
-//   margin: auto;
-
-//   @media screen and (min-width: 700px) {
-//     padding-top: 12rem;
-//     padding-left: var(--gap-s);
-//     padding-right: var(--gap-s);
-//   }
-// `;
+const LoadingStar = () => {
+  return (
+    <LoadingSpinner>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 245">
+        <path d="m56,237 74-228 74,228L10,96h240" />
+      </svg>
+    </LoadingSpinner>
+  );
+};
 
 const LoadingSpinner = styled.div`
   height: 100%;
@@ -84,6 +59,7 @@ const LoadingSpinner = styled.div`
   transform-origin: center;
   margin: auto;
   pointer-events: none;
+  fill: white;
 
   @keyframes spin {
     0% {
@@ -99,7 +75,6 @@ export {
   /* Buttons */
   ButtonBase,
   ButtonBaseMotion,
-  /* Layouts */
   /* Loading Indicators */
-  LoadingSpinner,
+  LoadingStar,
 };

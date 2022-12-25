@@ -100,10 +100,11 @@ const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
 const Circle = styled.div`
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  height: 80%;
+  margin: auto;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
-  background-color: black;
+  background-color: white;
 
   transition: opacity 100ms, transform 100ms;
   opacity: var(--circle-opacity);

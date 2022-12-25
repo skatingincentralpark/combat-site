@@ -4,7 +4,7 @@ import CartContext from "@lib/cart-context";
 import Image from "@components/image";
 import { transientOptions } from "@lib/helpers";
 import { m } from "framer-motion";
-import { LoadingSpinner } from "@components/ui";
+import { LoadingStar } from "@components/ui";
 
 interface Props {
   variant: ShopifyVariant;
@@ -69,10 +69,10 @@ const CartItem = forwardRef<HTMLDivElement, Props>(
           <CartRemove
             $loading={isLoading}
             onClick={() =>
-              updateLineItem({ variantId: variant.id, quantity: -1 })
+              updateLineItem({ variantId: variant.id, quantity: -10 })
             }
           >
-            {isLoading ? <LoadingSpinner>&#9733;</LoadingSpinner> : "Remove"}
+            {isLoading ? <LoadingStar /> : "Remove"}
           </CartRemove>
         </CartItemBody>
       </CartItemWrapper>
@@ -90,8 +90,6 @@ const CartItemWrapper = styled(m.div, transientOptions)<{
   height: min-content;
   transition: width 0.5s ease;
   cursor: ${({ $loading }) => ($loading ? "wait" : "initial")};
-  border: 1px dashed var(--gray-3);
-  background-color: white;
   border-radius: 1rem;
   position: relative;
   overflow: hidden;
@@ -109,27 +107,24 @@ const CartItemBody = styled.div`
   flex-direction: column;
   margin: var(--gap-m) var(--gap-xs) var(--gap-xs) var(--gap-xs);
 
-  @media screen and (min-width: 650px) {
-    border-top: 1px dashed var(--gray-3);
-    padding-top: var(--gap-s);
-  }
+  border-top: 1px dashed var(--gray-3);
+  padding-top: var(--gap-s);
 `;
 const CartItemBodySummary = styled.div`
   margin: var(--gap-s) 0 var(--gap-m) 0;
 `;
 const CartRemove = styled("button", transientOptions)<{ $loading: boolean }>`
-  font-weight: 400;
+  font-weight: 500;
   width: fit-content;
   cursor: pointer;
   pointer-events: ${({ $loading }) => ($loading ? "none" : "initial")};
   transition: border-color 200ms, transform 200ms;
-  padding: var(--gap-3xs) var(--gap-xs);
+  padding: 0.6rem var(--gap-xs);
   border-radius: var(--gap-3xs);
-  background-color: var(--gray-1);
-  color: gray;
+  background-color: red;
+  color: white;
   width: 100%;
   height: var(--button-height);
-  border: 1px dashed var(--gray-1);
 
   &:hover {
     border-color: var(--gray-3);

@@ -138,7 +138,7 @@ const ShopItemWrapper = styled.div`
   align-items: center;
   height: 100%;
   flex-wrap: wrap;
-  padding: var(--gap-page-top) var(--gap-m) var(--gap-m) var(--gap-m);
+  padding: var(--gap-page-top) var(--gap-m) var(--gap-3xl) var(--gap-m);
 
   @media screen and (min-width: 600px) {
     padding-top: 0;

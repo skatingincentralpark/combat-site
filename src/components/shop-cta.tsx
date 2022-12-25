@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import styled from "@emotion/styled";
-import { AnimatePresence, m } from "framer-motion";
+import { m } from "framer-motion";
 import RadioButton from "@components/radio-button";
 import { StyledButton } from "@components/shared-styles/buttons";
 import Link from "next/link";
 import CartContext from "@lib/cart-context";
 import { transientOptions } from "@lib/helpers";
-import { LoadingSpinner } from "./ui";
+import { LoadingStar } from "./ui";
 
 type Props = {
   variants: {
@@ -54,7 +54,7 @@ const ShopCta = ({
       </RadioGroup>
       <Row>
         <Button $available={loading} onClick={submit}>
-          {loading ? <LoadingSpinner>&#9733;</LoadingSpinner> : "Add To Cart"}
+          {loading ? <LoadingStar /> : "Add To Cart"}
         </Button>
         <StyledLink $available={loading} href="/shop">
           View All
@@ -79,6 +79,7 @@ const Button = styled(StyledButton, transientOptions)<{ $available: boolean }>`
   border-radius: var(--gap-xxs);
   font-weight: 600;
   transition: background-color 0.3s, color 0.3s, transform 0.3s, opacity 0.5s;
+  padding: 0.6rem 0;
 
   background-color: ${({ $available }) => $available && "var(--gray-1)"};
   color: ${({ $available }) => ($available ? "var(--gray-3)" : "white")};

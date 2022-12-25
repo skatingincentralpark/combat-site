@@ -55,6 +55,7 @@ const Items = styled.section`
 const Item = styled.div`
   display: block;
   aspect-ratio: 1;
+  text-align: center;
 
   & > * {
     overflow: hidden;
