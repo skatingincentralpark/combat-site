@@ -1,4 +1,4 @@
-import { LazyMotion, domAnimation } from "framer-motion";
+import { LazyMotion } from "framer-motion";
 import type { AppProps } from "next/app";
 import GlobalStyles from "../styles/global";
 
@@ -11,6 +11,10 @@ import useIsLoading from "hooks/useIsLoading";
 
 import { Jost } from "@next/font/google";
 import { CartContextProvider } from "@lib/cart-context";
+
+// Make sure to return the specific export containing the feature bundle.
+const loadFeatures = () =>
+  import("@lib/framer-features").then((res) => res.default);
 
 const jost = Jost({ subsets: ["latin"] });
 
@@ -39,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <CartContextProvider>
       <GlobalStyles />
-      <LazyMotion features={domAnimation}>
+      <LazyMotion features={loadFeatures} strict>
         <Header isLoading={isLoading} />
         <style jsx global>{`
           html {

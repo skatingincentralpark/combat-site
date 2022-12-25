@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import CartContext from "@lib/cart-context";
 import Image from "@components/image";
 import { transientOptions } from "@lib/helpers";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { LoadingSpinner } from "@components/ui";
 
 interface Props {
@@ -82,7 +82,7 @@ const CartItem = forwardRef<HTMLDivElement, Props>(
 
 export default CartItem;
 
-const CartItemWrapper = styled(motion.div, transientOptions)<{
+const CartItemWrapper = styled(m.div, transientOptions)<{
   $loading: boolean;
 }>`
   display: block;
