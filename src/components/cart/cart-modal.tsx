@@ -145,6 +145,6 @@ const CartVideo = () => {
 
 const containerStyles = css`
   height: clamp(200px, 10vw, 250px);
-  width: fit-content;
+  width: auto;
   margin-bottom: var(--gap-l);
 `;
