@@ -69,7 +69,7 @@ const CartItem = forwardRef<HTMLDivElement, Props>(
           <CartRemove
             $loading={isLoading}
             onClick={() =>
-              updateLineItem({ variantId: variant.id, quantity: -10 })
+              updateLineItem({ variantId: variant.id, quantity: -1 })
             }
           >
             {isLoading ? <LoadingStar /> : "Remove"}

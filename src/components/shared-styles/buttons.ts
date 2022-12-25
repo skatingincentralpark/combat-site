@@ -11,7 +11,9 @@ const StyledButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: var(--green-2);
+    @media screen and (min-width: 700px) {
+      background-color: var(--green-2);
+    }
   }
   &:active {
     background-color: var(--green-3);
