@@ -110,5 +110,7 @@ const AccordionListItemIndicator = styled.span<ActiveProp>`
 `;
 
 const AccordionBody = styled.div`
-  margin-left: 7rem;
+  @media screen and (min-width: 700px) {
+    margin-left: 7rem;
+  }
 `;

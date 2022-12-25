@@ -1,5 +1,5 @@
 import { useRef, useContext } from "react";
-import FutureImage from "next/image";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { AnimatePresence, m } from "framer-motion";
 import Accordion from "../accordion/accordion";
@@ -13,6 +13,7 @@ import {
   cartModalMobileCtaVariants,
 } from "@lib/animate";
 import CartContext from "@lib/cart-context";
+import Video from "@components/video";
 
 const accordionOptions = [
   {
@@ -128,7 +129,7 @@ const CartFunWrapper = styled.div`
 const TempSlideUpModal = styled(m.div)`
   width: 100%;
 
-  background-color: var(--piss-1);
+  background-color: #e8ff8f;
   padding: 0 var(--gap-m);
 
   @media screen and (min-width: 650px) {
@@ -137,34 +138,27 @@ const TempSlideUpModal = styled(m.div)`
 `;
 
 const CartVideo = () => {
-  const framerVariants = {
-    initial: {
-      opacity: 0,
-    },
-    animate: {
-      opacity: 1,
-    },
-    exit: {
-      opacity: 0,
-    },
+  const asset = {
+    url: "/videos/shin-sound.mp4",
+    height: 720,
+    width: 504,
+    caption: "Shin Matsunaga",
+    alt: "Shin Matsunaga",
+    autoplay: true,
   };
 
   return (
-    <StyledVideo autoPlay={true} playsInline muted loop {...framerVariants}>
-      <source src="/videos/shin-sound.mp4" />
-      <meta itemProp="description" content="Shin matsunaga poster animated" />
-    </StyledVideo>
+    <Video
+      asset={asset}
+      defaultOnScreen={true}
+      controls={false}
+      containerStyles={containerStyles}
+    />
   );
 };
 
-const StyledVideo = styled(m.video)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  position: relative;
+const containerStyles = css`
   height: clamp(200px, 10vw, 250px);
+  width: fit-content;
   margin-bottom: var(--gap-l);
 `;

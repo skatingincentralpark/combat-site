@@ -36,7 +36,7 @@ const CartItem = forwardRef<HTMLDivElement, Props>(
         ref={ref}
         $loading={isLoading}
         layout
-        initial={{ scale: 0.75, opacity: 0 }}
+        initial={false}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.75, opacity: 0 }}
         transition={{ type: "spring" }}
@@ -100,13 +100,10 @@ const CartItemWrapper = styled(m.div, transientOptions)<{
   @media screen and (min-width: 1000px) {
     width: calc(20% - 2rem);
   }
-
-  & > div:first-of-type {
-    overflow: hidden;
-  }
 `;
 const ImageWrapper = styled.div`
   border-radius: 1rem;
+  overflow: hidden;
 `;
 const CartItemBody = styled.div`
   display: flex;

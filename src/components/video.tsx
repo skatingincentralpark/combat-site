@@ -13,9 +13,17 @@ interface Props {
   asset: VideoType;
   containerStyles?: CssProperties;
   buttonStyles?: CssProperties;
+  defaultOnScreen?: boolean;
+  controls?: boolean;
 }
 
-const Video = ({ asset, containerStyles, buttonStyles }: Props) => {
+const Video = ({
+  asset,
+  containerStyles,
+  buttonStyles,
+  defaultOnScreen = false,
+  controls = true,
+}: Props) => {
   const { url, height = 1, width = 1, caption, alt, autoplay } = asset;
 
   const ref = useRef<HTMLVideoElement | null>(null);
@@ -23,7 +31,8 @@ const Video = ({ asset, containerStyles, buttonStyles }: Props) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [canPlay, setCanPlay] = useState<boolean>(false);
 
-  const isOnScreen = useOnScreen(ref);
+  const onScreen = useOnScreen(ref);
+  const isOnScreen = defaultOnScreen || onScreen;
 
   // when intersecting, load the video
   useEffect(() => {
@@ -55,16 +64,20 @@ const Video = ({ asset, containerStyles, buttonStyles }: Props) => {
       `}
     >
       <DominantColor canPlay={canPlay} />
-      <VideoButtons
-        buttonStyles={buttonStyles}
-        isPlaying={isPlaying}
-        canPlay={canPlay}
-      >
-        <button onClick={handlePlayVideo}>
-          {isPlaying ? "Pause" : "Play"}
-        </button>
-        <button onClick={handleMuteVideo}>{isMuted ? "Mute" : "Unmute"}</button>
-      </VideoButtons>
+      {controls && (
+        <VideoButtons
+          buttonStyles={buttonStyles}
+          isPlaying={isPlaying}
+          canPlay={canPlay}
+        >
+          <button onClick={handlePlayVideo}>
+            {isPlaying ? "Pause" : "Play"}
+          </button>
+          <button onClick={handleMuteVideo}>
+            {isMuted ? "Mute" : "Unmute"}
+          </button>
+        </VideoButtons>
+      )}
       <StyledVideo
         autoPlay={autoplay || true}
         playsInline
