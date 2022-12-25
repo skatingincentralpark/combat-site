@@ -32,14 +32,11 @@ const accordionOptions = [
 const CartModal = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const refScrollable = useRef<HTMLDivElement>(null);
-
   const entry = useIntersectionObserver(ref, {
     root: refScrollable?.current,
     rootMargin: "100px",
   });
-
   const isVisible = !!entry?.isIntersecting;
-
   useLockBodyScroll(refScrollable);
 
   const { checkout } = useContext(CartContext);
@@ -65,24 +62,18 @@ const CartModal = () => {
       </m.div>
       <CartModalWrapper {...cartModalVariants}>
         <CartModalInner ref={refScrollable} {...headerInnerVariants}>
-          <CartFunWrapper>
-            <FutureImage
-              src="/images/otter-cheeks.jpeg"
-              alt="Something"
-              fill
-              style={{ objectFit: `cover` }}
-            />
-          </CartFunWrapper>
-
+          <CartVideo />
           <CartItemsWrapper>
-            {checkout?.lineItems?.map((item) => (
-              <CartItem
-                key={item.variant.id}
-                variant={item.variant}
-                title={item.title}
-                quantity={item.quantity}
-              />
-            ))}
+            <AnimatePresence mode="popLayout">
+              {checkout?.lineItems.map((item) => (
+                <CartItem
+                  key={item.variant.id}
+                  variant={item.variant}
+                  title={item.title}
+                  quantity={item.quantity}
+                />
+              ))}
+            </AnimatePresence>
           </CartItemsWrapper>
 
           <Accordion options={accordionOptions} />
@@ -106,28 +97,11 @@ const CartModalWrapper = styled(m.div)`
   width: 100%;
   height: 100%;
   overflow: hidden;
-
-  background: #ebebeb;
-  background-size: 400% 400%;
-  animation: Combative 4s ease infinite;
-  background-attachment: fixed;
-
-  @keyframes Combative {
-    0% {
-      background-position: 51% 0%;
-    }
-    50% {
-      background-position: 50% 100%;
-    }
-    100% {
-      background-position: 51% 0%;
-    }
-  }
-
+  background: #ebffc9;
   overflow: scroll;
 `;
 const CartModalInner = styled(m.div)`
-  padding: var(--gap-page-top) var(--gap-l) 3rem var(--gap-l);
+  padding: var(--gap-l) var(--gap-l) 3rem var(--gap-l);
   overflow-y: auto;
   height: 100vh;
 `;
@@ -160,4 +134,37 @@ const TempSlideUpModal = styled(m.div)`
   @media screen and (min-width: 650px) {
     display: none;
   }
+`;
+
+const CartVideo = () => {
+  const framerVariants = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+    },
+    exit: {
+      opacity: 0,
+    },
+  };
+
+  return (
+    <StyledVideo autoPlay={true} playsInline muted loop {...framerVariants}>
+      <source src="/videos/shin-sound.mp4" />
+      <meta itemProp="description" content="Shin matsunaga poster animated" />
+    </StyledVideo>
+  );
+};
+
+const StyledVideo = styled(m.video)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  position: relative;
+  height: clamp(200px, 10vw, 250px);
+  margin-bottom: var(--gap-l);
 `;

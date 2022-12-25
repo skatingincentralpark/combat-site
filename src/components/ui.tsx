@@ -77,9 +77,29 @@ const ButtonBaseMotion = styled(m.button)`
 //   }
 // `;
 
+const LoadingSpinner = styled.div`
+  height: 100%;
+  aspect-ratio: 1;
+  animation: spin 0.75s linear infinite;
+  transform-origin: center;
+  margin: auto;
+  pointer-events: none;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
 export {
   /* Buttons */
   ButtonBase,
   ButtonBaseMotion,
   /* Layouts */
+  /* Loading Indicators */
+  LoadingSpinner,
 };

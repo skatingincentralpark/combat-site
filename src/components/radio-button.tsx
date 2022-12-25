@@ -47,7 +47,7 @@ const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
   color: ${({ available }) => (!available ? "var(--gray-3)" : "white")};
   pointer-events: ${({ available }) => !available && "none"};
 
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 
   height: var(--button-height);
   aspect-ratio: 1;
@@ -76,6 +76,11 @@ const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
     background-color: var(--green-3);
     --circle-opacity: 1;
     --circle-transform: scale(0.8);
+  }
+
+  &:not(:last-of-type) {
+    border-right: 0.5px solid white;
+    border-color: var(--radio-border-color);
   }
 
   & > input {
