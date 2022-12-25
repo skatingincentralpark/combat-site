@@ -20,7 +20,7 @@ const Accordion = ({ options }: Props) => {
           const active = activeItem === i;
           return (
             <AccordionListItem key={i} onClick={() => setActiveItem(i)}>
-              {/* <AccordionListItemIndicator active={active} /> */}
+              <AccordionListItemIndicator active={active} />
               {option.label}
             </AccordionListItem>
           );
@@ -109,4 +109,6 @@ const AccordionListItemIndicator = styled.span<ActiveProp>`
   transition: background-color 0.25s, transform 0.25s;
 `;
 
-const AccordionBody = styled.div``;
+const AccordionBody = styled.div`
+  margin-left: 7rem;
+`;
