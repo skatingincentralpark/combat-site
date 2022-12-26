@@ -35,7 +35,7 @@ export default async function handler(
 
     //getting payload
     const {
-      body: { type, slug },
+      body: { type, slug = "" },
     } = req;
 
     const defaultMessage = {
@@ -48,6 +48,9 @@ export default async function handler(
         return res.json(defaultMessage);
       case "lookbook":
         await res.revalidate(`/lookbooks/${slug}`);
+        return res.json(defaultMessage);
+      case "generalSettings":
+        await res.revalidate(`/index`);
         return res.json(defaultMessage);
     }
 
