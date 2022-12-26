@@ -98,7 +98,7 @@ const CartModalWrapper = styled(m.div)`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #ebffc9;
+  background: #e4e4e4;
   overflow: scroll;
 `;
 const CartModalInner = styled(m.div)`

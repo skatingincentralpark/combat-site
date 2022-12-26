@@ -47,7 +47,7 @@ const cssVariables = css`
     // Border Radius
     --border-radius-m: 3rem;
     // Stuff
-    --button-height: 2.25rem;
+    --button-height: 2.75rem;
     --header-height: 5rem;
     --gap-page-top: calc(var(--header-height) + var(--gap-s));
 

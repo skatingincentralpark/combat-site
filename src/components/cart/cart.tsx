@@ -61,4 +61,9 @@ const CartButton = styled(ButtonBaseMotion)`
   white-space: nowrap;
   overflow: hidden;
   text-align: center;
+  transition: background-color 200ms;
+
+  &:active {
+    background-color: var(--yellow-2) !important;
+  }
 `;
