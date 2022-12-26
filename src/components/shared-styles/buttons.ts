@@ -1,14 +1,23 @@
 import styled from "@emotion/styled";
 
-const StyledButton = styled.button`
+const StyledButtonBase = styled.button`
   color: white;
-  font-weight: 400;
-  border-radius: var(--gap-4xs);
+  font-weight: 500;
+  border-radius: var(--gap-3xs);
   padding: var(--gap-3xs) var(--gap-l);
-  background-color: var(--green-1);
   width: 100%;
   height: var(--button-height);
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s, opacity 0.5s;
+  line-height: 1;
+
+  &:active {
+    transform: scale(0.95);
+  }
+`;
+
+const StyledButton = styled(StyledButtonBase)`
+  background-color: var(--green-1);
 
   &:hover {
     @media screen and (min-width: 700px) {
@@ -20,4 +29,8 @@ const StyledButton = styled.button`
   }
 `;
 
-export { StyledButton };
+const StyledButtonDanger = styled(StyledButtonBase)`
+  background-color: red;
+`;
+
+export { StyledButton, StyledButtonDanger };

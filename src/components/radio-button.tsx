@@ -90,11 +90,11 @@ const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
   }
 
   &:nth-of-type(1) {
-    border-radius: var(--gap-xxs) 0 0 var(--gap-xxs);
+    border-radius: var(--gap-3xs) 0 0 var(--gap-3xs);
   }
 
   &:last-of-type {
-    border-radius: 0 var(--gap-xxs) var(--gap-xxs) 0;
+    border-radius: 0 var(--gap-3xs) var(--gap-3xs) 0;
   }
 `;
 const Circle = styled.div`

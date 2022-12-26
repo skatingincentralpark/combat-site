@@ -1,10 +1,11 @@
-import { useContext, forwardRef } from "react";
+import { useContext, forwardRef, useRef } from "react";
 import styled from "@emotion/styled";
 import CartContext from "@lib/cart-context";
 import Image from "@components/image";
 import { transientOptions } from "@lib/helpers";
 import { m } from "framer-motion";
 import { LoadingStar } from "@components/ui";
+import { StyledButtonDanger } from "@components/shared-styles/buttons";
 
 interface Props {
   variant: ShopifyVariant;
@@ -12,10 +13,7 @@ interface Props {
   quantity: number;
 }
 
-/*
- * The forwarded ref is for popLayout (Framer Motion) in cartModal
- */
-
+// The forwarded ref is for popLayout (Framer Motion) in cartModal
 const CartItem = forwardRef<HTMLDivElement, Props>(
   ({ variant, title, quantity }, ref) => {
     const currentPrice = parseInt(variant.price.amount).toFixed(2);
@@ -29,6 +27,28 @@ const CartItem = forwardRef<HTMLDivElement, Props>(
       height: variant.image.height,
       width: variant.image.width,
       aspectRatio: variant.image.height / variant.image.width,
+    };
+
+    const prevQuantity = useRef(quantity);
+    const isIncreasing = prevQuantity.current < quantity ? 1 : 0;
+
+    // will only be isIncreasing if someone opens cart immediately after adding to cart
+    const QuantityVariants = {
+      animate: (isIncreasing: number) => {
+        if (isIncreasing === 1) {
+          return {
+            color: [`#0cd226`, `#000`],
+            borderColor: [`#0cd226`, `rgba(255, 255, 255, 0)`],
+            x: [0, 5, 0, 0],
+          };
+        } else {
+          return {
+            color: [`#ff0000`, `#000`],
+            borderColor: [`#ff0000`, `rgba(255, 255, 255, 0)`],
+            x: [0, -5, 0, 0],
+          };
+        }
+      },
     };
 
     return (
@@ -49,12 +69,12 @@ const CartItem = forwardRef<HTMLDivElement, Props>(
             {title}
             {!variant.available && <small> (sold out - please remove) </small>}
           </strong>
-          <strong>
+          <div>
             <SalePrice>
               ${compareAtPrice} {variant.compareAtPrice.currencyCode}
             </SalePrice>
             ${currentPrice} {variant.price.currencyCode}
-          </strong>
+          </div>
           <CartItemBodySummary>
             <div>
               <strong>Color:</strong> <span>White</span>
@@ -62,9 +82,17 @@ const CartItem = forwardRef<HTMLDivElement, Props>(
             <div>
               <strong>Size:</strong> <span>{variant.title}</span>
             </div>
-            <div>
-              <strong>Quantity:</strong> <span>{quantity}</span>
-            </div>
+            <QuantityCount
+              key={quantity}
+              variants={QuantityVariants}
+              animate="animate"
+              custom={isIncreasing}
+              transition={{ duration: 1 }}
+              initial={false}
+            >
+              <strong>Quantity: </strong>
+              <span>{quantity}</span>
+            </QuantityCount>
           </CartItemBodySummary>
           <CartRemove
             $loading={isLoading}
@@ -107,37 +135,24 @@ const CartItemBody = styled.div`
   flex-direction: column;
   margin: var(--gap-m) var(--gap-xs) var(--gap-xs) var(--gap-xs);
 
-  border-top: 1px dashed var(--gray-3);
+  border-top: 1px solid var(--gray-3);
   padding-top: var(--gap-s);
 `;
 const CartItemBodySummary = styled.div`
   margin: var(--gap-s) 0 var(--gap-m) 0;
 `;
-const CartRemove = styled("button", transientOptions)<{ $loading: boolean }>`
-  font-weight: 500;
-  width: fit-content;
-  cursor: pointer;
+const CartRemove = styled(StyledButtonDanger, transientOptions)<{
+  $loading: boolean;
+}>`
   pointer-events: ${({ $loading }) => ($loading ? "none" : "initial")};
-  transition: border-color 200ms, transform 200ms;
-  padding: 0.6rem var(--gap-xs);
-  border-radius: var(--gap-3xs);
-  background-color: red;
-  color: white;
-  width: 100%;
-  height: var(--button-height);
-
-  &:hover {
-    border-color: var(--gray-3);
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
 `;
 const SalePrice = styled.span`
   text-decoration: line-through;
   color: red;
   margin-right: 0.7em;
+`;
+const QuantityCount = styled(m.div)`
+  border-bottom: 1px solid #000;
 `;
 
 CartItem.displayName = "CartItem";

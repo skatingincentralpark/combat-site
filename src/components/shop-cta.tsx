@@ -76,18 +76,9 @@ const RadioGroup = styled.div`
   margin-bottom: var(--gap-xxs);
 `;
 const Button = styled(StyledButton, transientOptions)<{ $available: boolean }>`
-  border-radius: var(--gap-xxs);
-  font-weight: 600;
-  transition: background-color 0.3s, color 0.3s, transform 0.3s, opacity 0.5s;
-  padding: 0.6rem 0;
-
   background-color: ${({ $available }) => $available && "var(--gray-1)"};
   color: ${({ $available }) => ($available ? "var(--gray-3)" : "white")};
   pointer-events: ${({ $available }) => $available && "none"};
-
-  &:active {
-    transform: scale(0.95);
-  }
 `;
 const Row = styled.div`
   display: flex;

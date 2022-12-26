@@ -1,10 +1,14 @@
-import React from "react";
+import { forwardRef, useContext } from "react";
 import styled from "@emotion/styled";
 import { StyledButton } from "../shared-styles/buttons";
+import CartContext from "@lib/cart-context";
+import { transientOptions } from "@lib/helpers";
+import { LoadingStar } from "@components/ui";
 
-const CartCta = React.forwardRef<HTMLDivElement, { totalPrice: string }>(
+const CartCta = forwardRef<HTMLDivElement, { totalPrice: string }>(
   ({ totalPrice }, ref) => {
     const currentPrice = parseInt(totalPrice).toFixed(2);
+    const { isLoading } = useContext(CartContext);
 
     return (
       <CartCtaInner ref={ref || null}>
@@ -20,7 +24,9 @@ const CartCta = React.forwardRef<HTMLDivElement, { totalPrice: string }>(
           <span>Total (Duties Included)</span>
           <span>${currentPrice}</span>
         </CartDescriptionItem>
-        <StyledButton>Checkout</StyledButton>
+        <Button $available={!isLoading}>
+          {isLoading ? <LoadingStar /> : "Checkout"}
+        </Button>
       </CartCtaInner>
     );
   }
@@ -49,6 +55,12 @@ const CartDescriptionItem = styled.div`
     min-width: clamp(7rem, 6vw, 10rem);
     margin-right: var(--gap-s);
   }
+`;
+const Button = styled(StyledButton, transientOptions)<{ $available: boolean }>`
+  min-width: 12rem;
+  background-color: ${({ $available }) => !$available && "var(--gray-2)"};
+  color: ${({ $available }) => (!$available ? "var(--gray-3)" : "white")};
+  pointer-events: ${({ $available }) => !$available && "none"};
 `;
 
 CartCta.displayName = "CartCta";
