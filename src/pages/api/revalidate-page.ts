@@ -50,7 +50,7 @@ export default async function handler(
         await res.revalidate(`/lookbooks/${slug}`);
         return res.json(defaultMessage);
       case "generalSettings":
-        await res.revalidate(`/index`);
+        await res.revalidate(`/`);
         return res.json(defaultMessage);
     }
 
