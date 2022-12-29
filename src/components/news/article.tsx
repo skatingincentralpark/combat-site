@@ -51,6 +51,10 @@ const ArticleContainer = styled.main`
 interface BlockMediaProps {
   caption: string;
   alt: string;
+  padding: {
+    paddingMobile: boolean;
+    paddingDesktop: boolean;
+  };
   width: 20 | 25 | 33 | 50 | 66 | 75 | 100;
   align: "left" | "right" | "center";
 }
@@ -73,7 +77,9 @@ const containerAligns = {
 };
 
 const BlockImage = ({ value }: { value: BlockMediaImageProps }) => {
-  const { width, align, image } = value;
+  const { width, align, image, padding } = value;
+
+  const { paddingDesktop, paddingMobile } = padding || {};
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
@@ -93,14 +99,16 @@ const BlockImage = ({ value }: { value: BlockMediaImageProps }) => {
           ${containerAligns[align]}
           display: block;
           position: relative;
-          padding-bottom: var(--gap-s);
           margin-bottom: var(--gap-s);
           cursor: pointer;
           border-radius: 2rem;
+          padding: ${paddingMobile ? "0 var(--gap-xl)" : "0"};
+          padding-bottom: var(--gap-s);
           --opacity: 0;
 
           @media screen and (min-width: 700px) {
-            padding: var(--gap-xs);
+            padding: ${paddingDesktop ? "var(--gap-xs)" : "0"};
+            padding-bottom: var(--gap-s);
             width: ${(width / 100) * 100}%;
             display: inline-block;
           }
@@ -150,7 +158,9 @@ const BlockImage = ({ value }: { value: BlockMediaImageProps }) => {
 };
 
 const BlockVideoCloudinary = ({ value }: { value: BlockMediaImageProps }) => {
-  const { caption, alt, width, align, autoplay, asset } = value;
+  const { caption, alt, width, align, autoplay, asset, padding } = value;
+
+  const { paddingDesktop, paddingMobile } = padding || {};
 
   const assetObject = {
     url: asset.url,
@@ -169,9 +179,13 @@ const BlockVideoCloudinary = ({ value }: { value: BlockMediaImageProps }) => {
         ${containerAligns[align]}
         padding: var(--gap-xs);
         display: inline-block; // currently this makes it so containerAligns doesn't work
+        padding: ${paddingMobile ? "0 var(--gap-xl)" : "0"};
+        padding-bottom: var(--gap-s);
 
         @media screen and (min-width: 700px) {
           width: ${(width / 100) * 100}%;
+          padding: ${paddingDesktop ? "var(--gap-xs)" : "0"};
+          padding-bottom: var(--gap-s);
         }
       `}
     >
