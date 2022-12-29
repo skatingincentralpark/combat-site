@@ -57,13 +57,11 @@ const Video = ({
   };
 
   return (
-    <VideoContainer
-      containerStyles={containerStyles}
-      css={css`
-        aspect-ratio: ${width} / ${height};
-      `}
-    >
-      <DominantColor canPlay={canPlay} />
+    <VideoContainer containerStyles={containerStyles}>
+      <DominantColor
+        canPlay={canPlay}
+        style={{ aspectRatio: (width / height).toString() }}
+      />
       {controls && (
         <VideoButtons
           buttonStyles={buttonStyles}
@@ -158,7 +156,6 @@ const DominantColor = styled.div<{
   position: absolute;
   inset: 0px;
   width: 100%;
-  height: 100%;
   z-index: 1;
   background-color: var(--piss-1);
   pointer-events: none;

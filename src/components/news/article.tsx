@@ -21,7 +21,6 @@ export default Article;
 
 const ArticleContainer = styled.main`
   color: #333333;
-  padding: var(--gap-l);
 
   p,
   strong,
@@ -33,12 +32,14 @@ const ArticleContainer = styled.main`
   }
 
   p {
+    padding: 0 var(--gap-xl);
     margin-bottom: 1em;
   }
 
   blockquote {
     width: 70%;
     margin: var(--gap-3xl) 0;
+    padding: 0 var(--gap-xl);
     color: #333333;
     font-size: ${clamp(18, 25)};
     line-height: 1.3em;
@@ -163,20 +164,25 @@ const BlockVideoCloudinary = ({ value }: { value: BlockMediaImageProps }) => {
   if (!asset?.url) return null;
 
   return (
-    <Video
-      asset={assetObject}
-      containerStyles={css`
-        width: 100%;
+    <div
+      css={css`
         ${containerAligns[align]}
-        display: inline-block;
-        margin: 1em 0;
-        z-index: 0;
+        padding: var(--gap-xs);
+        display: inline-block; // currently this makes it so containerAligns doesn't work
 
         @media screen and (min-width: 700px) {
           width: ${(width / 100) * 100}%;
         }
       `}
-    />
+    >
+      <Video
+        asset={assetObject}
+        containerStyles={css`
+          aspect-ratio: ${asset.width /
+          asset.height}; // needed to prevent layout shift, after video loads
+        `}
+      />
+    </div>
   );
 };
 
@@ -193,6 +199,9 @@ const SoundcloudEmbed = ({ value }: { value: BlockSoundcloudProps }) => {
         background: #eeeeee;
         border-radius: 1rem;
         position: relative;
+        margin: var(--gap-xl);
+        border-radius: 4px;
+        overflow: hidden;
       `}
     >
       <div
