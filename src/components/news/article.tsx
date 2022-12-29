@@ -21,12 +21,12 @@ export default Article;
 
 const ArticleContainer = styled.main`
   color: #333333;
-  padding: var(--gap-xl);
+  padding: var(--gap-l);
 
   p,
   strong,
   ul {
-    line-height: 1.5em;
+    line-height: 1.4em;
     font-size: ${clamp(14, 18)};
     max-width: 40em;
     margin: 1em auto;
@@ -65,12 +65,10 @@ interface BlockMediaImageProps extends BlockMediaProps {
   };
 }
 
-const o = {
-  containerAligns: {
-    left: `margin-right: auto;`,
-    right: `margin-left: auto;`,
-    center: `margin-left: auto; margin-right: auto; display: block !important;`,
-  },
+const containerAligns = {
+  left: `margin-right: auto;`,
+  right: `margin-left: auto;`,
+  center: `margin-left: auto; margin-right: auto; display: block !important;`,
 };
 
 const BlockImage = ({ value }: { value: BlockMediaImageProps }) => {
@@ -89,25 +87,62 @@ const BlockImage = ({ value }: { value: BlockMediaImageProps }) => {
       <div
         onClick={() => setLightboxOpen(true)}
         css={css`
-          aspect-ratio: ${image.aspectRatio};
           width: 100%;
-          width: ${(width / 100) * 100}%;
           height: fit-content;
-          ${o.containerAligns[align]}
-          display: inline-block;
+          ${containerAligns[align]}
+          display: block;
           position: relative;
+          padding-bottom: var(--gap-s);
+          margin-bottom: var(--gap-s);
+          cursor: pointer;
+          border-radius: 2rem;
+          --opacity: 0;
 
           @media screen and (min-width: 700px) {
-            padding: var(--gap-m);
+            padding: var(--gap-xs);
+            width: ${(width / 100) * 100}%;
+            display: inline-block;
           }
 
-          & > div {
-            width: 100%;
-            cursor: pointer;
+          &:active {
+            @media screen and (min-width: 700px) {
+              outline: 1px dashed magenta;
+            }
+            --opacity: 1;
           }
         `}
       >
+        <div
+          css={css`
+            background-color: #fdff19;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            mix-blend-mode: exclusion;
+            backdrop-filter: brightness(0.5);
+            pointer-events: none;
+            border-radius: 2rem;
+            transition: opacity 200ms;
+            z-index: 1;
+            opacity: var(--opacity);
+          `}
+        />
         <Image image={image} />
+        <div
+          css={css`
+            margin: var(--gap-m) var(--gap-l) 0 var(--gap-l);
+            max-width: 100%;
+
+            @media screen and (min-width: 700px) {
+              max-width: ${width > 75 && "35%"};
+            }
+          `}
+        >
+          Model (left) wears Maiden Name tank top, Paul Smith shorts and GmbH
+          boots. Model (right) wears Paul Smith tank top and Ann Demeulemeester
+          boots.
+        </div>
       </div>
     </>
   );
@@ -132,7 +167,7 @@ const BlockVideoCloudinary = ({ value }: { value: BlockMediaImageProps }) => {
       asset={assetObject}
       containerStyles={css`
         width: 100%;
-        ${o.containerAligns[align]}
+        ${containerAligns[align]}
         display: inline-block;
         margin: 1em 0;
         z-index: 0;
@@ -157,8 +192,21 @@ const SoundcloudEmbed = ({ value }: { value: BlockSoundcloudProps }) => {
         height: 180px;
         background: #eeeeee;
         border-radius: 1rem;
+        position: relative;
       `}
     >
+      <div
+        css={css`
+          background-color: #fdff19;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          inset: 0;
+          mix-blend-mode: exclusion;
+          backdrop-filter: brightness(0.5);
+          pointer-events: none;
+        `}
+      />
       <iframe
         width="100%"
         height="180"
