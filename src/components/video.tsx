@@ -57,11 +57,11 @@ const Video = ({
   };
 
   return (
-    <VideoContainer containerStyles={containerStyles}>
-      <DominantColor
-        canPlay={canPlay}
-        style={{ aspectRatio: (width / height).toString() }}
-      />
+    <VideoContainer
+      containerStyles={containerStyles}
+      style={{ aspectRatio: (width / height).toString() }}
+    >
+      <DominantColor canPlay={canPlay} />
       {controls && (
         <VideoButtons
           buttonStyles={buttonStyles}

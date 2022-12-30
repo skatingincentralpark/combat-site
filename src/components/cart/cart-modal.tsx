@@ -134,17 +134,14 @@ const CartVideo = () => {
   };
 
   return (
-    <Video
-      asset={asset}
-      defaultOnScreen={true}
-      controls={false}
-      containerStyles={containerStyles}
-    />
+    <VideoContainer>
+      <Video asset={asset} defaultOnScreen={true} controls={false} />
+    </VideoContainer>
   );
 };
 
-const containerStyles = css`
+const VideoContainer = styled.div`
   height: clamp(200px, 10vw, 250px);
-  width: auto;
+  width: fit-content;
   margin-bottom: var(--gap-l);
 `;
