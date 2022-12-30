@@ -4,7 +4,7 @@ declare module "shopify-buy/index.unoptimized.umd";
 interface ShopifyVariant {
   id: string;
   title: string;
-  available: boolean;
+  quantityAvailable: number;
   image: { altText: string; src: string; width: number; height: number };
   price: {
     amount: string;
@@ -16,10 +16,22 @@ interface ShopifyVariant {
   };
 }
 interface Product {
-  title: string;
   id: string;
+  title: string;
   handle: string;
-  images: { src: string; width: number; height: number }[];
   descriptionHtml: string;
-  variants: ShopifyVariant[];
+  priceRange: {
+    maxVariantPrice: {
+      amount: string;
+      currencyCode: string;
+    };
+    minVariantPrice: {
+      amount: string;
+      currencyCode: string;
+    };
+  };
+  images: {
+    nodes: { url: string; width: number; height: number; altText: string }[];
+  };
+  variants: { nodes: ShopifyVariant[] };
 }

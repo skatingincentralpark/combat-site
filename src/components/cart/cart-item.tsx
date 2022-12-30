@@ -67,7 +67,9 @@ const CartItem = forwardRef<HTMLDivElement, Props>(
         <CartItemBody>
           <strong>
             {title}
-            {!variant.available && <small> (sold out - please remove) </small>}
+            {variant.quantityAvailable === 0 && (
+              <small> (sold out - please remove) </small>
+            )}
           </strong>
           <div>
             <SalePrice>

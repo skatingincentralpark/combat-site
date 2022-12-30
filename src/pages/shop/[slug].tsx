@@ -3,13 +3,12 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import styled from "@emotion/styled";
 import { clamp } from "@lib/helpers";
 import ShopCta from "@components/shop-cta";
-import { client } from "@lib/sanity";
-import { shopifyClient, parseShopifyResponse } from "@lib/shopify";
 import Image from "@components/image";
 import CartContext from "@lib/cart-context";
 
 import useSWR from "swr";
 import axios from "axios";
+import { getAllProductsIdsAndHandles, getProduct } from "data";
 
 const fetcher = async (url: string, id: string) => {
   const res = await axios.get(url, {
@@ -22,11 +21,13 @@ const fetcher = async (url: string, id: string) => {
 };
 
 const ShopItemPage = ({ product }: { product: Product }) => {
-  const currentPrice = parseInt(product?.variants[0]?.price.amount).toFixed(2);
-  const compareAtPrice = parseInt(
-    product?.variants[0]?.compareAtPrice.amount
+  const currentPrice = parseInt(
+    product?.priceRange.minVariantPrice.amount
   ).toFixed(2);
-  const currencyCode = product?.variants[0]?.price.currencyCode;
+  const compareAtPrice = parseInt(
+    product?.priceRange.maxVariantPrice.amount
+  ).toFixed(2);
+  const currencyCode = product?.priceRange.minVariantPrice.currencyCode;
   const onSale = currentPrice !== compareAtPrice;
   const [selectedSize, setSelectedSize] = useState<number | undefined>(
     undefined
@@ -34,13 +35,14 @@ const ShopItemPage = ({ product }: { product: Product }) => {
 
   const image: ImageType = {
     caption: product?.title,
-    url: product?.images[0]?.src,
-    height: product?.images[0]?.height,
-    width: product?.images[0]?.width,
-    aspectRatio: product?.images[0]?.height / product?.images[0]?.width,
+    url: product?.images.nodes[0]?.url,
+    height: product?.images.nodes[0]?.height,
+    width: product?.images.nodes[0]?.width,
+    aspectRatio:
+      product?.images.nodes[0]?.height / product?.images.nodes[0]?.width,
   };
 
-  const { data: latestVariants } = useSWR(
+  const { data: latestVariants } = useSWR<ShopifyVariant[]>(
     ["/api/shopify-item-available", product?.handle],
     ([url, id]) => fetcher(url, id),
     { errorRetryCount: 3 }
@@ -48,10 +50,7 @@ const ShopItemPage = ({ product }: { product: Product }) => {
 
   useEffect(() => {
     setSelectedSize(
-      latestVariants?.findIndex(
-        (variant: { available: boolean; id: string; title: string }) =>
-          variant.available === true
-      )
+      latestVariants?.findIndex((variant) => variant.quantityAvailable > 0)
     );
   }, [latestVariants]);
 
@@ -59,6 +58,7 @@ const ShopItemPage = ({ product }: { product: Product }) => {
 
   const submit = () =>
     typeof selectedSize !== "undefined" &&
+    latestVariants &&
     updateLineItem({ variantId: latestVariants[selectedSize].id, quantity: 1 });
 
   return (
@@ -82,7 +82,7 @@ const ShopItemPage = ({ product }: { product: Product }) => {
               dangerouslySetInnerHTML={{ __html: product?.descriptionHtml }}
             />
             <ShopCta
-              variants={latestVariants || product?.variants}
+              variants={latestVariants || product?.variants.nodes}
               selectedSize={selectedSize}
               setSelectedSize={setSelectedSize}
               submit={submit}
@@ -97,25 +97,22 @@ const ShopItemPage = ({ product }: { product: Product }) => {
 export default ShopItemPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await client.fetch(
-    `*[_type == "product"][].store.slug.current`
-  );
+  const data = await getAllProductsIdsAndHandles();
 
   return {
-    paths: paths.map((slug: string) => ({ params: { slug } })),
+    paths: data.map((x) => ({ params: { slug: x.handle } })),
     fallback: true,
   };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  // Should fix typing here
-  const { slug = "" } = context.params!;
+  const { slug = "" } = context.params!; // Should fix typing here
 
-  const product = await shopifyClient.product.fetchByHandle(slug as string);
+  const product = await getProduct(slug as string);
 
   return {
     props: {
-      product: parseShopifyResponse(product),
+      product: product,
     },
   };
 };

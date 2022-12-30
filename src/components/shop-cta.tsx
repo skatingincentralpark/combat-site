@@ -11,7 +11,7 @@ import { LoadingStar } from "./ui";
 type Props = {
   variants: {
     id: string;
-    available: boolean;
+    quantityAvailable: number;
     title: string;
   }[];
   selectedSize?: number | undefined;
@@ -46,7 +46,7 @@ const ShopCta = ({
             name="size"
             selected={selectedSize}
             onClick={setSelectedSize}
-            available={loading ? false : variant.available}
+            available={loading ? false : variant.quantityAvailable > 0}
           >
             {variant.title.toUpperCase()}
           </RadioButton>

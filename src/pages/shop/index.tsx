@@ -1,8 +1,8 @@
 import { GetStaticProps } from "next";
 import styled from "@emotion/styled";
 import Link from "@components/link";
-import { shopifyClient, parseShopifyResponse } from "@lib/shopify";
 import Image from "@components/image";
+import { getAllProducts } from "data";
 
 const ShopPage = ({ products }: { products: Product[] }) => {
   return (
@@ -14,11 +14,12 @@ const ShopPage = ({ products }: { products: Product[] }) => {
               <Image
                 image={{
                   caption: product.title,
-                  url: product.images[0].src,
-                  height: product.images[0].height,
-                  width: product.images[0].width,
+                  url: product.images.nodes[0].url,
+                  height: product.images.nodes[0].height,
+                  width: product.images.nodes[0].width,
                   aspectRatio:
-                    product.images[0].height / product.images[0].width,
+                    product.images.nodes[0].height /
+                    product.images.nodes[0].width,
                 }}
               />
             </Link>
@@ -33,12 +34,11 @@ const ShopPage = ({ products }: { products: Product[] }) => {
 export default ShopPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  // Fetch all the products
-  const products = await shopifyClient.product.fetchAll();
+  const products = await getAllProducts();
 
   return {
     props: {
-      products: parseShopifyResponse(products),
+      products,
     },
   };
 };

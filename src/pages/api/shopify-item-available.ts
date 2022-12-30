@@ -1,12 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-interface Variant {
-  available: boolean;
-  id: string;
-  title: string;
-}
-
-type Data = Variant[];
+type Data = ShopifyVariant[];
 
 type Error = {
   error: string;
@@ -67,7 +61,7 @@ export default async function available(
           edges {
             node {
               id
-              available
+              quantityAvailable
               title
             }
           }
@@ -84,8 +78,8 @@ export default async function available(
 
   const products = await getProduct(id);
 
-  const latestVariants = products?.variants?.edges?.map(
-    ({ node }: { node: Variant }) => node
+  const latestVariants: ShopifyVariant[] = products?.variants?.edges?.map(
+    ({ node }: { node: ShopifyVariant }) => node
   );
 
   res.status(200);
