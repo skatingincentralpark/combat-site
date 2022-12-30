@@ -20,6 +20,7 @@ interface Checkout {
     amount: string;
   };
   lineItems: LineItem[];
+  webUrl: string;
 }
 
 interface DefaultState {

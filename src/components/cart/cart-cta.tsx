@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from "react";
+import { forwardRef, useContext, MouseEvent } from "react";
 import styled from "@emotion/styled";
 import { StyledButton } from "../shared-styles/buttons";
 import CartContext from "@lib/cart-context";
@@ -8,7 +8,13 @@ import { LoadingStar } from "@components/ui";
 const CartCta = forwardRef<HTMLDivElement, { totalPrice: string }>(
   ({ totalPrice }, ref) => {
     const currentPrice = parseInt(totalPrice).toFixed(2);
-    const { isLoading } = useContext(CartContext);
+    const { isLoading, checkout } = useContext(CartContext);
+
+    const goToCheckout = (e: MouseEvent) => {
+      e.preventDefault();
+      if (checkout?.webUrl !== null)
+        return window.open(checkout?.webUrl, "_self");
+    };
 
     return (
       <CartCtaInner ref={ref || null}>
@@ -24,7 +30,7 @@ const CartCta = forwardRef<HTMLDivElement, { totalPrice: string }>(
           <span>Total (Duties Included)</span>
           <span>${currentPrice}</span>
         </CartDescriptionItem>
-        <Button $available={!isLoading}>
+        <Button $available={!isLoading} onClick={goToCheckout}>
           {isLoading ? <LoadingStar /> : "Checkout"}
         </Button>
       </CartCtaInner>
