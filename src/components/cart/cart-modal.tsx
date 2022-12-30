@@ -50,7 +50,7 @@ const CartModal = () => {
           position: `fixed`,
           bottom: `3rem`,
           width: `100%`,
-          zIndex: 10,
+          zIndex: 9,
         }}
       >
         <AnimatePresence>
@@ -92,7 +92,7 @@ export default CartModal;
 
 const CartModalWrapper = styled(m.div)`
   position: fixed;
-  z-index: 9;
+  z-index: 8;
   top: 0;
   left: 0;
   width: 100%;
@@ -115,7 +115,9 @@ const CartItemsWrapper = styled.div`
 const TempSlideUpModal = styled(m.div)`
   width: 100%;
 
-  background-color: #e8ff8f;
+  background-color: black;
+  color: white;
+  font-weight: 400;
   padding: 0 var(--gap-m);
 
   @media screen and (min-width: 650px) {

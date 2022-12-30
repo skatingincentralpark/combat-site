@@ -89,7 +89,7 @@ const HeaderMenuWrapper = styled(m.div)`
   top: 0;
   left: 0;
   overflow: hidden;
-  z-index: 7;
+  z-index: 6;
   width: 100%;
   background-color: white;
   font-weight: 300;
