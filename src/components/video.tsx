@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 import useOnScreen from "@hooks/useOnScreen";
 
 /*

@@ -26,7 +26,13 @@ const HeroMedia = ({
   `;
 
   if (type === "video")
-    return <Video asset={video} containerStyles={[mediaStyles, position]} />;
+    return (
+      <Video
+        asset={video}
+        containerStyles={[mediaStyles, position]}
+        defaultOnScreen
+      />
+    );
 
   if (type === "image")
     return <Image image={image} styles={[mediaStyles, position]} />;
