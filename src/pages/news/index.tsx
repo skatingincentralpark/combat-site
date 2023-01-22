@@ -6,7 +6,7 @@ import { client } from "@lib/sanity";
 import Link from "next/link";
 import queries from "@lib/queries";
 
-import { NewsItemType } from "types/newsTypes";
+import { type NewsItemType } from "types/newsTypes";
 import { Heading, HeadingSm } from "@components/shared-styles/typography";
 import HeadSEO from "@components/head-seo";
 import Image from "@components/image";

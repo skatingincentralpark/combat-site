@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { clamp } from "@lib/helpers";
-import { SubheadlineOptions } from "types/newsTypes";
+import { type HeroTextOptions } from "types/newsTypes";
 
-interface Props extends SubheadlineOptions {
+interface Props extends HeroTextOptions {
   children: React.ReactNode;
 }
 
@@ -43,7 +43,7 @@ const o = {
   },
 };
 
-const SubheadlineStyled = styled.h2<SubheadlineOptions>`
+const SubheadlineStyled = styled.h2<HeroTextOptions>`
   line-height: 1.4em;
   letter-spacing: -0.02em;
   width: 100%;

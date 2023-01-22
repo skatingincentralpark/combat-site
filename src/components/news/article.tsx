@@ -47,7 +47,7 @@ const ArticleContainer = styled.main`
   }
 `;
 
-// Extra props for images and files (videos)
+/** Extra props for images and files (videos) */
 interface BlockMediaProps {
   caption: string;
   alt: string;
@@ -60,8 +60,6 @@ interface BlockMediaProps {
 }
 interface BlockMediaImageProps extends BlockMediaProps {
   image: ImageType;
-}
-interface BlockMediaImageProps extends BlockMediaProps {
   autoplay: boolean;
   asset: {
     url: string;
@@ -242,9 +240,13 @@ const SoundcloudEmbed = ({ value }: { value: BlockSoundcloudProps }) => {
   );
 };
 
-// Config object that lets you customise the components used for different pt types
-// Guide: https://github.com/sanity-io/block-content-to-react/issues/29#issuecomment-772393191
-// Discussion on Typescript: https://github.com/portabletext/react-portabletext/issues/5#issuecomment-1057294157
+/**
+ * Config object that lets you customise the components used for different pt types
+ *
+ * Guide: https://github.com/sanity-io/block-content-to-react/issues/29#issuecomment-772393191
+ *
+ * Discussion on Typescript: https://github.com/portabletext/react-portabletext/issues/5#issuecomment-1057294157
+ */
 const pt: PortableTextComponents = {
   types: {
     image: BlockImage,

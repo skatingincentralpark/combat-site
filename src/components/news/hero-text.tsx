@@ -4,20 +4,16 @@ import HeroHeadline from "@components/news/hero-headline";
 import HeroSubheadline from "@components/news/hero-subheadline";
 import HeroCredits from "@components/news/hero-credits";
 
-import {
-  HeadlineOptions,
-  SubheadlineOptions,
-  CreditsOptions,
-} from "types/newsTypes";
+import { type HeroTextOptions } from "types/newsTypes";
 
 interface HeroTextProps {
   headlineText: string;
   subheadlineText: string;
   creditsText: { author: string; role: string }[];
   heroTextStyles: {
-    headline: HeadlineOptions;
-    subheadline: SubheadlineOptions;
-    credits: CreditsOptions;
+    headline: HeroTextOptions;
+    subheadline: HeroTextOptions;
+    credits: HeroTextOptions;
   };
 }
 

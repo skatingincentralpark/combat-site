@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { clamp } from "@lib/helpers";
-import { CreditsOptions } from "types/newsTypes";
+import { type HeroTextOptions } from "types/newsTypes";
 
-interface Props extends CreditsOptions {
+interface Props extends HeroTextOptions {
   children: React.ReactNode;
 }
 
@@ -43,7 +43,7 @@ const o = {
   },
 };
 
-const CreditsStyled = styled.small<CreditsOptions>`
+const CreditsStyled = styled.small<HeroTextOptions>`
   line-height: 1.6em;
   letter-spacing: 0;
   width: 100%;
