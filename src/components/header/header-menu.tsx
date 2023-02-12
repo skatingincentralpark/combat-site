@@ -6,8 +6,8 @@ import Link from "@components/link";
 import { headerVariants, headerInnerVariants } from "@lib/animate";
 import { TextSm } from "@components/shared-styles/typography";
 import useLockBodyScroll from "@hooks/useLockBodyScroll";
-import PinkSkull from "../../../public/images/pink-skull.png";
-import SplatterMan from "../../../public/images/poster/profile-man.png";
+import Logo from "../../../public/images/tomaskii.png";
+import Sunnies from "../../../public/images/sunnies-aussie.png";
 import Image from "@components/image";
 
 const navLinks = [
@@ -35,18 +35,18 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
 
   const imageObject: ImageType = {
     caption: "Menu Image",
-    url: PinkSkull.src,
-    height: PinkSkull.height,
-    width: PinkSkull.width,
-    aspectRatio: PinkSkull.height / PinkSkull.width,
+    url: Logo.src,
+    height: Logo.height,
+    width: Logo.width,
+    aspectRatio: Logo.height / Logo.width,
   };
 
   const imageObjectMobile: ImageType = {
     caption: "Menu Image",
-    url: SplatterMan.src,
-    height: SplatterMan.height,
-    width: SplatterMan.width,
-    aspectRatio: SplatterMan.height / SplatterMan.width,
+    url: Sunnies.src,
+    height: Sunnies.height,
+    width: Sunnies.width,
+    aspectRatio: Sunnies.height / Sunnies.width,
     dominantColor: "#fff000",
   };
 
@@ -73,9 +73,7 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
           </HeaderMenuText>
         </HeaderMenuLeft>
         <MenuImageDesktop>
-          <div style={{ aspectRatio: imageObject.aspectRatio }}>
-            <Image image={imageObject} />
-          </div>
+          <Image image={imageObject} />
         </MenuImageDesktop>
       </HeaderMenuInner>
     </HeaderMenuWrapper>
@@ -144,10 +142,8 @@ const MenuImageDesktop = styled.div`
     align-items: center;
   }
 
-  & > div {
-    width: 100%;
-    height: fit-content;
-  }
+  max-width: 80rem;
+  height: 100%;
 `;
 const MenuImageMobile = styled.div`
   display: block;

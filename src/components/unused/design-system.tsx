@@ -9,7 +9,7 @@ import {
 } from "@components/shared-styles/typography";
 import HeadSEO from "@components/head-seo";
 
-const DesignSystemPage = () => {
+const DesignSystem = () => {
   return (
     <StyledPageWrapper px="l">
       <HeadSEO title="Design System" />
@@ -84,7 +84,7 @@ const DesignSystemPage = () => {
   );
 };
 
-export default DesignSystemPage;
+export default DesignSystem;
 
 // Sections
 const HeaderSection = styled.main`

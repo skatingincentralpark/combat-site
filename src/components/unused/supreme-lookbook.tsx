@@ -4,12 +4,10 @@ import { css } from "@emotion/react";
 import FutureImage from "next/image";
 import { clamp } from "@lib/helpers";
 import { m, AnimatePresence } from "framer-motion";
-import { client } from "@lib/sanity";
-import { LookbookType } from "types/lookbookTypes";
-import queries from "@lib/queries";
+import { type LookbookType } from "types/lookbookTypes";
 import Lightbox from "@components/lightbox";
 
-const LookbookPOC = ({ lookbook }: LookbookType) => {
+const SupremeLookbook = ({ lookbook }: LookbookType) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const media = lookbook.album;
@@ -78,31 +76,7 @@ const LookbookPOC = ({ lookbook }: LookbookType) => {
   );
 };
 
-export default LookbookPOC;
-
-export const getStaticProps = async () => {
-  const lookbook = await client.fetch(
-    `
-      *[_type == "lookbook"] {
-        _id,
-        "slug": slug.current,
-        "slugsAll": *[_type == "lookbook"][].slug.current,
-        season,
-        date,
-        description,
-        title,
-        album[]{ 
-          ${queries.imageMeta}
-        }
-      }[0]
-    `
-  );
-  return {
-    props: {
-      lookbook,
-    },
-  };
-};
+export default SupremeLookbook;
 
 const PageWrapper = styled.main`
   height: 100%;
@@ -212,9 +186,6 @@ const MotionDiv = styled(m.div)`
 `;
 
 const Thumbnail = ({ image }: { image: ImageType }) => {
-  // const urlFor = (source: AssetType) => imageBuilder.image(source);
-  // const lowQualUrl = urlFor(image.asset).width(300).url();
-
   return (
     <FutureImage
       src={image.url}

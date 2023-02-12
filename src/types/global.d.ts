@@ -29,10 +29,10 @@ interface ImageType {
 }
 interface VideoType {
   url: string;
-  height?: number;
-  width?: number;
-  caption: string;
   alt: string;
   autoplay: boolean;
+  caption: string;
+  height?: number;
+  width?: number;
 }
 type CssProperties = Interpolation<React.CSSProperties>;
