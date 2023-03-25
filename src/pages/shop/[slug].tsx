@@ -33,16 +33,14 @@ const ShopItemPage = ({ product }: { product: Product }) => {
     undefined
   );
 
-  const [images, setImages] = useState(() =>
-    product.images.nodes.map((image) => ({
-      caption: product?.title,
-      url: image?.url,
-      height: image?.height,
-      width: image?.width,
-      aspectRatio: image?.height / image?.width,
-    }))
-  );
-  const [selectedImage, setSelectedImage] = useState(0);
+  const image: ImageType = {
+    caption: product?.title,
+    url: product?.images.nodes[0]?.url,
+    height: product?.images.nodes[0]?.height,
+    width: product?.images.nodes[0]?.width,
+    aspectRatio:
+      product?.images.nodes[0]?.height / product?.images.nodes[0]?.width,
+  };
 
   const { data: latestVariants } = useSWR<ShopifyVariant[]>(
     ["/api/shopify-item-available", product?.handle],
@@ -66,7 +64,7 @@ const ShopItemPage = ({ product }: { product: Product }) => {
   return (
     <StyledCenteredWrapper>
       <ShopItemWrapper>
-        <Image image={images[selectedImage]} />
+        <Image image={image} />
         <ShopItemInfo>
           <ShopItemHeader>
             <span>{product?.title}</span>
@@ -84,7 +82,6 @@ const ShopItemPage = ({ product }: { product: Product }) => {
               dangerouslySetInnerHTML={{ __html: product?.descriptionHtml }}
               style={{ borderBottom: "0.5px solid var(--gray-4)" }}
             />
-            {/* <Thumbnails images={images} /> */}
             <ShopCta
               variants={latestVariants || product?.variants.nodes}
               selectedSize={selectedSize}
