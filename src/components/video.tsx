@@ -151,11 +151,10 @@ const DominantColor = styled.div<{
 }>`
   opacity: ${({ canPlay }) => (canPlay ? 0 : 1)};
   transition: opacity 500ms linear 0s;
-  border-radius: 2rem;
   position: absolute;
   inset: 0px;
   width: 100%;
   z-index: 1;
-  background-color: var(--piss-1);
+  background-color: #f7ffe6;
   pointer-events: none;
 `;

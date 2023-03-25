@@ -69,8 +69,8 @@ const Index = ({ slugs }: Props) => {
           <DummyListItem variants={childVariants} key={i}>
             <button>
               <span />
-              <span>null</span>
-              <span>null</span>
+              <span>إيبسوم</span>
+              <span>لوريم</span>
             </button>
           </DummyListItem>
         ))}

@@ -193,6 +193,7 @@ const BlockVideoCloudinary = ({ value }: { value: BlockMediaImageProps }) => {
           aspect-ratio: ${asset.width /
           asset.height}; // needed to prevent layout shift, after video loads
         `}
+        controls={false}
       />
     </div>
   );

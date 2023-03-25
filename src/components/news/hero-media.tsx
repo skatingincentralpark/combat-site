@@ -31,6 +31,7 @@ const HeroMedia = ({
         asset={video}
         containerStyles={[mediaStyles, position]}
         defaultOnScreen
+        controls={false}
       />
     );
 

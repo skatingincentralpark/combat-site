@@ -2,6 +2,7 @@ import { useState, lazy, Suspense } from "react";
 import styled from "@emotion/styled";
 import { AnimatePresence } from "framer-motion";
 import CombatLogo from "../combat-logo";
+import SuperhighwayLogo from "../superhighway-logo";
 import BackButton from "./backButton";
 import Cart from "@components/cart/cart";
 const HeaderMenu = lazy(() => import("./header-menu"));
@@ -28,8 +29,8 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
       <HeaderWrapper>
         <BackButton navOpen={navOpen} isLoading={isLoading} />
         <HeaderToggle onClick={toggleNav}>
-          <CombatLogo isLoading={isLoading} />
-          <Circle />
+          <SuperhighwayLogo isLoading={isLoading} />
+          {/* <Circle /> */}
         </HeaderToggle>
       </HeaderWrapper>
 

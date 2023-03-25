@@ -47,9 +47,12 @@ const Items = styled.section`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: var(--gap-m);
-  max-width: 50rem;
   margin: auto;
   flex-grow: 1;
+
+  @media screen and (min-width: 800px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;
 
 const Item = styled.div`

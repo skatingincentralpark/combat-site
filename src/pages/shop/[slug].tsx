@@ -33,14 +33,16 @@ const ShopItemPage = ({ product }: { product: Product }) => {
     undefined
   );
 
-  const image: ImageType = {
-    caption: product?.title,
-    url: product?.images.nodes[0]?.url,
-    height: product?.images.nodes[0]?.height,
-    width: product?.images.nodes[0]?.width,
-    aspectRatio:
-      product?.images.nodes[0]?.height / product?.images.nodes[0]?.width,
-  };
+  const [images, setImages] = useState(() =>
+    product.images.nodes.map((image) => ({
+      caption: product?.title,
+      url: image?.url,
+      height: image?.height,
+      width: image?.width,
+      aspectRatio: image?.height / image?.width,
+    }))
+  );
+  const [selectedImage, setSelectedImage] = useState(0);
 
   const { data: latestVariants } = useSWR<ShopifyVariant[]>(
     ["/api/shopify-item-available", product?.handle],
@@ -64,7 +66,7 @@ const ShopItemPage = ({ product }: { product: Product }) => {
   return (
     <StyledCenteredWrapper>
       <ShopItemWrapper>
-        <Image image={image} />
+        <Image image={images[selectedImage]} />
         <ShopItemInfo>
           <ShopItemHeader>
             <span>{product?.title}</span>
@@ -80,7 +82,9 @@ const ShopItemPage = ({ product }: { product: Product }) => {
           <ShopItemBody>
             <div
               dangerouslySetInnerHTML={{ __html: product?.descriptionHtml }}
+              style={{ borderBottom: "0.5px solid var(--gray-4)" }}
             />
+            {/* <Thumbnails images={images} /> */}
             <ShopCta
               variants={latestVariants || product?.variants.nodes}
               selectedSize={selectedSize}
@@ -204,14 +208,29 @@ const ShopItemBody = styled.div`
   & > * {
     margin-bottom: 1rem;
   }
-
-  & > div:first-of-type {
-    border-bottom: 0.5px solid var(--gray-4);
-  }
 `;
 
 const SalePrice = styled.span`
   text-decoration: line-through;
   color: red;
   margin-right: 0.7em;
+`;
+
+const Thumbnails = ({ images }: { images: ImageType[] }) => {
+  return (
+    <StyledThumbnail>
+      {images.map((x) => (
+        <Image image={x} />
+      ))}
+    </StyledThumbnail>
+  );
+};
+
+const StyledThumbnail = styled.div`
+  display: flex;
+  border-bottom: 0.5px solid var(--gray-4);
+
+  & > * {
+    width: 5rem;
+  }
 `;
