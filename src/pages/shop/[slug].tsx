@@ -219,8 +219,8 @@ const SalePrice = styled.span`
 const Thumbnails = ({ images }: { images: ImageType[] }) => {
   return (
     <StyledThumbnail>
-      {images.map((x) => (
-        <Image image={x} />
+      {images.map((x, i) => (
+        <Image image={x} key={`thumb: ${i}`} />
       ))}
     </StyledThumbnail>
   );
