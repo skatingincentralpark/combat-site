@@ -50,5 +50,5 @@ const PageTransitionWrapper = ({ children, loading, className }: Props) => {
 export default PageTransitionWrapper;
 
 const TransitionWrapper = styled(m.div)`
-  height: 100%;
+  height: auto;
 `;
