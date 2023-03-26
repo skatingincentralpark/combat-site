@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import styled from "@emotion/styled";
 import { m } from "framer-motion";
-import RadioButton from "@components/radio-button";
 import { StyledButton } from "@components/shared-styles/buttons";
 import Link from "next/link";
 import CartContext from "@lib/cart-context";
 import { transientOptions } from "@lib/helpers";
 import { LoadingStar } from "./ui";
+import RadioButtonNew from "./radio-button-new/radio-button-new";
 
 type Props = {
   variants: {
@@ -39,7 +39,7 @@ const ShopCtaSimple = ({
         }}
       >
         {variants?.map((variant, i) => (
-          <RadioButton
+          <RadioButtonNew
             key={variant.title}
             index={i}
             value={variant.title}
@@ -49,7 +49,7 @@ const ShopCtaSimple = ({
             available={loading ? false : variant.quantityAvailable > 0}
           >
             {variant.title.toUpperCase()}
-          </RadioButton>
+          </RadioButtonNew>
         ))}
       </RadioGroup>
       <Row>
