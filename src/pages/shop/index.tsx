@@ -63,18 +63,26 @@ const HeroImage = styled.img`
 
 const Items = styled.section`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: var(--gap-m);
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: var(--gap-xl);
   margin: auto;
   flex-grow: 1;
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 900px) {
     grid-template-columns: repeat(4, 1fr);
   }
 `;
 
-const ShopPageWrapper = styled.main`
-  padding: var(--header-height) var(--gap-xxl) var(--gap-m) var(--gap-xxl);
-  height: 100%;
+const ShopPageWrapper = styled.div`
+  padding: var(--header-height) var(--gap-xs) var(--gap-xxl) var(--gap-xs);
+  min-height: 100vh;
   display: flex;
+
+  @media screen and (min-width: 500px) {
+    padding: var(--header-height) var(--gap-xxl) var(--gap-xxl) var(--gap-xxl);
+  }
 `;

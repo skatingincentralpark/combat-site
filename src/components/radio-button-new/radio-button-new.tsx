@@ -9,7 +9,6 @@ type Props = {
   available: boolean;
   children: string;
 };
-
 const RadioButtonNew = ({
   value,
   name,
@@ -19,6 +18,9 @@ const RadioButtonNew = ({
   available,
   children,
 }: Props) => {
+  const selectedText = selected === index ? "المحدد" : children;
+  const selectedEmoji = selected === index ? "🐡" : "⚡️";
+
   return (
     <RadioLabelInputWrapper checked={selected === index} available={available}>
       <input
@@ -27,8 +29,7 @@ const RadioButtonNew = ({
         value={value}
         name={name}
       />
-      <Circle />
-      {children}
+      {selectedEmoji} {children}
     </RadioLabelInputWrapper>
   );
 };
@@ -40,72 +41,23 @@ type RadioLabelInputWrapperProps = {
   available: boolean;
 };
 const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
-  background-color: ${({ checked }) =>
-    checked ? "var(--green-1)" : "rgb(221, 221, 221)"};
-
-  background-color: ${({ available }) => !available && "var(--gray-2)"};
-  color: ${({ available }) => (!available ? "var(--gray-3)" : "white")};
+  color: ${({ available }) => (!available ? "var(--gray-3)" : "lightgray")};
+  color: ${({ checked }) => checked && "black"};
+  text-decoration: ${({ available }) => !available && "line-through"};
   pointer-events: ${({ available }) => !available && "none"};
 
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-
-  height: var(--button-height);
-  aspect-ratio: 1;
-
-  font-weight: 600;
-  text-align: center;
 
   cursor: pointer;
   touch-action: manipulation;
 
   display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
-
-  --circle-opacity: 0;
-  --circle-transform: scale(0.5);
-
-  &:hover {
-    @media screen and (min-width: 700px) {
-      background-color: var(--green-2);
-    }
-  }
-
-  &:active {
-    background-color: var(--green-3);
-    --circle-opacity: 1;
-    --circle-transform: scale(0.8);
-  }
-
-  &:not(:last-of-type) {
-    border-color: var(--radio-border-color);
-  }
+  padding: 0.1rem 0;
 
   & > input {
     opacity: 0;
     position: fixed;
     width: 0;
   }
-
-  &:nth-of-type(1) {
-    border-radius: var(--gap-xxs) 0 0 var(--gap-xxs);
-  }
-
-  &:last-of-type {
-    border-radius: 0 var(--gap-xxs) var(--gap-xxs) 0;
-  }
-`;
-const Circle = styled.div`
-  position: absolute;
-  inset: 0;
-  height: 80%;
-  margin: auto;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  background-color: white;
-
-  transition: opacity 100ms, transform 100ms;
-  opacity: var(--circle-opacity);
-  transform: var(--circle-transform);
 `;

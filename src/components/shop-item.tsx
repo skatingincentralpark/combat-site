@@ -122,9 +122,8 @@ const SalePrice = styled.span`
 const ShopItemHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 1rem 0;
   gap: 1rem;
-  border-bottom: 0.5px solid var(--gray-4);
+  font-weight: 500;
 `;
 
 const ShopItemBody = styled.div`

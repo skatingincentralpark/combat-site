@@ -59,7 +59,7 @@ const LoadingSpinner = styled.div`
   transform-origin: center;
   margin: auto;
   pointer-events: none;
-  fill: white;
+  fill: black;
 
   @keyframes spin {
     0% {
