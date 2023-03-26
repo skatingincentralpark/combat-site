@@ -39,15 +39,18 @@ const headerCartVariants = () => {
 
 const headerVariants = {
   initial: {
-    height: 0,
+    opacity: 0,
+    y: 0,
   },
   animate: {
-    height: "100%",
-    transition: { duration: 0.5, ease: "circOut" },
+    opacity: 1,
+    y: 20,
+    transition: { duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] },
   },
   exit: {
-    height: 0,
-    transition: { duration: 0.5, ease: "circOut" },
+    opacity: 0,
+    y: 0,
+    transition: { duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] },
   },
 };
 

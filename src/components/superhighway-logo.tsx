@@ -77,18 +77,18 @@ const Path = styled.path<{ fast?: boolean }>`
   fill: #000;
   animation: ${({ fast }) =>
     fast ? `FairyBreadBiatch2 infinite` : `FairyBreadBiatch infinite`};
-  animation-duration: ${({ fast }) => (fast ? `1000ms` : `1500ms`)};
+  animation-duration: ${({ fast }) => (fast ? `1000ms` : `2500ms`)};
   animation-delay: calc(var(--delay) * 0.1s);
 
   @keyframes FairyBreadBiatch {
     0% {
-      fill: var(--yellow-1);
+      fill: whitesmoke;
     }
     15% {
-      fill: var(--yellow-1);
+      fill: gray;
     }
     25% {
-      fill: var(--yellow-1);
+      fill: darkgray;
     }
     50% {
       fill: #000;

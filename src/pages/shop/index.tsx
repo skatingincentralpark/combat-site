@@ -1,33 +1,41 @@
+import { useContext, useEffect, useRef } from "react";
 import { GetStaticProps } from "next";
 import styled from "@emotion/styled";
-import Link from "@components/link";
-import Image from "@components/image";
+import useIntersectionObserver from "@hooks/useIntersectionObserver";
+
 import { getAllProducts } from "data";
+import ShopItem from "@components/shop-item";
+import HeaderContext from "@lib/header-context";
 
 const ShopPage = ({ products }: { products: Product[] }) => {
+  const { setIsTransparent } = useContext(HeaderContext);
+
+  const ref = useRef<HTMLImageElement | null>(null);
+
+  const entry = useIntersectionObserver(ref, {
+    rootMargin: "-50px",
+    threshold: 0,
+  });
+
+  const isVisible = !!entry?.isIntersecting;
+
+  useEffect(() => {
+    setIsTransparent(isVisible);
+  }, [isVisible]);
+
   return (
-    <ShopPageWrapper>
-      <Items>
-        {products.map((product, i) => (
-          <Item key={product.title}>
-            <Link href={`/shop/${product.handle}`}>
-              <Image
-                image={{
-                  caption: product.title,
-                  url: product.images.nodes[0].url,
-                  height: product.images.nodes[0].height,
-                  width: product.images.nodes[0].width,
-                  aspectRatio:
-                    product.images.nodes[0].height /
-                    product.images.nodes[0].width,
-                }}
-              />
-            </Link>
-            {product.title}
-          </Item>
-        ))}
-      </Items>
-    </ShopPageWrapper>
+    <>
+      <HeroImageWrapper>
+        <HeroImage src="/temp/splat1.png" alt="tetsuya nishima" ref={ref} />
+      </HeroImageWrapper>
+      <ShopPageWrapper>
+        <Items>
+          {products.map((product) => (
+            <ShopItem product={product} key={product.id} />
+          ))}
+        </Items>
+      </ShopPageWrapper>
+    </>
   );
 };
 
@@ -43,6 +51,16 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
+const HeroImageWrapper = styled.div`
+  padding: 2rem 1rem 3.5rem 1rem;
+  height: 100vh;
+`;
+const HeroImage = styled.img`
+  height: 100%;
+  margin: auto;
+  object-fit: contain;
+`;
+
 const Items = styled.section`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -55,27 +73,8 @@ const Items = styled.section`
   }
 `;
 
-const Item = styled.div`
-  display: block;
-  aspect-ratio: 1;
-  text-align: center;
-
-  & > * {
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  & img {
-    object-fit: contain;
-    width: auto;
-    height: auto;
-  }
-`;
 const ShopPageWrapper = styled.main`
-  padding-top: var(--header-height);
-  padding: var(--gap-m) var(--gap-xxl) var(--gap-m) var(--gap-xxl);
+  padding: var(--header-height) var(--gap-xxl) var(--gap-m) var(--gap-xxl);
   height: 100%;
   display: flex;
 `;

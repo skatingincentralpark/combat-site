@@ -19,7 +19,7 @@ type Props = {
   submit: () => void;
 };
 
-const ShopCta = ({
+const ShopCtaSimple = ({
   variants,
   selectedSize,
   setSelectedSize,
@@ -56,15 +56,12 @@ const ShopCta = ({
         <Button $available={loading} onClick={submit}>
           {loading ? <LoadingStar /> : "Add To Cart"}
         </Button>
-        <StyledLink $available={loading} href="/shop">
-          View All
-        </StyledLink>
       </Row>
     </ShopCtaWrapper>
   );
 };
 
-export default ShopCta;
+export default ShopCtaSimple;
 
 const ShopCtaWrapper = styled(m.div)`
   width: 100%;
@@ -74,6 +71,11 @@ const RadioGroup = styled.div`
   display: flex;
   justify-content: flex-start;
   margin-bottom: var(--gap-xxs);
+  width: 100%;
+
+  label {
+    width: 25%;
+  }
 `;
 const Button = styled(StyledButton, transientOptions)<{ $available: boolean }>`
   background-color: ${({ $available }) => $available && "var(--gray-1)"};
@@ -83,13 +85,4 @@ const Button = styled(StyledButton, transientOptions)<{ $available: boolean }>`
 const Row = styled.div`
   display: flex;
   align-items: center;
-`;
-const StyledLink = styled(Link, transientOptions)<{ $available: boolean }>`
-  white-space: nowrap;
-  margin-left: var(--gap-s);
-  padding: 0 var(--gap-s);
-  color: var(--gray-4);
-  transition: opacity 200ms;
-  pointer-events: ${({ $available }) => $available && "none"};
-  opacity: ${({ $available }) => $available && 0.2};
 `;

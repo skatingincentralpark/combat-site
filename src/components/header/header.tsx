@@ -1,10 +1,10 @@
-import { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, useRef, useContext } from "react";
 import styled from "@emotion/styled";
 import { AnimatePresence } from "framer-motion";
-import CombatLogo from "../combat-logo";
 import SuperhighwayLogo from "../superhighway-logo";
 import BackButton from "./backButton";
 import Cart from "@components/cart/cart";
+import HeaderContext from "@lib/header-context";
 const HeaderMenu = lazy(() => import("./header-menu"));
 
 const Header = ({ isLoading }: { isLoading: boolean }) => {
@@ -23,12 +23,14 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
     closeNav();
   };
 
+  const { isTransparent } = useContext(HeaderContext);
+
   return (
     <>
       <Cart navOpen={navOpen} cartOpen={cartOpen} toggleCart={toggleCart} />
       <HeaderWrapper>
         <BackButton navOpen={navOpen} isLoading={isLoading} />
-        <HeaderToggle onClick={toggleNav}>
+        <HeaderToggle onClick={toggleNav} isTransparent={isTransparent}>
           <SuperhighwayLogo isLoading={isLoading} />
           {/* <Circle /> */}
         </HeaderToggle>
@@ -57,10 +59,11 @@ const HeaderWrapper = styled.header`
   align-items: center;
   justify-content: flex-start;
 `;
-const HeaderToggle = styled.button`
+const HeaderToggle = styled.button<{ isTransparent: boolean }>`
   position: relative;
   padding: var(--gap-s) var(--gap-xl);
-  background-color: #000;
+  background-color: ${({ isTransparent }) =>
+    isTransparent ? "transparent" : "black"};
   flex-grow: 1;
   height: 100%;
   cursor: pointer;
@@ -68,6 +71,7 @@ const HeaderToggle = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: background 0.3s;
 
   &:hover {
     @media screen and (min-width: 700px) {

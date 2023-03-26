@@ -11,6 +11,7 @@ import useIsLoading from "hooks/useIsLoading";
 
 import { Jost } from "@next/font/google";
 import { CartContextProvider } from "@lib/cart-context";
+import { HeaderContextProvider } from "@lib/header-context";
 
 // Make sure to return the specific export containing the feature bundle.
 const loadFeatures = () =>
@@ -41,21 +42,23 @@ function MyApp({ Component, pageProps }: AppProps) {
   const isLoading = useIsLoading();
 
   return (
-    <CartContextProvider>
-      <GlobalStyles />
-      <LazyMotion features={loadFeatures} strict>
-        <Header isLoading={isLoading} />
-        <style jsx global>{`
-          html {
-            font-family: ${jost.style.fontFamily};
-          }
-        `}</style>
-        {/* <MusicPlayer /> */}
-        <PageTransitionWrapper loading={isLoading}>
-          <Component {...pageProps} />
-        </PageTransitionWrapper>
-      </LazyMotion>
-    </CartContextProvider>
+    <HeaderContextProvider>
+      <CartContextProvider>
+        <GlobalStyles />
+        <LazyMotion features={loadFeatures} strict>
+          <Header isLoading={isLoading} />
+          <style jsx global>{`
+            html {
+              font-family: ${jost.style.fontFamily};
+            }
+          `}</style>
+          <MusicPlayer />
+          <PageTransitionWrapper loading={isLoading}>
+            <Component {...pageProps} />
+          </PageTransitionWrapper>
+        </LazyMotion>
+      </CartContextProvider>
+    </HeaderContextProvider>
   );
 }
 
