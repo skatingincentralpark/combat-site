@@ -13,7 +13,6 @@ import Image from "@components/image";
 const navLinks = [
   { href: "/", name: "Home" },
   { href: "/shop", name: "Shop" },
-  { href: "/design-system", name: "Design System" },
   { href: "/news", name: "News" },
   { href: "/lookbooks", name: "Lookbooks" },
 ];

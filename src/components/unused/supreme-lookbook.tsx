@@ -7,7 +7,7 @@ import { m, AnimatePresence } from "framer-motion";
 import { type LookbookType } from "types/lookbookTypes";
 import Lightbox from "@components/lightbox";
 
-const SupremeLookbook = ({ lookbook }: LookbookType) => {
+const SupremeLookbook = ({ lookbook }: { lookbook: LookbookType }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const media = lookbook.album;
