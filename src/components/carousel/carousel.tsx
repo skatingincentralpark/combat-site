@@ -6,7 +6,7 @@ import { LookbookType } from "types/lookbookTypes";
 import { CarouselSlide } from "./carousel-slide";
 import Lightbox from "@components/lightbox";
 
-const Carousel = ({ lookbook }: LookbookType) => {
+const Carousel = ({ lookbook }: { lookbook: LookbookType }) => {
   const { album } = lookbook || {};
   const [viewportRef, embla] = useEmblaCarousel({
     containScroll: "trimSnaps",

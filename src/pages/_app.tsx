@@ -4,7 +4,6 @@ import GlobalStyles from "../styles/global";
 
 import Header from "@components/header/header";
 import PageTransitionWrapper from "@components/page-transition-wrapper";
-import MusicPlayer from "@components/music-player";
 
 import { deviceIsBrowser } from "@lib/helpers";
 import useIsLoading from "hooks/useIsLoading";
@@ -52,7 +51,6 @@ function MyApp({ Component, pageProps }: AppProps) {
               font-family: ${jost.style.fontFamily};
             }
           `}</style>
-          <MusicPlayer />
           <PageTransitionWrapper loading={isLoading}>
             <Component {...pageProps} />
           </PageTransitionWrapper>

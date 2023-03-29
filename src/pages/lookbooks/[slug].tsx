@@ -9,8 +9,9 @@ import Dropdown from "@components/dropdown";
 import { useRouter } from "next/router";
 import HeadSEO from "@components/head-seo";
 import queries from "@lib/queries";
+import { GetLookbook } from "data";
 
-const LookbookPage = ({ lookbook }: LookbookType) => {
+const LookbookPage = ({ lookbook }: { lookbook: LookbookType }) => {
   return (
     <>
       <HeadSEO title={`Lookbook / ${lookbook?.title}`} />
@@ -42,7 +43,7 @@ const PageWrapper = styled.main`
 `;
 
 // Seperated so dropdown state won't re-render Lookbook Page component
-const SeasonDropdown = ({ lookbook }: LookbookType) => {
+const SeasonDropdown = ({ lookbook }: { lookbook: LookbookType }) => {
   const router = useRouter();
 
   // Default selected is true if it's current slug
@@ -94,23 +95,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   // Should fix typing here
   const { slug = "" } = context.params!;
-  const lookbook = await client.fetch(
-    `
-      *[_type == "lookbook" && slug.current == $slug] {
-        _id,
-        "slug": slug.current,
-        "slugsAll": *[_type == "lookbook"][].slug.current,
-        season,
-        date,
-        description,
-        title,
-        album[]{ 
-          ${queries.imageMeta}
-        }
-      }[0]
-    `,
-    { slug }
-  );
+
+  const lookbook = await GetLookbook(slug);
+
   return {
     props: {
       lookbook,

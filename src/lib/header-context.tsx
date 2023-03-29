@@ -6,7 +6,7 @@ interface DefaultState {
 }
 
 const defaultState: DefaultState = {
-  isTransparent: false,
+  isTransparent: true,
   setIsTransparent: () => {},
 };
 

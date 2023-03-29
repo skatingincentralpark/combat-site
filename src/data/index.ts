@@ -1,3 +1,6 @@
+import queries from "@lib/queries";
+import { client } from "@lib/sanity";
+import { LookbookType } from "types/lookbookTypes";
 import { product } from "./queries";
 
 const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
@@ -102,4 +105,31 @@ export async function getAllProductsIdsAndHandles(): Promise<Product[]> {
   const data = edges.map(({ node }: { node: Product }) => node);
 
   return data;
+}
+
+/**
+ * Will return lookbook for a slug
+ */
+export async function GetLookbook(
+  slug: string | string[]
+): Promise<LookbookType> {
+  const lookbook = await client.fetch(
+    `
+      *[_type == "lookbook" && slug.current == $slug] {
+        _id,
+        "slug": slug.current,
+        "slugsAll": *[_type == "lookbook"][].slug.current,
+        season,
+        date,
+        description,
+        title,
+        album[]{ 
+          ${queries.imageMeta}
+        }
+      }[0]
+    `,
+    { slug }
+  );
+
+  return lookbook;
 }

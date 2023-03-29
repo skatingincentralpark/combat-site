@@ -41,7 +41,7 @@ type RadioLabelInputWrapperProps = {
   available: boolean;
 };
 const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
-  color: ${({ available }) => (!available ? "var(--gray-3)" : "lightgray")};
+  color: ${({ available }) => (!available ? "red" : "var(--gray-3)")};
   color: ${({ checked }) => checked && "black"};
   text-decoration: ${({ available }) => !available && "line-through"};
   pointer-events: ${({ available }) => !available && "none"};

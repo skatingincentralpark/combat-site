@@ -5,6 +5,7 @@ import SuperhighwayLogo from "../superhighway-logo";
 import BackButton from "./backButton";
 import Cart from "@components/cart/cart";
 import HeaderContext from "@lib/header-context";
+import MusicPlayerNew from "@components/music-player-new/music-player-new";
 const HeaderMenu = lazy(() => import("./header-menu"));
 
 const Header = ({ isLoading }: { isLoading: boolean }) => {
@@ -32,8 +33,8 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
         <BackButton navOpen={navOpen} isLoading={isLoading} />
         <HeaderToggle onClick={toggleNav} isTransparent={isTransparent}>
           <SuperhighwayLogo isLoading={isLoading} />
-          {/* <Circle /> */}
         </HeaderToggle>
+        <MusicPlayerNew />
       </HeaderWrapper>
 
       <Suspense fallback="">
@@ -91,13 +92,4 @@ const HeaderToggle = styled.button<{ isTransparent: boolean }>`
       transform: scale(1.1);
     }
   }
-`;
-const Circle = styled.div`
-  height: 100%;
-  aspect-ratio: 1 / 1;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  background-color: white;
-  transition: transform 0.2s;
 `;

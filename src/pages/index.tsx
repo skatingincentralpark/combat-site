@@ -1,24 +1,60 @@
+import { useContext, useEffect, useRef } from "react";
 import { GetStaticProps } from "next";
 import styled from "@emotion/styled";
-import { client } from "@lib/sanity";
-import HeadSEO from "@components/head-seo";
-import queries from "@lib/queries";
-import Image from "@components/image";
-import Video from "@components/video";
-import { css } from "@emotion/react";
+import useIntersectionObserver from "@hooks/useIntersectionObserver";
 
-const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
-  // const { url, width, height, caption, aspectRatio, dominantColor } =
-  //   homePageImage;
+import { getAllProducts, GetLookbook } from "data";
+import ShopItem from "@components/shop-item";
+import HeaderContext from "@lib/header-context";
+import { LookbookType } from "types/lookbookTypes";
+
+const HomePage = ({
+  products,
+  lookbook,
+}: {
+  products: Product[];
+  lookbook: LookbookType;
+}) => {
+  const { setIsTransparent } = useContext(HeaderContext);
+
+  const ref = useRef<HTMLImageElement | null>(null);
+
+  const entry = useIntersectionObserver(ref, {
+    rootMargin: "-50px",
+    threshold: 0,
+  });
+
+  const isVisible = !!entry?.isIntersecting;
+
+  useEffect(() => {
+    setIsTransparent(isVisible);
+  }, [isVisible]);
 
   return (
     <>
-      <HeadSEO title="Home" />
-      <PageSectionNew>
-        {/* <HomeVideo /> */}
-        <Image image={homePageImage} />
-        {/* <img src="/images/poster/glitch.png" /> */}
-      </PageSectionNew>
+      <HeroImageWrapper>
+        <HeroImage src="/temp/splat1.png" alt="tetsuya nishima" ref={ref} />
+      </HeroImageWrapper>
+      <ShopPageWrapper>
+        <Items>
+          {products.map((product) => (
+            <ShopItem product={product} key={product.id} />
+          ))}
+        </Items>
+      </ShopPageWrapper>
+      <HeroImageWrapper>
+        <HeroImage src="/temp/1.jpg" alt="tetsuya nishima" />
+      </HeroImageWrapper>
+      <Grid>
+        <img src="/temp/1.jpg" alt="" />
+        <img src="/temp/2.jpg" alt="" />
+        <img src="/temp/3.jpg" alt="" />
+        <img src="/temp/4.jpg" alt="" />
+
+        {/* {lookbook?.album.map((x) => (
+          <img src={x.url} key={x.url} />
+        ))} */}
+      </Grid>
     </>
   );
 };
@@ -26,67 +62,57 @@ const HomePage = ({ homePageImage }: { homePageImage: ImageType }) => {
 export default HomePage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const homePageData = await client.fetch(
-    `
-    *[_type == "generalSettings"]{
-      homePageImage{
-        ${queries.imageMeta}
-      },
-    }[0]
-  `
-  );
+  const products = await getAllProducts();
+  const lookbook = await GetLookbook("spring-song");
 
   return {
     props: {
-      homePageImage: homePageData.homePageImage,
+      products,
+      lookbook,
     },
   };
 };
 
-const PageSectionNew = styled.section`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;
-
-const PageSection = styled.section`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 
   & > img {
-    min-height: 100vh;
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
-    object-position: top;
+    min-width: 0;
+  }
+`;
+const HeroImageWrapper = styled.div`
+  padding: 2rem 1rem 3.5rem 1rem;
+  height: 100vh;
+`;
+const HeroImage = styled.img`
+  height: 100%;
+  margin: auto;
+  object-fit: contain;
+`;
+
+const Items = styled.section`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: var(--gap-xl);
+  margin: auto;
+  flex-grow: 1;
+
+  @media screen and (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  &:first-of-type {
-    margin-top: var(--header-height);
-    min-height: calc(100vh - var(--header-height));
+  @media screen and (min-width: 900px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 
-const HomeVideo = () => {
-  const asset: VideoType = {
-    url: "videos/monke.mp4",
-    alt: "viktor",
-    autoplay: true,
-    caption: "viktor",
-  };
+const ShopPageWrapper = styled.div`
+  padding: var(--header-height) var(--gap-xs) var(--gap-xxl) var(--gap-xs);
+  min-height: 100vh;
+  display: flex;
 
-  return (
-    <Video
-      asset={asset}
-      containerStyles={css`
-        width: 60%;
-        height: 60%;
-      `}
-    />
-  );
-};
+  @media screen and (min-width: 500px) {
+    padding: var(--header-height) var(--gap-xxl) var(--gap-xxl) var(--gap-xxl);
+  }
+`;
