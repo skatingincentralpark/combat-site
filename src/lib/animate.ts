@@ -21,15 +21,15 @@ const headerCartVariants = () => {
   return {
     initial: {
       height: 0,
-      backgroundColor: "#d9ff00",
+      // backgroundColor: "#d9ff00",
     },
     animate: {
       height: "3rem",
-      backgroundColor: "var(--yellow-1)",
+      // backgroundColor: "var(--yellow-1)",
     },
     exit: {
       height: 0,
-      backgroundColor: "#fff",
+      // backgroundColor: "#fff",
       transition: {
         when: "afterChildren",
       },

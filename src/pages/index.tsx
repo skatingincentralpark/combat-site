@@ -31,7 +31,7 @@ const HomePage = ({
   }, [isVisible]);
 
   return (
-    <>
+    <HomeWrapper>
       <HeroImageWrapper>
         <HeroImage src="/temp/splat1.png" alt="tetsuya nishima" ref={ref} />
       </HeroImageWrapper>
@@ -42,9 +42,9 @@ const HomePage = ({
           ))}
         </Items>
       </ShopPageWrapper>
-      <HeroImageWrapper>
+      {/* <HeroImageWrapper>
         <HeroImage src="/temp/1.jpg" alt="tetsuya nishima" />
-      </HeroImageWrapper>
+      </HeroImageWrapper> */}
       <Grid>
         <img src="/temp/1.jpg" alt="" />
         <img src="/temp/2.jpg" alt="" />
@@ -55,7 +55,7 @@ const HomePage = ({
           <img src={x.url} key={x.url} />
         ))} */}
       </Grid>
-    </>
+    </HomeWrapper>
   );
 };
 
@@ -73,16 +73,24 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
+const HomeWrapper = styled.main`
+  padding: 2rem 0 3rem 0;
+`;
+
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 
   & > img {
     min-width: 0;
   }
+
+  @media screen and (min-width: 600px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;
 const HeroImageWrapper = styled.div`
-  padding: 2rem 1rem 3.5rem 1rem;
+  padding: 0 1rem 3.5rem 1rem;
   height: 100vh;
 `;
 const HeroImage = styled.img`

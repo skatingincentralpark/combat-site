@@ -31,7 +31,7 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
       <Cart navOpen={navOpen} cartOpen={cartOpen} toggleCart={toggleCart} />
       <HeaderWrapper>
         <BackButton navOpen={navOpen} isLoading={isLoading} />
-        <HeaderToggle isTransparent={isTransparent}>
+        <HeaderToggle isTransparent={isTransparent} onClick={toggleNav}>
           <SuperhighwayLogo isLoading={isLoading} />
         </HeaderToggle>
         <MusicPlayerNew />
@@ -74,7 +74,7 @@ const HeaderToggle = styled.button<{ isTransparent: boolean }>`
   align-items: center;
   transition: background 0.3s;
 
-  /* &:hover {
+  &:hover {
     @media screen and (min-width: 700px) {
       background-color: var(--yellow-1);
 
@@ -83,7 +83,7 @@ const HeaderToggle = styled.button<{ isTransparent: boolean }>`
         transform: scale(0.9);
       }
     }
-  } */
+  }
 
   &:active {
     background-color: var(--yellow-2);
