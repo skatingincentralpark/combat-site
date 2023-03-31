@@ -6,6 +6,7 @@ import BackButton from "./backButton";
 import Cart from "@components/cart/cart";
 import HeaderContext from "@lib/header-context";
 import MusicPlayerNew from "@components/music-player-new/music-player-new";
+import { useRouter } from "next/router";
 const HeaderMenu = lazy(() => import("./header-menu"));
 
 const Header = ({ isLoading }: { isLoading: boolean }) => {
@@ -26,12 +27,18 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
 
   const { isTransparent } = useContext(HeaderContext);
 
+  const router = useRouter();
+  const isHome = router.pathname === "/";
+
   return (
     <>
       <Cart navOpen={navOpen} cartOpen={cartOpen} toggleCart={toggleCart} />
       <HeaderWrapper>
         <BackButton navOpen={navOpen} isLoading={isLoading} />
-        <HeaderToggle isTransparent={isTransparent} onClick={toggleNav}>
+        <HeaderToggle
+          isTransparent={isHome && isTransparent}
+          onClick={toggleNav}
+        >
           <SuperhighwayLogo isLoading={isLoading} />
         </HeaderToggle>
         <MusicPlayerNew />
