@@ -1,15 +1,11 @@
-import { GetStaticProps } from "next";
 import styled from "@emotion/styled";
-import Link from "@components/link";
 import Image from "@components/image";
-import { getAllProducts } from "data";
 import { useContext, useEffect, useState } from "react";
 import ShopCta from "@components/shop-cta";
 
 import useSWR from "swr";
 import axios from "axios";
 import CartContext from "@lib/cart-context";
-import { clamp } from "@lib/helpers";
 
 const fetcher = async (url: string, id: string) => {
   const res = await axios.get(url, {
