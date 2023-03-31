@@ -51,7 +51,6 @@ const RecordWrapper = styled.div<{ isPlaying: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.75rem;
   background-color: white;
   border-radius: 10px;
 `;
@@ -123,6 +122,7 @@ const Squares = ({ isPlaying }: { isPlaying: boolean }) => {
       id="Layer_2"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 54.53 54.53"
+      style={{ width: "100%", padding: "0.75rem" }}
     >
       <g>
         {pathData.map((x, i) => (
