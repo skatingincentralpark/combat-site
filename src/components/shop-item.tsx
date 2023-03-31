@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Image from "@components/image";
 import { useContext, useEffect, useState } from "react";
-import ShopCta from "@components/shop-cta";
+import ShopCta from "@components/shop-cta-simple";
 
 import useSWR from "swr";
 import axios from "axios";

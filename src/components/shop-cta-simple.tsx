@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import styled from "@emotion/styled";
 import { m } from "framer-motion";
-import RadioButton from "@components/radio-button";
 import { StyledButton } from "@components/shared-styles/buttons";
 import Link from "next/link";
 import CartContext from "@lib/cart-context";
 import { transientOptions } from "@lib/helpers";
 import { LoadingStar } from "./ui";
+import RadioButtonNew from "./radio-button-new/radio-button-new";
 
 type Props = {
   variants: {
@@ -19,7 +19,7 @@ type Props = {
   submit: () => void;
 };
 
-const ShopCta = ({
+const ShopCtaSimple = ({
   variants,
   selectedSize,
   setSelectedSize,
@@ -28,6 +28,8 @@ const ShopCta = ({
   const availabilityLoading = typeof selectedSize === "undefined";
   const { isLoading } = useContext(CartContext);
   const loading = isLoading || availabilityLoading;
+
+  const sizesHardcoded = ["Small", "Medium", "Large", "X-Large"] as const;
 
   return (
     <ShopCtaWrapper>
@@ -39,7 +41,7 @@ const ShopCta = ({
         }}
       >
         {variants?.map((variant, i) => (
-          <RadioButton
+          <RadioButtonNew
             key={variant.title}
             index={i}
             value={variant.title}
@@ -48,48 +50,41 @@ const ShopCta = ({
             onClick={setSelectedSize}
             available={loading ? false : variant.quantityAvailable > 0}
           >
-            {variant.title.toUpperCase()}
-          </RadioButton>
+            {sizesHardcoded[i]}
+          </RadioButtonNew>
         ))}
       </RadioGroup>
       <Row>
         <Button $available={loading} onClick={submit}>
           {loading ? <LoadingStar /> : "Add To Cart"}
         </Button>
-        <StyledLink $available={loading} href="/shop">
-          View All
-        </StyledLink>
       </Row>
     </ShopCtaWrapper>
   );
 };
 
-export default ShopCta;
+export default ShopCtaSimple;
 
 const ShopCtaWrapper = styled(m.div)`
   width: 100%;
   margin-bottom: var(--gap-xs);
+  font-weight: 400;
 `;
 const RadioGroup = styled.div`
-  display: flex;
   justify-content: flex-start;
   margin-bottom: var(--gap-xxs);
+  width: 100%;
 `;
-const Button = styled(StyledButton, transientOptions)<{ $available: boolean }>`
-  background-color: ${({ $available }) => $available && "var(--gray-1)"};
-  color: ${({ $available }) => ($available ? "var(--gray-3)" : "white")};
+const Button = styled("button", transientOptions)<{ $available: boolean }>`
+  background-color: ${({ $available }) => $available && "white"};
+  color: ${({ $available }) => ($available ? "var(--gray-3)" : "black")};
   pointer-events: ${({ $available }) => $available && "none"};
+  cursor: pointer;
+  width: auto;
+  height: 2rem;
+  display: block;
 `;
 const Row = styled.div`
   display: flex;
   align-items: center;
-`;
-const StyledLink = styled(Link, transientOptions)<{ $available: boolean }>`
-  white-space: nowrap;
-  margin-left: var(--gap-s);
-  padding: 0 var(--gap-s);
-  color: var(--gray-4);
-  transition: opacity 200ms;
-  pointer-events: ${({ $available }) => $available && "none"};
-  opacity: ${({ $available }) => $available && 0.2};
 `;
