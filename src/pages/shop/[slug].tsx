@@ -87,6 +87,7 @@ const ShopItemPage = ({ product }: { product: Product }) => {
               selectedSize={selectedSize}
               setSelectedSize={setSelectedSize}
               submit={submit}
+              showBack
             />
           </ShopItemBody>
         </ShopItemInfo>

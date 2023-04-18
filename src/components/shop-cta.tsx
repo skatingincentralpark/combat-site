@@ -17,6 +17,8 @@ type Props = {
   selectedSize?: number | undefined;
   setSelectedSize: Function;
   submit: () => void;
+  showBack?: boolean;
+  fullWidth?: boolean;
 };
 
 const ShopCta = ({
@@ -24,6 +26,8 @@ const ShopCta = ({
   selectedSize,
   setSelectedSize,
   submit,
+  showBack,
+  fullWidth,
 }: Props) => {
   const availabilityLoading = typeof selectedSize === "undefined";
   const { isLoading } = useContext(CartContext);
@@ -47,6 +51,7 @@ const ShopCta = ({
             selected={selectedSize}
             onClick={setSelectedSize}
             available={loading ? false : variant.quantityAvailable > 0}
+            fullWidth={fullWidth}
           >
             {variant.title.toUpperCase()}
           </RadioButton>
@@ -54,11 +59,13 @@ const ShopCta = ({
       </RadioGroup>
       <Row>
         <Button $available={loading} onClick={submit}>
-          {loading ? <LoadingStar /> : "Add To Cart"}
+          {loading ? <LoadingStar fill="#fff" /> : "Add To Cart"}
         </Button>
-        <StyledLink $available={loading} href="/shop">
-          View All
-        </StyledLink>
+        {showBack && (
+          <StyledLink $available={loading} href="/shop">
+            View All
+          </StyledLink>
+        )}
       </Row>
     </ShopCtaWrapper>
   );

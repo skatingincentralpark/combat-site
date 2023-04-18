@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import Image from "@components/image";
 import { useContext, useEffect, useState } from "react";
-import ShopCta from "@components/shop-cta-simple";
+import ShopCta from "@components/shop-cta";
 
 import useSWR from "swr";
 import axios from "axios";
 import CartContext from "@lib/cart-context";
+import ShopCtaSimple from "@components/shop-cta-simple";
 
 const fetcher = async (url: string, id: string) => {
   const res = await axios.get(url, {
@@ -82,6 +83,7 @@ const ShopItem = ({ product }: { product: Product }) => {
           selectedSize={selectedSize}
           setSelectedSize={setSelectedSize}
           submit={submit}
+          fullWidth
         />
       </ShopItemBody>
     </Item>

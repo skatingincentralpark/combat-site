@@ -7,6 +7,7 @@ type Props = {
   selected: number | undefined;
   onClick: Function;
   available: boolean;
+  fullWidth?: boolean;
   children: string;
 };
 
@@ -17,10 +18,15 @@ const RadioButton = ({
   selected,
   onClick,
   available,
+  fullWidth,
   children,
 }: Props) => {
   return (
-    <RadioLabelInputWrapper checked={selected === index} available={available}>
+    <RadioLabelInputWrapper
+      checked={selected === index}
+      available={available}
+      fullWidth={fullWidth}
+    >
       <input
         onClick={() => onClick(index)}
         type="radio"
@@ -38,6 +44,7 @@ export default RadioButton;
 type RadioLabelInputWrapperProps = {
   checked: boolean;
   available: boolean;
+  fullWidth?: boolean;
 };
 const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
   background-color: ${({ checked }) =>
@@ -51,6 +58,7 @@ const RadioLabelInputWrapper = styled.label<RadioLabelInputWrapperProps>`
 
   height: var(--button-height);
   aspect-ratio: 1;
+  width: ${({ fullWidth }) => fullWidth && "100%"};
 
   font-weight: 600;
   text-align: center;
