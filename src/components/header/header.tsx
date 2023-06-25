@@ -7,6 +7,7 @@ import Cart from "@components/cart/cart";
 import HeaderContext from "@lib/header-context";
 import MusicPlayerNew from "@components/music-player-new/music-player-new";
 import { useRouter } from "next/router";
+
 const HeaderMenu = lazy(() => import("./header-menu"));
 
 const Header = ({ isLoading }: { isLoading: boolean }) => {

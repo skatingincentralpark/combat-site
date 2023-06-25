@@ -8,6 +8,7 @@ import { TextSm } from "@components/shared-styles/typography";
 import useLockBodyScroll from "@hooks/useLockBodyScroll";
 import Logo from "../../../public/images/tomaskii.png";
 import Sunnies from "../../../public/images/sunnies-aussie.png";
+import Skele from "../../../public/images/skele.png";
 import Image from "@components/image";
 
 const navLinks = [
@@ -32,15 +33,15 @@ const HeaderMenu = ({ closeNav }: { closeNav: () => void }) => {
     if (refVideo.current) refVideo.current.playbackRate = 0.5;
   }, [refVideo.current]);
 
-  const imageObject: ImageType = {
+  const imageObject = {
     caption: "Menu Image",
-    url: Logo.src,
-    height: Logo.height,
-    width: Logo.width,
-    aspectRatio: Logo.height / Logo.width,
+    url: Skele.src,
+    height: Skele.height,
+    width: Skele.width,
+    aspectRatio: Skele.height / Skele.width,
   };
 
-  const imageObjectMobile: ImageType = {
+  const imageObjectMobile = {
     caption: "Menu Image",
     url: Sunnies.src,
     height: Sunnies.height,
