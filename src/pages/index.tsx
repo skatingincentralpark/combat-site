@@ -8,6 +8,9 @@ import ShopItem from "@components/shop-item";
 import HeaderContext from "@lib/header-context";
 import { LookbookType } from "types/lookbookTypes";
 
+import Thom from "../../public/images/thom.jpeg";
+import Image from "next/image";
+
 const HomePage = ({
   products,
   lookbook,
@@ -33,7 +36,7 @@ const HomePage = ({
   return (
     <HomeWrapper>
       <HeroImageWrapper>
-        <HeroImage src="/temp/splat1.png" alt="tetsuya nishima" ref={ref} />
+        <HeroImage src={Thom} alt="Thom Yorke" ref={ref} placeholder="blur" />
       </HeroImageWrapper>
       <ShopPageWrapper>
         <Items>
@@ -42,9 +45,7 @@ const HomePage = ({
           ))}
         </Items>
       </ShopPageWrapper>
-      {/* <HeroImageWrapper>
-        <HeroImage src="/temp/1.jpg" alt="tetsuya nishima" />
-      </HeroImageWrapper> */}
+
       <Grid>
         <img src="/temp/1.jpg" alt="" />
         <img src="/temp/2.jpg" alt="" />
@@ -93,7 +94,7 @@ const HeroImageWrapper = styled.div`
   padding: 0 1rem 3.5rem 1rem;
   height: 100vh;
 `;
-const HeroImage = styled.img`
+const HeroImage = styled(Image)`
   height: 100%;
   margin: auto;
   object-fit: contain;
