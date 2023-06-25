@@ -8,8 +8,7 @@ import { LookbookDescription } from "@components/lookbook-description";
 import Dropdown from "@components/dropdown";
 import { useRouter } from "next/router";
 import HeadSEO from "@components/head-seo";
-import queries from "@lib/queries";
-import { GetLookbook } from "data";
+import { getLookbook } from "data";
 
 const LookbookPage = ({ lookbook }: { lookbook: LookbookType }) => {
   return (
@@ -96,7 +95,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   // Should fix typing here
   const { slug = "" } = context.params!;
 
-  const lookbook = await GetLookbook(slug);
+  const lookbook = await getLookbook(slug);
 
   return {
     props: {

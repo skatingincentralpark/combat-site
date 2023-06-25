@@ -8,7 +8,7 @@ import PageTransitionWrapper from "@components/page-transition-wrapper";
 import { deviceIsBrowser } from "@lib/helpers";
 import useIsLoading from "hooks/useIsLoading";
 
-import { Jost } from "@next/font/google";
+import { Jost } from "next/font/google";
 import { CartContextProvider } from "@lib/cart-context";
 import { HeaderContextProvider } from "@lib/header-context";
 

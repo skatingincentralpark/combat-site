@@ -4,12 +4,12 @@ import { AnimatePresence, m } from "framer-motion";
 import { PortableText } from "@portabletext/react";
 import { client } from "@lib/sanity";
 import Link from "next/link";
-import queries from "@lib/queries";
 
 import { type NewsItemType } from "types/newsTypes";
 import { Heading, HeadingSm } from "@components/shared-styles/typography";
 import HeadSEO from "@components/head-seo";
 import Image from "@components/image";
+import { getNewsItems } from "data";
 
 const NewsIndexPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
   const container = {
@@ -33,24 +33,7 @@ const NewsIndexPage = ({ newsItems }: { newsItems: NewsItemType[] }) => {
 };
 
 export async function getStaticProps() {
-  const newsItems: NewsItemType[] = await client.fetch(`
-    *[_type == "newsItem"] {
-      title,
-      subtitle,
-      "slug": slug.current,
-      excerpt,
-      location { lat, lng },
-      credits[] {
-        "author": author -> name,
-        role
-      },
-      category,
-      date,
-      previewImages[] {
-        ${queries.imageMeta}
-      }
-    }
-  `);
+  const newsItems = await getNewsItems();
 
   return {
     props: {

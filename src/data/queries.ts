@@ -1,3 +1,7 @@
+/**
+ * This file contains regularly used queries objects
+ */
+
 export const product = `
 id
 title
@@ -34,4 +38,16 @@ variants (first: 4) {
     }
   }
 }
+`;
+
+export const imageMeta = `
+    caption,
+    asset,
+    "url": asset -> url,
+    "height": asset -> metadata.dimensions.height,
+    "width": asset -> metadata.dimensions.width,
+    "aspectRatio": asset -> metadata.dimensions.aspectRatio,
+    "lqip": asset -> metadata.lqip,
+    "blurHash": asset -> metadata.blurHash,
+    "dominantColor": asset -> metadata.palette.dominant.background,
 `;

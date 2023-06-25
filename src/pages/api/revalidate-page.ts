@@ -5,6 +5,9 @@ type Data = {
   message: string;
 };
 
+/**
+ * Hitting this endpoint will revalidate the page depending on the type property in the body
+ */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>

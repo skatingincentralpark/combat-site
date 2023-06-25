@@ -2,12 +2,12 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import { client } from "@lib/sanity";
 import { type NewsItemArticle } from "types/newsTypes";
 import { ParsedUrlQuery } from "querystring";
-import queries from "@lib/queries";
 
 import Article from "@components/news/article";
 import Hero from "@components/news/hero";
 import HeroMedia from "@components/news/hero-media";
 import HeroText from "@components/news/hero-text";
+import { getNewsItem } from "data";
 
 const NewsArticle = ({ data }: { data: NewsItemArticle }) => {
   const {
@@ -59,66 +59,8 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug = "" } = context.params as IParams;
-  const data = await client.fetch(
-    `
-      *[_type == "newsItem" && slug.current == $slug] {
-        title,
-        subtitle,
-        "slug": slug.current,
-        excerpt,
-        location { lat, lng },
-        credits[] {
-          "author": author -> name,
-          role
-        },
-        category,
-        date,
-        previewImages[] {
-          ${queries.imageMeta}
-        },
-        heroLayout,
-        heroMedia {
-          type,
-          image {
-            ${queries.imageMeta}
-          },
-          video {
-            "url": asset.url,
-            "height": asset.height,
-            "width": asset.width,
-            autoplay,
-            caption,
-            alt
-          }
-        },
-        heroImage {
-          ${queries.imageMeta}
-        },
-        body[] {
-          ...,
-          _type == 'image' => {
-            "image": {
-              caption,
-              asset,
-              "url": asset -> url,
-              "height": asset -> metadata.dimensions.height,
-              "width": asset -> metadata.dimensions.width,
-              "aspectRatio": asset -> metadata.dimensions.aspectRatio,
-              "lqip": asset -> metadata.lqip,
-              "blurHash": asset -> metadata.blurHash,
-              "dominantColor": asset -> metadata.palette.dominant.background,
-            }
-          }
-        },
-        heroTextStyles {
-          credits { containerAlign, fontSize, fontWeight, textAlign, width },
-          headline { containerAlign, fontSize, fontWeight, textAlign, width },
-          subheadline { containerAlign, fontSize, fontWeight, textAlign, width },
-        }
-      }[0]
-    `,
-    { slug }
-  );
+  const data = await getNewsItem(slug);
+
   return {
     props: {
       data,

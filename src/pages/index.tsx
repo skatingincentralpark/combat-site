@@ -3,7 +3,7 @@ import { GetStaticProps } from "next";
 import styled from "@emotion/styled";
 import useIntersectionObserver from "@hooks/useIntersectionObserver";
 
-import { getAllProducts, GetLookbook } from "data";
+import { getAllProducts, getLookbook } from "data";
 import ShopItem from "@components/shop-item";
 import HeaderContext from "@lib/header-context";
 import { LookbookType } from "types/lookbookTypes";
@@ -64,7 +64,7 @@ export default HomePage;
 
 export const getStaticProps: GetStaticProps = async () => {
   const products = await getAllProducts();
-  const lookbook = await GetLookbook("spring-song");
+  const lookbook = await getLookbook("spring-song");
 
   return {
     props: {

@@ -1,7 +1,7 @@
-import queries from "@lib/queries";
 import { client } from "@lib/sanity";
 import { LookbookType } from "types/lookbookTypes";
-import { product } from "./queries";
+import { NewsItemArticle, NewsItemType } from "types/newsTypes";
+import { imageMeta, product } from "./queries";
 
 const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
 const storefrontAccessToken =
@@ -110,10 +110,10 @@ export async function getAllProductsIdsAndHandles(): Promise<Product[]> {
 /**
  * Will return lookbook for a slug
  */
-export async function GetLookbook(
+export async function getLookbook(
   slug: string | string[]
 ): Promise<LookbookType> {
-  const lookbook = await client.fetch(
+  return await client.fetch(
     `
       *[_type == "lookbook" && slug.current == $slug] {
         _id,
@@ -124,12 +124,94 @@ export async function GetLookbook(
         description,
         title,
         album[]{ 
-          ${queries.imageMeta}
+          ${imageMeta}
         }
       }[0]
     `,
     { slug }
   );
+}
 
-  return lookbook;
+export async function getNewsItem(slug: string): Promise<NewsItemArticle> {
+  return await client.fetch(
+    `
+    *[_type == "newsItem" && slug.current == $slug] {
+      title,
+      subtitle,
+      "slug": slug.current,
+      excerpt,
+      location { lat, lng },
+      credits[] {
+        "author": author -> name,
+        role
+      },
+      category,
+      date,
+      previewImages[] {
+        ${imageMeta}
+      },
+      heroLayout,
+      heroMedia {
+        type,
+        image {
+          ${imageMeta}
+        },
+        video {
+          "url": asset.url,
+          "height": asset.height,
+          "width": asset.width,
+          autoplay,
+          caption,
+          alt
+        }
+      },
+      heroImage {
+        ${imageMeta}
+      },
+      body[] {
+        ...,
+        _type == 'image' => {
+          "image": {
+            caption,
+            asset,
+            "url": asset -> url,
+            "height": asset -> metadata.dimensions.height,
+            "width": asset -> metadata.dimensions.width,
+            "aspectRatio": asset -> metadata.dimensions.aspectRatio,
+            "lqip": asset -> metadata.lqip,
+            "blurHash": asset -> metadata.blurHash,
+            "dominantColor": asset -> metadata.palette.dominant.background,
+          }
+        }
+      },
+      heroTextStyles {
+        credits { containerAlign, fontSize, fontWeight, textAlign, width },
+        headline { containerAlign, fontSize, fontWeight, textAlign, width },
+        subheadline { containerAlign, fontSize, fontWeight, textAlign, width },
+      }
+    }[0]
+  `,
+    { slug }
+  );
+}
+
+export async function getNewsItems(): Promise<NewsItemType[]> {
+  return await client.fetch(`
+    *[_type == "newsItem"] {
+      title,
+      subtitle,
+      "slug": slug.current,
+      excerpt,
+      location { lat, lng },
+      credits[] {
+        "author": author -> name,
+        role
+      },
+      category,
+      date,
+      previewImages[] {
+        ${imageMeta}
+      }
+    }
+  `);
 }
