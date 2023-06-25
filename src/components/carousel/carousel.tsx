@@ -41,7 +41,7 @@ const Carousel = ({ lookbook }: { lookbook: LookbookType }) => {
   );
 
   const openLightbox = (i: number) => {
-    embla?.clickAllowed() && setLightboxImageIndex(i);
+    setLightboxImageIndex(i);
   };
   const closeLightbox = () => setLightboxImageIndex(null);
 
