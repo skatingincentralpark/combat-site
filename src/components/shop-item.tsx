@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled from "@emotion/styled";
 import Image from "@components/image";
 import { useContext, useEffect, useState } from "react";

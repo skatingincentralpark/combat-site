@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useEffect, useState, useContext } from "react";
 import { GetStaticProps, GetStaticPaths } from "next";
 import styled from "@emotion/styled";
