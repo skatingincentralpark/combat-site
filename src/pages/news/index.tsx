@@ -76,16 +76,6 @@ const NewsItem = ({
 
   const [isOpen, setIsOpen] = useState(false);
 
-  // useEffect(() => {
-  //   const openFirstItem = setTimeout(() => {
-  //     if (index === 0) {
-  //       setIsOpen(true);
-  //     }
-  //   }, 200);
-
-  //   return () => clearTimeout(openFirstItem);
-  // }, []);
-
   // Creates an array of at least 6 items
   const atLeastSixArray = previewImages
     ? [...previewImages, ...Array(6 - previewImages.length)]
@@ -211,7 +201,9 @@ const NewsImage = ({ image }: { image: ImageType | undefined }) => {
         },
       }}
     >
-      <Image image={image} />
+      <Image
+        image={{ ...image, caption: image.caption || "News Article Image" }}
+      />
     </ImageWrapper>
   );
 };
