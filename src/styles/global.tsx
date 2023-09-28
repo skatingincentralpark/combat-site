@@ -24,6 +24,7 @@ const GlobalStyles = () => {
         font-weight: 300;
         color: var(--black);
         -webkit-font-smoothing: antialiased;
+        font-family: var(--font-primary);
 
         @media screen and (min-width: 1550px) {
           font-size: 13px;

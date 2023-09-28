@@ -46,12 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <GlobalStyles />
         <LazyMotion features={loadFeatures} strict>
           <Header isLoading={isLoading} />
-          <style jsx global>{`
-            html {
-              font-family: ${jost.style.fontFamily};
-            }
-          `}</style>
-          <PageTransitionWrapper loading={isLoading}>
+          <PageTransitionWrapper loading={isLoading} className={jost.className}>
             <Component {...pageProps} />
           </PageTransitionWrapper>
         </LazyMotion>
