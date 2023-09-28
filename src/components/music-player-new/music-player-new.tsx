@@ -34,13 +34,17 @@ const MusicPlayerWrapper = styled.div`
   font-family: var(--font-mono);
   -webkit-font-smoothing: initial;
   height: 100%;
-  aspect-ratio: 1 / 1;
   background: var(--piss-1);
   transition: transform 0.2s;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+
+  @media screen and (min-width: 330px) {
+    display: flex;
+    aspect-ratio: 1 / 1;
+  }
 `;
 const RecordWrapper = styled.div<{ isPlaying: boolean }>`
   font-family: var(--font-mono);
@@ -48,11 +52,15 @@ const RecordWrapper = styled.div<{ isPlaying: boolean }>`
   height: 100%;
   aspect-ratio: 1 / 1;
   transition: transform 0.2s;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   background-color: white;
   border-radius: 10px;
+
+  @media screen and (min-width: 430px) {
+    display: flex;
+  }
 `;
 
 const Pause = () => (

@@ -35,9 +35,6 @@ const HomePage = ({
 
   return (
     <HomeWrapper>
-      <HeroImageWrapper>
-        <HeroImage src={Thom} alt="Thom Yorke" ref={ref} placeholder="blur" />
-      </HeroImageWrapper>
       <ShopPageWrapper>
         <Items>
           {products.map((product) => (
@@ -45,17 +42,6 @@ const HomePage = ({
           ))}
         </Items>
       </ShopPageWrapper>
-
-      <Grid>
-        <img src="/temp/1.jpg" alt="" />
-        <img src="/temp/2.jpg" alt="" />
-        <img src="/temp/3.jpg" alt="" />
-        <img src="/temp/4.jpg" alt="" />
-
-        {/* {lookbook?.album.map((x) => (
-          <img src={x.url} key={x.url} />
-        ))} */}
-      </Grid>
     </HomeWrapper>
   );
 };
