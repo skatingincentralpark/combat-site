@@ -6,6 +6,7 @@ import { transientOptions } from "@lib/helpers";
 import { m } from "framer-motion";
 import { LoadingStar } from "@components/ui";
 import { StyledButtonDanger } from "@components/shared-styles/buttons";
+import getSymbolFromCurrency from "currency-symbol-map";
 
 interface Props {
   variant: ShopifyVariant;
@@ -16,8 +17,11 @@ interface Props {
 // The forwarded ref is for popLayout (Framer Motion) in cartModal
 const CartItem = forwardRef<HTMLDivElement, Props>(
   ({ variant, title, quantity }, ref) => {
-    const currentPrice = parseInt(variant.price.amount).toFixed(2);
-    const compareAtPrice = parseInt(variant.compareAtPrice.amount).toFixed(2);
+    const currentPrice = parseInt(variant.price.amount);
+    const compareAtPrice = parseInt(variant.compareAtPrice.amount);
+    const currencySymbol = getSymbolFromCurrency(
+      variant.compareAtPrice.currencyCode
+    );
 
     const { updateLineItem, isLoading } = useContext(CartContext);
 
@@ -73,9 +77,11 @@ const CartItem = forwardRef<HTMLDivElement, Props>(
           </strong>
           <div>
             <SalePrice>
-              ${compareAtPrice} {variant.compareAtPrice.currencyCode}
+              {currencySymbol}
+              {compareAtPrice} {variant.compareAtPrice.currencyCode}
             </SalePrice>
-            ${currentPrice} {variant.price.currencyCode}
+            {currencySymbol}
+            {currentPrice} {variant.price.currencyCode}
           </div>
           <CartItemBodySummary>
             <div>

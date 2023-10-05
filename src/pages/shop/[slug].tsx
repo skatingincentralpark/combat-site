@@ -10,6 +10,7 @@ import CartContext from "@lib/cart-context";
 import useSWR from "swr";
 import axios from "axios";
 import { getAllProductsIdsAndHandles, getProduct } from "data";
+import getSymbolFromCurrency from "currency-symbol-map";
 
 const fetcher = async (url: string, id: string) => {
   const res = await axios.get(url, {
@@ -22,17 +23,14 @@ const fetcher = async (url: string, id: string) => {
 };
 
 const ShopItemPage = ({ product }: { product: Product }) => {
-  const currentPrice = parseInt(
-    product?.priceRange.minVariantPrice.amount
-  ).toFixed(2);
-  const compareAtPrice = parseInt(
-    product?.priceRange.maxVariantPrice.amount
-  ).toFixed(2);
+  const currentPrice = parseInt(product?.priceRange.minVariantPrice.amount);
+  const compareAtPrice = parseInt(product?.priceRange.maxVariantPrice.amount);
   const currencyCode = product?.priceRange.minVariantPrice.currencyCode;
   const onSale = currentPrice !== compareAtPrice;
   const [selectedSize, setSelectedSize] = useState<number | undefined>(
     undefined
   );
+  const currencySymbol = getSymbolFromCurrency(currencyCode);
 
   const image: ImageType = {
     caption: product?.title,
@@ -72,9 +70,11 @@ const ShopItemPage = ({ product }: { product: Product }) => {
             <span>
               {onSale && (
                 <SalePrice>
+                  {currencySymbol}
                   {compareAtPrice} {currencyCode}
                 </SalePrice>
               )}
+              {currencySymbol}
               {currentPrice} {currencyCode}
             </span>
           </ShopItemHeader>
