@@ -1,12 +1,15 @@
-import { useState, lazy, Suspense, useRef, useContext } from "react";
+import { useState, lazy, Suspense, useContext, useEffect } from "react";
 import styled from "@emotion/styled";
 import { AnimatePresence } from "framer-motion";
 import SuperhighwayLogo from "../superhighway-logo";
 import BackButton from "./backButton";
-import Cart from "@components/cart/cart";
 import HeaderContext from "@lib/header-context";
-import MusicPlayerNew from "@components/music-player-new/music-player-new";
 import { useRouter } from "next/router";
+
+import dynamic from "next/dynamic";
+const Cart = dynamic(
+  () => import(/* webpackChunkName: "Cart_Context" */ "@components/cart")
+);
 
 const HeaderMenu = lazy(() => import("./header-menu"));
 
@@ -31,9 +34,17 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
   const router = useRouter();
   const isHome = router.pathname === "/";
 
+  const [isRendered, setIsRendered] = useState(false);
+
+  useEffect(() => {
+    setIsRendered(true);
+  });
+
   return (
     <>
-      <Cart navOpen={navOpen} cartOpen={cartOpen} toggleCart={toggleCart} />
+      {isRendered && (
+        <Cart navOpen={navOpen} cartOpen={cartOpen} toggleCart={toggleCart} />
+      )}
       <HeaderWrapper>
         <BackButton navOpen={navOpen} isLoading={isLoading} />
         <HeaderToggle
@@ -42,7 +53,7 @@ const Header = ({ isLoading }: { isLoading: boolean }) => {
         >
           <SuperhighwayLogo isLoading={isLoading} />
         </HeaderToggle>
-        <MusicPlayerNew />
+        {/* <MusicPlayerNew /> */}
       </HeaderWrapper>
 
       <Suspense fallback="">

@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { LazyMotion } from "framer-motion";
 import type { AppProps } from "next/app";
 import GlobalStyles from "../styles/global";
@@ -9,8 +10,14 @@ import { deviceIsBrowser } from "@lib/helpers";
 import useIsLoading from "hooks/useIsLoading";
 
 import { Jost } from "next/font/google";
-import { CartContextProvider } from "@lib/cart-context";
 import { HeaderContextProvider } from "@lib/header-context";
+import { useEffect, useState } from "react";
+
+const CartContextProvider = dynamic(() =>
+  import(
+    /* webpackChunkName: "Cart_Context_Provider" */ "@lib/cart-context"
+  ).then((mod) => mod.CartContextProvider)
+);
 
 // Make sure to return the specific export containing the feature bundle.
 const loadFeatures = () =>
@@ -39,6 +46,24 @@ ASCII by Joan G. Stark`,
 
 function MyApp({ Component, pageProps }: AppProps) {
   const isLoading = useIsLoading();
+  const [isRendered, setIsRendered] = useState(false);
+
+  useEffect(() => {
+    setIsRendered(true);
+  });
+
+  if (!isRendered)
+    return (
+      <HeaderContextProvider>
+        <GlobalStyles />
+        <LazyMotion features={loadFeatures} strict>
+          <Header isLoading={isLoading} />
+          <PageTransitionWrapper loading={isLoading} className={jost.className}>
+            <Component {...pageProps} />
+          </PageTransitionWrapper>
+        </LazyMotion>
+      </HeaderContextProvider>
+    );
 
   return (
     <HeaderContextProvider>

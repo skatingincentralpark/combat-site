@@ -6,15 +6,13 @@ import { headerCartVariants } from "@lib/animate";
 import { ButtonBaseMotion } from "@components/ui";
 import CartContext from "@lib/cart-context";
 
-const Cart = ({
-  cartOpen,
-  toggleCart,
-  navOpen,
-}: {
+export interface CartProps {
   cartOpen: boolean;
   toggleCart: () => void;
   navOpen: boolean;
-}) => {
+}
+
+const CartComponent = ({ cartOpen, toggleCart, navOpen }: CartProps) => {
   const { checkout, isLoading } = useContext(CartContext);
   const { lineItems } = checkout || {};
   const [quantityInCart, setQuantityInCart] = useState<number | null>(null);
@@ -50,7 +48,7 @@ const Cart = ({
   );
 };
 
-export default Cart;
+export default CartComponent;
 
 const CartButton = styled(ButtonBaseMotion)`
   position: fixed;
