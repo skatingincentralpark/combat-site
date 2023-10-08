@@ -46,36 +46,18 @@ ASCII by Joan G. Stark`,
 
 function MyApp({ Component, pageProps }: AppProps) {
   const isLoading = useIsLoading();
-  const [isRendered, setIsRendered] = useState(false);
-
-  useEffect(() => {
-    setIsRendered(true);
-  });
-
-  if (!isRendered)
-    return (
-      <HeaderContextProvider>
-        <GlobalStyles />
-        <LazyMotion features={loadFeatures} strict>
-          <Header isLoading={isLoading} />
-          <PageTransitionWrapper loading={isLoading} className={jost.className}>
-            <Component {...pageProps} />
-          </PageTransitionWrapper>
-        </LazyMotion>
-      </HeaderContextProvider>
-    );
 
   return (
     <HeaderContextProvider>
-      <CartContextProvider>
-        <GlobalStyles />
-        <LazyMotion features={loadFeatures} strict>
-          <Header isLoading={isLoading} />
-          <PageTransitionWrapper loading={isLoading} className={jost.className}>
+      <GlobalStyles />
+      <LazyMotion features={loadFeatures} strict>
+        <Header isLoading={isLoading} />
+        <PageTransitionWrapper loading={isLoading} className={jost.className}>
+          <CartContextProvider>
             <Component {...pageProps} />
-          </PageTransitionWrapper>
-        </LazyMotion>
-      </CartContextProvider>
+          </CartContextProvider>
+        </PageTransitionWrapper>
+      </LazyMotion>
     </HeaderContextProvider>
   );
 }
