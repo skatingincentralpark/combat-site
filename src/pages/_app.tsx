@@ -11,7 +11,6 @@ import useIsLoading from "hooks/useIsLoading";
 
 import { Jost } from "next/font/google";
 import { HeaderContextProvider } from "@lib/header-context";
-import { useEffect, useState } from "react";
 
 const CartContextProvider = dynamic(() =>
   import(
@@ -49,15 +48,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <HeaderContextProvider>
-      <GlobalStyles />
-      <LazyMotion features={loadFeatures} strict>
-        <Header isLoading={isLoading} />
-        <PageTransitionWrapper loading={isLoading} className={jost.className}>
-          <CartContextProvider>
+      <CartContextProvider>
+        <GlobalStyles />
+        <LazyMotion features={loadFeatures} strict>
+          <Header isLoading={isLoading} />
+          <PageTransitionWrapper loading={isLoading} className={jost.className}>
             <Component {...pageProps} />
-          </CartContextProvider>
-        </PageTransitionWrapper>
-      </LazyMotion>
+          </PageTransitionWrapper>
+        </LazyMotion>
+      </CartContextProvider>
     </HeaderContextProvider>
   );
 }
