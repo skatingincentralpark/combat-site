@@ -10,6 +10,7 @@ interface Props {
   placeholder?: "blur" | "empty";
   onClick?: () => void;
   sizes?: string;
+  priority?: boolean;
 }
 
 /*
@@ -24,6 +25,7 @@ const Image = ({
   placeholder = "empty",
   onClick,
   sizes,
+  priority,
 }: Props) => {
   const { url, caption, lqip, dominantColor, aspectRatio, width, height } =
     image;
@@ -55,6 +57,7 @@ const Image = ({
         placeholder={placeholder}
         quality={quality || undefined}
         sizes={sizes}
+        priority={priority}
       />
     </ImageContainer>
   );
