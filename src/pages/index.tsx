@@ -16,6 +16,7 @@ const HomePage = () => {
           src={Picasso}
           alt="Picasso"
           sizes={"(max-width: 768px) 80vw, (max-width: 1400px) 33vw, 22vw"}
+          priority
         />
       </ShopPageWrapper>
     </HomeWrapper>
@@ -30,6 +31,7 @@ const HomeWrapper = styled.main`
 const SImage = styled(Image)`
   height: 50rem;
   object-fit: contain;
+  width: auto;
 `;
 const ShopPageWrapper = styled.div`
   padding: var(--header-height) var(--gap-xs) var(--gap-xxl) var(--gap-xs);

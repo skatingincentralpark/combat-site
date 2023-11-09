@@ -164,7 +164,7 @@ const BlockVideoCloudinary = ({ value }: { value: BlockMediaImageProps }) => {
   const { paddingDesktop, paddingMobile } = padding || {};
 
   const assetObject = {
-    url: asset.url,
+    url: asset.url.replace("http:", "https:"),
     height: asset.height,
     width: asset.width,
     caption,
