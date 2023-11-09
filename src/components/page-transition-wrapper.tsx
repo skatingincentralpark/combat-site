@@ -19,13 +19,13 @@ const PageTransitionWrapper = ({ children, className }: Props) => {
     animate: {
       opacity: 1,
       transition: {
-        duration: 0.4,
+        duration: 0,
       },
     },
     exit: {
       opacity: 0,
       transition: {
-        duration: 0.2,
+        duration: 0,
       },
     },
   };
