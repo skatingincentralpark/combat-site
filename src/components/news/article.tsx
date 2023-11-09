@@ -81,8 +81,6 @@ const BlockImage = ({ value }: { value: BlockMediaImageProps }) => {
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
-  console.log(`${(width / 100) * 100}vw`);
-
   return (
     <>
       <AnimatePresence>

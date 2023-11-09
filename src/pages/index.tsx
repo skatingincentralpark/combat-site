@@ -1,35 +1,8 @@
-import { useContext, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
-import useIntersectionObserver from "@hooks/useIntersectionObserver";
-
-import HeaderContext from "@lib/header-context";
-import { LookbookType } from "types/lookbookTypes";
-
 import Picasso from "../../public/images/picasso.jpeg";
 import Image from "next/image";
 
-const HomePage = ({
-  products,
-  lookbook,
-}: {
-  products: Product[];
-  lookbook: LookbookType;
-}) => {
-  const { setIsTransparent } = useContext(HeaderContext);
-
-  const ref = useRef<HTMLImageElement | null>(null);
-
-  const entry = useIntersectionObserver(ref, {
-    rootMargin: "-50px",
-    threshold: 0,
-  });
-
-  const isVisible = !!entry?.isIntersecting;
-
-  useEffect(() => {
-    setIsTransparent(isVisible);
-  }, [isVisible]);
-
+const HomePage = () => {
   return (
     <HomeWrapper>
       <ShopPageWrapper>

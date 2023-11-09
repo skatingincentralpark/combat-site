@@ -1,9 +1,8 @@
-import { useState, lazy, Suspense, useContext, useEffect } from "react";
+import { useState, lazy, Suspense, useEffect } from "react";
 import styled from "@emotion/styled";
 import { AnimatePresence } from "framer-motion";
 import SuperhighwayLogo from "../superhighway-logo";
 import BackButton from "./backButton";
-import HeaderContext from "@lib/header-context";
 import { useRouter } from "next/router";
 import useIsLoading from "hooks/useIsLoading";
 
@@ -31,8 +30,6 @@ const Header = () => {
     closeNav();
   };
 
-  const { isTransparent } = useContext(HeaderContext);
-
   const router = useRouter();
   const isHome = router.pathname === "/";
 
@@ -49,10 +46,7 @@ const Header = () => {
       )}
       <HeaderWrapper>
         <BackButton navOpen={navOpen} isLoading={isLoading} />
-        <HeaderToggle
-          isTransparent={isHome && isTransparent}
-          onClick={toggleNav}
-        >
+        <HeaderToggle onClick={toggleNav}>
           <SuperhighwayLogo isLoading={isLoading} />
         </HeaderToggle>
         {/* <MusicPlayerNew /> */}
@@ -81,11 +75,10 @@ const HeaderWrapper = styled.header`
   align-items: center;
   justify-content: flex-start;
 `;
-const HeaderToggle = styled.button<{ isTransparent: boolean }>`
+const HeaderToggle = styled.button`
   position: relative;
   padding: var(--gap-s) var(--gap-xl);
-  background-color: ${({ isTransparent }) =>
-    isTransparent ? "transparent" : "black"};
+  background-color: black;
   flex-grow: 1;
   height: 100%;
   cursor: pointer;
