@@ -3,12 +3,16 @@ import { client } from "@lib/sanity";
 import { type NewsItemArticle } from "types/newsTypes";
 import { ParsedUrlQuery } from "querystring";
 
-import Article from "@components/news/article";
 import Hero from "@components/news/hero";
 import HeroMedia from "@components/news/hero-media";
 import HeroText from "@components/news/hero-text";
 import { getNewsItem } from "data";
 import Head from "next/head";
+
+import dynamic from "next/dynamic";
+const Article = dynamic(() => import("@components/news/article"), {
+  ssr: false,
+});
 
 const NewsArticle = ({ data }: { data: NewsItemArticle }) => {
   const {
