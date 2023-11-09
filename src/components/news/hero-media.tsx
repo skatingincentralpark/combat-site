@@ -1,8 +1,12 @@
 import { HeroMediaType } from "types/newsTypes";
-import Video from "@components/video";
+import dynamic from "next/dynamic";
 import { css } from "@emotion/react";
 import { HeroLayoutType } from "types/newsTypes";
 import Image from "@components/image";
+
+const Video = dynamic(() => import("@components/video"), {
+  ssr: false,
+});
 
 /*
  * Returns Video or Image, these will be absolute or static dependant on heroLayout
