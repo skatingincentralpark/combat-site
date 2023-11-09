@@ -3,11 +3,19 @@ import { PortableText, PortableTextComponents } from "@portabletext/react";
 import { css } from "@emotion/react";
 import { clamp } from "@lib/helpers";
 
-import Video from "@components/video";
 import Lightbox from "@components/lightbox";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import Image from "@components/image";
+
+import dynamic from "next/dynamic";
+
+const Video = dynamic(() => import("@components/video"), {
+  ssr: false,
+});
+
+const Image = dynamic(() => import("@components/image"), {
+  ssr: false,
+});
 
 const Article = ({ body }: { body: [] }) => {
   return (
