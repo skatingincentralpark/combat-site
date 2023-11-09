@@ -4,7 +4,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>Superhighway</title>
         <meta name="description" content="Site for Superhighway" />
         <link rel="icon" href="/favicon.ico" />
         {/* To-Do: Purchase bitcount mono */}

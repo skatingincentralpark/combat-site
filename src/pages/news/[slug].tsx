@@ -8,6 +8,7 @@ import Hero from "@components/news/hero";
 import HeroMedia from "@components/news/hero-media";
 import HeroText from "@components/news/hero-text";
 import { getNewsItem } from "data";
+import Head from "next/head";
 
 const NewsArticle = ({ data }: { data: NewsItemArticle }) => {
   const {
@@ -28,6 +29,11 @@ const NewsArticle = ({ data }: { data: NewsItemArticle }) => {
 
   return (
     <>
+      <Head>
+        <title>Superhighway</title>
+        <meta name="description" content="Site for Superhighway" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Hero heroMediaAspect={aspectForSectionHeight} heroLayout={heroLayout}>
         <HeroText
           headlineText={title}
