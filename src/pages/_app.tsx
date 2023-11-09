@@ -7,7 +7,6 @@ import Header from "@components/header/header";
 import PageTransitionWrapper from "@components/page-transition-wrapper";
 
 import { deviceIsBrowser } from "@lib/helpers";
-import useIsLoading from "hooks/useIsLoading";
 
 import { Jost } from "next/font/google";
 import { HeaderContextProvider } from "@lib/header-context";
@@ -44,15 +43,13 @@ ASCII by Joan G. Stark`,
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const isLoading = useIsLoading();
-
   return (
     <HeaderContextProvider>
       <CartContextProvider>
         <GlobalStyles />
         <LazyMotion features={loadFeatures} strict>
-          <Header isLoading={isLoading} />
-          <PageTransitionWrapper loading={isLoading} className={jost.className}>
+          <Header />
+          <PageTransitionWrapper className={jost.className}>
             <Component {...pageProps} />
           </PageTransitionWrapper>
         </LazyMotion>

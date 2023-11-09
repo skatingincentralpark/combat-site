@@ -4,11 +4,12 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <link
+        {/* To-Do: Purchase bitcount mono */}
+        {/* <link
           href="//cloud.typenetwork.com/projects/6783/fontface.css/"
           rel="stylesheet"
           type="text/css"
-        />
+        /> */}
       </Head>
       <body>
         <Main />

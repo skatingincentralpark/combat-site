@@ -28,8 +28,9 @@ const cssVariables = css`
     // Font Family
     --font-primary: "Jost", Helvetica, Helvetica, -apple-system, Arial,
       sans-serif, Courier New;
-    --font-mono: "Bitcount Mono Single Bk Circle", "Courier New", Courier,
-      monospace;
+    --font-mono: "Courier New", Courier, monospace;
+    /* --font-mono: "Bitcount Mono Single Bk Circle", "Courier New", Courier,
+      monospace; */
     // Gap
     --gap-4xs: 0.25rem; // 3px to 3.25px
     --gap-3xs: 0.5rem; // 6px to 6.5px

@@ -81,6 +81,8 @@ const BlockImage = ({ value }: { value: BlockMediaImageProps }) => {
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
+  console.log(`${(width / 100) * 100}vw`);
+
   return (
     <>
       <AnimatePresence>
@@ -135,7 +137,10 @@ const BlockImage = ({ value }: { value: BlockMediaImageProps }) => {
             opacity: var(--opacity);
           `}
         />
-        <Image image={image} />
+        <Image
+          image={image}
+          sizes={`(max-width: 700px) 100vw, ${(width / 100) * 100}vw`}
+        />
         <div
           css={css`
             margin: var(--gap-m) var(--gap-l) 0 var(--gap-l);

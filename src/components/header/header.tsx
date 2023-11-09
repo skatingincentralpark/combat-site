@@ -5,6 +5,7 @@ import SuperhighwayLogo from "../superhighway-logo";
 import BackButton from "./backButton";
 import HeaderContext from "@lib/header-context";
 import { useRouter } from "next/router";
+import useIsLoading from "hooks/useIsLoading";
 
 import dynamic from "next/dynamic";
 const Cart = dynamic(
@@ -13,9 +14,10 @@ const Cart = dynamic(
 
 const HeaderMenu = lazy(() => import("./header-menu"));
 
-const Header = ({ isLoading }: { isLoading: boolean }) => {
+const Header = () => {
   const [navOpen, setNavOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const isLoading = useIsLoading();
 
   const closeNav = () => setNavOpen(false);
   const closeCart = () => setCartOpen(false);

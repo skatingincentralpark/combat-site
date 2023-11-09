@@ -36,7 +36,13 @@ const HeroMedia = ({
     );
 
   if (type === "image")
-    return <Image image={image} styles={[mediaStyles, position]} />;
+    return (
+      <Image
+        image={image}
+        styles={[mediaStyles, position]}
+        sizes="(max-width: 700px) 100vw, 50vw"
+      />
+    );
 
   return null;
 };

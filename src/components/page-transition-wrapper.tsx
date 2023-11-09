@@ -1,15 +1,16 @@
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import { AnimatePresence, m } from "framer-motion";
+import useIsLoading from "hooks/useIsLoading";
 
 type Props = {
   children: React.ReactNode;
-  loading: boolean;
   className?: string;
 };
 
-const PageTransitionWrapper = ({ children, loading, className }: Props) => {
+const PageTransitionWrapper = ({ children, className }: Props) => {
   const router = useRouter();
+  const isLoading = useIsLoading();
 
   const variants = {
     initial: {
@@ -31,7 +32,7 @@ const PageTransitionWrapper = ({ children, loading, className }: Props) => {
 
   return (
     <AnimatePresence>
-      {!loading && (
+      {!isLoading && (
         <TransitionWrapper
           key={router.pathname}
           variants={variants}
